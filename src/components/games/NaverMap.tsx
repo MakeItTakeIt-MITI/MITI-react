@@ -92,18 +92,45 @@ const NaverMap = ({
             currency: "KRW",
           })}</span>
           <span class="font-[300] text-[10px] text-[#737373]">/ ${game.starttime.slice(0, 5)}</span>
-          <div class="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] bg-[#fff] text-[#525252]  flex items-center justify-center text-[10px] font-bold ">${markerCount >= 99 ? "+99" : markerCount}</div>
-      </button>`;
+  
+          ${
+            filteredAddresses?.length >= 2
+              ? `<div class="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] bg-[#404040] 
+               text-[#fff] flex items-center justify-center text-[10px] font-bold">
+               ${markerCount >= 99 ? "+99" : markerCount}
+               </div>`
+              : ""
+          }
+          </button>`;
 
+      // <div class="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] bg-[#fff] text-[#525252]  flex items-center justify-center text-[10px] font-bold ">${markerCount >= 99 ? "+99" : markerCount}</div>
+      // const selectedMarkerHTML = `
+      // <button key=${game.id}  id="element-${index}"  type="button" " class="cursor-pointer relative text-[12px] font-bold border border-[#525252]  bg-[#BFF9FA] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
+      //     <span>${game.fee.toLocaleString("ko-KR", {
+      //       style: "currency",
+      //       currency: "KRW",
+      //     })}</span>
+      //     <span class="font-[300] text-[10px] text-[#737373]">/ ${game.starttime.slice(0, 5)}</span>
+      //     <div class="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] bg-[#404040] text-[#fff]  flex items-center justify-center text-[10px] font-bold ">${markerCount >= 99 ? "+99" : markerCount}</div>
+      // </button>`;
       const selectedMarkerHTML = `
-      <button key=${game.id}  id="element-${index}"  type="button" " class="cursor-pointer relative text-[12px] font-bold border border-[#525252]  bg-[#BFF9FA] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
-          <span>${game.fee.toLocaleString("ko-KR", {
-            style: "currency",
-            currency: "KRW",
-          })}</span>
-          <span class="font-[300] text-[10px] text-[#737373]">/ ${game.starttime.slice(0, 5)}</span>
-          <div class="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] bg-[#404040] text-[#fff]  flex items-center justify-center text-[10px] font-bold ">${markerCount >= 99 ? "+99" : markerCount}</div>
-      </button>`;
+  <a href="/games/${game.id}" key=${game.id} id="element-${index}" type="button" 
+    class="cursor-pointer relative text-[12px] font-bold border border-[#525252] bg-[#BFF9FA] 
+    w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
+      <span>${game.fee.toLocaleString("ko-KR", {
+        style: "currency",
+        currency: "KRW",
+      })}</span>
+      <span class="font-[300] text-[10px] text-[#737373]">/ ${game.starttime.slice(0, 5)}</span>
+      ${
+        filteredAddresses?.length >= 2
+          ? `<div class="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] bg-[#404040] 
+           text-[#fff] flex items-center justify-center text-[10px] font-bold">
+           ${markerCount >= 99 ? "+99" : markerCount}
+           </div>`
+          : ""
+      }
+  </a>`;
 
       const marker = new naver.maps.Marker({
         position: new naver.maps.LatLng(
@@ -116,6 +143,7 @@ const NaverMap = ({
         markerHTML: markerHTML,
         overlappedMarkerHTML: overlappedMarkerHTML,
         selectedMarkerHTML: selectedMarkerHTML,
+        zIndex: gameId === game.id ? 100 : 1,
       });
 
       marker.setIcon({
