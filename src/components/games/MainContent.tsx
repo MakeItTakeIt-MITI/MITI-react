@@ -34,7 +34,6 @@ const MainContent = ({
   const [longitude, setLongitude] = useState<null | string>(null);
 
   const [isGameCardSelected, setIsGameCardSelected] = useState(false);
-  const [cardAddress, setCardAddress] = useState("");
   const [gameId, setGameId] = useState(0);
 
   const handleSetCoords = (lat: string, long: string, id: number) => {
@@ -112,8 +111,6 @@ const MainContent = ({
               isAddressSelected={isAddressSelected}
               latitude={latitude}
               longitude={longitude}
-              selectedAddress={selectedAddress}
-              cardAddress={cardAddress}
               isGameCardSelected={isGameCardSelected}
               gameId={gameId}
             />
