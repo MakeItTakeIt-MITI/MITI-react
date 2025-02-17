@@ -235,6 +235,8 @@ const NaverMap = ({
     geoLongitude,
     latitude,
     longitude,
+    gameId,
+    isGameCardSelected,
   ]);
   return (
     <div
