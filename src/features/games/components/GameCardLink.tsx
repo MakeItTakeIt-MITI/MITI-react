@@ -7,13 +7,15 @@ import time from "../../../assets/v11/time.svg";
 
 interface GameListCardProp {
   game: Game;
-  handleSetCoords: (arg1: string, arg2: string) => void;
+  handleSetCoords: (arg1: string, arg2: string, arg3: number) => void;
 }
 export const GameCardLink = ({ game, handleSetCoords }: GameListCardProp) => {
   return (
     <Link
       to={`/games/${game.id}`}
-      onClick={() => handleSetCoords(game.court.latitude, game.court.longitude)}
+      onClick={() =>
+        handleSetCoords(game.court.latitude, game.court.longitude, game.id)
+      }
       className=" sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
       // className="cssanimation sequence fadeInBottom  sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
     >

@@ -35,11 +35,11 @@ const MainContent = ({
 
   const [isGameCardSelected, setIsGameCardSelected] = useState(false);
   const [cardAddress, setCardAddress] = useState("");
-  console.log(isGameCardSelected);
+  const [gameId, setGameId] = useState(0);
 
-  const handleSetCoords = (lat: string, long: string) => {
+  const handleSetCoords = (lat: string, long: string, id: number) => {
     setIsGameCardSelected(true);
-
+    setGameId(id);
     setLatitude(lat);
     setLongitude(long);
   };
@@ -100,6 +100,7 @@ const MainContent = ({
                 allGamesData={allGamesData}
                 handleSetCoords={handleSetCoords}
                 isLoading={isLoading}
+                gameId={gameId}
               />
             )}
             <MobileGameListContainer allGamesData={allGamesData} />
@@ -113,6 +114,8 @@ const MainContent = ({
               longitude={longitude}
               selectedAddress={selectedAddress}
               cardAddress={cardAddress}
+              isGameCardSelected={isGameCardSelected}
+              gameId={gameId}
             />
           </div>
         </div>

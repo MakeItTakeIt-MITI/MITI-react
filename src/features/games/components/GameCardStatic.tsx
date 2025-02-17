@@ -6,26 +6,22 @@ import { Fee } from "./Fee.tsx";
 
 interface GameListCardProp {
   game: Game;
-  handleSetCoords: (arg1: string, arg2: string) => void;
+  handleSetCoords: (arg1: string, arg2: string, arg3: number) => void;
   isClicked?: (arg: boolean) => void | undefined;
-  setGameId: number | null;
 }
 
 export const GameCardStatic = ({
   game,
   handleSetCoords,
   isClicked,
-  setGameId,
 }: GameListCardProp) => {
   return (
     <div
       onClick={() => {
-        handleSetCoords(game.court.latitude, game.court.longitude);
+        handleSetCoords(game.court.latitude, game.court.longitude, game.id);
         if (isClicked) {
           isClicked(true);
         }
-
-        setGameId(game.id);
       }}
       className=" sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
       // className="cssanimation sequence fadeInBottom  sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
