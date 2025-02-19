@@ -2,6 +2,7 @@ import time from "../../assets/v11/time.svg";
 import participants from "../../assets/v11/participants.svg";
 import { Game } from "../../interfaces/games.ts";
 import { Link } from "react-router-dom";
+import { GameStatus } from "../../features/games/components/GameStatus.tsx";
 
 interface FilteredGameCardProp {
   game: Game;
@@ -15,37 +16,7 @@ const FilteredGameCard = ({ game }: FilteredGameCardProp) => {
     >
       {/* Status and title */}
       <div className="space-y-2">
-        <span
-          style={{
-            backgroundColor:
-              game.game_status === "open"
-                ? "#b9dbdc"
-                : game.game_status === "canceled"
-                  ? "#E3C6CB"
-                  : game.game_status === "closed"
-                    ? "#d3d3d3"
-                    : game.game_status === "completed"
-                      ? "#B9DBDC"
-                      : "",
-
-            color:
-              game.game_status === "open"
-                ? "#4152EB"
-                : game.game_status === "canceled"
-                  ? "#C93568"
-                  : game.game_status === "closed"
-                    ? "#d3d3d3"
-                    : game.game_status === "completed"
-                      ? "#00979A"
-                      : "",
-          }}
-          className="p-[.25rem] text-[10px] rounded-[0.125rem] w-full font-bold  "
-        >
-          {(game.game_status === "open" && "모집중") ||
-            (game.game_status === "canceled" && "경기 취소") ||
-            (game.game_status === "closed" && "모집 마감") ||
-            (game.game_status === "completed" && "모집 완료")}
-        </span>
+        <GameStatus status={game.game_status} />
         <h1 className="font-bold  text-[#E5E5E5]">{game.title}</h1>
       </div>
       {/* Game Information */}

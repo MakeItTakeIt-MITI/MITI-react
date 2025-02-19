@@ -27,12 +27,18 @@ const MainContent = ({
     useGameFilterStore();
   const [selected, setSelected] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState<string>("");
+
   const [isAddressSelected, setIsAddressSelected] = useState<boolean>(false);
 
   const [latitude, setLatitude] = useState<null | string>(null);
   const [longitude, setLongitude] = useState<null | string>(null);
 
-  const handleSetCoords = (lat: string, long: string) => {
+  const [isGameCardSelected, setIsGameCardSelected] = useState(false);
+  const [gameId, setGameId] = useState(0);
+
+  const handleSetCoords = (lat: string, long: string, id: number) => {
+    setIsGameCardSelected(true);
+    setGameId(id);
     setLatitude(lat);
     setLongitude(long);
   };
@@ -93,6 +99,7 @@ const MainContent = ({
                 allGamesData={allGamesData}
                 handleSetCoords={handleSetCoords}
                 isLoading={isLoading}
+                gameId={gameId}
               />
             )}
             <MobileGameListContainer allGamesData={allGamesData} />
@@ -104,6 +111,8 @@ const MainContent = ({
               isAddressSelected={isAddressSelected}
               latitude={latitude}
               longitude={longitude}
+              isGameCardSelected={isGameCardSelected}
+              gameId={gameId}
             />
           </div>
         </div>

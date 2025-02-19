@@ -1,29 +1,23 @@
-import time from "../../assets/v11/time.svg";
-import participants from "../../assets/v11/participants.svg";
-import { Game } from "../../interfaces/games.ts";
-import { GameStatus } from "../../features/games/components/GameStatus.tsx";
-import { Fee } from "../../features/games/components/Fee.tsx";
+import { Link } from "react-router-dom";
+import { Game } from "../../../interfaces/games.ts";
+import { Fee } from "./Fee.tsx";
+import { GameStatus } from "./GameStatus.tsx";
+import participants from "../../../assets/v11/participants.svg";
+import time from "../../../assets/v11/time.svg";
 
 interface GameListCardProp {
   game: Game;
-  handleSetCoords: (arg1: string, arg2: string, address: string) => void;
+  handleSetCoords: (arg1: string, arg2: string, arg3: number) => void;
 }
-
-const GameListCard = ({
-  game,
-
-  handleSetCoords,
-}: GameListCardProp) => {
+export const GameCardLink = ({ game, handleSetCoords }: GameListCardProp) => {
   return (
-    <div
+    <Link
+      to={`/games/${game.id}`}
       onClick={() =>
-        handleSetCoords(
-          game.court.latitude,
-          game.court.longitude,
-          game.court.address
-        )
+        handleSetCoords(game.court.latitude, game.court.longitude, game.id)
       }
-      className="cssanimation sequence fadeInBottom  sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
+      className=" sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
+      // className="cssanimation sequence fadeInBottom  sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
     >
       {/* Status and title */}
       <div className="space-y-2">
@@ -48,10 +42,9 @@ const GameListCard = ({
             </span>
           </div>
         </div>
+        {/* FEE */}
         <Fee fee={game.fee} />
       </div>
-    </div>
+    </Link>
   );
 };
-
-export default GameListCard;

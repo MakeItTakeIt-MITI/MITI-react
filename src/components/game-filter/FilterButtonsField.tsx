@@ -19,7 +19,7 @@ const FilterButtonsField = ({
       <button
         type="button"
         onClick={handleApplyFilters}
-        className="w-full h-full p-[0.62rem] flex items-center justify-center rounded-[0.5rem] sm:bg-[#737373] md:bg-primary-teal sm:text-secondary-white md:text-secondary-black font-bold"
+        className="w-full h-full p-[0.62rem] flex items-center justify-center rounded-[0.5rem] bg-primary-teal text-secondary-black font-bold"
       >
         적용하기
       </button>
