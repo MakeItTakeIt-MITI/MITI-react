@@ -31,7 +31,7 @@ const MobileGameListCard = ({ game }: MobileGameListCardProp) => {
             </span>
           </div>
 
-          <div className="flex ">
+          <div className="flex gap-[5pxn]">
             <img src={participants} alt="participants" />
             <span>
               {game.num_of_participations} / {game.max_invitation}
