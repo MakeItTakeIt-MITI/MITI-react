@@ -18,7 +18,9 @@ const MobileGameListCard = ({ game }: MobileGameListCardProp) => {
       {/* Status and title */}
       <div className="space-y-2">
         <GameStatus status={game.game_status} />
-        <h1 className="font-bold  text-[#E5E5E5]">{game.title}</h1>
+        <h1 className="font-bold  text-[#E5E5E5]  w-[300px] truncate">
+          {game.title}
+        </h1>
       </div>
       {/* Game Information */}
       <div className="flex justify-between items-end">
@@ -31,7 +33,7 @@ const MobileGameListCard = ({ game }: MobileGameListCardProp) => {
             </span>
           </div>
 
-          <div className="flex gap-[5pxn]">
+          <div className="flex gap-[5px]">
             <img src={participants} alt="participants" />
             <span>
               {game.num_of_participations} / {game.max_invitation}
