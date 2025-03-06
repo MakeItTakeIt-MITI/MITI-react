@@ -205,7 +205,7 @@ const GameDetail = () => {
             </h1>
             <div
               style={{ whiteSpace: "pre-line" }}
-              className="text-primary-white font-[400] text-sm min-h-[350px]"
+              className="text-primary-white font-[400] text-sm min-h-[350px] sm:pb-[3.75rem] md:pb-0"
             >
               {game?.data.info}
             </div>
