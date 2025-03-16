@@ -1,21 +1,21 @@
 import { Link } from "react-router-dom";
-import { Game } from "../../../interfaces/games.ts";
 import { Fee } from "./Fee.tsx";
 import { GameStatus } from "./GameStatus.tsx";
 import participants from "../../../assets/v11/participants.svg";
 import time from "../../../assets/v11/time.svg";
+import { GameField } from "../interface/games.ts";
 
 interface GameListCardProp {
-  game: Game;
-  handleSetCoords: (arg1: string, arg2: string, arg3: number) => void;
+  game: GameField;
+  handleSetCoords?: (arg1: string, arg2: string, arg3: number) => void;
 }
 export const GameCardLink = ({ game, handleSetCoords }: GameListCardProp) => {
   return (
     <Link
       to={`/games/${game.id}`}
-      onClick={() =>
-        handleSetCoords(game.court.latitude, game.court.longitude, game.id)
-      }
+      // onClick={() =>
+      //   handleSetCoords(game.court.latitude, game.court.longitude, game.id)
+      // }
       className=" sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
       // className="cssanimation sequence fadeInBottom  sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
     >
@@ -40,7 +40,7 @@ export const GameCardLink = ({ game, handleSetCoords }: GameListCardProp) => {
           <div className="flex gap-1">
             <img src={participants} alt="participants" />
             <span>
-              {game.num_of_participations} / {game.max_invitation}
+              {game.num_of_participations}/ {game.max_invitation}
             </span>
           </div>
         </div>

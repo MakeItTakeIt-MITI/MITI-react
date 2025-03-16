@@ -1,24 +1,24 @@
-import GameDetailMap from "../components/game-details/GameDetailMap.tsx";
-import Layout from "../components/game-details/Layout.tsx";
-import clock from "../assets/v11/clock.svg";
-import location from "../assets/v11/location.svg";
-import participants from "../assets/v11/participants.svg";
-import profile from "../assets/v11/profile.svg";
-// import star from "../assets/v11/star.svg";
-import ShareFeatureFooter from "../components/common/ShareFeatureFooter.tsx";
-import { useGameDetailDataHook } from "../hooks/useGameDetailDataHook.tsx";
+import GameDetailMap from "../../components/game-details/GameDetailMap.tsx";
+import Layout from "../../components/game-details/Layout.tsx";
+import clock from "../../assets/v11/clock.svg";
+import location from "../../assets/v11/location.svg";
+import participants from "../../assets/v11/participants.svg";
+import profile from "../../assets/v11/profile.svg";
+// import star from "../../assets/v11/star.svg";
+import ShareFeatureFooter from "../../components/common/ShareFeatureFooter.tsx";
+import { useGameDetailDataHook } from "../../hooks/useGameDetailDataHook.tsx";
 import { useParams } from "react-router-dom";
 
-import no_stars from "../assets/v11/reviews/zero-star.svg";
-import one_star from "../assets/v11/reviews/one-star.svg";
-import one_half_stars from "../assets/v11/reviews/one-half-star.svg";
-import two_stars from "../assets/v11/reviews/two-star.svg";
-import two_half_stars from "../assets/v11/reviews/two-half-star.svg";
-import three_stars from "../assets/v11/reviews/three-star.svg";
-import three_half_stars from "../assets/v11/reviews/three-half-star.svg";
-import four_stars from "../assets/v11/reviews/four-star.svg";
-import four_half_stars from "../assets/v11/reviews/four-half-star.svg";
-import fivestars from "../assets/v11/reviews/five-star.svg";
+import no_stars from "../../assets/v11/reviews/zero-star.svg";
+import one_star from "../../assets/v11/reviews/one-star.svg";
+import one_half_stars from "../../assets/v11/reviews/one-half-star.svg";
+import two_stars from "../../assets/v11/reviews/two-star.svg";
+import two_half_stars from "../../assets/v11/reviews/two-half-star.svg";
+import three_stars from "../../assets/v11/reviews/three-star.svg";
+import three_half_stars from "../../assets/v11/reviews/three-half-star.svg";
+import four_stars from "../../assets/v11/reviews/four-star.svg";
+import four_half_stars from "../../assets/v11/reviews/four-half-star.svg";
+import fivestars from "../../assets/v11/reviews/five-star.svg";
 // import { useEffect } from "react";
 
 const GameDetail = () => {
