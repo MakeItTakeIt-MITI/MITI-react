@@ -1,13 +1,9 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchGamesList } from "../api/games.ts";
 
-export const useGamesList = (
-  district?: string,
-  title?: string,
-  page: number = 1
-) => {
+export const useGamesList = (district: string, title: string) => {
   return useInfiniteQuery({
-    queryKey: ["v11.2 Games List", district, title, page],
+    queryKey: ["v11.2 Games List", district, title],
     queryFn: ({ pageParam = 1 }) => fetchGamesList(district, title, pageParam),
 
     initialPageParam: 1,

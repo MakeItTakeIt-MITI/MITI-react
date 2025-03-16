@@ -55,20 +55,16 @@ export const Games = () => {
 
   const {
     data: gamesListData,
-    refetch,
     isLoading,
     fetchNextPage,
     hasNextPage,
-  } = useGamesList();
-  console.log("v11.2 games", gamesListData);
+  } = useGamesList("", "");
 
   const { ref, inView } = useInView({
     threshold: 0.2,
   });
 
   useEffect(() => {
-    // refetch();
-
     if (inView && hasNextPage) {
       fetchNextPage();
     }
@@ -159,7 +155,7 @@ export const Games = () => {
                       <GameCardSkeleton key={index} />
                     ))
                   ) : gamesListData?.pages.length ? (
-                    gamesListData.pages.map((page, pageIndex) =>
+                    gamesListData.pages.map((page) =>
                       page?.data.page_content.length > 0
                         ? page.data.page_content.map((game: GameField) => (
                             <GameCardLink key={game.id} game={game} />
@@ -180,37 +176,6 @@ export const Games = () => {
                     <div ref={ref} className="h-1 w-full opacity-0" />
                   )}
                 </>
-
-                {/* <>
-                  {isLoading ? (
-                    Array.from({ length: 5 }).map((_, index) => (
-                      <GameCardSkeleton key={index} />
-                    ))
-                  ) : gamesListData?.pages.status_code === 200 &&
-                    gamesListData?.pages.data.page_content.length > 0 ? (
-                    gamesListData?.pages.data.page_content.map(
-                      (game: GameField) => (
-                        <GameCardLink
-                          key={game.id}
-                          game={game}
-                          // handleSetCoords={handleSetCoords}
-                        />
-                      )
-                    )
-                  ) : (
-                    <div className="space-y-4 flex flex-col items-center justify-center w-full h-full text-white">
-                      <h1 className=" font-bold text-xl">
-                        검색된 경기가 없습니다.
-                      </h1>
-                      <h2 className="text-sm">
-                        필터를 변경하여 다른 경기를 찾아보세요!
-                      </h2>
-                    </div>
-                  )}
-                  {hasNextPage && (
-                    <div ref={ref} className="h-1 w-full opacity-0" />
-                  )}{" "}
-                </> */}
               </div>
 
               {/* {isAddressSelected ? (
