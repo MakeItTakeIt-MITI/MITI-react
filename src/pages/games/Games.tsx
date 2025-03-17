@@ -24,6 +24,10 @@ import { GameField } from "../../features/games/interface/games.ts";
 import { useInView } from "react-intersection-observer";
 import { GamesMap } from "../../features/map/components/GamesMap.tsx";
 
+// vv1.2
+import right_arrow from "../../assets/v11.2/right_arrow.svg";
+import { Link } from "react-router-dom";
+
 export const Games = () => {
   const [displayFilterBox, setDisplayFilterBox] = useState<boolean>(false);
 
@@ -110,13 +114,24 @@ export const Games = () => {
       <section className="page-padding bg-secondary-black min-h-screen sm:px-[0.81rem] md:px-0  ">
         <div className=" page-layer sm:px-[0.5rem] md:px-0 h-full sm:space-y-[1.75rem] md:space-y-[2.62rem]">
           {/* Top */}
-          <div className="space-y-5 sm:text-center md:text-left text-[#fff]">
-            <h1 className="sm:font-bold md:font-[600] sm:text-[26px] md:text-[32px]">
-              MITI 경기 목록
-            </h1>
-            <p className="sm:text-sm md:text-[20px] sm:font-[500] md:font-[400]">
-              당신의 참여 기다리는 경기들입니다. 지금 참여하세요!
-            </p>
+          <div className="flex items-center justify-between">
+            <div className="space-y-5 sm:text-center md:text-left text-[#fff]">
+              <h1 className="sm:font-bold md:font-[600] sm:text-[26px] md:text-[32px]">
+                MITI 경기 목록
+              </h1>
+              <p className="sm:text-sm md:text-[20px] sm:font-[500] md:font-[400]">
+                당신의 참여 기다리는 경기들입니다. 지금 참여하세요!
+              </p>
+            </div>
+            <Link to="list">
+              <button
+                type="button"
+                className="text-sm font-[600] text-[#fff] flex"
+              >
+                <span> 전체 경기</span>
+                <img src={right_arrow} alt="right" />
+              </button>
+            </Link>
           </div>
           {/* Bottom */}
           <div className="sm:space-y-[1.25rem] md:space-y-5">
@@ -167,7 +182,7 @@ export const Games = () => {
                       ))
                     ) : gamesListData?.pages.length ? (
                       gamesListData.pages.map((page) =>
-                        page?.data.page_content.length > 0
+                        page?.data.page_content.length < 0
                           ? page.data.page_content.map((game: GameField) => (
                               <GameCardLink key={game.id} game={game} />
                             ))
