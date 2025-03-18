@@ -1,11 +1,15 @@
 import { useState } from "react";
 import close from "../../../assets/v11.2/close.svg";
 
+interface RegionContainerProps {
+  handleDisplayFilterContainer: (arg: boolean) => void;
+  handleRegionFilter: (arg: string) => void;
+}
+
 export const RegionFilterContainer = ({
   handleDisplayFilterContainer,
   handleRegionFilter,
-  regionValue,
-}) => {
+}: RegionContainerProps) => {
   const [selected, setSelected] = useState("");
 
   const handleSelected = (input: string) => {
@@ -43,7 +47,10 @@ export const RegionFilterContainer = ({
       <div className="space-y-5 rounded-tl-[20px] rounded-tr-[20px] absolute right-0 bottom-0 left-0 mx-auto sm:w-full md:w-[605px] h-[400px]   bg-secondary-black pt-[30px] px-[21px] pb-[20x] ">
         <div className="flex justify-between">
           <h1 className="text-base font-bold text-white">지역</h1>
-          <button type="button" onClick={handleDisplayFilterContainer}>
+          <button
+            type="button"
+            onClick={() => handleDisplayFilterContainer(false)}
+          >
             <img src={close} alt="close" />
           </button>
         </div>
@@ -66,7 +73,7 @@ export const RegionFilterContainer = ({
         <button
           type="button"
           onClick={() => {
-            handleDisplayFilterContainer();
+            handleDisplayFilterContainer(false);
             handleRegionFilter(selected);
           }}
           className="w-full h-[48px] font-bold rounded-lg bg-[#7FEEF0] text-[#262626]"

@@ -56,7 +56,6 @@ export const List = () => {
         <RegionFilterContainer
           handleDisplayFilterContainer={handleDisplayFilterContainer}
           handleRegionFilter={handleRegionFilter}
-          regionValue={regionValue}
         />
       )}
 
