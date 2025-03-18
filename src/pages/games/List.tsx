@@ -12,24 +12,36 @@ import { useInView } from "react-intersection-observer";
 import React, { useEffect, useState } from "react";
 import { GameCardSkeleton } from "../../features/games/components/GameCardSkeleton.tsx";
 import { GameField } from "../../features/games/interface/games.ts";
+import { RegionFilterContainer } from "../../features/games/components/RegionFilterContainer.tsx";
 
 export const List = () => {
   //   const [currentPage, setCurrentPage] = useState(1);
+  const [searchValue, setSearchValue] = useState("");
+  const [regionValue, setRegionValue] = useState("전체");
+  const [displayFilterContainer, setDisplayFilterContainer] = useState(false);
+
+  const handleSearchValue = (input: string) => {
+    setSearchValue(input);
+  };
+
+  const handleRegionFilter = (input: string) => {
+    setRegionValue(input);
+  };
+
+  const handleDisplayFilterContainer = () => {
+    setDisplayFilterContainer(!displayFilterContainer);
+  };
 
   const {
     data: gamesListData,
     isLoading,
     fetchNextPage,
     hasNextPage,
-  } = useGamesList("", "");
+  } = useGamesList("", regionValue === "전체" ? "" : regionValue);
 
   const { ref, inView } = useInView({
     threshold: 0.2,
   });
-
-  const startPage = gamesListData?.pages[0]?.data.start_index ?? 1;
-  const currentPage = gamesListData?.pageParams.length;
-  const pageLength = gamesListData?.pages[0]?.data.end_index ?? 1;
 
   useEffect(() => {
     if (inView && hasNextPage) {
@@ -38,6 +50,15 @@ export const List = () => {
   }, [fetchNextPage, inView]);
   return (
     <>
+      {/* filter container */}
+      {displayFilterContainer && (
+        <RegionFilterContainer
+          handleDisplayFilterContainer={handleDisplayFilterContainer}
+          handleRegionFilter={handleRegionFilter}
+          regionValue={regionValue}
+        />
+      )}
+
       <header className="bg-games_web bg-center bg-cover bg-no-repeat  h-[20rem] sm:hidden md:flex justify-center items-center bg-[#000] relative">
         {/* pc hero */}
         <div className="absolute md:w-[768px] flex flex-col sm:items-center md:items-start justify-center gap-[1.25rem] text-[#fff] ">
@@ -110,9 +131,10 @@ export const List = () => {
             </div>
             <button
               type="button"
+              onClick={handleDisplayFilterContainer}
               className="w-[122px] h-full flex items-center justify-between bg-light-dark  py-3 pr-3 pl-5 rounded-lg"
             >
-              <span className="font-medium text-white">전체</span>
+              <span className="font-medium text-white">{regionValue}</span>
               <img src={dropdown} alt="dropdown" />
             </button>
           </aside>
@@ -120,7 +142,6 @@ export const List = () => {
           {/*  // ! game list container */}
           <div className="p-4 h-[768px] overflow-y-auto w-full bg-light-dark rounded-lg flex flex-col gap-2.5 custom-scrollbar">
             {/* game card */}
-
             <>
               {isLoading ? (
                 Array.from({ length: 5 }).map((_, index) => (
@@ -143,22 +164,9 @@ export const List = () => {
                 </div>
               )}
             </>
-            <ul className="flex items-center gap-4 justify-center text-white text-sm">
-              {/* {Array.from(
-                { length: pageLength - startPage + 1 },
-                (_, i) => startPage + i
-              ).map((pageNum) => (
-                <li
-                  key={pageNum}
-                  className={`cursor-pointer  ${pageNum === currentPage ? "text-[#7FEEF0]" : ""}`}
-                  onClick={() => {
-                    fetchNextPage();
-                  }}
-                >
-                  {pageNum}
-                </li>
-              ))} */}
-            </ul>
+            {hasNextPage && (
+              <div ref={ref} className="h-1 w-full opacity-0" />
+            )}{" "}
           </div>
 
           <MoveToAppBanner />
