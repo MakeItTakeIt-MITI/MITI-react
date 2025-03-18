@@ -20,8 +20,8 @@ const { naver } = window;
 
 interface NaverMapProps extends AllGamesProps {
   handleSetSelected?: () => void;
-  setSelectedAddress?: (arg: string) => void;
-  setIsAddressSelected?: (arg: boolean) => void;
+  setSelectedAddress: (arg: string) => void;
+  setIsAddressSelected: (arg: boolean) => void;
   isAddressSelected?: boolean;
   latitude?: string | null;
   longitude?: string | null;

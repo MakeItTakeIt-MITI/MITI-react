@@ -10,7 +10,7 @@ export interface GameField {
     max_invitation: number;
     num_of_participations: number;
     fee: number;
-    info: string;
+    info?: string;
     court: {
         id: number;
         name: string;
