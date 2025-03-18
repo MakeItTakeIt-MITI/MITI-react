@@ -15,14 +15,11 @@ import { GameField } from "../../features/games/interface/games.ts";
 import { RegionFilterContainer } from "../../features/games/components/RegionFilterContainer.tsx";
 
 export const List = () => {
-  //   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
+  const [test, setTest] = useState("");
+
   const [regionValue, setRegionValue] = useState("전체");
   const [displayFilterContainer, setDisplayFilterContainer] = useState(false);
-
-  const handleSearchValue = (input: string) => {
-    setSearchValue(input);
-  };
 
   const handleRegionFilter = (input: string) => {
     setRegionValue(input);
@@ -32,12 +29,16 @@ export const List = () => {
     setDisplayFilterContainer(!displayFilterContainer);
   };
 
+  const handleSearch = () => {
+    setTest(searchValue);
+  };
+
   const {
     data: gamesListData,
     isLoading,
     fetchNextPage,
     hasNextPage,
-  } = useGamesList("", regionValue === "전체" ? "" : regionValue);
+  } = useGamesList(regionValue === "전체" ? "" : regionValue, test);
 
   const { ref, inView } = useInView({
     threshold: 0.2,
@@ -119,13 +120,15 @@ export const List = () => {
             <div className="w-full h-full rounded-lg bg-light-dark  py-3 pr-3 pl-5 text-white flex items-center gap-[5px]">
               <input
                 type="text"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
                 placeholder="경기 제목을 입력해주세요."
                 style={{
                   outlineStyle: "none",
                 }}
                 className="h-full bg-light-dark  w-full"
               />
-              <button type="button">
+              <button type="button" onClick={handleSearch}>
                 <img src={seaarch} alt="search" />
               </button>
             </div>
