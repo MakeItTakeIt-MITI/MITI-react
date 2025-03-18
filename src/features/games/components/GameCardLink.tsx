@@ -30,17 +30,17 @@ export const GameCardLink = ({ game, handleSetCoords }: GameListCardProp) => {
       <div className="flex justify-between items-end">
         {/* TIME  & PLAYERS*/}
         <div className="space-y-[4.5px] text-[#E5E5E5] text-[12px]">
-          <div className="flex gap-1">
+          <div className="flex items-center gap-1">
             <img src={time} alt="time" />
             <span>
               {game.starttime.slice(0, 5)} ~ {game.endtime.slice(0, 5)}
             </span>
           </div>
 
-          <div className="flex gap-1">
+          <div className="flex items-center gap-1">
             <img src={participants} alt="participants" />
             <span>
-              {game.num_of_participations}/ {game.max_invitation}
+              {game.num_of_participations} / {game.max_invitation}
             </span>
           </div>
         </div>

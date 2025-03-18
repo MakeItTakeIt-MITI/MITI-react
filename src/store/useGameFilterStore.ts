@@ -18,12 +18,13 @@ interface GameFilterState {
 
 const displayDate = `${DATES()[0].month}.${DATES()[0].date} (${DATES()[0].dayKorean})`;
 const today = `${DATES()[0].month}.${DATES()[0].date} (${DATES()[0].dayKorean})`;
-const displayTime = `오전 00:00`
-const displayStatus = '모집중,모집 완료,경기 완료,경기 취소'
+const displayTime = `경기 시작 시간`
+const displayStatus = '경기 상태'
 
 const useGameFilterStore = create<GameFilterState>((set) => ({
 
-    selectedDate: displayDate,
+    // selectedDate: displayDate,
+    selectedDate: "날짜",
     // selectedTimeDate: "경기 시작 시간",
     selectedTimeDate: displayTime,
     selectedStatus: displayStatus,
