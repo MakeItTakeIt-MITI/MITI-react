@@ -95,7 +95,7 @@ export const List = () => {
           {/* top */}
 
           <div className="flex items-center justify-between">
-            <div className="space-y-5 sm:text-center md:text-left text-[#fff]">
+            <div className="space-y-5 sm:text-left md:text-left text-[#fff]">
               <h1 className="sm:font-bold md:font-[600] sm:text-[26px] md:text-[32px]">
                 MITI 경기 목록
               </h1>
