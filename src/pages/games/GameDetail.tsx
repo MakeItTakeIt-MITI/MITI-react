@@ -19,6 +19,7 @@ import three_half_stars from "../../assets/v11/reviews/three-half-star.svg";
 import four_stars from "../../assets/v11/reviews/four-star.svg";
 import four_half_stars from "../../assets/v11/reviews/four-half-star.svg";
 import fivestars from "../../assets/v11/reviews/five-star.svg";
+import MoveToAppBanner from "../../components/common/MoveToAppBanner.tsx";
 // import { useEffect } from "react";
 
 const GameDetail = () => {
@@ -57,7 +58,7 @@ const GameDetail = () => {
 
   return (
     <>
-      <section className="sm:bg-secondary-black  min-h-screen md:bg-light-dark  md:pt-[3.75rem] md:pb-[10.375rem]  ">
+      <section className="sm:bg-secondary-black  min-h-screen md:bg-light-dark  md:pt-[3.75rem] md:pb-[7rem]  ">
         <div className="sm:w-full md:w-[43.25rem]  mx-auto sm:space-y-[0.25rem] md:space-y-[1.25rem]">
           <GameDetailMap
             longitude={game?.data.court.longitude}
@@ -65,7 +66,7 @@ const GameDetail = () => {
           />
 
           <Layout height="">
-            <div className="space-y-[.75rem] ">
+            <div className="space-y-3 ">
               <span
                 style={{
                   backgroundColor:
@@ -97,7 +98,7 @@ const GameDetail = () => {
                   (game?.data.game_status === "closed" && "모집 마감") ||
                   (game?.data.game_status === "completed" && "모집 완료")}
               </span>
-              <div className="space-y-[0.5rem]">
+              <div className="space-y-2">
                 <h1 className="sm:text-base md:text-lg font-bold text-primary-white">
                   {game?.data.title}
                 </h1>
@@ -115,91 +116,110 @@ const GameDetail = () => {
               <div className="flex items-center gap-2">
                 <img src={location} alt="location" />
                 <span>
-                  {game?.data.court.address} {game?.data.court.adress_detail}
+                  {game?.data.court.address} {game?.data.court.name}
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <img src={participants} alt="participants" />
                 <span>
-                  {game?.data.num_of_confirmed_participations} /{" "}
+                  {game?.data.num_of_participations} /{" "}
                   {game?.data.max_invitation}
                 </span>
               </div>
             </div>
-            <h1 className="text-[#7feef0] sm:text-base md:text-lg font-bold">
-              참가비{" "}
-              {game?.data.fee.toLocaleString("ko-KR", {
-                style: "currency",
-                currency: "KRW",
-              })}
-            </h1>
-          </Layout>
+            <div className="flex items-end justify-between">
+              <h1 className="text-[#7feef0] sm:text-base md:text-lg font-bold">
+                참가비{" "}
+                {game?.data.fee.toLocaleString("ko-KR", {
+                  style: "currency",
+                  currency: "KRW",
+                })}
+              </h1>
+              <button
+                type="button"
+                className="h-[48px] w-[150px] bg-[#7FEEF0] text-base font-bold text-[#262626] rounded-lg"
+              >
+                참가하기
+              </button>
+            </div>
 
-          <Layout height="">
-            <h1 className="text-primary-white font-bold sm:text-base md:text-lg">
-              호스트 소개
-            </h1>
-            <div className="flex gap-[.75rem]">
-              <img src={profile} alt="profile" />
-              <div className="space-y-[.25rem] text-primary-white">
-                <h2 className="font-bold text-sm">
-                  {game?.data.host.nickname} 님
-                </h2>
-                <div className="flex items-center gap-[.38rem] font-[400] text-[14px]">
-                  <div className="flex">
-                    {game?.data.host.rating.host_rating.average_rating ===
-                      null && <img src={no_stars} alt="no reviews" />}
-                    {game?.data.host.rating.host_rating.average_rating ===
-                      0 && <img src={one_star} alt="one stars" />}
-                    {game?.data.host.rating.host_rating.average_rating > 0.5 &&
-                      game?.data.host.rating.host_rating.average_rating <=
-                        1.4 && <img src={one_half_stars} alt="one half star" />}
-                    {game?.data.host.rating.host_rating.average_rating > 1.4 &&
-                      game?.data.host.rating.host_rating.average_rating <=
-                        2 && <img src={two_stars} alt="two stars" />}
-                    {game?.data.host.rating.host_rating.average_rating > 2 &&
-                      game?.data.host.rating.host_rating.average_rating <=
-                        2.4 && (
-                        <img src={two_half_stars} alt="two and a half stars" />
+            {/* host */}
+            <div className="border-b border-t py-5 space-y-5  border-[#525252]">
+              <h1 className="text-primary-white font-bold sm:text-base md:text-lg">
+                호스트 소개
+              </h1>
+              <div className="flex gap-[.75rem]">
+                <img src={profile} alt="profile" />
+                <div className="space-y-1 text-primary-white">
+                  <h2 className="font-bold text-sm">
+                    {game?.data.host.nickname} 님
+                  </h2>
+                  <div className="flex items-center gap-[.38rem] font-[400] text-[14px]">
+                    <div className="flex">
+                      {game?.data?.host?.host_rating?.average_rating ===
+                        null && <img src={no_stars} alt="no reviews" />}
+                      {game?.data?.host?.host_rating?.average_rating === 0 && (
+                        <img src={one_star} alt="one star" />
                       )}
-                    {game?.data.host.rating.host_rating.average_rating > 2.4 &&
-                      game?.data.host.rating.host_rating.average_rating <=
-                        3 && <img src={three_stars} alt="three stars" />}
-                    {game?.data.host.rating.host_rating.average_rating > 3 &&
-                      game?.data.host.rating.host_rating.average_rating <=
-                        3.4 && (
-                        <img
-                          src={three_half_stars}
-                          alt="three and a half stars"
-                        />
-                      )}
-                    {game?.data.host.rating.host_rating.average_rating > 3.4 &&
-                      game?.data.host.rating.host_rating.average_rating <=
-                        4 && <img src={four_stars} alt="four stars" />}
-                    {game?.data.host.rating.host_rating.average_rating > 4 &&
-                      game?.data.host.rating.host_rating.average_rating <=
-                        4.4 && (
-                        <img
-                          src={four_half_stars}
-                          alt="four and a half stars"
-                        />
-                      )}
-                    {game?.data.host.rating.host_rating.average_rating > 4.4 &&
-                      game?.data.host.rating.host_rating.average_rating <=
-                        5 && <img src={fivestars} alt="five stars" />}
+                      {game?.data?.host?.host_rating?.average_rating > 0 &&
+                        game?.data?.host?.host_rating?.average_rating <=
+                          1.4 && (
+                          <img src={one_half_stars} alt="one half star" />
+                        )}
+                      {game?.data?.host?.host_rating?.average_rating > 1.4 &&
+                        game?.data?.host?.host_rating?.average_rating <= 2 && (
+                          <img src={two_stars} alt="two stars" />
+                        )}
+                      {game?.data?.host?.host_rating?.average_rating > 2 &&
+                        game?.data?.host?.host_rating?.average_rating <=
+                          2.4 && (
+                          <img
+                            src={two_half_stars}
+                            alt="two and a half stars"
+                          />
+                        )}
+                      {game?.data?.host?.host_rating?.average_rating > 2.4 &&
+                        game?.data?.host?.host_rating?.average_rating <= 3 && (
+                          <img src={three_stars} alt="three stars" />
+                        )}
+                      {game?.data?.host?.host_rating?.average_rating > 3 &&
+                        game?.data?.host?.host_rating?.average_rating <=
+                          3.4 && (
+                          <img
+                            src={three_half_stars}
+                            alt="three and a half stars"
+                          />
+                        )}
+                      {game?.data?.host?.host_rating?.average_rating > 3.4 &&
+                        game?.data?.host?.host_rating?.average_rating <= 4 && (
+                          <img src={four_stars} alt="four stars" />
+                        )}
+                      {game?.data?.host?.host_rating?.average_rating > 4 &&
+                        game?.data?.host?.host_rating?.average_rating <=
+                          4.4 && (
+                          <img
+                            src={four_half_stars}
+                            alt="four and a half stars"
+                          />
+                        )}
+                      {game?.data?.host?.host_rating?.average_rating > 4.4 &&
+                        game?.data?.host?.host_rating?.average_rating <= 5 && (
+                          <img src={fivestars} alt="five stars" />
+                        )}
+                    </div>
+                    <span>
+                      {game?.data?.host?.host_rating?.average_rating === null &&
+                        "0"}
+                      {game?.data?.host?.host_rating?.average_rating}
+                    </span>
+                    <span className="underline">리뷰</span>
                   </div>
-                  <span>
-                    {game?.data.host.rating.host_rating.average_rating ===
-                      null && "0"}
-                    {game?.data.host.rating.host_rating.average_rating}
-                  </span>
-                  <span className="underline">리뷰</span>
                 </div>
               </div>
             </div>
-          </Layout>
 
-          <Layout height="">
+            {/* 모집 정보 */}
+
             <h1 className="sm:text-base md:text-lg font-bold text-primary-white">
               모집 정보
             </h1>
@@ -210,6 +230,9 @@ const GameDetail = () => {
               {game?.data.info}
             </div>
           </Layout>
+          <div className="sm:hidden md:block">
+            <MoveToAppBanner />
+          </div>
         </div>
       </section>
       <ShareFeatureFooter />
