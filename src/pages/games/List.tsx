@@ -152,11 +152,20 @@ export const List = () => {
                 ))
               ) : gamesListData?.pages.length ? (
                 gamesListData.pages.map((page) =>
-                  page?.data.page_content.length > 0
-                    ? page.data.page_content.map((game: GameField) => (
-                        <GameListCard game={game} />
-                      ))
-                    : null
+                  page?.data.page_content.length > 0 ? (
+                    page.data.page_content.map((game: GameField) => (
+                      <GameListCard game={game} />
+                    ))
+                  ) : (
+                    <div className="space-y-4 flex flex-col items-center justify-center w-full h-full text-white">
+                      <h1 className="font-bold text-xl">
+                        검색된 경기가 없습니다.
+                      </h1>
+                      <h2 className="text-sm">
+                        필터를 변경하여 다른 경기를 찾아보세요!
+                      </h2>
+                    </div>
+                  )
                 )
               ) : (
                 <div className="space-y-4 flex flex-col items-center justify-center w-full h-full text-white">

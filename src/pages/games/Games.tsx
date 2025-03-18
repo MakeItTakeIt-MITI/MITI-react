@@ -27,9 +27,22 @@ import { GamesMap } from "../../features/map/components/GamesMap.tsx";
 // vv1.2
 import right_arrow from "../../assets/v11.2/right_arrow.svg";
 import { Link } from "react-router-dom";
+import NaverMap from "../../components/games/NaverMap.tsx";
+import { useMapGamesList } from "../../features/map/hooks/useMapGamesList.tsx";
+import useStatusStore from "../../features/map/store/useGameStatusStore.ts";
+import FilteredStatus from "../../components/game-filter/FilteredStatus.tsx";
+import useGameFilterStore from "../../store/useGameFilterStore.ts";
 
 export const Games = () => {
   const [displayFilterBox, setDisplayFilterBox] = useState<boolean>(false);
+
+  const [isAddressSelected, setIsAddressSelected] = useState<boolean>(false);
+
+  const [latitude, setLatitude] = useState<null | string>(null);
+  const [longitude, setLongitude] = useState<null | string>(null);
+
+  const { selectedStatus, selectedDate, selectedTimeDate } =
+    useGameFilterStore();
 
   // react custom hooks
   const { handleToggleFilterBox } = useFilterBox(
@@ -45,6 +58,8 @@ export const Games = () => {
   const { selectedStatuses } = useStatusSelectionStore();
   const { currentMonth } = useCurrentMonthStore();
 
+  const { status, setStatus } = useStatusStore();
+
   // ! fetch game list API v11.1 [OLD]
   // const {
   //   data: allGamesData,
@@ -58,22 +73,22 @@ export const Games = () => {
 
   // ! fetch game list API v11.2
 
-  const {
-    data: gamesListData,
-    isLoading,
-    fetchNextPage,
-    hasNextPage,
-  } = useGamesList("", "");
+  // const {
+  //   data: gamesListData,
+  //   isLoading,
+  //   fetchNextPage,
+  //   hasNextPage,
+  // } = useGamesList(yearMonthDay, formattedFullTime);
 
-  const { ref, inView } = useInView({
-    threshold: 0.2,
-  });
+  const { data: mapData, isLoading } = useMapGamesList(
+    yearMonthDay,
+    formattedFullTime,
+    ""
+  );
 
-  useEffect(() => {
-    if (inView && hasNextPage) {
-      fetchNextPage();
-    }
-  }, [selectedStatuses, displayFilterBox, fetchNextPage, inView]);
+  console.log(mapData);
+
+  useEffect(() => {}, [selectedStatuses, displayFilterBox]);
 
   return (
     <>
@@ -140,10 +155,34 @@ export const Games = () => {
               {/* // * 지도  */}
               <GamesMap />
 
+              {/* <NaverMap
+                allGamesData={allGamesData}
+                handleSetSelected={handleSetSelected}
+                setSelectedAddress={setSelectedAddress}
+                setIsAddressSelected={setIsAddressSelected}
+                isAddressSelected={isAddressSelected}
+                latitude={latitude}
+                longitude={longitude}
+                isGameCardSelected={isGameCardSelected}
+                gameId={gameId}
+              />
+               */}
+
               <section className="space-y-[10px]">
+                {/* <NaverMap
+                  allGamesData={mapData?.data}
+                  handleSetSelected={handleSetSelected}
+                  setSelectedAddress={setSelectedAddress}
+                  setIsAddressSelected={setIsAddressSelected}
+                  isAddressSelected={isAddressSelected}
+                  latitude={latitude}
+                  longitude={longitude}
+                  isGameCardSelected={isGameCardSelected}
+                  gameId={gameId}
+                /> */}
                 {/* // * 필터  */}
                 {/* Filter Row  & non-mobile */}
-                <div className="flex items-center justify-between w-full ">
+                {/* <div className="flex items-center justify-between w-full ">
                   <div className=" flex items-center  gap-4 ">
                     <button
                       className="p-[10px] text-sm rounded-[50px] font-[500] border border-[#F5F5F5] text-[#f5f5f5]"
@@ -171,7 +210,34 @@ export const Games = () => {
                   >
                     <img src={filter} alt="filter" />
                   </button>
-                </div>
+                </div> */}
+
+                <>
+                  {/* Filter Row  & non-mobile */}
+                  <div className="flex items-center justify-between w-full ">
+                    <div className=" flex  items-center justify-start gap-3    md:px-0  sm:overflow-x-scroll sm:overflow-y-hidden md:overflow-hidden  ">
+                      {/* <FilteredStatus
+                        handleDisplayFilterBox={handleToggleFilterBox}
+                        content={selectedDate}
+                      />
+                      <FilteredStatus
+                        content={selectedTimeDate}
+                        handleDisplayFilterBox={handleToggleFilterBox}
+                      />
+                      <FilteredStatus
+                        content={selectedStatus}
+                        handleDisplayFilterBox={handleToggleFilterBox}
+                      /> */}
+                    </div>
+                    <button
+                      className="sm:hidden md:block"
+                      type="button"
+                      onClick={handleToggleFilterBox}
+                    >
+                      <img src={filter} alt="filter" />
+                    </button>
+                  </div>
+                </>
 
                 {/*   // * 경기 목록 컨테이너  */}
                 <div className=" custom-scrollbar bg-light-dark full h-[494px] p-4 rounded-[20px] space-y-3 overflow-y-scroll">
@@ -180,14 +246,18 @@ export const Games = () => {
                       Array.from({ length: 5 }).map((_, index) => (
                         <GameCardSkeleton key={index} />
                       ))
-                    ) : gamesListData?.pages.length ? (
-                      gamesListData.pages.map((page) =>
-                        page?.data.page_content.length < 0
-                          ? page.data.page_content.map((game: GameField) => (
-                              <GameCardLink key={game.id} game={game} />
-                            ))
-                          : null
-                      )
+                    ) : mapData?.data?.length > 0 ? (
+                      mapData.data.map((game) => (
+                        // <GameCardLink key={game.id} game={game} />
+                        <div className="space-y-4 flex flex-col items-center justify-center w-full h-full text-white">
+                          <h1 className="font-bold text-xl">
+                            검색된 경기가 없습니다.
+                          </h1>
+                          <h2 className="text-sm">
+                            필터를 변경하여 다른 경기를 찾아보세요!
+                          </h2>
+                        </div>
+                      ))
                     ) : (
                       <div className="space-y-4 flex flex-col items-center justify-center w-full h-full text-white">
                         <h1 className="font-bold text-xl">
@@ -198,14 +268,11 @@ export const Games = () => {
                         </h2>
                       </div>
                     )}
-                    {hasNextPage && (
-                      <div ref={ref} className="h-1 w-full opacity-0" />
-                    )}
                   </>
                 </div>
               </section>
-
-              {/* {isAddressSelected ? (
+              {/* 
+              {isAddressSelected ? (
               <FilteredGameListContainer
                 allGamesData={allGamesData}
                 selectedAddress={selectedAddress}
@@ -222,17 +289,6 @@ export const Games = () => {
 
             )} */}
               {/* <MobileGameListContainer allGamesData={allGamesData} /> */}
-              {/* <NaverMap
-              allGamesData={allGamesData}
-              handleSetSelected={handleSetSelected}
-              setSelectedAddress={setSelectedAddress}
-              setIsAddressSelected={setIsAddressSelected}
-              isAddressSelected={isAddressSelected}
-              latitude={latitude}
-              longitude={longitude}
-              isGameCardSelected={isGameCardSelected}
-              gameId={gameId}
-            /> */}
             </div>
           </div>
           <MoveToAppBanner />
