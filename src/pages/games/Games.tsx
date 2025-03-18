@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import MainContent from "../../components/games/MainContent.tsx";
+// import MainContent from "../../components/games/MainContent.tsx";
 import GameFilterContainer from "../../components/game-filter/GameFilterContainer.tsx";
 import Footer from "../../components/common/Footer.tsx";
-import { useGamesDataHook } from "../../hooks/useGamesDataHook.tsx";
+// import { useGamesDataHook } from "../../hooks/useGamesDataHook.tsx";
 import useDateSelectionStore from "../../store/useDateSelectionStore.ts";
 import useTimeFieldStore from "../../store/useTimeStore.ts";
 import useStatusSelectionStore from "../../store/useStatusSelectionStore.ts";
@@ -11,38 +11,38 @@ import useCurrentMonthStore from "../../store/useCurrentMonthStore.ts";
 
 import { useFilterBox } from "../../hooks/game-list-filters/useFilterBox.tsx";
 import { useFilterBoxSettings } from "../../hooks/game-list-filters/useFilterBoxSettings.tsx";
-import { useGamesList } from "../../features/games/hooks/useGamesList.tsx";
+// import { useGamesList } from "../../features/games/hooks/useGamesList.tsx";
 import MoveToAppBanner from "../../components/common/MoveToAppBanner.tsx";
-import GameListContainer from "../../components/games/GameListContainer.tsx";
-import FilteredGameListContainer from "../../components/games/FilteredGameListContainer.tsx";
+// import GameListContainer from "../../components/games/GameListContainer.tsx";
+// import FilteredGameListContainer from "../../components/games/FilteredGameListContainer.tsx";
 
 import filter from "../../assets/v11/filter.svg";
 import { GameCardSkeleton } from "../../features/games/components/GameCardSkeleton.tsx";
-import GameListCard from "../../components/games/GameListCard.tsx";
-import { GameCardLink } from "../../features/games/components/GameCardLink.tsx";
-import { GameField } from "../../features/games/interface/games.ts";
-import { useInView } from "react-intersection-observer";
+// import GameListCard from "../../components/games/GameListCard.tsx";
+// import { GameCardLink } from "../../features/games/components/GameCardLink.tsx";
+// import { GameField } from "../../features/games/interface/games.ts";
+// import { useInView } from "react-intersection-observer";
 import { GamesMap } from "../../features/map/components/GamesMap.tsx";
 
 // vv1.2
 import right_arrow from "../../assets/v11.2/right_arrow.svg";
 import { Link } from "react-router-dom";
-import NaverMap from "../../components/games/NaverMap.tsx";
+// import NaverMap from "../../components/games/NaverMap.tsx";
 import { useMapGamesList } from "../../features/map/hooks/useMapGamesList.tsx";
-import useStatusStore from "../../features/map/store/useGameStatusStore.ts";
-import FilteredStatus from "../../components/game-filter/FilteredStatus.tsx";
-import useGameFilterStore from "../../store/useGameFilterStore.ts";
+// import useStatusStore from "../../features/map/store/useGameStatusStore.ts";
+// import FilteredStatus from "../../components/game-filter/FilteredStatus.tsx";
+// import useGameFilterStore from "../../store/useGameFilterStore.ts";
 
 export const Games = () => {
   const [displayFilterBox, setDisplayFilterBox] = useState<boolean>(false);
 
-  const [isAddressSelected, setIsAddressSelected] = useState<boolean>(false);
+  // const [isAddressSelected, setIsAddressSelected] = useState<boolean>(false);
 
-  const [latitude, setLatitude] = useState<null | string>(null);
-  const [longitude, setLongitude] = useState<null | string>(null);
+  // const [latitude, setLatitude] = useState<null | string>(null);
+  // const [longitude, setLongitude] = useState<null | string>(null);
 
-  const { selectedStatus, selectedDate, selectedTimeDate } =
-    useGameFilterStore();
+  // const { selectedStatus, selectedDate, selectedTimeDate } =
+  //   useGameFilterStore();
 
   // react custom hooks
   const { handleToggleFilterBox } = useFilterBox(
@@ -58,7 +58,7 @@ export const Games = () => {
   const { selectedStatuses } = useStatusSelectionStore();
   const { currentMonth } = useCurrentMonthStore();
 
-  const { status, setStatus } = useStatusStore();
+  // const { status, setStatus } = useStatusStore();
 
   // ! fetch game list API v11.1 [OLD]
   // const {
@@ -247,7 +247,7 @@ export const Games = () => {
                         <GameCardSkeleton key={index} />
                       ))
                     ) : mapData?.data?.length > 0 ? (
-                      mapData.data.map((game) => (
+                      mapData.data.map(() => (
                         // <GameCardLink key={game.id} game={game} />
                         <div className="space-y-4 flex flex-col items-center justify-center w-full h-full text-white">
                           <h1 className="font-bold text-xl">
