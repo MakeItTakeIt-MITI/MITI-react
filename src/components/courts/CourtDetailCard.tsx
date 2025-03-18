@@ -30,21 +30,21 @@ const CourtDetailCard = ({ game }: CourtDetailCard) => {
             </span>
           </div>
 
-          <div className="flex gap-1">
+          {/* <div className="flex gap-1">
             <img src={participants} alt="participants" />
             <span>
               {game.num_of_participations}/{game.max_invitation}
             </span>
-          </div>
+          </div> */}
         </div>
 
         <h2 className="text-primary-teal font-bold">
-          {game?.fee === 0
+          {/* {game?.fee === 0
             ? "무료"
             : game?.fee.toLocaleString("ko-KR", {
                 style: "currency",
                 currency: "KRW",
-              })}
+              })} */}
         </h2>
       </div>
     </Link>

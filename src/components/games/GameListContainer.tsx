@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AllGamesProps } from "../../interfaces/games.ts";
-import { GameCardSkeleton } from "./GameCardSkeleton.tsx";
+import { GameCardSkeleton } from "../../features/games/components/GameCardSkeleton.tsx";
 // import GameListCard from "./GameListCard.tsx";
 
 import "./scrollbar.css";

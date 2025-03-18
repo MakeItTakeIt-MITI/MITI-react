@@ -8,7 +8,7 @@ import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import { CourtsList } from "../interfaces/courts.ts";
 import { useCourtGamesInfiniteData } from "../hooks/useCourtGamesInfiniteData.tsx";
-import { GameCardSkeleton } from "../components/games/GameCardSkeleton.tsx";
+import { GameCardSkeleton } from "../features/games/components/GameCardSkeleton.tsx";
 
 const CourtGamesList = () => {
   const { id } = useParams();
@@ -87,7 +87,9 @@ const CourtGamesList = () => {
                 );
               })
             )}
-            {hasNextPage && <div ref={ref} className="h-1 w-full opacity-0" />}{" "}
+            {hasNextPage && (
+              <div ref={ref} className="h-1 w-full opacity-0" />
+            )}{" "}
           </div>
           <DetailMap />
         </div>

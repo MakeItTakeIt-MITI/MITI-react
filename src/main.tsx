@@ -2,11 +2,11 @@
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { Games } from "./pages/Games.tsx";
+import { Games } from "./pages/games/Games.tsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import GameDetail from "./pages/GameDetail.tsx";
+import GameDetail from "./pages/games/GameDetail.tsx";
 import Courts from "./pages/Courts.tsx";
 import Faq from "./pages/Faq.tsx";
 import React from "react";
@@ -18,6 +18,7 @@ import Policies from "./pages/Policies.tsx";
 import PoliciesDetails from "./pages/PoliciesDetails.tsx";
 import InquiryDetail from "./pages/InquiryDetail.tsx";
 import CourtGamesList from "./pages/CourtGamesList.tsx";
+import { List } from "./pages/games/List.tsx";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
 
         children: [
           { path: "", element: <Games /> },
+          { path: "list", element: <List /> },
           { path: ":id", element: <GameDetail /> },
         ],
       },
