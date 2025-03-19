@@ -9,7 +9,7 @@ import MoveToAppBanner from "../../components/common/MoveToAppBanner.tsx";
 import Footer from "../../components/common/Footer.tsx";
 import { useGamesList } from "../../features/games/hooks/useGamesList.tsx";
 import { useInView } from "react-intersection-observer";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { GameCardSkeleton } from "../../features/games/components/GameCardSkeleton.tsx";
 import { GameField } from "../../features/games/interface/games.ts";
 import { RegionFilterContainer } from "../../features/games/components/RegionFilterContainer.tsx";

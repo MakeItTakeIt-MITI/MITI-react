@@ -9,7 +9,7 @@ interface GameListCardProp {
   game: GameField;
   handleSetCoords?: (arg1: string, arg2: string, arg3: number) => void;
 }
-export const GameCardLink = ({ game, handleSetCoords }: GameListCardProp) => {
+export const GameCardLink = ({ game }: GameListCardProp) => {
   return (
     <Link
       to={`/games/${game.id}`}

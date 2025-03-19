@@ -3,7 +3,8 @@ import marker from "../../assets/v11/detail-marker.svg";
 
 const { naver } = window;
 
-const CourtMap = () => {
+const CourtMap = ({ courtsData }: { courtsData: unknown }) => {
+  console.log(courtsData);
   useEffect(() => {
     if (!naver) return;
 
@@ -26,13 +27,14 @@ const CourtMap = () => {
       });
       map.setCenter(markerLocation.getPosition());
     };
+
     initMap();
   }, []);
   return (
     <div
       id="map"
       data-testid="courts-map"
-      className="sm:hidden md:block w-[367px] h-[30.875rem] rounded-[1.25rem]"
+      className="sm:hidden md:block w-full h-[496px] rounded-lg"
     ></div>
   );
 };

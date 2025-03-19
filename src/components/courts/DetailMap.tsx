@@ -39,7 +39,7 @@ const DetailMap = () => {
   return (
     <div
       id="map1"
-      className="sm:hidden md:block w-[367px] h-[618px] rounded-[1.25rem]"
+      className="sm:hidden md:block w-full h-[494px] rounded-lg"
     ></div>
   );
 };

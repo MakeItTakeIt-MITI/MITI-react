@@ -1,9 +1,9 @@
 import { GAMESTATUS } from "../../constants/status.ts";
 import useGameStatusStore from "../../features/map/store/useGameStatusStore.ts";
-import useStatusSelectionStore from "../../store/useStatusSelectionStore.ts";
+// import useStatusSelectionStore from "../../store/useStatusSelectionStore.ts";
 
 const FilterStatusField = () => {
-  const { selectedStatuses, toggleStatus } = useStatusSelectionStore();
+  // const { selectedStatuses, toggleStatus } = useStatusSelectionStore();
   const { status, setStatus } = useGameStatusStore();
 
   return (
