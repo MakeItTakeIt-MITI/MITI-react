@@ -3,7 +3,7 @@ import marker from "../../assets/v11/detail-marker.svg";
 
 const { naver } = window;
 
-const CourtMap = () => {
+const CourtMap = ({ courtsData }) => {
   useEffect(() => {
     if (!naver) return;
 
@@ -26,6 +26,7 @@ const CourtMap = () => {
       });
       map.setCenter(markerLocation.getPosition());
     };
+
     initMap();
   }, []);
   return (
