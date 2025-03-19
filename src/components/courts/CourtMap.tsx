@@ -3,7 +3,8 @@ import marker from "../../assets/v11/detail-marker.svg";
 
 const { naver } = window;
 
-const CourtMap = ({ courtsData }) => {
+const CourtMap = ({ courtsData }: { courtsData: unknown }) => {
+  console.log(courtsData);
   useEffect(() => {
     if (!naver) return;
 
