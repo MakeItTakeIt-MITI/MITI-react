@@ -17,7 +17,7 @@ import InquiriesList from "./pages/Inquiries.tsx";
 import Policies from "./pages/Policies.tsx";
 import PoliciesDetails from "./pages/PoliciesDetails.tsx";
 import InquiryDetail from "./pages/InquiryDetail.tsx";
-import CourtGamesList from "./pages/CourtGamesList.tsx";
+import CourtGamesList from "./pages/courts/CourtGamesList.tsx";
 import { List } from "./pages/games/List.tsx";
 
 const queryClient = new QueryClient();
