@@ -135,12 +135,12 @@ const GameDetail = () => {
                   currency: "KRW",
                 })}
               </h1>
-              <button
+              {/* <button
                 type="button"
                 className="h-[48px] w-[150px] bg-[#7FEEF0] text-base font-bold text-[#262626] rounded-lg"
               >
                 참가하기
-              </button>
+              </button> */}
             </div>
 
             {/* host */}

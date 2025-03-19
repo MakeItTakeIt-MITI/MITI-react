@@ -32,7 +32,7 @@ const CourtMap = () => {
     <div
       id="map"
       data-testid="courts-map"
-      className="sm:hidden md:block w-[367px] h-[30.875rem] rounded-[1.25rem]"
+      className="sm:hidden md:block w-full h-[496px] rounded-lg"
     ></div>
   );
 };

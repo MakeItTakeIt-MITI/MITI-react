@@ -9,6 +9,9 @@ import CourtMap from "../components/courts/CourtMap.tsx";
 import MoveToAppBanner from "../components/common/MoveToAppBanner.tsx";
 import SearchContainer from "../components/courts/SearchContainer.tsx";
 import FilterContainer from "../components/courts/FilterContainer.tsx";
+
+import search from "../assets/v11/search.svg";
+
 import { Link } from "react-router-dom";
 
 const Courts = () => {
@@ -71,20 +74,36 @@ const Courts = () => {
         </div>
       </header>
 
-      <section className="pt-[3.75rem] sm:px-[.81rem] pb-[6.25rem] flex flex-col  justify-center  gap-[2.62rem] mx-auto sm:w-full md:w-[768px]">
-        <div className="space-y-[1.25rem] text-[#fff] sm:text-center md:text-start">
+      <section className="pt-[3.75rem] sm:px-[.81rem] pb-[6.25rem] flex flex-col  justify-center  gap-[30px] mx-auto sm:w-full md:w-[768px]">
+        <div className="space-y-5 text-[#fff] text-start">
           <h1 className="text-[32px] font-[600]">경기장 목록</h1>
           <h2 className="text-[20px] font-[400]">
             동네에 있는 경기장을 찾아보세요!
           </h2>
         </div>
+        <CourtMap />
         <div className="flex items-center sm:justify-center gap-[1.25rem]">
-          <div className="space-y-[1.25rem]">
+          <div className="space-y-[1.25rem] w-full">
             <div className="flex items-center gap-[0.75rem] h-[3rem]">
-              <SearchContainer
-                handleSearchInput={handleSearchInput}
-                setInput={setInput}
-              />
+              {/* \search */}
+              <div className="flex items-center justify-between bg-light-dark w-full h-full py-[0.75rem] pl-[1.25rem] pr-[0.75rem] rounded-[0.75rem]">
+                <input
+                  type="text"
+                  onChange={(e) => setInput(e.target.value)}
+                  className="bg-light-dark text-secondary-white font-[500] courtsPlaceHolder sm:w-[11rem] md:w-[12rem]"
+                  placeholder="경기장 (주소/경기장 명) 검색"
+                />
+                <button
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleSearchInput();
+                    }
+                  }}
+                  onClick={handleSearchInput}
+                >
+                  <img src={search} alt="search" />
+                </button>
+              </div>
 
               <FilterContainer
                 handleDisplayDropbox={handleDisplayDropbox}
@@ -94,13 +113,13 @@ const Courts = () => {
               />
             </div>
 
-            <div className="bg-light-dark sm:h-[29.5rem] md:h-[426px] w-full p-4 space-y-3 overflow-y-scroll rounded-[20px]  custom-scrollbar">
+            <div className="bg-light-dark sm:h-[29.5rem] md:h-[466px] w-full p-4 space-y-3 overflow-y-scroll rounded-[20px]  custom-scrollbar">
               {courtsData?.pages.map((page) => {
                 return page.data.page_content.length > 0 ? (
                   page.data.page_content.map((court: Court) => (
                     <Link
                       to={`/courts/${court.id}`}
-                      className="p-4 bg-dark-card md:w-[350px] sm:w-[333px] h-[66px] flex flex-col justify-center rounded-[12px]"
+                      className="p-4 bg-dark-card w-full h-[66px] flex flex-col justify-center rounded-[12px]"
                     >
                       <h1 className="font-bold text-primary-white truncate ">
                         {court.name}
@@ -116,7 +135,7 @@ const Courts = () => {
                       조회 결과가 없습니다.
                     </h1>
                     <h2 className="text-sm font-[400] text-[#d4d4d4]">
-                      검색어와 필터를 변경하여 다른 경기를 찾아보세요!
+                      검색 조건을 변경하여 다른 경기장을 찾아보세요!{" "}
                     </h2>
                   </div>
                 );
@@ -126,7 +145,6 @@ const Courts = () => {
               )}{" "}
             </div>
           </div>
-          <CourtMap />
         </div>
 
         <MoveToAppBanner />
