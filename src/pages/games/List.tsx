@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { GameCardSkeleton } from "../../features/games/components/GameCardSkeleton.tsx";
 import { GameField } from "../../features/games/interface/games.ts";
 import { RegionFilterContainer } from "../../features/games/components/RegionFilterContainer.tsx";
+import mobile_dropdown from "../../assets/v11.2/mobile_dropdown.svg";
 
 export const List = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -103,7 +104,7 @@ export const List = () => {
                 당신의 참여 기다리는 경기들입니다. 지금 참여하세요!
               </p>
             </div>
-            <Link to="/games">
+            <Link to="/games" className="sm:hidden md:block">
               <button
                 type="button"
                 className="text-sm font-[600] text-[#fff] flex"
@@ -115,69 +116,101 @@ export const List = () => {
           </div>
 
           {/* // * search filter */}
-          <aside className="flex gap-5 items-center justify-between w-full h-12 ">
-            <div className="w-full h-full rounded-lg bg-light-dark  py-3 pr-3 pl-5 text-white flex items-center gap-[5px]">
+          <aside className="flex md:gap-5 sm:gap-2 items-center justify-between w-full h-12   ">
+            <div className="w-full md:h-full sm:h-[28px] md:rounded-lg sm:rounded-[100px] bg-light-dark  md:py-3 md:pr-3 md:pl-5 sm:py-1 sm:px-4 text-white flex items-center gap-[5px]">
               <input
                 type="text"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
                 placeholder="경기 제목을 입력해주세요."
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 style={{
                   outlineStyle: "none",
                 }}
-                className="h-full bg-light-dark  w-full"
+                className="sm:h-[28px] md:h-full bg-light-dark  w-full md:text-base sm:text-xs"
               />
-              <button type="button" onClick={handleSearch}>
+              <button
+                type="button"
+                onClick={handleSearch}
+                className="md:block sm:hidden"
+              >
                 <img src={seaarch} alt="search" />
               </button>
             </div>
             <button
               type="button"
               onClick={handleDisplayFilterContainer}
-              className="w-[122px] h-full flex items-center justify-between bg-light-dark  py-3 pr-3 pl-5 rounded-lg"
+              className="md:w-[122px] sm:w-[77px] md:h-full sm:h-[28px]  flex items-center justify-between bg-light-dark sm:py-1 sm:pr-1 sm:pl-4 md:py-3 md:pr-3 md:pl-5 md:rounded-lg sm:rounded-[100px]   "
             >
-              <span className="font-medium text-white">{regionValue}</span>
-              <img src={dropdown} alt="dropdown" />
+              <span className="md:font-medium sm:font-[300] text-white md:text-base sm:text-xs ">
+                {regionValue}
+              </span>
+              <img
+                src={dropdown}
+                alt="dropdown"
+                className="md:block sm:hidden"
+              />
+              <img
+                src={mobile_dropdown}
+                alt="dropdown"
+                className="md:hidden sm:block"
+              />
             </button>
           </aside>
 
-          {/*  // ! game list container */}
-          <div className="p-4 h-[768px] overflow-y-auto w-full bg-light-dark rounded-lg flex flex-col gap-2.5 custom-scrollbar">
-            {/* game card */}
-            <>
-              {isLoading ? (
-                Array.from({ length: 5 }).map((_, index) => (
-                  <GameCardSkeleton key={index} />
-                ))
-              ) : gamesListData?.pages.length ? (
-                gamesListData.pages.map((page) =>
-                  page?.data.page_content.length > 0 ? (
-                    page.data.page_content.map((game: GameField) => (
-                      <GameListCard game={game} />
-                    ))
-                  ) : (
-                    <div className="space-y-4 flex flex-col items-center justify-center w-full h-full text-white">
-                      <h1 className="font-bold text-xl">
-                        검색된 경기가 없습니다.
-                      </h1>
-                      <h2 className="text-sm">
-                        필터를 변경하여 다른 경기를 찾아보세요!
-                      </h2>
-                    </div>
+          <div className="space-y-[5px]">
+            <Link
+              to="/games"
+              className=" md:hidden sm:flex justify-end w-full "
+            >
+              <button
+                type="button"
+                className="md:text-sm sm:text-xs font-[600] text-[#fff] flex"
+              >
+                <span> 지도로 보기</span>
+                <img src={right_arrow} alt="right" />
+              </button>
+            </Link>
+            {/*  // ! game list container */}
+            <div className=" sm:p-2 sm:px-4 md:p-4 h-[768px] overflow-y-auto w-full bg-light-dark rounded-lg flex flex-col gap-2.5 custom-scrollbar">
+              {/* game card */}
+              <>
+                {isLoading ? (
+                  Array.from({ length: 5 }).map((_, index) => (
+                    <GameCardSkeleton key={index} />
+                  ))
+                ) : gamesListData?.pages.length ? (
+                  gamesListData.pages.map((page) =>
+                    page?.data.page_content.length > 0 ? (
+                      page.data.page_content.map((game: GameField) => (
+                        <GameListCard game={game} />
+                      ))
+                    ) : (
+                      <div className="space-y-4 flex flex-col items-center justify-center w-full h-full text-white">
+                        <h1 className="font-bold text-xl">
+                          검색된 경기가 없습니다.
+                        </h1>
+                        <h2 className="text-sm">
+                          필터를 변경하여 다른 경기를 찾아보세요!
+                        </h2>
+                      </div>
+                    )
                   )
-                )
-              ) : (
-                <div className="space-y-4 flex flex-col items-center justify-center w-full h-full text-white">
-                  <h1 className="font-bold text-xl">검색된 경기가 없습니다.</h1>
-                  <h2 className="text-sm">
-                    필터를 변경하여 다른 경기를 찾아보세요!
-                  </h2>
-                </div>
-              )}
-            </>
-            {hasNextPage && (
-              <div ref={ref} className="h-1 w-full opacity-0" />
-            )}{" "}
+                ) : (
+                  <div className="space-y-4 flex flex-col items-center justify-center w-full h-full text-white">
+                    <h1 className="font-bold text-xl">
+                      검색된 경기가 없습니다.
+                    </h1>
+                    <h2 className="text-sm">
+                      필터를 변경하여 다른 경기를 찾아보세요!
+                    </h2>
+                  </div>
+                )}
+              </>
+              {hasNextPage && (
+                <div ref={ref} className="h-1 w-full opacity-0" />
+              )}{" "}
+            </div>
           </div>
 
           <MoveToAppBanner />

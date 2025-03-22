@@ -55,7 +55,7 @@ const MainContent = ({
           {/* Top */}
           {/* Top */}
           <div className="flex items-center justify-between">
-            <div className="space-y-5 sm:text-center md:text-left text-[#fff]">
+            <div className="space-y-5  text-[#fff]">
               <h1 className="sm:font-bold md:font-[600] sm:text-[26px] md:text-[32px]">
                 MITI 경기 목록
               </h1>
@@ -63,7 +63,7 @@ const MainContent = ({
                 당신의 참여 기다리는 경기들입니다. 지금 참여하세요!
               </p>
             </div>
-            <Link to="list">
+            <Link to="list" className="sm:hidden md:block">
               <button
                 type="button"
                 className="text-sm font-[600] text-[#fff] flex"
@@ -129,6 +129,15 @@ const MainContent = ({
               )}
               <MobileGameListContainer allGamesData={allGamesData} />
             </div>
+            <Link to="list" className="md:hidden full sm:flex  justify-end">
+              <button
+                type="button"
+                className="text-xs font-[600] text-[#fff] flex"
+              >
+                <span> 전체 경기</span>
+                <img src={right_arrow} alt="right" />
+              </button>
+            </Link>
           </div>
           <MoveToAppBanner />
         </div>

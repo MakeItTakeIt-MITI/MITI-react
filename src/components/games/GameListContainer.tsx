@@ -20,7 +20,7 @@ const GameListContainer = ({
 }: GameListProps) => {
   const [clicked, isClicked] = useState(false);
   return (
-    <div className=" custom-scrollbar bg-light-dark w-full h-[494px] p-4 rounded-[20px] space-y-3 overflow-y-scroll">
+    <div className="sm:hidden md:block custom-scrollbar bg-light-dark w-full h-[494px] p-4 rounded-[20px] space-y-3 overflow-y-scroll">
       {isLoading && (
         <>
           {Array.from({ length: 5 }).map((_, index) => (
