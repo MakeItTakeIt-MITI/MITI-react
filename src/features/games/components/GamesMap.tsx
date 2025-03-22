@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import { useEffect } from "react";
-import { useMapGamesList } from "../hooks/useMapGamesList.tsx";
+import { useMapGamesList } from "../../games/hooks/useMapGamesList.tsx";
 
 declare global {
   interface Window {

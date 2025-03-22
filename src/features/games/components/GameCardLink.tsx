@@ -7,16 +7,16 @@ import { GameField } from "../interface/games.ts";
 
 interface GameListCardProp {
   game: GameField;
-  handleSetCoords?: (arg1: string, arg2: string, arg3: number) => void;
+  handleSetCoords: (arg1: string, arg2: string, arg3: number) => void;
 }
-export const GameCardLink = ({ game }: GameListCardProp) => {
+export const GameCardLink = ({ game, handleSetCoords }: GameListCardProp) => {
   return (
     <Link
       to={`/games/${game.id}`}
-      // onClick={() =>
-      //   handleSetCoords(game.court.latitude, game.court.longitude, game.id)
-      // }
-      className=" sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
+      onClick={() =>
+        handleSetCoords(game.court.latitude, game.court.longitude, game.id)
+      }
+      className=" sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px]rounded-xl p-4"
       // className="cssanimation sequence fadeInBottom  sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
     >
       {/* Status and  */}
