@@ -140,7 +140,7 @@ export const List = () => {
             <button
               type="button"
               onClick={handleDisplayFilterContainer}
-              className="md:w-[122px] sm:w-[77px] md:h-full sm:h-[28px]  flex items-center justify-between bg-light-dark sm:py-1 sm:pr-1 sm:pl-4 md:py-3 md:pr-3 md:pl-5 md:rounded-lg sm:rounded-[100px]   "
+              className="md:w-[122px] sm:w-[79px] md:h-full sm:h-[28px]  flex items-center justify-between bg-light-dark sm:py-1 sm:pr-1 sm:pl-4 md:py-3 md:pr-3 md:pl-5 md:rounded-lg sm:rounded-[100px]   "
             >
               <span className="md:font-medium sm:font-[300] text-white md:text-base sm:text-xs ">
                 {regionValue}
@@ -167,7 +167,7 @@ export const List = () => {
                 type="button"
                 className="md:text-sm sm:text-xs font-[600] text-[#fff] flex"
               >
-                <span> 지도로 보기</span>
+                <span>오늘 경기 보기</span>
                 <img src={right_arrow} alt="right" />
               </button>
             </Link>
