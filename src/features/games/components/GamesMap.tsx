@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import { useEffect } from "react";
-import { useMapGamesList } from "../../games/hooks/useMapGamesList.tsx";
+// import { useMapGamesList } from "../../games/hooks/useMapGamesList.tsx";
 
 declare global {
   interface Window {
@@ -18,9 +18,9 @@ const { naver } = window;
 
 // ! {{DOMAIN}}/games?startdate=2024-05-03&starttime=17:00&game_status=closed&game_status=open&game_status=canceled&game_status=completed
 export const GamesMap = () => {
-  const { data: mapData } = useMapGamesList("", "", "");
+  // const { data: mapData } = useMapGamesList("", "", "");
 
-  console.log(mapData);
+  // console.log(mapData);
   useEffect(() => {
     new naver.maps.Map("games-map", {
       center: new naver.maps.LatLng(37.554722, 126.972778),
