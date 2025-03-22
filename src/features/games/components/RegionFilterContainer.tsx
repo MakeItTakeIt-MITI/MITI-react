@@ -63,7 +63,7 @@ export const RegionFilterContainer = ({
                 border: region === selected ? "1px solid #7FEEF0" : "",
               }}
               onClick={() => handleSelected(region)}
-              className="cursor-pointer sm:w-[31%] md:w-[103px] h-[48px] p-2.5 bg-light-dark flex items-center justify-center text-white  text-[14px] rounded-lg font-[400]"
+              className="cursor-pointer sm:w-[30%] md:w-[103px] h-[48px] p-2.5 bg-light-dark flex items-center justify-center text-white  text-[14px] rounded-lg font-[400]"
             >
               {region}
             </li>
