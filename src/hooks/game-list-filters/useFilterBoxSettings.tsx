@@ -45,6 +45,7 @@ export const useFilterBoxSettings = (
       const statusSpacing = `${selectedStatuses} `;
       setSelectedStatus(statusSpacing);
     }
+
     setDisplayFilterBox(false);
   };
 

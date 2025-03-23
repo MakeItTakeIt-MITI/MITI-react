@@ -16,20 +16,22 @@ export const GameCardLink = ({ game, handleSetCoords }: GameListCardProp) => {
       onClick={() =>
         handleSetCoords(game.court.latitude, game.court.longitude, game.id)
       }
-      className=" sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px]rounded-xl p-4"
+      className="   bg-[#343434] sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] "
       // className="cssanimation sequence fadeInBottom  sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
     >
       {/* Status and  */}
       <div className="space-y-2">
         <GameStatus status={game.game_status} />
-        <h1 className="font-bold  text-[#E5E5E5] w-[300px] truncate">
+        <h1
+          className={`font-bold  text-[#E5E5E5] ${game.title.length > 64 && "truncate"} text-lg`}
+        >
           {game.title}
         </h1>
       </div>
       {/* Game Information */}
       <div className="flex justify-between items-end">
         {/* TIME  & PLAYERS*/}
-        <div className="space-y-[4.5px] text-[#E5E5E5] text-[12px]">
+        <div className="space-y-[6px] text-[#E5E5E5] text-xs font-[600]">
           <div className="flex items-center gap-1">
             <img src={time} alt="time" />
             <span>

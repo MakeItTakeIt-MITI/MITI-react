@@ -20,6 +20,7 @@ export const Games = () => {
     displayFilterBox,
     setDisplayFilterBox
   );
+
   const { handleResetFilters, handleApplyFilters } =
     useFilterBoxSettings(setDisplayFilterBox);
 
