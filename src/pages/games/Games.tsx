@@ -39,6 +39,14 @@ export const Games = () => {
 
   return (
     <>
+      {displayFilterBox && (
+        <GameFilterContainer
+          handleToggleFilterBox={handleToggleFilterBox}
+          handleResetFilters={handleResetFilters}
+          handleApplyFilters={handleApplyFilters}
+          currentMonth={currentMonth}
+        />
+      )}
       <header className="bg-games_web bg-center bg-cover bg-no-repeat  h-[20rem] sm:hidden md:flex justify-center items-center bg-[#000] relative">
         {/* pc hero */}
         <div className="absolute md:w-[768px] flex flex-col sm:items-center md:items-start justify-center gap-[1.25rem] text-[#fff] ">
@@ -75,14 +83,7 @@ export const Games = () => {
         allGamesData={mapGamesData?.data}
         isLoading={isLoading}
       />
-      {displayFilterBox && (
-        <GameFilterContainer
-          handleToggleFilterBox={handleToggleFilterBox}
-          handleResetFilters={handleResetFilters}
-          handleApplyFilters={handleApplyFilters}
-          currentMonth={currentMonth}
-        />
-      )}
+
       <Footer />
     </>
   );
