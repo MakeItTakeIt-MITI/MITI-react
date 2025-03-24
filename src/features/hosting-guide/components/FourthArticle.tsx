@@ -1,13 +1,24 @@
-import fourth_4_1 from "../../../assets/v11.2/hosting-guide/web-fourth-1-1.svg";
+// import fourth_4_1 from "../../../assets/v11.2/hosting-guide/web-fourth-1-1.svg";
+import fourth_web from "../../../assets/v11.2/host-guide/web-fourth.png";
+import { APPLE_STORE, PLAYSTORE } from "../../../utils/app.ts";
+
+import googlePlay from "../../../assets/v11/google-play-teal.svg";
+import appleStore from "../../../assets/v11/apple-store-teal.svg";
+import { useInView } from "react-intersection-observer";
 
 const FourthArticle = () => {
+  const { ref, inView } = useInView({
+    threshold: 0.9,
+    triggerOnce: true,
+  });
+
   return (
-    <article className="w-full h-[800px] bg-[#404040] flex items-center justify-center">
-      <div className="w-[1114px] h-[700px]  flex md:flex-row sm:flex-col items-center  justify-center md:gap-[150px] sm:gap-[40px]">
+    <article className="w-full md:h-[800px] sm:h-[750px] bg-[#343434] flex items-center justify-center">
+      <div className="md:w-[1331px] md:h-[600px] sm:w-[313px] sm:h-[660px]  flex md:flex-row sm:flex-col items-center  justify-center md:gap-[150px] sm:gap-[40px]">
         {/* left */}
 
-        <div className="md:h-[594px] md:w-[484px] sm:h-[400px] sm:w-[325px]">
-          <img src={fourth_4_1} alt="" className="w-full h-full" />
+        <div className="h-[600px]">
+          <img src={fourth_web} alt="" className=" w-full h-full" />
         </div>
 
         {/* right */}
@@ -26,6 +37,30 @@ const FourthArticle = () => {
               MITI가 함께하겠습니다!
             </p>
           </div>
+          {/* button */}
+          <div
+            ref={ref}
+            className={`${inView && "shake"} flex items-center sm:justify-center md:justify-start sm:gap-3 md:gap-4 text-[#BFF9FA] sm:px-[17.5px] md:px-0  `}
+          >
+            <a href={PLAYSTORE} target="_blank">
+              <button
+                type="button"
+                className="text-[18px] text-sm font-[600] flex items-center justify-center gap-3 bg-[#69696980]  sm:h-[45px] md:h-[58px] sm:w-[140px] md:w-[180px] rounded-[14px] text-[#BFF9FA] "
+              >
+                <img src={googlePlay} alt="Google store" />
+                <p>Google Play</p>
+              </button>
+            </a>
+            <a href={APPLE_STORE} target="_blank">
+              <button
+                type="button"
+                className="text-[18px] text-sm font-[600] flex items-center justify-center gap-3 bg-[#69696980] sm:h-[45px] md:h-[58px] sm:w-[140px] md:w-[180px] rounded-[14px] text-[#BFF9FA] "
+              >
+                <img src={appleStore} alt="Apple Store" />
+                <p>App Store</p>
+              </button>
+            </a>
+          </div>{" "}
         </div>
       </div>
     </article>

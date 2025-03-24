@@ -9,6 +9,7 @@ import mobile_3 from "../../../assets/v11.2/host-guide/mobile-second-3.png";
 import mobile_4 from "../../../assets/v11.2/host-guide/mobile-second-4.png";
 
 import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 const SecondCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -21,13 +22,20 @@ const SecondCarousel = () => {
     { id: 4, img: web_4, img_mobile: mobile_4 },
   ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % carousel.length);
-    }, 7000);
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
 
-    return () => clearInterval(interval);
-  }, [carousel.length]);
+  useEffect(() => {
+    if (inView) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % carousel.length);
+      }, 7000);
+
+      return () => clearInterval(interval);
+    }
+  }, [carousel.length, inView]);
 
   const handleImageLoad = (index: number) => {
     setLoaded((prevState) => {
@@ -41,6 +49,7 @@ const SecondCarousel = () => {
     <article className=" relative w-full bg-[#404040] h-[800px]  overflow-hidden">
       {carousel.map((article, index) => (
         <div
+          ref={ref}
           key={article.id}
           className={`absolute py-[21px]  w-full inset-0 flex items-center justify-center transition-opacity duration-700 ${
             index === currentIndex
