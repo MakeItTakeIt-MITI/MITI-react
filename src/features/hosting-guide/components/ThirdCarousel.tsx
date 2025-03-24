@@ -23,8 +23,7 @@ const ThirdCarousel = () => {
   ];
 
   const { ref, inView } = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
+    threshold: 1.0,
   });
 
   useEffect(() => {

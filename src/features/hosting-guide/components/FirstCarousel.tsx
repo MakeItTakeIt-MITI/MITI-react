@@ -13,8 +13,7 @@ const FirstCarousel = () => {
   const [loaded, setLoaded] = useState([false, false, false]);
 
   const { ref, inView } = useInView({
-    threshold: 0.9,
-    triggerOnce: true,
+    threshold: 1.0,
   });
 
   const carousel = [
