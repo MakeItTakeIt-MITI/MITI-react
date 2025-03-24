@@ -6,6 +6,7 @@ import SecondArticle from "../../features/hosting-guide/components/SecondArticle
 import ThirdArticle from "../../features/hosting-guide/components/ThirdArticle.tsx";
 import FourthArticle from "../../features/hosting-guide/components/FourthArticle.tsx";
 import FirstCarousel from "../../features/hosting-guide/components/FirstCarousel.tsx";
+import SecondCarousel from "../../features/hosting-guide/components/SecondCarousel.tsx";
 
 const HostingGuide = () => {
   return (
@@ -14,7 +15,8 @@ const HostingGuide = () => {
       <section>
         {/* <FirstArticle /> */}
         <FirstCarousel />
-        <SecondArticle />
+        <SecondCarousel />
+        {/* <SecondArticle />퍄 */}
         <ThirdArticle />
         <FourthArticle />
       </section>
