@@ -25,7 +25,7 @@ const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
-    path: "/hosting-guide",
+    path: "/host-guide",
     children: [{ path: "", element: <HostingGuide /> }],
   },
   {
