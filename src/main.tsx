@@ -19,10 +19,15 @@ import PoliciesDetails from "./pages/PoliciesDetails.tsx";
 import InquiryDetail from "./pages/InquiryDetail.tsx";
 import CourtGamesList from "./pages/courts/CourtGamesList.tsx";
 import { List } from "./pages/games/List.tsx";
+import HostingGuide from "./pages/hosting-guide/HostingGuide.tsx";
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
+  {
+    path: "/host-guide",
+    children: [{ path: "", element: <HostingGuide /> }],
+  },
   {
     path: "/",
     element: <App />,
@@ -63,6 +68,7 @@ const router = createBrowserRouter([
           { path: ":id", element: <PoliciesDetails /> },
         ],
       },
+
       { path: "*", element: <NotFound /> },
     ],
   },

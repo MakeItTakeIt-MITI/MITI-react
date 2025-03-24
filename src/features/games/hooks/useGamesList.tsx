@@ -3,7 +3,7 @@ import { fetchGamesList } from "../api/games.ts";
 
 export const useGamesList = (district: string, title: string) => {
   return useInfiniteQuery({
-    queryKey: ["v11.2 Games List", district, title],
+    queryKey: ["v1.2 Games List", district, title],
     queryFn: ({ pageParam = 1 }) => fetchGamesList(district, title, pageParam),
 
     initialPageParam: 1,

@@ -6,6 +6,7 @@ import { GameCardSkeleton } from "../../features/games/components/GameCardSkelet
 import "./scrollbar.css";
 import { GameCardStatic } from "../../features/games/components/GameCardStatic.tsx";
 import { GameCardLink } from "../../features/games/components/GameCardLink.tsx";
+import { ListContainerLayout } from "../../features/common/components/ListContainerLayout.tsx";
 
 interface GameListProps extends AllGamesProps {
   handleSetCoords: (arg1: string, arg2: string, arg3: number) => void;
@@ -20,7 +21,7 @@ const GameListContainer = ({
 }: GameListProps) => {
   const [clicked, isClicked] = useState(false);
   return (
-    <div className="sm:hidden md:block custom-scrollbar bg-light-dark w-full h-[494px] p-4 rounded-[20px] space-y-3 overflow-y-scroll">
+    <ListContainerLayout height={500}>
       {isLoading && (
         <>
           {Array.from({ length: 5 }).map((_, index) => (
@@ -64,7 +65,7 @@ const GameListContainer = ({
           // />
         )
       )}
-    </div>
+    </ListContainerLayout>
   );
 };
 
