@@ -10,6 +10,7 @@ import mobile_4 from "../../../assets/v11.2/host-guide/mobile-second-4.png";
 
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import { CarouselRotateBtns } from "./CarouselRotateBtns.tsx";
 
 const SecondCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,8 +24,7 @@ const SecondCarousel = () => {
   ];
 
   const { ref, inView } = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
+    threshold: 1.0,
   });
 
   useEffect(() => {
@@ -46,12 +46,12 @@ const SecondCarousel = () => {
   };
 
   return (
-    <article className=" relative w-full bg-[#404040] h-[800px]  overflow-hidden">
+    <article className=" relative w-full bg-[#404040] ] h-[800px]  overflow-hidden">
       {carousel.map((article, index) => (
         <div
           ref={ref}
           key={article.id}
-          className={`absolute py-[21px]  w-full inset-0 flex items-center justify-center transition-opacity duration-700 ${
+          className={`absolute   w-full inset-0 px-[21px]  flex items-center justify-center transition-opacity duration-700 ${
             index === currentIndex
               ? "opacity-100"
               : "opacity-0 pointer-events-none"
@@ -69,7 +69,7 @@ const SecondCarousel = () => {
           <img
             src={article.img_mobile}
             alt={`mobile-image-${article.id}`}
-            className={`sm:block md:hidden  w-[375px] h-full mx-auto transition-opacity duration-700 ${
+            className={`sm:block md:hidden  h-[704px]   mx-auto transition-opacity duration-700 ${
               loaded[index] ? "opacity-100" : "opacity-0"
             }`}
             loading="lazy"
@@ -78,17 +78,11 @@ const SecondCarousel = () => {
         </div>
       ))}
 
-      <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-3">
-        {carousel.map((_, index) => (
-          <button
-            key={index}
-            className={`w-1 h-1 rounded-full transition-all duration-300 ${
-              index === currentIndex ? "bg-[#7FEEF0]" : "bg-[#A3A3A3]"
-            }`}
-            onClick={() => setCurrentIndex(index)}
-          />
-        ))}
-      </div>
+      <CarouselRotateBtns
+        carousel={carousel}
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
+      />
     </article>
   );
 };

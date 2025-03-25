@@ -1,4 +1,4 @@
-// import fourth_4_1 from "../../../assets/v11.2/hosting-guide/web-fourth-1-1.svg";
+import fourth_mobile from "../../../assets/v11.2/host-guide/mobile-fourth.png";
 import fourth_web from "../../../assets/v11.2/host-guide/web-fourth.png";
 import { APPLE_STORE, PLAYSTORE } from "../../../utils/app.ts";
 
@@ -13,12 +13,21 @@ const FourthArticle = () => {
   });
 
   return (
-    <article className="w-full md:h-[800px] sm:h-[750px] bg-[#343434] flex items-center justify-center">
+    <article className="w-full md:h-[800px] sm:h-[750px] md:bg-[#343434] sm:bg-[#404040] flex items-center justify-center">
       <div className="md:w-[1331px] md:h-[600px] sm:w-[313px] sm:h-[660px]  flex md:flex-row sm:flex-col items-center  justify-center md:gap-[150px] sm:gap-[40px]">
         {/* left */}
 
         <div className="h-[600px]">
-          <img src={fourth_web} alt="" className=" w-full h-full" />
+          <img
+            src={fourth_web}
+            alt=""
+            className="sm:hidden md:block w-full h-full"
+          />
+          <img
+            src={fourth_mobile}
+            alt=""
+            className="sm:block md:hidden w-full h-full"
+          />
         </div>
 
         {/* right */}
