@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { getProceededCourtList } from "../api/courts.ts";
+import { getProceededCourtList } from "../features/courts/api/courts.ts";
 
 export const useCourtGamesInfiniteData = (courtId: number | null) => {
   return useInfiniteQuery({
