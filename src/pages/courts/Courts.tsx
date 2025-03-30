@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useCourtsInfiniteDataHook } from "../../hooks/useCourtsInfiniteDataHook.tsx";
 import { useInView } from "react-intersection-observer";
 
-import { Court } from "../../interfaces/games.ts";
-import CourtMap from "../../components/courts/CourtMap.tsx";
+// import { Court } from "../../interfaces/games.ts";
+import CourtMap from "../../features/courts/components/CourtMap.tsx";
 import MoveToAppBanner from "../../components/common/MoveToAppBanner.tsx";
 // import FilterContainer from "../components/courts/FilterContainer.tsx";
 
@@ -14,12 +14,16 @@ import location from "../../assets/v11.2/map_pin.svg";
 
 import { Link } from "react-router-dom";
 import { RegionFilterContainer } from "../../features/games/components/RegionFilterContainer.tsx";
+import { CourtsField } from "../../features/courts/interface/courts.ts";
 
 const Courts = () => {
-  // const [displayDropbox, setDisplayDropbox] = useState(false);
-  // const [selectedCity, setSelectedCity] = useState("");
   const [input, setInput] = useState("");
   const [searchInput, setSearchInput] = useState("");
+  const [courtsList, setCourtsList] = useState<CourtsField[]>([]);
+  const [geolocation, setGeolocation] = useState<{
+    lat: number;
+    lon: number;
+  } | null>(null);
 
   const [regionValue, setRegionValue] = useState("전체");
   const [displayFilterContainer, setDisplayFilterContainer] = useState(false);
@@ -51,6 +55,27 @@ const Courts = () => {
     refetch();
   };
 
+  function calculateCurrentToCourtDistance(
+    lat1: string,
+    lon1: string,
+    lat2: string | number,
+    lon2: string | number
+  ): number {
+    const R = 6371;
+    const dLat = (Number(lat2) - Number(lat1)) * (Math.PI / 180);
+    const dLon = (Number(lon2) - Number(lon1)) * (Math.PI / 180);
+
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(Number(lat1) * (Math.PI / 180)) *
+        Math.cos(Number(lat2) * (Math.PI / 180)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  }
+
   useEffect(() => {
     if (inView && hasNextPage) {
       fetchNextPage();
@@ -59,7 +84,27 @@ const Courts = () => {
 
   useEffect(() => {
     refetch();
-  }, [refetch, searchInput, input]);
+
+    if (courtsData) {
+      const mappedCourts = courtsData.pages.flatMap((page) =>
+        page.data.page_content.length > 0 ? page.data.page_content : []
+      );
+      setCourtsList(mappedCourts);
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setGeolocation({
+              lat: position.coords.latitude,
+              lon: position.coords.longitude,
+            });
+          },
+          (err) => console.log(err.message),
+          { enableHighAccuracy: true }
+        );
+      }
+    }
+  }, [refetch, searchInput, input, courtsData]);
 
   return (
     <>
@@ -95,7 +140,7 @@ const Courts = () => {
               동네에 있는 경기장을 찾아보세요!
             </h2>
           </div>
-          <CourtMap courtsData={courtsData} />
+          <CourtMap courtsList={courtsList} />
           <div className="flex items-center sm:justify-center gap-[1.25rem]">
             <div className="space-y-[1.25rem] w-full">
               <div className="flex items-center gap-[0.75rem] h-[3rem]">
@@ -119,18 +164,12 @@ const Courts = () => {
                   <span className="font-medium text-white">{regionValue}</span>
                   <img src={search} alt="dropdown" />
                 </button>
-                {/* <FilterContainer
-                  handleDisplayDropbox={handleDisplayDropbox}
-                  selectedCity={selectedCity}
-                  displayDropbox={displayDropbox}
-                  handleSelectCity={handleSelectCity}
-                /> */}
               </div>
 
               <div className="sm:h-[29.5rem] bg-[#343434] md:h-[506px] w-full px-4 pt-4 pb-5 space-y-1 overflow-y-scroll rounded-[20px]  custom-scrollbar">
                 {courtsData?.pages.map((page) => {
                   return page.data.page_content.length > 0 ? (
-                    page.data.page_content.map((court: Court) => (
+                    page.data.page_content.map((court: CourtsField) => (
                       <Link
                         key={court.id}
                         to={`/courts/${court.id}`}
@@ -144,9 +183,26 @@ const Courts = () => {
                             {court.address} {court.address_detail}
                           </h2>
                         </div>
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center justify-end gap-1 w-[100px] ">
                           <img src={location} alt="location" />
-                          <p className="text-white text-xs font-medium">0.0m</p>
+                          <p className="text-white text-xs font-medium ">
+                            {!isNaN(
+                              calculateCurrentToCourtDistance(
+                                court.latitude,
+                                court.longitude,
+                                geolocation?.lat ?? 0,
+                                geolocation?.lon ?? 0
+                              )
+                            )
+                              ? calculateCurrentToCourtDistance(
+                                  court.latitude,
+                                  court.longitude,
+                                  geolocation?.lat ?? 0,
+                                  geolocation?.lon ?? 0
+                                ).toFixed(1)
+                              : ""}{" "}
+                            km
+                          </p>
                         </div>
                       </Link>
                     ))

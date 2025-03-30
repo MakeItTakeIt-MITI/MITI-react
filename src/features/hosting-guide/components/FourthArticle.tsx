@@ -17,7 +17,7 @@ const FourthArticle = () => {
       <div className="md:w-[1331px] md:h-[600px] sm:w-[313px] sm:h-[660px]  flex md:flex-row sm:flex-col items-center  justify-center md:gap-[150px] sm:gap-[40px]">
         {/* left */}
 
-        <div className="h-[600px]">
+        <div className=" sm:h-[400px] md:h-[600px]">
           <img
             src={fourth_web}
             alt=""

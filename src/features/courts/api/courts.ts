@@ -1,5 +1,5 @@
 
-import axiosUrl from "../utils/axios"
+import axiosUrl from "../../../utils/axios.ts"
 
 
 
@@ -29,3 +29,4 @@ export const getCourtDetail = async (courtId: number) => {
         throw new Error
     }
 }
+
