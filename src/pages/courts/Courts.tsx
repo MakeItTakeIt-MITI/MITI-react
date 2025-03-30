@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useCourtsInfiniteDataHook } from "../../hooks/useCourtsInfiniteDataHook.tsx";
 import { useInView } from "react-intersection-observer";
 
-import { Court } from "../../interfaces/games.ts";
+// import { Court } from "../../interfaces/games.ts";
 import CourtMap from "../../features/courts/components/CourtMap.tsx";
 import MoveToAppBanner from "../../components/common/MoveToAppBanner.tsx";
 // import FilterContainer from "../components/courts/FilterContainer.tsx";
@@ -14,11 +14,12 @@ import location from "../../assets/v11.2/map_pin.svg";
 
 import { Link } from "react-router-dom";
 import { RegionFilterContainer } from "../../features/games/components/RegionFilterContainer.tsx";
+import { CourtsField } from "../../features/courts/interface/courts.ts";
 
 const Courts = () => {
   const [input, setInput] = useState("");
   const [searchInput, setSearchInput] = useState("");
-  const [courtsList, setCourtsList] = useState<Court[]>([]);
+  const [courtsList, setCourtsList] = useState<CourtsField[]>([]);
   const [geolocation, setGeolocation] = useState<{
     lat: number;
     lon: number;
@@ -55,19 +56,19 @@ const Courts = () => {
   };
 
   function calculateCurrentToCourtDistance(
-    lat1: number,
-    lon1: number,
-    lat2: number,
-    lon2: number
+    lat1: string,
+    lon1: string,
+    lat2: string | number,
+    lon2: string | number
   ): number {
     const R = 6371;
-    const dLat = (lat2 - lat1) * (Math.PI / 180);
-    const dLon = (lon2 - lon1) * (Math.PI / 180);
+    const dLat = (Number(lat2) - Number(lat1)) * (Math.PI / 180);
+    const dLon = (Number(lon2) - Number(lon1)) * (Math.PI / 180);
 
     const a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(lat1 * (Math.PI / 180)) *
-        Math.cos(lat2 * (Math.PI / 180)) *
+      Math.cos(Number(lat1) * (Math.PI / 180)) *
+        Math.cos(Number(lat2) * (Math.PI / 180)) *
         Math.sin(dLon / 2) *
         Math.sin(dLon / 2);
 
@@ -168,7 +169,7 @@ const Courts = () => {
               <div className="sm:h-[29.5rem] bg-[#343434] md:h-[506px] w-full px-4 pt-4 pb-5 space-y-1 overflow-y-scroll rounded-[20px]  custom-scrollbar">
                 {courtsData?.pages.map((page) => {
                   return page.data.page_content.length > 0 ? (
-                    page.data.page_content.map((court: Court) => (
+                    page.data.page_content.map((court: CourtsField) => (
                       <Link
                         key={court.id}
                         to={`/courts/${court.id}`}
@@ -185,12 +186,21 @@ const Courts = () => {
                         <div className="flex items-center justify-end gap-1 w-[100px] ">
                           <img src={location} alt="location" />
                           <p className="text-white text-xs font-medium ">
-                            {calculateCurrentToCourtDistance(
-                              court.latitude,
-                              court.longitude,
-                              geolocation?.lat,
-                              geolocation?.lon
-                            ).toFixed(1) || "0.00"}{" "}
+                            {!isNaN(
+                              calculateCurrentToCourtDistance(
+                                court.latitude,
+                                court.longitude,
+                                geolocation?.lat ?? 0,
+                                geolocation?.lon ?? 0
+                              )
+                            )
+                              ? calculateCurrentToCourtDistance(
+                                  court.latitude,
+                                  court.longitude,
+                                  geolocation?.lat ?? 0,
+                                  geolocation?.lon ?? 0
+                                ).toFixed(1)
+                              : ""}{" "}
                             km
                           </p>
                         </div>
