@@ -6,7 +6,6 @@ import participants from "../../assets/v11/participants.svg";
 import profile from "../../assets/v11/profile.svg";
 // import star from "../../assets/v11/star.svg";
 import ShareFeatureFooter from "../../components/common/ShareFeatureFooter.tsx";
-import { useGameDetailDataHook } from "../../hooks/useGameDetailDataHook.tsx";
 import { useParams } from "react-router-dom";
 
 import no_stars from "../../assets/v11/reviews/zero-star.svg";
@@ -20,6 +19,7 @@ import four_stars from "../../assets/v11/reviews/four-star.svg";
 import four_half_stars from "../../assets/v11/reviews/four-half-star.svg";
 import fivestars from "../../assets/v11/reviews/five-star.svg";
 import MoveToAppBanner from "../../components/common/MoveToAppBanner.tsx";
+import { useGameDetailDataHook } from "../../features/games/hooks/useGameDetailDataHook.tsx";
 // import { useEffect } from "react";
 
 const GameDetail = () => {

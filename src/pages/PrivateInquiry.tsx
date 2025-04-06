@@ -6,7 +6,7 @@ import Footer from "../components/common/Footer.tsx";
 // eslint-disable-next-line import/named
 import { SubmitHandler, useForm } from "react-hook-form";
 import { PrivateInquiryField } from "../interfaces/support.ts";
-import { usePrivateInquiryHook } from "../hooks/usePrivateInquiryHook.tsx";
+import { usePrivateInquiryHook } from "../features/inquiries/hooks/usePrivateInquiryHook.tsx";
 import MoveToAppBanner from "../components/common/MoveToAppBanner.tsx";
 
 const PrivateInquiry = () => {

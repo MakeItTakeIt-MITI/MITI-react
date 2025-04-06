@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { privateInquiryDetails } from "../api/support.ts";
-import { InquiryDetailField } from "../interfaces/support.ts";
+import { privateInquiryDetails } from "../../../api/support.ts";
+import { InquiryDetailField } from "../../../interfaces/support.ts";
 
 export const useInquiryDetailsHook = (
   inquiryId: number,

@@ -8,8 +8,8 @@ import useStatusSelectionStore from "../../store/useStatusSelectionStore.ts";
 
 import useCurrentMonthStore from "../../store/useCurrentMonthStore.ts";
 
-import { useFilterBox } from "../../hooks/game-list-filters/useFilterBox.tsx";
-import { useFilterBoxSettings } from "../../hooks/game-list-filters/useFilterBoxSettings.tsx";
+import { useFilterBox } from "../../features/games/hooks/useFilterBox.tsx";
+import { useFilterBoxSettings } from "../../features/games/hooks/useFilterBoxSettings.tsx";
 import { useMapGamesList } from "../../features/games/hooks/useMapGamesList.tsx";
 
 export const Games = () => {

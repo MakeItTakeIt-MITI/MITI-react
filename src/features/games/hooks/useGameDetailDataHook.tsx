@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getGameDetail } from "../api/games.ts";
+import { getGameDetail } from "../../../api/games.ts";
 
 interface GameDetailParams {
   id: number;

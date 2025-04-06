@@ -3,7 +3,7 @@ import searchIcon from "../../assets/v11/search.svg";
 import { FAQ_TOPICS } from "../../constants/faq.ts";
 import dropdown from "../../assets/v11/drop.svg";
 import { useEffect, useRef, useState } from "react";
-import { useFaqDataHook } from "../../hooks/useFaqDataHook.tsx";
+import { useFaqDataHook } from "../../features/faq/hooks/useFaqDataHook.tsx";
 import { FAQItem } from "../../interfaces/support.ts";
 import "./faq.css";
 import MoveToAppBanner from "../common/MoveToAppBanner.tsx";

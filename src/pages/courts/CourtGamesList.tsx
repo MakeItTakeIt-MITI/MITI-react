@@ -2,12 +2,12 @@ import { useParams } from "react-router-dom";
 import ShareFeatureFooter from "../../components/common/ShareFeatureFooter.tsx";
 import DetailMap from "../../components/courts/DetailMap.tsx";
 import MobileDetailMap from "../../components/courts/MobileDetailMap.tsx";
-import { useCourtDetailData } from "../../hooks/useCourtDetailData.tsx";
+import { useCourtDetailData } from "../../features/courts/hooks/useCourtDetailData.tsx";
 import CourtDetailCard from "../../components/courts/CourtDetailCard.tsx";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import { CourtsList } from "../../interfaces/courts.ts";
-import { useCourtGamesInfiniteData } from "../../hooks/useCourtGamesInfiniteData.tsx";
+import { useCourtGamesInfiniteData } from "../../features/courts/hooks/useCourtGamesInfiniteData.tsx";
 import { GameCardSkeleton } from "../../features/games/components/GameCardSkeleton.tsx";
 
 import copy from "../../assets/v11.2/copy.svg";

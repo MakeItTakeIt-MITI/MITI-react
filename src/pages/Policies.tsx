@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Footer from "../components/common/Footer.tsx";
-import { useServiceTermsDataHook } from "../hooks/useServiceTermsDataHook.tsx";
+import { useServiceTermsDataHook } from "../features/policies/hooks/useServiceTermsDataHook.tsx";
 import { PoliciesField } from "../interfaces/support.ts";
 import MoveToAppBanner from "../components/common/MoveToAppBanner.tsx";
 
