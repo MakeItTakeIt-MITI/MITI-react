@@ -6,7 +6,7 @@ import participants from "../../assets/v11/participants.svg";
 import profile from "../../assets/v11/profile.svg";
 // import star from "../../assets/v11/star.svg";
 import ShareFeatureFooter from "../../components/common/ShareFeatureFooter.tsx";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 import no_stars from "../../assets/v11/reviews/zero-star.svg";
 import one_star from "../../assets/v11/reviews/one-star.svg";
@@ -26,8 +26,8 @@ const GameDetail = () => {
   const { id } = useParams();
   const gameId = Number(id);
 
-  const { data: game } = useGameDetailDataHook({ id: gameId });
-
+  const { data: game, error } = useGameDetailDataHook({ id: gameId });
+  console.log(error);
   // function totalGameTime() {
   const start = game?.data.starttime || "00:00:00";
   const end = game?.data.endtime || "00:00:00";
@@ -55,6 +55,10 @@ const GameDetail = () => {
   }
 
   const gameDuration = calculateDuration(start, end);
+
+  if (!/^\d+$/.test(id ?? "")) {
+    return <Navigate to="/*" />;
+  }
 
   return (
     <>
