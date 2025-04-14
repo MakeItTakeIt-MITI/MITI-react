@@ -20,6 +20,7 @@ import InquiryDetail from "./pages/InquiryDetail.tsx";
 import CourtGamesList from "./pages/courts/CourtGamesList.tsx";
 import { List } from "./pages/games/List.tsx";
 import HostingGuide from "./pages/hosting-guide/HostingGuide.tsx";
+import { Auth } from "./pages/auth/Auth.tsx";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "/", element: <Landing /> },
+      { path: "/auth", element: <Auth /> },
 
       {
         path: "games",
