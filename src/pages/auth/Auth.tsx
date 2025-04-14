@@ -2,8 +2,27 @@ import logo from "../../assets/v11.2/auth/logo.svg";
 import private_pass from "../../assets/v11.2/auth/private.svg";
 import kakao_msg from "../../assets/v11.2/auth/kakao_msg.svg";
 import Footer from "../../components/common/Footer.tsx";
+import { useRef } from "react";
+import { useEmailLoginHook } from "../../features/auth/hooks/useEmailLoginHook.tsx";
 
 export const Auth = () => {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const { mutate: mutateLogin } = useEmailLoginHook();
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const email = emailRef.current?.value;
+    const password = passwordRef.current?.value;
+
+    mutateLogin({
+      email: email,
+      password: password,
+    });
+  };
+
   return (
     <>
       <section className=" w-full sm:h-full sm:pb-[116px] md:h-[760px] flex items-center justify-center">
@@ -16,11 +35,16 @@ export const Auth = () => {
           <form className="flex flex-col  space-y-[42px] ">
             {/* email */}
             <div className="flex flex-col gap-2">
-              <label htmlFor="" className="text-sm text-[#D4D4D4] font-[400]">
+              <label
+                htmlFor="email"
+                className="text-sm text-[#D4D4D4] font-[400]"
+              >
                 이메일
               </label>
               <input
                 type="text"
+                ref={emailRef}
+                id="email"
                 placeholder="이메일을 입력해주세요."
                 className="focus:outline-none  focus:border-none w-[333px] h-[48px] px-5 py-4 text-base font-[500] rounded-lg bg-[#404040] text-[#F1F1F1]"
               />
@@ -28,13 +52,18 @@ export const Auth = () => {
             {/* password */}
 
             <div className=" flex flex-col gap-2">
-              <label htmlFor="" className="text-sm text-[#D4D4D4] font-[400]">
+              <label
+                htmlFor="password"
+                className="text-sm text-[#D4D4D4] font-[400]"
+              >
                 비밀번호
               </label>
 
               <div className="relative w-[333px] h-[48px] space-y-4 ">
                 <input
                   type="password"
+                  ref={passwordRef}
+                  id="password"
                   placeholder="비밀번호를 입력해주세요."
                   className=" focus:outline-none  focus:border-none w-full h-full  pl-5 pr-[px] py-4  rounded-lg bg-[#404040] text-base font-[500]  text-[#F1F1F1]"
                 />
@@ -56,7 +85,8 @@ export const Auth = () => {
 
             <div className="space-y-4">
               <button
-                type="submit"
+                type="button"
+                onClick={handleLogin}
                 className=" w-[333px] h-[48px] bg-[#737373] text-sm text-[#f1f1f1] font-[700] rounded-lg"
               >
                 로그인 하기
