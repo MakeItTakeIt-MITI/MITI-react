@@ -10,7 +10,7 @@ import { useState } from "react";
 export const Auth = () => {
   const [status, setStatus] = useState(0);
 
-  const { register, handleSubmit } = useForm<EmailLoginField>();
+  const { register, handleSubmit, watch } = useForm<EmailLoginField>();
 
   const { mutate: mutateLogin } = useEmailLoginHook();
 
@@ -27,6 +27,10 @@ export const Auth = () => {
       },
     });
   };
+
+  const email = watch("email") || "";
+  const password = watch("password") || "";
+  const isInputted = email.length > 0 && password.length > 0;
 
   return (
     <>
@@ -97,7 +101,12 @@ export const Auth = () => {
           <div className="space-y-4">
             <button
               type="submit"
-              className="w-[333px] h-[48px] bg-[#737373] text-sm text-[#f1f1f1] font-[700] rounded-lg"
+              disabled={isInputted ? false : true}
+              style={{
+                backgroundColor: isInputted ? "#7FEEF0" : "#737373",
+                color: isInputted ? "#262626" : "#f1f1f1",
+              }}
+              className="w-[333px] h-[48px] text-sm  font-[700] rounded-lg"
             >
               로그인 하기
             </button>
