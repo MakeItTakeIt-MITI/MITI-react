@@ -1,24 +1,11 @@
 import { useState } from "react";
 import Footer from "../../components/common/Footer.tsx";
+import check from "../../assets/v11.2/auth/check.svg";
 
 export const Withdraw = () => {
-  const [checkboxes, setCheckboxes] = useState({
-    first: false,
-    second: false,
-    third: false,
-  });
+  const [checked, setChecked] = useState(true);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    name: keyof typeof checkboxes
-  ) => {
-    setCheckboxes((prev) => ({
-      ...prev,
-      [name]: e.target.checked,
-    }));
-  };
-
-  const allChecked = Object.values(checkboxes).every(Boolean);
+  // const allChecked = Object.values(checkboxes).every(Boolean);
 
   return (
     <>
@@ -33,26 +20,19 @@ export const Withdraw = () => {
             {/* checkbox */}
             <div className="space-y-3 text-sm font-[400]">
               <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  checked={checkboxes.first}
-                  onChange={(e) => handleChange(e, "first")}
-                />
+                <img src={check} alt="check" />
+
                 <div className="text-[#E5E5E5]">
                   <p>탈퇴하시는 경우, 해당 계정 정보는 즉시 삭제되며</p>
                   <p>입금되지 않은 송금요쳥과 보유금 전부 삭제됩니다.</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  checked={checkboxes.second}
-                  onChange={(e) => handleChange(e, "second")}
-                />
-                <div className="text-[#E5E5E5]">
-                  <p>탈퇴하시는 경우, 해당 계정 정보는 즉시 삭제되며</p>
-                  <p>입금되지 않은 송금요쳥과 보유금 전부 삭제됩니다.</p>
-                </div>
+                <img src={check} alt="check" />
+                <p className="text-[#E5E5E5]">
+                  아직 진행이 완료되지 않은 호스팅 경기나 게스트 경기가 있는
+                  경우, 경기가 완료된 이후 회원 탈퇴를 진행해주세요.
+                </p>
               </div>
             </div>
           </div>
@@ -60,18 +40,27 @@ export const Withdraw = () => {
           <div className="space-y-[20px]">
             <div className="flex items-center gap-2">
               <input
+                id="withdraw-agree"
                 type="checkbox"
-                checked={checkboxes.third}
-                onChange={(e) => handleChange(e, "third")}
+                checked={checked}
+                onChange={() => setChecked(!checked)}
+                className="size-6 "
               />
-              <p className="text-[#E5E5E5] text-sm font-[400]">
+
+              <label
+                htmlFor="withdraw-agree"
+                className="text-[#E5E5E5] text-sm font-[400]"
+              >
                 회원 탈퇴 유의 사항을 확인하였으며, 이에 동의합니다.
-              </p>
+              </label>
             </div>
             <button
               type="button"
-              disabled={!allChecked}
-              className="h-[40px] w-full bg-[#737373] rounded-lg"
+              disabled={!checked}
+              style={{
+                backgroundColor: checked ? "#7FEEF0" : "#737373",
+              }}
+              className="h-[40px] w-full  rounded-lg font-bold"
             >
               회원 탈퇴하기
             </button>
