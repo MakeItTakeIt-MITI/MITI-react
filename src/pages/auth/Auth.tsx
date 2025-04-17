@@ -6,6 +6,7 @@ import { useEmailLoginHook } from "../../features/auth/hooks/useEmailLoginHook.t
 import { useForm } from "react-hook-form";
 import { EmailLoginField } from "../../features/auth/interface/auth.ts";
 import { useState } from "react";
+import { useLoginStore } from "../../features/auth/state/useLoginStore.tsx";
 
 export const Auth = () => {
   const [status, setStatus] = useState(0);
@@ -13,6 +14,8 @@ export const Auth = () => {
   const { register, handleSubmit, watch } = useForm<EmailLoginField>();
 
   const { mutate: mutateLogin } = useEmailLoginHook();
+
+  const { setIsLogged, setUser, user } = useLoginStore();
 
   const onSubmit = (data: EmailLoginField) => {
     mutateLogin(data, {
@@ -24,6 +27,14 @@ export const Auth = () => {
       onSuccess: (response) => {
         const statusCode = response?.status_code;
         setStatus(statusCode);
+
+        if (statusCode === 200) {
+          localStorage.setItem("accessToken", response?.data.token.access);
+          localStorage.setItem("refreshToken", response?.data.token.refresh);
+          setUser(response?.data);
+          setIsLogged(true);
+          console.log(user);
+        }
       },
     });
   };
