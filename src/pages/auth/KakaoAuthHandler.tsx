@@ -40,11 +40,17 @@ export const KakaoAuthHandler = () => {
           {
             onSuccess: (res) => {
               if (res.status_code == 200) {
+                localStorage.setItem("accessToken", res?.data.token.access);
+                localStorage.setItem("refreshToken", res?.data.token.refresh);
                 setUser(res?.data);
                 setIsLogged(true);
                 navigate("/withdraw");
               } else {
                 alert("로그인 실패: 관리자에게 문의해주세요.");
+              }
+
+              if (res.status_code == 403) {
+                alert("다른 방법으로 로그인 시도해주세요.");
               }
             },
           }

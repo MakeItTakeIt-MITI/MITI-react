@@ -3,12 +3,18 @@ import Footer from "../../components/common/Footer.tsx";
 import check from "../../assets/v11.2/auth/check.svg";
 import { useLoginStore } from "../../features/auth/state/useLoginStore.tsx";
 import { useNavigate } from "react-router-dom";
+import { useDeleteAccountHook } from "../../features/auth/hooks/useDeleteAccountHook.tsx";
 
 export const Withdraw = () => {
   const [checked, setChecked] = useState(false);
   const navigate = useNavigate();
 
   const { user, isLogged } = useLoginStore();
+  const { mutate: deleteAccount } = useDeleteAccountHook();
+
+  const handleDeleteAccount = () => {
+    deleteAccount();
+  };
 
   useEffect(() => {
     if (!isLogged) {
@@ -65,6 +71,7 @@ export const Withdraw = () => {
             <button
               type="button"
               disabled={!checked}
+              onClick={handleDeleteAccount}
               style={{
                 backgroundColor: checked ? "#7FEEF0" : "#737373",
               }}
