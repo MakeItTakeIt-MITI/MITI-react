@@ -1,21 +1,23 @@
 import logo from "../../assets/v11.2/auth/logo.svg";
 import private_pass from "../../assets/v11.2/auth/private.svg";
-import kakao_msg from "../../assets/v11.2/auth/kakao_msg.svg";
 import Footer from "../../components/common/Footer.tsx";
 import { useEmailLoginHook } from "../../features/auth/hooks/useEmailLoginHook.tsx";
 import { useForm } from "react-hook-form";
 import { EmailLoginField } from "../../features/auth/interface/auth.ts";
 import { useState } from "react";
 import { useLoginStore } from "../../features/auth/state/useLoginStore.tsx";
+import { useNavigate } from "react-router-dom";
+import { KakaoLoginButton } from "../../features/auth/kakao/KakaoLoginButton.tsx";
 
 export const Auth = () => {
   const [status, setStatus] = useState(0);
+  const navigate = useNavigate();
 
   const { register, handleSubmit, watch } = useForm<EmailLoginField>();
 
   const { mutate: mutateLogin } = useEmailLoginHook();
 
-  const { setIsLogged, setUser, user } = useLoginStore();
+  const { setIsLogged, setUser } = useLoginStore();
 
   const onSubmit = (data: EmailLoginField) => {
     mutateLogin(data, {
@@ -33,7 +35,7 @@ export const Auth = () => {
           localStorage.setItem("refreshToken", response?.data.token.refresh);
           setUser(response?.data);
           setIsLogged(true);
-          console.log(user);
+          navigate("/withdraw");
         }
       },
     });
@@ -123,8 +125,8 @@ export const Auth = () => {
             </button>
 
             <p className="text-center text-xs text-[#EAEAEA]">또는</p>
-
-            <div className="relative w-[333px] h-[48px] bg-[#FAE64D] rounded-lg">
+            <KakaoLoginButton />
+            {/* <div className="relative w-[333px] h-[48px] bg-[#FAE64D] rounded-lg">
               <img
                 src={kakao_msg}
                 alt="kakao"
@@ -136,7 +138,7 @@ export const Auth = () => {
               >
                 카카오로 3초 만에 시작하기
               </button>
-            </div>
+            </div> */}
           </div>
         </form>
       </section>

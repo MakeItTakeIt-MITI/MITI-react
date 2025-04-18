@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../../components/common/Footer.tsx";
 import check from "../../assets/v11.2/auth/check.svg";
+import { useLoginStore } from "../../features/auth/state/useLoginStore.tsx";
+import { useNavigate } from "react-router-dom";
 
 export const Withdraw = () => {
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
+  const navigate = useNavigate();
 
-  // const allChecked = Object.values(checkboxes).every(Boolean);
+  const { user, isLogged } = useLoginStore();
 
+  useEffect(() => {
+    if (!isLogged) {
+      navigate("/auth");
+    }
+  }, [isLogged]);
   return (
     <>
       <section className="w-full h-[779px]   pt-[60px] pb-[100px] ">
@@ -14,7 +22,7 @@ export const Withdraw = () => {
           <div className="space-y-[24px]">
             {/* header */}
             <div className="text-white font-bold text-[20px]">
-              <h1>어니언수제어묵님,</h1>
+              <h1>{user?.nickname}님,</h1>
               <h2>정말 탈퇴하시겠어요?</h2>
             </div>
             {/* checkbox */}
