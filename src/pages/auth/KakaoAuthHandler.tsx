@@ -39,6 +39,7 @@ export const KakaoAuthHandler = () => {
           { access_token: accessToken },
           {
             onSuccess: (res) => {
+              console.log(res);
               if (res.status_code == 200) {
                 localStorage.setItem("accessToken", res?.data.token.access);
                 localStorage.setItem("refreshToken", res?.data.token.refresh);
@@ -46,19 +47,27 @@ export const KakaoAuthHandler = () => {
                 setIsLogged(true);
                 navigate("/withdraw");
               } else {
-                alert("로그인 실패: 관리자에게 문의해주세요.");
+                alert(res);
               }
 
               if (res.status_code == 403) {
                 alert("다른 방법으로 로그인 시도해주세요.");
               }
             },
+            onError() {
+              alert(
+                "카카오톡 로그인에 실패했습니다.\n카카오 계정으로 가입하신 사용자이신가요?\n계속해서 문제가 발생한다면 고객센터로 문의 부탁드립니다."
+              );
+
+              setIsLogged(false);
+              navigate("/auth");
+            },
           }
         );
 
         return response;
       } catch (error) {
-        console.log(error);
+        throw new Error();
       }
     };
 
