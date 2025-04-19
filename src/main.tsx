@@ -38,7 +38,10 @@ const router = createBrowserRouter([
       { path: "/", element: <Landing /> },
       { path: "/auth", element: <Auth /> },
       { path: "/kakao/login", element: <KakaoAuthHandler /> },
-      { path: "/withdraw", element: <Withdraw /> },
+      {
+        path: "/withdraw",
+        element: <Withdraw />,
+      },
 
       {
         path: "games",
