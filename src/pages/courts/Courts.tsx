@@ -1,7 +1,7 @@
 import Footer from "../../components/common/Footer.tsx";
 
 import { useEffect, useState } from "react";
-import { useCourtsInfiniteDataHook } from "../../hooks/useCourtsInfiniteDataHook.tsx";
+import { useCourtsInfiniteDataHook } from "../../features/courts/hooks/useCourtsInfiniteDataHook.tsx";
 import { useInView } from "react-intersection-observer";
 
 // import { Court } from "../../interfaces/games.ts";

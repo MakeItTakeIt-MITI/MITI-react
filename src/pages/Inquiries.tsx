@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import left from "../assets/v11/pagination-left.svg";
 import right from "../assets/v11/pagination-right.svg";
 import { InquiryListField } from "../interfaces/support.ts";
-import { useInquiriesDataHook } from "../hooks/useInquiriesDataHook.tsx";
+import { useInquiriesDataHook } from "../features/inquiries/hooks/useInquiriesDataHook.tsx";
 import MoveToAppBanner from "../components/common/MoveToAppBanner.tsx";
 
 const InquiriesList = () => {

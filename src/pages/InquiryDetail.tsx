@@ -1,6 +1,6 @@
 import Footer from "../components/common/Footer.tsx";
 import MoveToAppBanner from "../components/common/MoveToAppBanner.tsx";
-import { useInquiryDetailsHook } from "../hooks/useInquiryDetailsHook.tsx";
+import { useInquiryDetailsHook } from "../features/inquiries/hooks/useInquiryDetailsHook.tsx";
 import { useEffect, useState } from "react";
 import Modal from "../components/inquiry/Modal.tsx";
 import { InquiryDetailsField } from "../interfaces/support.ts";

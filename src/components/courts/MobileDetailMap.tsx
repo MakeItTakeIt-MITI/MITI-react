@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import marker from "../../assets/v11/detail-marker.svg";
 import { useParams } from "react-router-dom";
-import { useCourtDetailData } from "../../hooks/useCourtDetailData.tsx";
+import { useCourtDetailData } from "../../features/courts/hooks/useCourtDetailData.tsx";
 const { naver } = window;
 
 const MobileDetailMap = () => {

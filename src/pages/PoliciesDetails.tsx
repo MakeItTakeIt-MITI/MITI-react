@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import Footer from "../components/common/Footer.tsx";
-import { usePolicyDetailHook } from "../hooks/usePolicyDetailHook.tsx";
+import { usePolicyDetailHook } from "../features/policies/hooks/usePolicyDetailHook.tsx";
 
 import "../components/policies/policy-detail.css";
 import MoveToAppBanner from "../components/common/MoveToAppBanner.tsx";

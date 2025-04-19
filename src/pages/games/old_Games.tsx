@@ -9,8 +9,8 @@ import useStatusSelectionStore from "../../store/useStatusSelectionStore.ts";
 
 import useCurrentMonthStore from "../../store/useCurrentMonthStore.ts";
 
-import { useFilterBox } from "../../hooks/game-list-filters/useFilterBox.tsx";
-import { useFilterBoxSettings } from "../../hooks/game-list-filters/useFilterBoxSettings.tsx";
+import { useFilterBox } from "../../features/games/hooks/useFilterBox.tsx";
+import { useFilterBoxSettings } from "../../features/games/hooks/useFilterBoxSettings.tsx";
 import MoveToAppBanner from "../../components/common/MoveToAppBanner.tsx";
 
 import filter from "../../assets/v11/filter.svg";

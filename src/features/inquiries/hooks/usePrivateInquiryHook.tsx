@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { addPrivateInquiry } from "../api/support.ts";
+import { addPrivateInquiry } from "../../../api/support.ts";
 
 export const usePrivateInquiryHook = (reset: () => void) => {
   return useMutation({

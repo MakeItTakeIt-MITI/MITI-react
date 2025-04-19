@@ -30,12 +30,12 @@ const CourtDetailCard = ({ game }: CourtDetailCard) => {
             {game.starttime.slice(0, 5)} ~ {game.endtime.slice(0, 5)}
           </span>
         </div>
-        <h4 className="text-primary-teal font-bold text-base">
-          {game.fee.toLocaleString()} 원
-        </h4>
       </div>
     </Link>
   );
 };
+{
+  /* <h4 className="text-primary-teal font-bold text-base">{game.fee} 원</h4> */
+}
 
 export default CourtDetailCard;

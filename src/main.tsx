@@ -20,6 +20,9 @@ import InquiryDetail from "./pages/InquiryDetail.tsx";
 import CourtGamesList from "./pages/courts/CourtGamesList.tsx";
 import { List } from "./pages/games/List.tsx";
 import HostingGuide from "./pages/hosting-guide/HostingGuide.tsx";
+import { Auth } from "./pages/auth/Auth.tsx";
+import { Withdraw } from "./pages/auth/Withdraw.tsx";
+import { KakaoAuthHandler } from "./pages/auth/KakaoAuthHandler.tsx";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +36,12 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "/", element: <Landing /> },
+      { path: "/auth", element: <Auth /> },
+      { path: "/kakao/login", element: <KakaoAuthHandler /> },
+      {
+        path: "/withdraw",
+        element: <Withdraw />,
+      },
 
       {
         path: "games",
