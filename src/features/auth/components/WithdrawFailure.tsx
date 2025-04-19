@@ -6,7 +6,7 @@ interface WithdrawFailureProps {
 
 export const WithdrawFailure = ({ nickname }: WithdrawFailureProps) => {
   return (
-    <section className="w-full h-[779px]   pt-[60px] pb-[100px] ">
+    <section className="w-full md:h-[779px] sm:h-[619px]   md:pt-[60px]  md:pb-[100px] sm:py-0 ">
       <div className="mx-auto sm:w-full md:w-[375px] h-[619px] md:pt-5 sm:pt-[21px] md:pb-3  px-[21px]  flex flex-col gap-[150px]">
         <div className="space-y-[24px]">
           {/* header */}

@@ -29,8 +29,8 @@ export const Withdraw = () => {
       {status === 200 && <WithdrawSuccess />}
       {status === 403 && <WithdrawFailure nickname={user?.nickname} />}
       {status === 201 && (
-        <section className="w-full h-[779px]   pt-[60px] pb-[100px] ">
-          <div className="mx-auto sm:w-full md:w-[375px] h-[619px] md:pt-5 sm:pt-[21px] md:pb-3 sm:pb-[21px] px-[21px]  flex flex-col justify-between">
+        <section className="w-full md:h-[779px] sm:py-0   md:pt-[60px] md:pb-[100px] ">
+          <div className="md:mx-auto sm:w-full md:w-[375px] h-[619px]  md:pt-5 sm:pt-[20px] md:pb-3 sm:pb-[21px] px-[21px]  flex flex-col justify-between">
             <div className="space-y-[24px]">
               {/* header */}
               <div className="text-white font-bold text-[20px]">
@@ -81,7 +81,7 @@ export const Withdraw = () => {
                 style={{
                   backgroundColor: checked ? "#7FEEF0" : "#737373",
                 }}
-                className="h-[40px] w-full  rounded-lg font-bold"
+                className="md:h-[40px] sm:h-[48px] w-full  rounded-lg font-bold"
               >
                 회원 탈퇴하기
               </button>
