@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllGames } from "../api/games.ts";
+import { getAllGames } from "../../../api/games.ts";
 
 interface Params {
   startdate?: string;
