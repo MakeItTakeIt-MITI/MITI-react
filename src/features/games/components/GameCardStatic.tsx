@@ -1,5 +1,5 @@
 import { Game } from "../../../interfaces/games.ts";
-import { GameStatus } from "./GameStatus.tsx";
+import { GameStatus } from "./badge/GameStatus.tsx";
 import time from "../../../assets/v11/time.svg";
 import participants from "../../../assets/v11/participants.svg";
 import { Fee } from "./Fee.tsx";

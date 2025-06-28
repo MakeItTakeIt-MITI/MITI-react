@@ -4,7 +4,7 @@ import participants from "../../../assets/v11.2/participants.svg";
 import { Fee } from "./Fee.tsx";
 import { Link } from "react-router-dom";
 import { GameField } from "../interface/games.ts";
-import { GameStatus } from "./GameStatus.tsx";
+import { GameStatus } from "./badge/GameStatus.tsx";
 
 interface GameListCardProps {
   game: GameField;

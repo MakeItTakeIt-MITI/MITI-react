@@ -1,7 +1,7 @@
 import time from "../../assets/v11/time.svg";
 import participants from "../../assets/v11/participants.svg";
 import { Game } from "../../interfaces/games.ts";
-import { GameStatus } from "../../features/games/components/GameStatus.tsx";
+import { GameStatus } from "../../features/games/components/badge/GameStatus.tsx";
 import { Fee } from "../../features/games/components/Fee.tsx";
 
 interface GameListCardProp {
