@@ -4,30 +4,30 @@ export const GameStatus = ({ status }: { status: string }) => {
       style={{
         backgroundColor:
           status === "open"
-            ? "#b9dbdc"
+            ? "#1ADCDF33"
             : status === "canceled"
-            ? "#E3C6CB"
+            ? "#99999933"
             : status === "closed"
-            ? "#B9DBDC"
+            ? "#FF711433"
             : status === "completed"
-            ? "#C1C1C1"
+            ? "#FFFFFF33"
             : "",
         color:
           status === "open"
-            ? "#4152EB"
+            ? "#1ADCDF"
             : status === "canceled"
-            ? "#C93568"
+            ? "#999999"
             : status === "closed"
-            ? "#00979A"
+            ? "#FF7114"
             : status === "completed"
-            ? "#484848"
+            ? "#fff"
             : "",
       }}
-      className="p-[.25rem] text-[10px] rounded-[0.125rem] w-full font-bold  "
+      className="p-1 text-[10px] rounded-[2px] h-[18px] w-full font-bold  "
     >
-      {(status === "open" && "모집중") ||
+      {(status === "open" && "모집 중") ||
         (status === "canceled" && "경기 취소") ||
-        (status === "closed" && "모집 마감") ||
+        (status === "closed" && "모집 완료") ||
         (status === "completed" && "경기 완료")}
     </span>
   );
