@@ -1,11 +1,11 @@
-import GameDetailMap from "../../components/game-details/GameDetailMap.tsx";
-import Layout from "../../components/game-details/Layout.tsx";
+import GameDetailMap from "../../features/games/components/GameDetailMap.tsx";
+import Layout from "../../features/games/components/Layout.tsx";
 import clock from "../../assets/v11/clock.svg";
 import location from "../../assets/v11/location.svg";
 import participants from "../../assets/v11/participants.svg";
 import profile from "../../assets/v11/profile.svg";
 // import star from "../../assets/v11/star.svg";
-import ShareFeatureFooter from "../../components/common/ShareFeatureFooter.tsx";
+import ShareFeatureFooter from "../../features/common/components/ShareFeatureFooter.tsx";
 import { Navigate, useParams } from "react-router-dom";
 
 import no_stars from "../../assets/v11/reviews/zero-star.svg";
@@ -18,7 +18,7 @@ import three_half_stars from "../../assets/v11/reviews/three-half-star.svg";
 import four_stars from "../../assets/v11/reviews/four-star.svg";
 import four_half_stars from "../../assets/v11/reviews/four-half-star.svg";
 import fivestars from "../../assets/v11/reviews/five-star.svg";
-import MoveToAppBanner from "../../components/common/MoveToAppBanner.tsx";
+import MoveToAppBanner from "../../features/common/components/MoveToAppBanner.tsx";
 import { useGameDetailDataHook } from "../../features/games/hooks/useGameDetailDataHook.tsx";
 // import { useEffect } from "react";
 
@@ -77,23 +77,23 @@ const GameDetail = () => {
                     game?.data.game_status === "open"
                       ? "#b9dbdc"
                       : game?.data.game_status === "canceled"
-                        ? "#E3C6CB"
-                        : game?.data.game_status === "closed"
-                          ? "#B9DBDC"
-                          : game?.data.game_status === "completed"
-                            ? "#B9DBDC"
-                            : "",
+                      ? "#E3C6CB"
+                      : game?.data.game_status === "closed"
+                      ? "#B9DBDC"
+                      : game?.data.game_status === "completed"
+                      ? "#B9DBDC"
+                      : "",
 
                   color:
                     game?.data.game_status === "open"
                       ? "#4152EB"
                       : game?.data.game_status === "canceled"
-                        ? "#C93568"
-                        : game?.data.game_status === "closed"
-                          ? "#00979A"
-                          : game?.data.game_status === "completed"
-                            ? "#00979A"
-                            : "",
+                      ? "#C93568"
+                      : game?.data.game_status === "closed"
+                      ? "#00979A"
+                      : game?.data.game_status === "completed"
+                      ? "#00979A"
+                      : "",
                 }}
                 className="p-[.25rem] text-[10px] rounded-[0.125rem] font-bold  "
               >

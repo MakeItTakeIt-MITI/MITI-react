@@ -16,3 +16,11 @@ export const fetchGamesList = async (
 };
 
 
+export const getGameDetail = async (id: number) => {
+    try {
+        const response = await axiosUrl.get(`/games/${id}`)
+        return response.data
+    } catch {
+        throw new Error
+    }
+}

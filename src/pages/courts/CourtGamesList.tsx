@@ -1,9 +1,6 @@
 import { useParams } from "react-router-dom";
-import ShareFeatureFooter from "../../components/common/ShareFeatureFooter.tsx";
-import DetailMap from "../../components/courts/DetailMap.tsx";
-import MobileDetailMap from "../../components/courts/MobileDetailMap.tsx";
+import ShareFeatureFooter from "../../features/common/components/ShareFeatureFooter.tsx";
 import { useCourtDetailData } from "../../features/courts/hooks/useCourtDetailData.tsx";
-import CourtDetailCard from "../../components/courts/CourtDetailCard.tsx";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import { CourtsList } from "../../interfaces/courts.ts";
@@ -11,6 +8,9 @@ import { useCourtGamesInfiniteData } from "../../features/courts/hooks/useCourtG
 import { GameCardSkeleton } from "../../features/games/components/GameCardSkeleton.tsx";
 
 import copy from "../../assets/v11.2/copy.svg";
+import MobileDetailMap from "../../features/courts/components/MobileDetailMap.tsx";
+import DetailMap from "../../features/courts/components/DetailMap.tsx";
+import CourtDetailCard from "../../features/courts/components/CourtDetailCard.tsx";
 
 const CourtGamesList = () => {
   const { id } = useParams();
@@ -107,9 +107,7 @@ const CourtGamesList = () => {
                 );
               })
             )}
-            {hasNextPage && (
-              <div ref={ref} className="h-1 w-full opacity-0" />
-            )}{" "}
+            {hasNextPage && <div ref={ref} className="h-1 w-full opacity-0" />}{" "}
           </div>
         </div>
       </div>

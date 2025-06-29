@@ -1,4 +1,4 @@
-import Footer from "../../components/common/Footer.tsx";
+import Footer from "../../features/common/components/Footer.tsx";
 
 import { useEffect, useState } from "react";
 import { useCourtsInfiniteDataHook } from "../../features/courts/hooks/useCourtsInfiniteDataHook.tsx";
@@ -6,7 +6,7 @@ import { useInView } from "react-intersection-observer";
 
 // import { Court } from "../../interfaces/games.ts";
 import CourtMap from "../../features/courts/components/CourtMap.tsx";
-import MoveToAppBanner from "../../components/common/MoveToAppBanner.tsx";
+import MoveToAppBanner from "../../features/common/components/MoveToAppBanner.tsx";
 // import FilterContainer from "../components/courts/FilterContainer.tsx";
 
 import search from "../../assets/v11/search.svg";

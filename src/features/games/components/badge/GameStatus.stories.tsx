@@ -3,7 +3,7 @@ import { GameStatus } from "./GameStatus.tsx";
 
 const meta: Meta<typeof GameStatus> = {
   component: GameStatus,
-  title: "Games/GameStatus",
+  title: "Games/Status Badge",
   tags: ["autodocs"],
   parameters: {
     layout: "centered",

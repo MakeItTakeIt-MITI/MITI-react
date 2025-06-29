@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { policyDetailsData } from "../../../api/support.ts";
+import { policyDetailsData } from "../api/policies";
 
 interface PolicyDetailProps {
   policyId: number;

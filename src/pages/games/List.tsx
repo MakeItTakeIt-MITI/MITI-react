@@ -5,8 +5,8 @@ import dropdown from "../../assets/v11.2/dropdown.png";
 import { GameListCard } from "../../features/games/components/GameListCard.tsx";
 
 import "../../features/common/scrollbar.css";
-import MoveToAppBanner from "../../components/common/MoveToAppBanner.tsx";
-import Footer from "../../components/common/Footer.tsx";
+import MoveToAppBanner from "../../features/common/components/MoveToAppBanner.tsx";
+import Footer from "../../features/common/components/Footer.tsx";
 import { useGamesList } from "../../features/games/hooks/useGamesList.tsx";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";

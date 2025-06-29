@@ -6,23 +6,22 @@ export const GameStatus = ({ status }: { status: string }) => {
           status === "open"
             ? "#b9dbdc"
             : status === "canceled"
-              ? "#E3C6CB"
-              : status === "closed"
-                ? "#B9DBDC"
-                : status === "completed"
-                  ? "#C1C1C1"
-                  : "",
-
+            ? "#E3C6CB"
+            : status === "closed"
+            ? "#B9DBDC"
+            : status === "completed"
+            ? "#C1C1C1"
+            : "",
         color:
           status === "open"
             ? "#4152EB"
             : status === "canceled"
-              ? "#C93568"
-              : status === "closed"
-                ? "#00979A"
-                : status === "completed"
-                  ? "#484848"
-                  : "",
+            ? "#C93568"
+            : status === "closed"
+            ? "#00979A"
+            : status === "completed"
+            ? "#484848"
+            : "",
       }}
       className="p-[.25rem] text-[10px] rounded-[0.125rem] w-full font-bold  "
     >

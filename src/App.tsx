@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import { Navbar } from "./components/navigation/Navbar.tsx";
-import { ScrollToTop } from "./components/common/ScrollToTop.tsx";
+import { ScrollToTop } from "./features/common/components/ScrollToTop.tsx";
+import { Navbar } from "./features/header/Navbar.tsx";
 
 function App() {
   return (

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { faqList } from "../../../api/support.ts";
+import { faqList } from "../api/faq";
 
 export const useFaqDataHook = (search?: string | undefined) => {
   return useQuery({
