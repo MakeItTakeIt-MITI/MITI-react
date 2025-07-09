@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import BannerSmall from "./BannerSmall";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import BannerSmall from "./BannerSmall.tsx";
 
 const meta: Meta<typeof BannerSmall> = {
   component: BannerSmall,

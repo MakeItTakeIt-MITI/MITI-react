@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import Navbar from "./Navbar";
-import MobileNavbar from "./MobileNavbar";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import Navbar from "./Navbar.tsx";
+import MobileNavbar from "./MobileNavbar.tsx";
 
 const meta: Meta<typeof Navbar> = {
   component: Navbar,

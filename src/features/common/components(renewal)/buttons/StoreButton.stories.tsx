@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import StoreButton from "./StoreButton";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import StoreButton from "./StoreButton.tsx";
 
 const meta: Meta<typeof StoreButton> = {
   component: StoreButton,
