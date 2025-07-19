@@ -1,13 +1,24 @@
+import { Link } from "react-router-dom";
 import navbar_logo from "../../../assets/v1.3/navbar-logo.svg";
 
 export default function Navbar() {
+  const today = new Date().toISOString().slice(0, 10);
+
   return (
     <nav className="w-full px-[360px] h-[60px] bg-[#141414] flex items-center justify-center ">
       <div className=" h-[28px] w-[1200px]  flex items-center  justify-between">
         <img src={navbar_logo} alt="miti logo" />
         <ul className="flex items-center gap-5 text-white font-bold text-sm">
-          <li>경기 목록</li>
-          <li>경기장 목록록</li>
+          <li>
+            <Link
+              to={`games?tab=map&date=${today}&time=00:00&region=""&status=open&status=closed&status=completed&status=cancelled`}
+            >
+              경기 목록
+            </Link>
+          </li>
+          <li>
+            <Link to="courts">경기장 목록록</Link>
+          </li>
           <li>게시판</li>
           <li>자주 묻는 질문</li>
           <li>사용자의 문의</li>
