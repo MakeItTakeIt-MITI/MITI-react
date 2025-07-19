@@ -3,6 +3,7 @@ import Tab from "../../common/components(renewal)/chips/Tab.tsx";
 import GamesListMap from "./map/GamesListMap.tsx";
 import GamesList from "./game-list/GamesList.tsx";
 import Card from "./card/Card.tsx";
+import SearchBar from "./game-list/SearchBar.tsx";
 
 interface GameMapListContainerProps {
   handleToggleTab: (arg: string) => void;
@@ -15,7 +16,7 @@ export default function GameMapListContainer({
   const tab = serchParams.get("tab");
 
   return (
-    <div className=" w-[700px] flex flex-col gap-[30px]">
+    <div className=" w-[700px] flex flex-col gap-[20px]">
       {/* TAB  */}
       <div className="flex">
         <Tab content="지도" isSelected onClick={() => handleToggleTab("map")} />
@@ -26,15 +27,30 @@ export default function GameMapListContainer({
         />
       </div>
       {/* Games MAP/LIST */}
-      {tab === "map" ? <GamesListMap /> : <GamesList />}
-
-      {/* GAME CARD LIST CAONTAINER */}
-      <ul>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </ul>
+      {tab === "map" ? (
+        // GAME MAP LIST RENDERING CONTAINER
+        <div className="flex flex-col gap-5">
+          <GamesListMap />
+          <div className="flex flex-col gap-4">
+            <span className="text-xs font-[400] text-white">
+              총 NN개의 경기
+            </span>
+            <ul>
+              <Card />
+              <Card />
+              <Card />
+              <Card />
+            </ul>
+          </div>
+        </div>
+      ) : (
+        // ALL GAMES RENDERING CONTAINER
+        <div className="flex flex-col gap-5">
+          <SearchBar />
+          <GamesList />
+        </div>
+      )}
+      x
     </div>
   );
 }
