@@ -1,22 +1,25 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import GameStatus from "../../../common/components(renewal)/chips/GameStatus.tsx";
 
 export default function GameStatusField() {
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
 
-  const handleSelectStatus = (status: string) => {
-    setSelectedStatuses((prev) => {
-      if (prev.includes(status)) {
-        // Remove if already selected
-        return prev.filter((s) => s !== status);
-      } else if (prev.length < 4) {
-        // Add if not selected and less than 4 selected
-        return [...prev, status];
-      }
-      // If already 4 selected, do nothing
-      return prev;
-    });
-  };
+  const handleSelectStatus = useCallback(
+    (status: string) => {
+      setSelectedStatuses((prev) => {
+        if (prev.includes(status)) {
+          // Remove if already selected
+          return prev.filter((s) => s !== status);
+        } else if (prev.length < 4) {
+          // Add if not selected and less than 4 selected
+          return [...prev, status];
+        }
+        // If already 4 selected, do nothing
+        return prev;
+      });
+    },
+    [setSelectedStatuses]
+  );
   return (
     <div className="flex flex-col gap-4">
       <p className="font-bold text-sm text-[#fff]">경기 시작 시간</p>
