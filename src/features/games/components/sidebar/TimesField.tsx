@@ -1,6 +1,10 @@
 import { useRef, useState } from "react";
 
-export default function TimesField() {
+interface TimeFiledProps {
+  handleSetTime: (arg1: string, arg2: string) => void;
+}
+
+export default function TimesField({ handleSetTime }: TimeFiledProps) {
   const [hour, setHour] = useState(0);
   const [minutes, setMinutes] = useState(0);
 
@@ -24,6 +28,10 @@ export default function TimesField() {
     setHour((prev) => (prev !== selected ? selected : prev));
   };
 
+  const handleSetMinuteClick = (selected: number) => {
+    setMinutes((prev) => (prev !== selected ? selected : prev));
+  };
+
   const MINUTE_SCROLL_STEP = 10;
 
   const handleMinuteWheel = (e: React.WheelEvent<HTMLUListElement>) => {
@@ -37,6 +45,7 @@ export default function TimesField() {
       setMinutes((prev) => Math.max(0, prev - MINUTE_SCROLL_STEP));
     }
   };
+
   return (
     <div className="flex flex-col gap-4">
       <p className="font-bold text-sm text-[#fff]">경기 시작 시간</p>
@@ -119,7 +128,7 @@ export default function TimesField() {
               <li>
                 <button
                   type="button"
-                  // onClick={() => set(hour)}
+                  onClick={() => handleSetMinuteClick(minutes - 10)}
                   className="w-[84px] h-[32px] text-[#5C5C5C]"
                 >
                   {minutes - 10}
@@ -130,7 +139,6 @@ export default function TimesField() {
               <li>
                 <button
                   type="button"
-                  // onClick={() => set(hour)}
                   className="w-[84px] h-[32px] text-[#5C5C5C]"
                 >
                   {null}
@@ -140,17 +148,16 @@ export default function TimesField() {
             <li>
               <button
                 type="button"
-                // onClick={() => set(hour)}
                 className="w-[84px] h-[32px] rounded-lg bg-[#5C5C5C] text-[#1ADCDF] "
               >
                 {minutes}
               </button>
             </li>
-            {minutes === 0 && (
+            {minutes < 50 && (
               <li>
                 <button
                   type="button"
-                  // onClick={() => set(hour)}
+                  onClick={() => handleSetMinuteClick(minutes + 10)}
                   className="w-[84px] h-[32px] text-[#5C5C5C]"
                 >
                   {minutes + 10}
@@ -161,7 +168,7 @@ export default function TimesField() {
               <li>
                 <button
                   type="button"
-                  // onClick={() => set(hour)}
+                  disabled
                   className="w-[84px] h-[32px] text-[#5C5C5C]"
                 >
                   {null}

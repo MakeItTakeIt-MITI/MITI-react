@@ -17,14 +17,12 @@ type Story = StoryObj<typeof Tab>;
 export const SelectedTab: Story = {
   args: {
     content: "지도",
-    isSelected: true,
     onClick: () => console.log("Selected Tab Clicked"),
   },
 };
 export const NonSelectedTab: Story = {
   args: {
     content: "리스트",
-    isSelected: false,
     onClick: () => console.log("Selected Tab Clicked"),
   },
 };

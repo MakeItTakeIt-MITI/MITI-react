@@ -10,9 +10,7 @@ export default function Navbar() {
         <img src={navbar_logo} alt="miti logo" />
         <ul className="flex items-center gap-5 text-white font-bold text-sm">
           <li>
-            <Link
-              to={`games?tab=map&date=${today}&time=00:00&region=""&status=open&status=closed&status=completed&status=cancelled`}
-            >
+            <Link to={`games?tab=map&date=${today}&time=00:00&region=""`}>
               경기 목록
             </Link>
           </li>

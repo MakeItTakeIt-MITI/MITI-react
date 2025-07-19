@@ -4,7 +4,10 @@ import RegionField from "./RegionField.tsx";
 import ResetStatusField from "./ResetStatusField.tsx";
 import TimesField from "./TimesField.tsx";
 
-export default function Sidebar() {
+interface SidebarProps {
+  handleSetTime: (arg1: string, arg2: string) => void;
+}
+export default function Sidebar({ handleSetTime }: SidebarProps) {
   return (
     <aside
       style={{
@@ -18,7 +21,7 @@ export default function Sidebar() {
       {/* date */}
       <DatesField />
       {/* time */}
-      <TimesField />
+      <TimesField handleSetTime={handleSetTime} />
       {/* game status */}
       <GameStatusField />
       {/* region select */}

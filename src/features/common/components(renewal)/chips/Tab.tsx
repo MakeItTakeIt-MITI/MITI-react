@@ -1,17 +1,29 @@
+import { useSearchParams } from "react-router-dom";
+
 interface TabProps {
-  isSelected: boolean;
+  isSelected?: boolean;
   content: string;
   onClick: () => void;
 }
 
-export default function Tab({ isSelected, content, onClick }: TabProps) {
+export default function Tab({ content, onClick }: TabProps) {
+  const [searchParams] = useSearchParams();
+  const tab = searchParams.get("tab");
+
+  const contentToTab: Record<string, string> = {
+    지도: "map",
+    리스트: "list",
+  };
+
+  const isActive = tab === contentToTab[content];
+
   return (
     <button
       type="button"
       onClick={onClick}
       style={{
-        color: isSelected ? "#1ADCDF" : "#999",
-        borderColor: isSelected ? "#1ADCDF" : "#999",
+        color: isActive ? "#1ADCDF" : "#999",
+        borderColor: isActive ? "#1ADCDF" : "#999",
         width: "60px",
         height: "26px",
       }}

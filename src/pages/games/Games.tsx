@@ -20,6 +20,14 @@ export const Games = () => {
     [searchParams, setSearchParams]
   );
 
+  const handleSetTime = useCallback(
+    (hour: string, minutes: string) => {
+      const params = Object.fromEntries(searchParams.entries());
+      setSearchParams({ ...params, time: `${hour}:${minutes}` });
+    },
+    [searchParams, setSearchParams]
+  );
+
   return (
     <>
       <section
@@ -33,7 +41,7 @@ export const Games = () => {
         {/* Displays games filter sidebar and games list */}
         <article className="flex gap-[30px]">
           {/* Sidebar component to filter game rendering */}
-          <Sidebar />
+          <Sidebar handleSetTime={handleSetTime} />
           {/* Main display component between game map and game list components */}
           <GameMapListContainer handleToggleTab={handleToggleTab} />
         </article>
