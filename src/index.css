@@ -23,7 +23,8 @@ body {
 }
 
 section {
-  background: #262626;
+  /* background: #262626; */
+  background: #141414;
 }
 
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {
@@ -94,8 +95,7 @@ input[type="number"] {
 }
 
 .shadow-image {
-  background:
-    linear-gradient(0deg, rgba(0, 0, 0, 0) 15.95%, #151E1C96.62%),
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0) 15.95%, #151E1C96.62%),
     url(./assets/v11//hero.png) lightgray 50% / cover no-repeat;
 }
 

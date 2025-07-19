@@ -4,11 +4,12 @@ import checked from "../../../../assets/v1.3/icon/checked.svg";
 interface CheckItemProps {
   isSelected: boolean;
   content?: string;
+  onClick?: () => void;
 }
 
-function CheckItem({ isSelected, content }: CheckItemProps) {
+function CheckItem({ isSelected, content, onClick }: CheckItemProps) {
   return (
-    <button type="button" className="flex items-center gap-3">
+    <button onClick={onClick} type="button" className="flex items-center gap-3">
       <img src={isSelected ? checked : unchecked} alt="status icon" />
       <span
         className="text-xs font-[500]"

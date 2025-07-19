@@ -44,7 +44,7 @@ export default function BannerMedium({ type }: BannerMediumProps) {
   }
 
   return (
-    <div>
+    <div className="w-[800px]">
       <img src={bannerImg} alt={type} />
     </div>
   );
