@@ -14,6 +14,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
 
   const handleHourWheel = (e: React.WheelEvent<HTMLUListElement>) => {
     e.preventDefault();
+    e.stopPropagation();
 
     if (scrollTimeout.current) return;
 
