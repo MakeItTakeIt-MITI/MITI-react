@@ -30,7 +30,9 @@ export default function GameMapListContainer({
       {tab === "map" ? (
         // GAME MAP LIST RENDERING CONTAINER
         <div className="flex flex-col gap-5">
+          {/* <Suspense fallback={<p>Loading..</p>}> */}
           <GamesListMap />
+          {/* </Suspense> */}
           <div className="flex flex-col gap-4">
             <span className="text-xs font-[400] text-white">
               총 NN개의 경기
