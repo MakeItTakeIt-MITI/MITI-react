@@ -18,11 +18,21 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
 
     if (scrollTimeout.current) return;
 
-    if (e.deltaY > 0) {
-      setHour((prev) => Math.min(23, prev + SCROLL_STEP));
-    } else if (e.deltaY < 0) {
-      setHour((prev) => Math.max(0, prev - SCROLL_STEP));
-    }
+    setHour((prev) => {
+      if (e.deltaY > 0) {
+        // SCROLL DOWN and changes to next hour
+        return (prev + SCROLL_STEP) % 24;
+      } else if (e.deltaY < 0) {
+        // Scrolls up if 0, goes to 23
+        return (prev - SCROLL_STEP + 24) % 24;
+      }
+      return prev;
+    });
+
+    // timeout  function  changes the scroll speed
+    scrollTimeout.current = setTimeout(() => {
+      scrollTimeout.current = null;
+    }, 50);
   };
 
   const handleSetHourClick = (selected: number) => {
@@ -41,11 +51,20 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
 
     if (scrollTimeout.current) return;
 
-    if (e.deltaY > 0) {
-      setMinutes((prev) => Math.min(50, prev + MINUTE_SCROLL_STEP));
-    } else if (e.deltaY < 0) {
-      setMinutes((prev) => Math.max(0, prev - MINUTE_SCROLL_STEP));
-    }
+    setMinutes((prev) => {
+      if (e.deltaY > 0) {
+        // SCROLL DOWN and changes to next hour
+        return (prev + MINUTE_SCROLL_STEP) % 60;
+      } else if (e.deltaY < 0) {
+        // Scrolls up if 0, goes to 23
+        return (prev - MINUTE_SCROLL_STEP + 60) % 60;
+      }
+      return prev;
+    });
+
+    scrollTimeout.current = setTimeout(() => {
+      scrollTimeout.current = null;
+    }, 50);
   };
 
   return (
@@ -58,8 +77,8 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
             style={{
               scrollbarWidth: "none",
             }}
-            onWheel={handleHourWheel}
-            className="flex flex-col justify-center h-[90px] overflow-y-auto"
+            onWheelCapture={handleHourWheel}
+            className="flex flex-col justify-center h-[90px] overflow-y-scroll"
           >
             {hour === 0 && (
               <li>
@@ -69,7 +88,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
                   onClick={() => handleSetHourClick(hour)}
                   className="w-[84px] h-[32px] text-[#5C5C5C]"
                 >
-                  {null}
+                  {23}
                 </button>
               </li>
             )}
@@ -113,7 +132,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
                   onClick={() => handleSetHourClick(hour)}
                   className="w-[84px] h-[32px] text-[#5C5C5C]"
                 >
-                  {null}
+                  0
                 </button>
               </li>
             )}
@@ -123,8 +142,8 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
             style={{
               scrollbarWidth: "none",
             }}
-            onWheel={handleMinuteWheel}
-            className="flex flex-col justify-center h-[90px] overflow-y-auto"
+            onWheelCapture={handleMinuteWheel}
+            className="flex flex-col justify-center h-[90px] overflow-y-scroll"
           >
             {minutes !== 0 && (
               <li>
@@ -143,7 +162,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
                   type="button"
                   className="w-[84px] h-[32px] text-[#5C5C5C]"
                 >
-                  {null}
+                  50
                 </button>
               </li>
             )}
@@ -173,7 +192,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
                   disabled
                   className="w-[84px] h-[32px] text-[#5C5C5C]"
                 >
-                  {null}
+                  0
                 </button>
               </li>
             )}
