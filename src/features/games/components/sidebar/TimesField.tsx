@@ -70,7 +70,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
   return (
     <div className="flex flex-col gap-4">
       <p className="font-bold text-sm text-[#fff]">경기 시작 시간</p>
-      <div className="flex gap-3">
+      <div className="flex gap-3 items-center">
         <div className="flex gap-2 items-center">
           {/* hour */}
           <ul
@@ -78,7 +78,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
               scrollbarWidth: "none",
             }}
             onWheelCapture={handleHourWheel}
-            className="flex flex-col justify-center h-[90px] overflow-y-scroll"
+            className="flex flex-col items-center justify-center h-[90px] overflow-y-scroll"
           >
             {hour === 0 && (
               <li>
@@ -127,9 +127,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
             {hour === 23 && (
               <li>
                 <button
-                  type="button"
-                  disabled
-                  onClick={() => handleSetHourClick(hour)}
+                  onClick={() => handleSetHourClick(0)}
                   className="w-[84px] h-[32px] text-[#5C5C5C]"
                 >
                   0
@@ -143,7 +141,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
               scrollbarWidth: "none",
             }}
             onWheelCapture={handleMinuteWheel}
-            className="flex flex-col justify-center h-[90px] overflow-y-scroll"
+            className="flex flex-col items-center justify-center h-[90px] overflow-y-scroll"
           >
             {minutes !== 0 && (
               <li>
@@ -189,7 +187,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
               <li>
                 <button
                   type="button"
-                  disabled
+                  onClick={() => handleSetMinuteClick(0)}
                   className="w-[84px] h-[32px] text-[#5C5C5C]"
                 >
                   0
