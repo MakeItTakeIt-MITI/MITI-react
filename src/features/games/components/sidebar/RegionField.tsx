@@ -1,12 +1,14 @@
-import { useState } from "react";
 import CheckItem from "../../../common/components(renewal)/chips/CheckItem.tsx";
+import { useSearchParams } from "react-router-dom";
 
-export default function RegionField() {
-  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+interface RegionFieldProps {
+  handleSelectRegion: (arg: string) => void;
+}
 
-  const handleSelectRegion = (region: string) => {
-    setSelectedRegion(region === selectedRegion ? null : region);
-  };
+export default function RegionField({ handleSelectRegion }: RegionFieldProps) {
+  const [searchParams] = useSearchParams();
+
+  const currentRegion = searchParams.get("region");
 
   const REGIONS = [
     "서울",
@@ -32,11 +34,11 @@ export default function RegionField() {
       <p className="font-bold text-sm text-[#fff]">지역</p>
       <ul className=" ">
         {REGIONS.map((region) => (
-          <li className="py-[6px]">
+          <li className="py-[6px]" key={region}>
             <CheckItem
               key={region}
               content={region}
-              isSelected={selectedRegion === region}
+              isSelected={currentRegion === region}
               onClick={() => handleSelectRegion(region)}
             />
           </li>

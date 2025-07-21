@@ -2,7 +2,12 @@ import { useCallback, useState } from "react";
 import GameStatus from "../../../common/components(renewal)/chips/GameStatus.tsx";
 
 export default function GameStatusField() {
-  const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
+  const [selectedStatuses, setSelectedStatuses] = useState<string[]>([
+    "모집 중",
+    "모집 마감",
+    "경기 완료",
+    "경기 취소",
+  ]);
 
   const handleSelectStatus = useCallback(
     (status: string) => {

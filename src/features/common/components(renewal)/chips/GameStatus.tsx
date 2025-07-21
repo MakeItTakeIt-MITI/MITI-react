@@ -16,7 +16,7 @@ export default function GameStatus({
         color: isSelected ? "#000" : "#999",
         borderColor: isSelected ? "#1ADCDF" : "#707070",
       }}
-      className="py-2.5 px-3  text-sm rounded-[50px] border"
+      className="py-2.5 px-3  text-sm rounded-[50px] border font-[500]"
     >
       <button onClick={onClick} type="button">
         {status}

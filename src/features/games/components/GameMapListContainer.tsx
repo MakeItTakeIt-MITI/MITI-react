@@ -7,16 +7,18 @@ import SearchBar from "./game-list/SearchBar.tsx";
 
 interface GameMapListContainerProps {
   handleToggleTab: (arg: string) => void;
+  targetRef: React.Ref<HTMLDivElement>;
 }
 
 export default function GameMapListContainer({
   handleToggleTab,
+  targetRef,
 }: GameMapListContainerProps) {
   const [serchParams] = useSearchParams();
   const tab = serchParams.get("tab");
 
   return (
-    <div className=" w-[700px] flex flex-col gap-[20px]">
+    <div ref={targetRef} className=" w-[700px] flex flex-col gap-[20px]">
       {/* TAB  */}
       <div className="flex">
         <Tab content="지도" isSelected onClick={() => handleToggleTab("map")} />
