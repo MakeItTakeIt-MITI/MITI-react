@@ -16,7 +16,7 @@ export default function Sidebar({
     <aside
       style={{
         width: "238px",
-        height: "100vh",
+        height: "",
       }}
       className="p-4 flex flex-col gap-5 "
     >

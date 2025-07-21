@@ -11,7 +11,7 @@ export const Games = () => {
 
   const handleScroll = () => {
     targetRef.current?.scrollIntoView({ behavior: "smooth" });
-    console.log("clicked");
+    console.log("targetRef:", targetRef.current);
   };
 
   // function passed as a prop, useCallBack to prevent re-render

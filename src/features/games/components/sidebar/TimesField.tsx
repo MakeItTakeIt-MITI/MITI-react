@@ -86,7 +86,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
                   type="button"
                   disabled
                   onClick={() => handleSetHourClick(hour)}
-                  className="w-[84px] h-[32px] text-[#5C5C5C]"
+                  className="w-[66px] h-[30px] text-sm text-[#5C5C5C]"
                 >
                   {23}
                 </button>
@@ -97,7 +97,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
                 <button
                   type="button"
                   onClick={() => handleSetHourClick(hour - 1)}
-                  className="w-[84px] h-[32px] text-[#5C5C5C]"
+                  className="w-[66px] h-[30px] text-sm text-[#5C5C5C]"
                 >
                   {hour - 1}
                 </button>
@@ -107,7 +107,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
               <button
                 type="button"
                 onClick={() => handleSetHourClick(hour)}
-                className="w-[84px] h-[32px] rounded-lg bg-[#5C5C5C] text-[#1ADCDF] "
+                className="w-[66px] h-[30px] text-sm rounded-lg bg-[#5C5C5C] text-[#1ADCDF] "
               >
                 {hour}
               </button>
@@ -117,7 +117,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
                 <button
                   type="button"
                   onClick={() => handleSetHourClick(hour + 1)}
-                  className="w-[84px] h-[32px] text-[#5C5C5C]"
+                  className="w-[66px] h-[30px] text-sm text-[#5C5C5C]"
                 >
                   {hour + 1}
                 </button>
@@ -128,7 +128,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
               <li>
                 <button
                   onClick={() => handleSetHourClick(0)}
-                  className="w-[84px] h-[32px] text-[#5C5C5C]"
+                  className="w-[66px] h-[30px] text-sm text-[#5C5C5C]"
                 >
                   0
                 </button>
@@ -148,7 +148,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
                 <button
                   type="button"
                   onClick={() => handleSetMinuteClick(minutes - 10)}
-                  className="w-[84px] h-[32px] text-[#5C5C5C]"
+                  className="w-[66px] h-[30px] text-sm text-[#5C5C5C]"
                 >
                   {minutes - 10}
                 </button>
@@ -158,7 +158,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
               <li>
                 <button
                   type="button"
-                  className="w-[84px] h-[32px] text-[#5C5C5C]"
+                  className="w-[66px] h-[30px] text-sm text-[#5C5C5C]"
                 >
                   50
                 </button>
@@ -167,7 +167,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
             <li>
               <button
                 type="button"
-                className="w-[84px] h-[32px] rounded-lg bg-[#5C5C5C] text-[#1ADCDF] "
+                className="w-[66px] h-[30px] text-sm rounded-lg bg-[#5C5C5C] text-[#1ADCDF] "
               >
                 {minutes}
               </button>
@@ -177,7 +177,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
                 <button
                   type="button"
                   onClick={() => handleSetMinuteClick(minutes + 10)}
-                  className="w-[84px] h-[32px] text-[#5C5C5C]"
+                  className="w-[66px] h-[30px] text-sm text-[#5C5C5C]"
                 >
                   {minutes + 10}
                 </button>
@@ -188,7 +188,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
                 <button
                   type="button"
                   onClick={() => handleSetMinuteClick(0)}
-                  className="w-[84px] h-[32px] text-[#5C5C5C]"
+                  className="w-[66px] h-[30px] text-sm text-[#5C5C5C]"
                 >
                   0
                 </button>
@@ -196,7 +196,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
             )}
           </ul>
         </div>
-        <p className="flex items-center justify-center text-xs text-white">
+        <p className="flex items-center justify-center  text-xs text-white ">
           이후 경기
         </p>
       </div>

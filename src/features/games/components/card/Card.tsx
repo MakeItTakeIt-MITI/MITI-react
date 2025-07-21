@@ -12,7 +12,7 @@ export default function Card() {
       style={{
         boxShadow: isHovered ? "0 4px 24px 0 #1ADCDF, 0 0 0 4px #141414" : "",
       }}
-      className="w-[724px] h-[136px] flex flex-col gap-2.5 justify-center p-3 rounded-lg text-white"
+      className="w-full h-[136px] flex flex-col gap-2.5 justify-center p-3 rounded-lg text-white"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

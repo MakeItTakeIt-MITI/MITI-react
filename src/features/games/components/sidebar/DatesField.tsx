@@ -18,7 +18,7 @@ export default function DatesField() {
         <ul className="flex gap-4 text-[#707070] text-xs font-bold">
           {INITIAL_DATES.map((date) => (
             <li
-              key={date["day"]}
+              // key={date["day"]}
               className="flex flex-col items-center justify-center gap-2 w-[32px]"
             >
               <span

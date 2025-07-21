@@ -18,7 +18,10 @@ export default function GameMapListContainer({
   const tab = serchParams.get("tab");
 
   return (
-    <div ref={targetRef} className=" w-[700px] flex flex-col gap-[20px]">
+    <div
+      ref={targetRef}
+      className=" w-[700px] min-h-[1px] flex flex-col gap-[20px]"
+    >
       {/* TAB  */}
       <div className="flex">
         <Tab content="지도" isSelected onClick={() => handleToggleTab("map")} />
