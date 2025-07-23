@@ -1,8 +1,12 @@
+import { GameStatusLabel } from "../../../constants/games.ts";
+import { GameStatusEnum } from "../../../enum/games.ts";
+
 interface GameStatusProps {
-  status: "open" | "closed" | "canceled" | "completed";
+  status: GameStatusEnum;
 }
 
 export const GameStatus = ({ status }: GameStatusProps) => {
+  const label = GameStatusLabel[status];
   return (
     <span
       style={{
@@ -29,10 +33,7 @@ export const GameStatus = ({ status }: GameStatusProps) => {
       }}
       className="p-1 text-[10px] rounded-[2px] h-[18px] w-full font-bold  "
     >
-      {(status === "open" && "모집 중") ||
-        (status === "canceled" && "경기 취소") ||
-        (status === "closed" && "모집 완료") ||
-        (status === "completed" && "경기 완료")}
+      {label}
     </span>
   );
 };

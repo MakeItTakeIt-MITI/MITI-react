@@ -1,8 +1,6 @@
 import { PlayerPositionEnum, PlayerRoleEnum, SignupMethodEnum } from "../enum/users.ts";
 
 
-
-
 export const PlayerlPositionLabel: Record<PlayerPositionEnum, string> = {
     [PlayerPositionEnum.PG]: "포인트 가드",
     [PlayerPositionEnum.SG]: "슈팅 가드",

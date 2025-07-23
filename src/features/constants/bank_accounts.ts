@@ -1,5 +1,3 @@
-// constants.ts
-
 import { AccountStatusEnum, AccountTypeEnum, BankEnum, BankTransferStatusEnum, SettlementStatusEnum, SettlementTypeEnum } from "../enum/bank_accounts.ts";
 
 

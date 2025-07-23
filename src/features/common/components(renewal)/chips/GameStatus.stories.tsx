@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { GameStatus } from "./GameStatus.tsx";
+import { GameStatusEnum } from "../../../enum/games.ts";
 
 const meta: Meta<typeof GameStatus> = {
   component: GameStatus,
@@ -16,24 +17,24 @@ type Story = StoryObj<typeof GameStatus>;
 
 export const CompletedBadge: Story = {
   args: {
-    status: "completed",
+    status: GameStatusEnum.COMPLETED,
   },
 };
 
 export const CancelledBadge: Story = {
   args: {
-    status: "canceled",
+    status: GameStatusEnum.CANCELED,
   },
 };
 
 export const ClosedBadge: Story = {
   args: {
-    status: "closed",
+    status: GameStatusEnum.CLOSED,
   },
 };
 
 export const OpenBadge: Story = {
   args: {
-    status: "open",
+    status: GameStatusEnum.OPEN,
   },
 };
