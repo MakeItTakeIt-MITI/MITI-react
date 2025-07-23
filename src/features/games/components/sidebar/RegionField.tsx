@@ -1,4 +1,4 @@
-import CheckItem from "../../../common/components(renewal)/chips/CheckItem.tsx";
+import RegionCheck from "../../../common/components(renewal)/chips/RegionCheck.tsx";
 import { useSearchParams } from "react-router-dom";
 
 interface RegionFieldProps {
@@ -35,7 +35,7 @@ export default function RegionField({ handleSelectRegion }: RegionFieldProps) {
       <ul className=" ">
         {REGIONS.map((region) => (
           <li className="py-[6px]" key={region}>
-            <CheckItem
+            <RegionCheck
               key={region}
               content={region}
               isSelected={currentRegion === region}

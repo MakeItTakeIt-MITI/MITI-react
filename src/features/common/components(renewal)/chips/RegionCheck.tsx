@@ -1,13 +1,16 @@
 import unchecked from "../../../../assets/v1.3/icon/unchecked.svg";
 import checked from "../../../../assets/v1.3/icon/checked.svg";
+import { DistrictEnum } from "../../../enum/courts.ts";
+import { DistrictLabel } from "../../../constants/courts.ts";
 
 interface CheckItemProps {
   isSelected: boolean;
-  content?: string;
+  content: DistrictEnum;
   onClick?: () => void;
 }
 
-function CheckItem({ isSelected, content, onClick }: CheckItemProps) {
+function RegionCheck({ isSelected, content, onClick }: CheckItemProps) {
+  const label = DistrictLabel[content];
   return (
     <button onClick={onClick} type="button" className="flex items-center gap-3">
       <img src={isSelected ? checked : unchecked} alt="status icon" />
@@ -15,10 +18,10 @@ function CheckItem({ isSelected, content, onClick }: CheckItemProps) {
         className="text-xs font-[500]"
         style={{ color: isSelected ? "#1ADCDF" : "#999" }}
       >
-        {content}
+        {label}
       </span>
     </button>
   );
 }
 
-export default CheckItem;
+export default RegionCheck;

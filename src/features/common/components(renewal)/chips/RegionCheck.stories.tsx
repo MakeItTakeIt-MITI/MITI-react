@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import CheckItem from "./CheckItem.tsx";
+import RegionCheck from "./RegionCheck.tsx";
 
-const meta: Meta<typeof CheckItem> = {
-  component: CheckItem,
-  title: "Components/Chips/CheckItem",
+const meta: Meta<typeof RegionCheck> = {
+  component: RegionCheck,
+  title: "Components/Chips/RegionCheck",
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
@@ -12,18 +12,16 @@ const meta: Meta<typeof CheckItem> = {
 
 export default meta;
 
-type Story = StoryObj<typeof CheckItem>;
+type Story = StoryObj<typeof RegionCheck>;
 
 export const CheckedChip: Story = {
   args: {
     isSelected: true,
-    content: "서울",
   },
 };
 
 export const UncheckedChip: Story = {
   args: {
     isSelected: false,
-    content: "부산",
   },
 };

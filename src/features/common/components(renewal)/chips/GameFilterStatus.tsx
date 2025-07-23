@@ -1,5 +1,5 @@
 interface StatusProps {
-  status: React.ReactNode;
+  status: string;
   isSelected?: boolean;
   onClick?: () => void;
 }
