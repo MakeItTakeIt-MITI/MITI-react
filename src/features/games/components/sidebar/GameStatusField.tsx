@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import GameStatus from "../../../common/components(renewal)/chips/GameStatus.tsx";
+import GameStatus from "../../../common/components(renewal)/chips/GameFilterStatus.tsx";
 
 export default function GameStatusField() {
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([

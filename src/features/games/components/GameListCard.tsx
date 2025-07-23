@@ -4,7 +4,7 @@ import participants from "../../../assets/v11.2/participants.svg";
 import { Fee } from "./Fee.tsx";
 import { Link } from "react-router-dom";
 import { GameField } from "../interface/games.ts";
-import { GameStatus } from "./badge/GameStatus.tsx";
+import { GameStatus } from "../../common/components(renewal)/chips/GameStatus.tsx";
 
 interface GameListCardProps {
   game: GameField;
@@ -30,7 +30,9 @@ export const GameListCard = ({ game }: GameListCardProps) => {
               <GameStatus status={game.game_status} />
 
               <h2
-                className={`text-white sm:text-base md:text-lg font-bold md:${game.title.length > 64 && "truncate"}  sm:${game.title.length > 64 && "flex flex-wrap"} `}
+                className={`text-white sm:text-base md:text-lg font-bold md:${
+                  game.title.length > 64 && "truncate"
+                }  sm:${game.title.length > 64 && "flex flex-wrap"} `}
               >
                 {game.title}
               </h2>

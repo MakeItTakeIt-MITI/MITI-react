@@ -1,6 +1,12 @@
 // import time from "../../../../assets/v1.3/time.svg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import GameAddress from "../../../common/components(renewal)/chips/GameAddress.tsx";
+import GameTime from "../../../common/components(renewal)/chips/GameTime.tsx";
+import GameParticipants from "../../../common/components(renewal)/chips/GameParticipants.tsx";
+import GameTitle from "../../../common/components(renewal)/chips/GameTitle.tsx";
+import GameFee from "../../../common/components(renewal)/chips/GameFee.tsx";
+import { GameStatus } from "../../../common/components(renewal)/chips/GameStatus.tsx";
 
 export default function Card() {
   const [isHovered, setIsHovered] = useState(false);
@@ -14,31 +20,23 @@ export default function Card() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Link to="/games/detail?&id=1">
+      <Link to="/games/detail?&id=1" className="flex flex-col gap-2.5">
         <div className="space-y-2">
-          <span className="p-1 bg-[#1ADCDF] text-[10px]">모집</span>
-          <h1 className={`font-bold text-base `}>
-            GAME TITLE MAX LENGHT 64 MAX LINE 2{" "}
-          </h1>
+          <GameStatus status="closed" />
+          <GameTitle title="[김포 사우/감정] 삼성썬더스 목요일 픽업게임 게스트 모집	" />
         </div>
 
-        <div className="space-y-1 text-xs font-[400] text-[#D6D6D6]">
-          {/* <div className="flex items-center  gap-1">
-            <img src={location} alt="" />
-            <span>address</span>
-            <span>details</span>
-          </div> */}
-          {/* <div className="flex items-center gap-1">
-            <img src={users} alt="" />
-            <span>hh:mm</span>
-          </div> */}
-          {/* <div className="flex justify-between">
-            <div className="flex items-center gap-1">
-              <img src={time} alt="" />
-              <span>4/10</span>
-            </div>
-            <span className="font-bold text-[#7FEEF0] text-base">10,000</span>
-          </div>{" "} */}
+        <div className="space-y-1 ">
+          <GameAddress
+            address="경기 김포시 감정로 86"
+            address_detail="삼성리틀썬더스"
+          />
+          <GameTime starttime="10:25" endtime="11:30" />
+
+          <div className="flex items-center justify-between">
+            <GameParticipants min_participants="5" max_participants="10" />
+            <GameFee fee={0} size="md" />
+          </div>
         </div>
       </Link>
     </li>

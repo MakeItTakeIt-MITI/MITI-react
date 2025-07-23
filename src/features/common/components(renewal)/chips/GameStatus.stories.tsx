@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import GameStatus from "./GameStatus.tsx";
+import { GameStatus } from "./GameStatus.tsx";
 
 const meta: Meta<typeof GameStatus> = {
   component: GameStatus,
-  title: "Components/Chips/GameStatus",
+  title: "Components/Chips/Game Status Badge",
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
@@ -14,16 +14,26 @@ export default meta;
 
 type Story = StoryObj<typeof GameStatus>;
 
-export const StatusRecruiting: Story = {
+export const CompletedBadge: Story = {
   args: {
-    status: "모집 중",
-    isSelected: true,
+    status: "completed",
   },
 };
 
-export const StatusRecruitingClosed: Story = {
+export const CancelledBadge: Story = {
   args: {
-    status: "모집 마감",
-    isSelected: false,
+    status: "canceled",
+  },
+};
+
+export const ClosedBadge: Story = {
+  args: {
+    status: "closed",
+  },
+};
+
+export const OpenBadge: Story = {
+  args: {
+    status: "open",
   },
 };

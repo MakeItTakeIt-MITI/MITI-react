@@ -1,5 +1,5 @@
 import { Game } from "../../../interfaces/games.ts";
-import { GameStatus } from "./badge/GameStatus.tsx";
+import { GameStatus } from "../../common/components(renewal)/chips/GameStatus.tsx";
 import time from "../../../assets/v11/time.svg";
 import participants from "../../../assets/v11/participants.svg";
 import { Fee } from "./Fee.tsx";
@@ -29,7 +29,9 @@ export const GameCardStatic = ({
       <div className="space-y-2">
         <GameStatus status={game.game_status} />
         <h1
-          className={`font-bold  text-[#E5E5E5] ${game.title.length > 64 && "truncate"} text-lg`}
+          className={`font-bold  text-[#E5E5E5] ${
+            game.title.length > 64 && "truncate"
+          } text-lg`}
         >
           {game.title}
         </h1>

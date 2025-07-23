@@ -2,7 +2,7 @@ import time from "../../assets/v11/time.svg";
 import participants from "../../assets/v11/participants.svg";
 import { Game } from "../../interfaces/games.ts";
 import { Link } from "react-router-dom";
-import { GameStatus } from "../../features/games/components/badge/GameStatus.tsx";
+import { GameStatus } from "../common/components(renewal)/chips/GameStatus.tsx";
 import { Fee } from "../../features/games/components/Fee.tsx";
 
 interface MobileGameListCardProp {

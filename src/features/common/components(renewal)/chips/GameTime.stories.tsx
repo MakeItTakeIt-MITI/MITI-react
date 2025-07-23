@@ -16,6 +16,7 @@ type Story = StoryObj<typeof GameTime>;
 
 export const GameTimeChip: Story = {
   args: {
-    time: "22:10",
+    starttime: "22:10",
+    endtime: "23:10",
   },
 };

@@ -1,26 +1,38 @@
-interface StatusProps {
-  status: React.ReactNode;
-  isSelected?: boolean;
-  onClick?: () => void;
+interface GameStatusProps {
+  status: "open" | "closed" | "canceled" | "completed";
 }
 
-export default function GameStatus({
-  status,
-  isSelected,
-  onClick,
-}: StatusProps) {
+export const GameStatus = ({ status }: GameStatusProps) => {
   return (
     <span
       style={{
-        backgroundColor: isSelected ? "#1ADCDF" : "",
-        color: isSelected ? "#000" : "#999",
-        borderColor: isSelected ? "#1ADCDF" : "#707070",
+        backgroundColor:
+          status === "open"
+            ? "#1ADCDF33"
+            : status === "canceled"
+            ? "#99999933"
+            : status === "closed"
+            ? "#FF711433"
+            : status === "completed"
+            ? "#FFFFFF33"
+            : "",
+        color:
+          status === "open"
+            ? "#1ADCDF"
+            : status === "canceled"
+            ? "#999999"
+            : status === "closed"
+            ? "#FF7114"
+            : status === "completed"
+            ? "#fff"
+            : "",
       }}
-      className="py-2.5 px-3  text-sm rounded-[50px] border font-[500]"
+      className="p-1 text-[10px] rounded-[2px] h-[18px] w-full font-bold  "
     >
-      <button onClick={onClick} type="button">
-        {status}
-      </button>
+      {(status === "open" && "모집 중") ||
+        (status === "canceled" && "경기 취소") ||
+        (status === "closed" && "모집 완료") ||
+        (status === "completed" && "경기 완료")}
     </span>
   );
-}
+};
