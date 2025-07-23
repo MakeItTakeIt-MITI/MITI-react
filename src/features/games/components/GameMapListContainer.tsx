@@ -42,7 +42,7 @@ export default function GameMapListContainer({
             <span className="text-xs font-[400] text-white">
               총 NN개의 경기
             </span>
-            <ul>
+            <ul className="flex flex-col gap-2.5">
               <Card />
               <Card />
               <Card />
