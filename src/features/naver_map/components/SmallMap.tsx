@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import { useEffect } from "react";
+import { NaverMapProps } from "../interface/naver_map.ts";
 
 declare global {
   interface Window {
@@ -12,19 +13,22 @@ declare global {
 if (!window.naver) {
   console.error("Error in loading Naver Maps");
 }
+
 const { naver } = window;
 
-export default function GamesListMap() {
+export default function SmallMap({ id }: NaverMapProps) {
   useEffect(() => {
-    new naver.maps.Map("games-list-map", {
+    new naver.maps.Map(id, {
       center: new naver.maps.LatLng(37.554722, 126.972778),
       zoom: 14,
       scrollWheel: true,
       disableKineticPan: false,
-      // tileDuration: 700,
     });
   }, []);
+
   return (
-    <div id="games-list-map" className="w-full h-[500px] rounded-lg"></div>
+    <div id={id} className="w-[375px] h-[241px] rounded-[20px]">
+      SmallMap
+    </div>
   );
 }
