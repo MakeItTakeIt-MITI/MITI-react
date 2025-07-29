@@ -1,9 +1,9 @@
 import { useSearchParams } from "react-router-dom";
 import Tab from "../../common/components(renewal)/chips/Tab.tsx";
-import GamesListMap from "./map/GamesListMap.tsx";
 import GamesList from "./game-list/GamesList.tsx";
 import Card from "./card/Card.tsx";
 import SearchBar from "./game-list/SearchBar.tsx";
+import LargeMap from "../../naver_map/components/LargeMap.tsx";
 
 interface GameMapListContainerProps {
   handleToggleTab: (arg: string) => void;
@@ -36,7 +36,8 @@ export default function GameMapListContainer({
         // GAME MAP LIST RENDERING CONTAINER
         <div className="flex flex-col gap-5">
           {/* <Suspense fallback={<p>Loading..</p>}> */}
-          <GamesListMap />
+          {/* <GamesListMap /> */}
+          <LargeMap id="games-list" />
           {/* </Suspense> */}
           <div className="flex flex-col gap-4">
             <span className="text-xs font-[400] text-white">

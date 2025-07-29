@@ -45,16 +45,13 @@ const router = createBrowserRouter([
 
       {
         path: "games",
-
         children: [
           { path: "", element: <Games /> },
-          { path: "list", element: <List /> },
           { path: ":id", element: <GameDetail /> },
         ],
       },
       {
         path: "courts",
-
         children: [
           { path: "", element: <Courts /> },
           { path: ":id", element: <CourtGamesList /> },

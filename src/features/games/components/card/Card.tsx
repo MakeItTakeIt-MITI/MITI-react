@@ -7,6 +7,7 @@ import GameParticipants from "../../../common/components(renewal)/chips/GamePart
 import GameTitle from "../../../common/components(renewal)/chips/GameTitle.tsx";
 import GameFee from "../../../common/components(renewal)/chips/GameFee.tsx";
 import { GameStatus } from "../../../common/components(renewal)/chips/GameStatus.tsx";
+import { GameStatusEnum } from "../../../enum/games.ts";
 
 export default function Card() {
   const [isHovered, setIsHovered] = useState(false);
@@ -20,9 +21,9 @@ export default function Card() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Link to="/games/detail?&id=1" className="flex flex-col gap-2.5">
+      <Link to="/games/2" className="flex flex-col gap-2.5">
         <div className="space-y-2">
-          <GameStatus status="closed" />
+          <GameStatus status={GameStatusEnum.OPEN} />
           <GameTitle title="[김포 사우/감정] 삼성썬더스 목요일 픽업게임 게스트 모집	" />
         </div>
 
