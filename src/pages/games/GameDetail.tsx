@@ -10,7 +10,7 @@ const GameDetail = () => {
       }}
       className="mx-auto  w-[968px] flex flex-col items-center gap-[30px] py-[30px]"
     >
-      <article className="w-full h-[870px] flex justify-between">
+      <article className="w-full  flex justify-between">
         <GameDetailsPanel />
         <GameDetailContainer />
       </article>
