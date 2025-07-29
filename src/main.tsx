@@ -15,7 +15,6 @@ import PrivateInquiry from "./pages/inquiries/PrivateInquiry.tsx";
 import Policies from "./pages/policies/Policies.tsx";
 import PoliciesDetails from "./pages/policies/PoliciesDetails.tsx";
 import CourtGamesList from "./pages/courts/CourtGamesList.tsx";
-import { List } from "./pages/games/List.tsx";
 import HostingGuide from "./pages/hosting-guide/HostingGuide.tsx";
 import { Auth } from "./pages/auth/Auth.tsx";
 import { Withdraw } from "./pages/auth/Withdraw.tsx";
@@ -23,6 +22,7 @@ import { KakaoAuthHandler } from "./pages/auth/KakaoAuthHandler.tsx";
 import InquiriesList from "./pages/inquiries/Inquiries.tsx";
 import Faq from "./pages/faq/Faq.tsx";
 import InquiryDetail from "./pages/inquiries/InquiryDetail.tsx";
+import Community from "./pages/community/Community.tsx";
 
 const queryClient = new QueryClient();
 
@@ -73,6 +73,10 @@ const router = createBrowserRouter([
           { path: "", element: <Policies /> },
           { path: ":id", element: <PoliciesDetails /> },
         ],
+      },
+      {
+        path: "community",
+        children: [{ path: "", element: <Community /> }],
       },
 
       { path: "*", element: <NotFound /> },

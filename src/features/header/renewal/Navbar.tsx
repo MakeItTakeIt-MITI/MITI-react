@@ -17,7 +17,9 @@ export default function Navbar() {
           <li>
             <Link to="courts">경기장 목록록</Link>
           </li>
-          <li>게시판</li>
+          <li>
+            <Link to="community">게시판</Link>
+          </li>
           <li>자주 묻는 질문</li>
           <li>사용자의 문의</li>
         </ul>
