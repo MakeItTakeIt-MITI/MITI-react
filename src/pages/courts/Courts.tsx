@@ -1,8 +1,13 @@
 import { useSearchParams } from "react-router-dom";
 import Sidebar from "../../features/courts/components/Sidebar.tsx";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
+import SearchBar from "../../features/games/components/game-list/SearchBar.tsx";
+import CourtsListContainer from "../../features/courts/components/CourtsListContainer.tsx";
 
 export default function Courts() {
+  const [inputContent, setInputContent] = useState("");
+  console.log(inputContent);
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   // callback function to filter by region
@@ -31,7 +36,10 @@ export default function Courts() {
     >
       <article className="flex gap-[30px]">
         <Sidebar handleSelectRegion={handleSelectRegion} />
-        <div className=" w-[700px] min-h-[1px] flex flex-col gap-[20px]"></div>
+        <div className=" w-[800px] min-h-[1px] flex flex-col gap-[20px]">
+          <SearchBar setInputContent={setInputContent} title="경기장" />
+          <CourtsListContainer />
+        </div>
       </article>
     </section>
   );
