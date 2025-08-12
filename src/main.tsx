@@ -23,6 +23,7 @@ import InquiriesList from "./pages/inquiries/Inquiries.tsx";
 import Faq from "./pages/faq/Faq.tsx";
 import InquiryDetail from "./pages/inquiries/InquiryDetail.tsx";
 import Community from "./pages/community/Community.tsx";
+import CommunityPost from "./pages/community/CommunityPost.tsx";
 
 const queryClient = new QueryClient();
 
@@ -76,7 +77,10 @@ const router = createBrowserRouter([
       },
       {
         path: "community",
-        children: [{ path: "", element: <Community /> }],
+        children: [
+          { path: "", element: <Community /> },
+          { path: ":id", element: <CommunityPost /> },
+        ],
       },
 
       { path: "*", element: <NotFound /> },
