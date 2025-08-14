@@ -1,10 +1,16 @@
 import CourtDetailsGameCard from "./CourtDetailsGameCard.tsx";
 
 interface CourtDetailGamesListProps {
-  year?: number;
-  month?: number;
-  day?: number;
-  day_type?: string;
+  year: number;
+  month: number;
+  day: number;
+  day_type: string;
+  title: string;
+  starttime: string;
+  endtime: string;
+  min_participants: string;
+  max_participants: string;
+  fee: number;
 }
 
 const CourtDetailGamesList = ({
@@ -12,6 +18,12 @@ const CourtDetailGamesList = ({
   month,
   day,
   day_type,
+  title,
+  starttime,
+  endtime,
+  min_participants,
+  max_participants,
+  fee,
 }: CourtDetailGamesListProps) => {
   return (
     <div className="flex flex-col gap-3">
@@ -26,52 +38,12 @@ const CourtDetailGamesList = ({
         className="space-y-3 h-[540px] overflow-y-auto"
       >
         <CourtDetailsGameCard
-          title="GAME TITLE MAX LENGHT 64 MAX LINE 2 ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-          starttime="10:00"
-          endtime="12:00"
-          min_participants="2"
-          max_participants="10"
-          fee={10000}
-        />
-        <CourtDetailsGameCard
-          title="GAME TITLE MAX LENGHT 64 MAX LINE 2 ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-          starttime="12:30"
-          endtime="14:30"
-          min_participants="2"
-          max_participants="10"
-          fee={12000}
-        />
-        <CourtDetailsGameCard
-          title="GAME TITLE MAX LENGHT 64 MAX LINE 2 ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-          starttime="15:00"
-          endtime="17:00"
-          min_participants="2"
-          max_participants="10"
-          fee={15000}
-        />
-        <CourtDetailsGameCard
-          title="GAME TITLE MAX LENGHT 64 MAX LINE 2 ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-          starttime="17:30"
-          endtime="19:30"
-          min_participants="2"
-          max_participants="10"
-          fee={18000}
-        />
-        <CourtDetailsGameCard
-          title="GAME TITLE MAX LENGHT 64 MAX LINE 2 ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-          starttime="20:00"
-          endtime="22:00"
-          min_participants="2"
-          max_participants="10"
-          fee={20000}
-        />
-        <CourtDetailsGameCard
-          title="GAME TITLE MAX LENGHT 64 MAX LINE 2 ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-          starttime="22:30"
-          endtime="00:30"
-          min_participants="2"
-          max_participants="10"
-          fee={22000}
+          title={title}
+          starttime={starttime}
+          endtime={endtime}
+          min_participants={min_participants}
+          max_participants={max_participants}
+          fee={fee}
         />
       </ul>
     </div>

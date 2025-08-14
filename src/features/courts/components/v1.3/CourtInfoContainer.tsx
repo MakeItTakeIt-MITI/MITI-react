@@ -1,7 +1,31 @@
 import CourtDetailGamesList from "./CourtDetailGamesList.tsx";
 import { CourtDetailsCard } from "./CourtDetailsCard.tsx";
 
-const CourtInfoContainer = () => {
+interface CourtInfoContainerProps {
+  year: number;
+  month: number;
+  day: number;
+  day_type: string;
+  title: string;
+  starttime: string;
+  endtime: string;
+  min_participants: string;
+  max_participants: string;
+  fee: number;
+}
+
+const CourtInfoContainer = ({
+  year,
+  month,
+  day,
+  day_type,
+  title,
+  starttime,
+  endtime,
+  min_participants,
+  max_participants,
+  fee,
+}: CourtInfoContainerProps) => {
   return (
     <div className="flex flex-col gap-[32px] w-[410px]">
       {/* court detail info */}
@@ -16,7 +40,18 @@ const CourtInfoContainer = () => {
 흡연은 실외에서 부탁드리며, 실내에서는 준비된 실내화를 착용해주세요.`}
       />
       {/* games list */}
-      <CourtDetailGamesList year={2023} month={3} day={15} day_type="수" />
+      <CourtDetailGamesList
+        year={year}
+        month={month}
+        day={day}
+        day_type={day_type}
+        title={title}
+        starttime={starttime}
+        endtime={endtime}
+        min_participants={min_participants}
+        max_participants={max_participants}
+        fee={fee}
+      />
     </div>
   );
 };

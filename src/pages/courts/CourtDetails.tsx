@@ -42,7 +42,18 @@ export default function CourtDetails() {
           {/* <CourtsListContainer /> */}
           <div className="flex gap-[30px]">
             <MediumMap id="court_details_map" />
-            <CourtInfoContainer />
+            <CourtInfoContainer
+              year={2023}
+              month={3}
+              day={15}
+              day_type="수"
+              title="농구 경기"
+              starttime="10:00"
+              endtime="12:00"
+              min_participants="2"
+              max_participants="10"
+              fee={10000}
+            />
           </div>
         </div>
       </article>
