@@ -14,7 +14,6 @@ import Landing from "./pages/landing/Landing.tsx";
 import PrivateInquiry from "./pages/inquiries/PrivateInquiry.tsx";
 import Policies from "./pages/policies/Policies.tsx";
 import PoliciesDetails from "./pages/policies/PoliciesDetails.tsx";
-import CourtGamesList from "./pages/courts/CourtGamesList.tsx";
 import HostingGuide from "./pages/hosting-guide/HostingGuide.tsx";
 import { Auth } from "./pages/auth/Auth.tsx";
 import { Withdraw } from "./pages/auth/Withdraw.tsx";
@@ -24,6 +23,7 @@ import Faq from "./pages/faq/Faq.tsx";
 import InquiryDetail from "./pages/inquiries/InquiryDetail.tsx";
 import Community from "./pages/community/Community.tsx";
 import CommunityPost from "./pages/community/CommunityPost.tsx";
+import CourtDetails from "./pages/courts/CourtDetails.tsx";
 
 const queryClient = new QueryClient();
 
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
         path: "courts",
         children: [
           { path: "", element: <Courts /> },
-          { path: ":id", element: <CourtGamesList /> },
+          { path: ":id", element: <CourtDetails /> },
         ],
       },
       { path: `faq/category/:categoryId`, element: <Faq /> },

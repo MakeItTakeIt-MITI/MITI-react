@@ -1,4 +1,4 @@
-import RegionField from "../../games/components/sidebar/RegionField.tsx";
+import RegionField from "../../../games/components/sidebar/RegionField.tsx";
 
 interface SidebarProps {
   handleSelectRegion: (arg: string) => void;
