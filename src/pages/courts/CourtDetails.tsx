@@ -1,9 +1,9 @@
 import { useSearchParams } from "react-router-dom";
 import { useCallback, useState } from "react";
 import SearchBar from "../../features/games/components/game-list/SearchBar.tsx";
-import Sidebar from "../../features/courts/components/renewal/Sidebar.tsx";
+import Sidebar from "../../features/courts/components/v1.3/Sidebar.tsx";
 import MediumMap from "../../features/naver_map/components/MediumMap.tsx";
-import CourtGamesContainer from "../../features/courts/components/renewal/CourtGamesContainer.tsx";
+import CourtInfoContainer from "../../features/courts/components/v1.3/CourtInfoContainer.tsx";
 
 export default function CourtDetails() {
   const [inputContent, setInputContent] = useState("");
@@ -42,7 +42,7 @@ export default function CourtDetails() {
           {/* <CourtsListContainer /> */}
           <div className="flex gap-[30px]">
             <MediumMap id="court_details_map" />
-            <CourtGamesContainer />
+            <CourtInfoContainer />
           </div>
         </div>
       </article>

@@ -1,8 +1,8 @@
 import { useSearchParams } from "react-router-dom";
-import Sidebar from "../../features/courts/components/renewal/Sidebar.tsx";
+import Sidebar from "../../features/courts/components/v1.3/Sidebar.tsx";
 import { useCallback, useState } from "react";
 import SearchBar from "../../features/games/components/game-list/SearchBar.tsx";
-import CourtsListContainer from "../../features/courts/components/renewal/CourtsListContainer.tsx";
+import CourtsListContainer from "../../features/courts/components/v1.3/CourtsListContainer.tsx";
 
 export default function Courts() {
   const [inputContent, setInputContent] = useState("");

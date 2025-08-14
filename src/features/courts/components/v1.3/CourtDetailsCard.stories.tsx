@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { MemoryRouter } from "react-router-dom";
-import { CourtDetailGameCard } from "./CourtDetailGameCard.tsx";
+import { CourtDetailsCard } from "./CourtDetailsCard.tsx";
 
-const meta: Meta<typeof CourtDetailGameCard> = {
-  component: CourtDetailGameCard,
-  title: "Components/Courts/CourtDetailGameCard",
+const meta: Meta<typeof CourtDetailsCard> = {
+  component: CourtDetailsCard,
+  title: "Components/Courts/CourtDetailsCard",
   tags: ["autodocs"],
   decorators: [
     (Story) => (
@@ -27,9 +27,9 @@ const meta: Meta<typeof CourtDetailGameCard> = {
 
 export default meta;
 
-type Story = StoryObj<typeof CourtDetailGameCard>;
+type Story = StoryObj<typeof CourtDetailsCard>;
 
-export const CourtDetailGameCardExample: Story = {
+export const CourtDetailsCardExample: Story = {
   args: {
     title: "더모스트 바스켓볼 동탄오산점",
     address: "COUT ADDRESS",

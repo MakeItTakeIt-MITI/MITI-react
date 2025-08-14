@@ -1,6 +1,6 @@
 import marker_medium from "../../../../assets/v1.3/icon/location-pin-md.svg";
 
-interface CourtDetailGameCardProps {
+interface CourtDetailsCardProps {
   title: string;
   address: string;
   address_detail: string;
@@ -8,13 +8,13 @@ interface CourtDetailGameCardProps {
   info: string;
 }
 
-export const CourtDetailGameCard = ({
+export const CourtDetailsCard = ({
   title,
   address,
   address_detail,
   distance,
   info,
-}: CourtDetailGameCardProps) => {
+}: CourtDetailsCardProps) => {
   return (
     <div className="flex flex-col gap-3 min-h-[196px] w-full">
       <h1 className="text-white font-bold text-sm">경기장 정보</h1>
