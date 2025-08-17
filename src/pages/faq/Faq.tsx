@@ -8,6 +8,8 @@ const Faq = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const { data, isLoading } = useFaqDataHook(inputContent);
+
   // function passed as a prop, useCallBack to prevent re-render
   const handleToggleTab = useCallback(
     (selected: string) => {
@@ -16,8 +18,6 @@ const Faq = () => {
     },
     [searchParams, setSearchParams]
   );
-
-  const { data, isLoading } = useFaqDataHook(inputContent);
 
   return (
     <section className="w-[800px] min-h-[838px] mx-auto my-10 py-[30px] flex flex-col gap-[36px]">

@@ -44,7 +44,7 @@ const FaqContainer = ({
                 .map((faqData) => (
                   <li key={faqData.id}>
                     <FaqCard title={faqData.title} content={faqData.content} />
-                    <hr className="bg-[#fff]  " />
+                    <hr className="border-0 h-[0.5px] bg-[#fff]" />
                   </li>
                 ))}
             </>

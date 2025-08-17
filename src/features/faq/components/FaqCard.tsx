@@ -2,6 +2,7 @@ import { useState } from "react";
 import drop_arrow from "../../../assets/v1.3/icon/drop_arrow.svg";
 import up_arrow from "../../../assets/v1.3/icon/drop_up.svg";
 import DOMPurify from "dompurify";
+import "../faq.css";
 
 interface FaqCardProps {
   title: string;
@@ -24,6 +25,7 @@ const FaqCard = ({ title, content }: FaqCardProps) => {
       <button
         type="button"
         onClick={handleToggleFaq}
+        onKeyDown={handleToggleFaq}
         className="w-full flex items-center justify-between"
       >
         <h1 className="text-[18px] font-[400] text-white">{title}</h1>
@@ -32,7 +34,7 @@ const FaqCard = ({ title, content }: FaqCardProps) => {
       {toggle && (
         <p
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
-          className="text-sm text-[#e8e8e8] font-400 whitespace-pre-line"
+          className=" text-[#e8e8e8] font-400 "
         />
       )}
     </li>
