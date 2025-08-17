@@ -1,14 +1,10 @@
-import { UseFormReturn } from "react-hook-form";
-
+import { UseFormRegister } from "react-hook-form";
 import open from "../../../../assets/v11/display-password.svg";
 import close from "../../../../assets/v11/hide-password.svg";
-
-interface FormPasswordInputValues {
-  password: string;
-}
+import { PrivateInquiryField } from "../../../../interfaces/support";
 
 interface FormPasswordInputProps {
-  register: UseFormReturn<FormPasswordInputValues>["register"];
+  register: UseFormRegister<PrivateInquiryField>;
   displayPassword: boolean;
   handleTogglePassword: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }

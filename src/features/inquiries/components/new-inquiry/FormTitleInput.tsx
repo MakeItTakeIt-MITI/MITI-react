@@ -1,12 +1,8 @@
-// eslint-disable-next-line import/named
-import { UseFormReturn } from "react-hook-form";
-
-interface FormTitleInputValues {
-  title: string;
-}
+import { UseFormRegister } from "react-hook-form";
+import { PrivateInquiryField } from "../../../../interfaces/support";
 
 interface FormTitleInputProps {
-  register: UseFormReturn<FormTitleInputValues>["register"];
+  register: UseFormRegister<PrivateInquiryField>;
   erase_input: string;
 }
 

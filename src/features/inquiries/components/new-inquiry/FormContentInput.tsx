@@ -1,11 +1,8 @@
-import { UseFormReturn } from "react-hook-form";
-
-interface FormContentInputValues {
-  content: string;
-}
+import { UseFormRegister } from "react-hook-form";
+import { PrivateInquiryField } from "../../../../interfaces/support";
 
 interface FormContentInputProps {
-  register: UseFormReturn<FormContentInputValues>["register"];
+  register: UseFormRegister<PrivateInquiryField>;
 }
 
 const FormContentInput = ({ register }: FormContentInputProps) => {

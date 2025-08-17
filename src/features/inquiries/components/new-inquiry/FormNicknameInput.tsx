@@ -1,11 +1,8 @@
-import { UseFormReturn } from "react-hook-form";
-
-interface FormNicknameInputValues {
-  nickname: string;
-}
+import { UseFormRegister } from "react-hook-form";
+import { PrivateInquiryField } from "../../../../interfaces/support";
 
 interface FormNicknameInputProps {
-  register: UseFormReturn<FormNicknameInputValues>["register"];
+  register: UseFormRegister<PrivateInquiryField>;
   erase_input: string;
 }
 const FormNicknameInput = ({

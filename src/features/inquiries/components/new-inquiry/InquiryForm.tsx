@@ -1,57 +1,58 @@
+import { useCallback, useState } from "react";
+import { PrivateInquiryField } from "../../../../interfaces/support";
+import { usePrivateInquiryHook } from "../../hooks/usePrivateInquiryHook";
+import { SubmitHandler, useForm } from "react-hook-form";
+
 import erase_input from "../../../../assets/v1.3/icon/erase_input.svg";
+import FormTitleInput from "./FormTitleInput";
+import FormContentInput from "./FormContentInput";
+import FormNicknameInput from "./FormNicknameInput";
+import FormPasswordInput from "./FormPasswordInput";
+import NewInquiryNotice from "./NewInquiryNotice";
+import FormSubmitButton from "./FormSubmitButton";
 
-import InquiryFormSubmitButton from "./FormSubmitButton.tsx";
-import NewInquiryNotice from "./NewInquiryNotice.tsx";
-import FormTitleInput from "./FormTitleInput.tsx";
-import FormContentInput from "./FormContentInput.tsx";
-import FormNicknameInput from "./FormNicknameInput.tsx";
-import FormPasswordInput from "./FormPasswordInput.tsx";
+const InquiryForm = () => {
+  const [displayPassword, setDisplayPassword] = useState(false);
 
-interface InquiryFormProps {
-  handleSubmit: () => void;
-  onSubmit: (arg: any) => void;
-  register: any;
-  displayPassword: boolean;
-  handleTogglePassword: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  password: string;
-  isFormFilled: boolean | string;
-  passwordRegex: RegExp;
-}
+  const { register, handleSubmit, watch, reset } =
+    useForm<PrivateInquiryField>();
+  const { mutate } = usePrivateInquiryHook(reset);
 
-const InquiryForm = ({
-  handleSubmit,
-  onSubmit,
-  register,
-  displayPassword,
-  handleTogglePassword,
-  password,
-  isFormFilled,
-  passwordRegex,
-}: InquiryFormProps) => {
+  const onSubmit: SubmitHandler<PrivateInquiryField> = (data) => {
+    mutate(data);
+  };
+
+  const title = watch("title");
+  const password = watch("password");
+  const content = watch("content");
+  const nickname = watch("nickname");
+
+  const passwordRegex = /^[0-9]{4}$/;
+
+  const isFormFilled =
+    title && password && content && nickname && passwordRegex.test(password);
+
+  const handleTogglePassword = useCallback(() => {
+    setDisplayPassword((prev) => !prev);
+  }, [setDisplayPassword]);
+
   return (
-    <form className="space-y-5">
-      {/* INQUIRY TITLE */}
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       <FormTitleInput register={register} erase_input={erase_input} />
 
-      {/*  CONTENT */}
       <FormContentInput register={register} />
-      {/*  NICKNAME + PASSWORD */}
       <div className="flex items-center justify-center gap-[32px] w-full ">
-        {/* NICKNAME */}
         <FormNicknameInput register={register} erase_input={erase_input} />
-        {/* PASSWORD */}
         <FormPasswordInput
           register={register}
           displayPassword={displayPassword}
           handleTogglePassword={handleTogglePassword}
         />
       </div>
-
       <hr className="text-[#525252] w-full" />
-
       {/* 안내사항 */}
       <NewInquiryNotice />
-      <InquiryFormSubmitButton isFormFilled={isFormFilled} />
+      <FormSubmitButton isFormFilled={isFormFilled} />
     </form>
   );
 };
