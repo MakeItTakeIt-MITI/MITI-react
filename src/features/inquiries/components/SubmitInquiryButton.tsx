@@ -1,16 +1,10 @@
+import { Link } from "react-router-dom";
 import inquiry_button from "../../../assets/v1.3/icon/inquiry_button.svg";
 
-interface SubmitInquiryButtonProps {
-  handleSubmitInquiry: () => void;
-}
-
-const SubmitInquiryButton = ({
-  handleSubmitInquiry,
-}: SubmitInquiryButtonProps) => {
+const SubmitInquiryButton = () => {
   return (
-    <button
-      type="button"
-      onClick={handleSubmitInquiry}
+    <Link
+      to="new"
       style={{
         lineHeight: "24px",
       }}
@@ -18,7 +12,7 @@ const SubmitInquiryButton = ({
     >
       <img src={inquiry_button} alt="inquiry_button" />
       <span className=" font-bold">문의하기</span>
-    </button>
+    </Link>
   );
 };
 

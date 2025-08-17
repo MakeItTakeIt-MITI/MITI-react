@@ -24,10 +24,6 @@ const InquiriesList = () => {
     pages.push(i);
   }
 
-  const handleSubmitInquiry = useCallback(() => {
-    console.log("inquriy");
-  }, []);
-
   return (
     <section className="sm:w-full  md:w-[800px]  mx-auto  md:py-[30px] flex flex-col gap-[36px]">
       <Header />
@@ -37,7 +33,7 @@ const InquiriesList = () => {
         {/* Search bar + Submit Inquiry Bitton */}
         <div className="flex items-center gap-6">
           <SearchBar title="문의하기" setInputContent={setInputContent} />
-          <SubmitInquiryButton handleSubmitInquiry={handleSubmitInquiry} />
+          <SubmitInquiryButton />
         </div>
         {/* Inquiries List */}
         <InquiriesListContainer />

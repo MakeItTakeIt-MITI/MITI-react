@@ -11,7 +11,7 @@ import Courts from "./pages/courts/Courts.tsx";
 import React from "react";
 import NotFound from "./pages/other/NotFound.tsx";
 import Landing from "./pages/landing/Landing.tsx";
-import PrivateInquiry from "./pages/inquiries/PrivateInquiry.tsx";
+import NewInquiry from "./pages/inquiries/NewInquiry.tsx";
 import Policies from "./pages/policies/Policies.tsx";
 import PoliciesDetails from "./pages/policies/PoliciesDetails.tsx";
 import HostingGuide from "./pages/hosting-guide/HostingGuide.tsx";
@@ -63,7 +63,7 @@ const router = createBrowserRouter([
         path: "inquiries",
         children: [
           { path: "", element: <InquiriesList /> },
-          { path: "new", element: <PrivateInquiry /> },
+          { path: "new", element: <NewInquiry /> },
           { path: ":id", element: <InquiryDetail /> },
         ],
       },
