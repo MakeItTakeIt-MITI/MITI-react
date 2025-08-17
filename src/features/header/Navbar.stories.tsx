@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import Navbar from "./Navbar.tsx";
+import DesktopNavbar from "./DesktopNavbar.tsx";
 import MobileNavbar from "./MobileNavbar.tsx";
 
-const meta: Meta<typeof Navbar> = {
-  component: Navbar,
-  title: "Navigation/Navbar(v1.3)",
+const meta: Meta<typeof DesktopNavbar> = {
+  component: DesktopNavbar,
+  title: "Navigation/DesktopNavbar",
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
@@ -12,10 +12,10 @@ const meta: Meta<typeof Navbar> = {
 };
 export default meta;
 
-type Story = StoryObj<typeof Navbar>;
+type Story = StoryObj<typeof DesktopNavbar>;
 
 export const Desktop: Story = {
-  render: () => <Navbar />,
+  render: () => <DesktopNavbar />,
 };
 
 export const Mobile: Story = {

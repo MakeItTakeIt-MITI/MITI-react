@@ -1,14 +1,13 @@
 import { Outlet } from "react-router-dom";
 import { ScrollToTop } from "./features/common/components/ScrollToTop.tsx";
-import Navbar from "./features/header/renewal/Navbar.tsx";
 import Footer from "./features/common/components/Footer.tsx";
+import Header from "./features/header/Header.tsx";
 
 function App() {
   return (
     <>
       <ScrollToTop />
-      {/* <Navbar /> */}
-      <Navbar />
+      <Header />
       <Outlet />
       <Footer />
     </>

@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import navbar_logo from "../../../assets/v1.3/navbar-logo.svg";
+import navbar_logo from "../../assets/v1.3/navbar-logo.svg";
 
-export default function Navbar() {
+export default function DesktopNavbar() {
   const today = new Date().toISOString().slice(0, 10);
 
   return (
-    <nav className="w-full px-[360px] h-[60px] bg-[#141414] flex items-center justify-center ">
+    <nav className="sm:hidden md:flex w-full px-[360px] h-[60px] bg-[#141414]  items-center justify-center ">
       <div className=" h-[28px] w-[1200px]  flex items-center  justify-between">
         <img src={navbar_logo} alt="miti logo" />
         <ul className="flex items-center gap-5 text-white font-bold text-sm">

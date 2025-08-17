@@ -4,12 +4,12 @@ import FourthArticle from "../../features/hosting-guide/components/FourthArticle
 import FirstCarousel from "../../features/hosting-guide/components/FirstCarousel.tsx";
 import SecondCarousel from "../../features/hosting-guide/components/SecondCarousel.tsx";
 import ThirdCarousel from "../../features/hosting-guide/components/ThirdCarousel.tsx";
-import { Navbar } from "../../features/header/Navbar.tsx";
+// import { Navbar } from "../../features/header/Navbar.tsx";
 
 const HostingGuide = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <section>
         <FirstCarousel />
         <SecondCarousel />
