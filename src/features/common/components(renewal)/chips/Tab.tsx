@@ -13,6 +13,12 @@ export default function Tab({ content, onClick }: TabProps) {
   const contentToTab: Record<string, string> = {
     지도: "map",
     리스트: "list",
+    전체: "all",
+    경기: "games",
+    정산: "payments",
+    리뷰: "reviews",
+    신고: "reports",
+    기타: "etc",
   };
 
   const isActive = tab === contentToTab[content];

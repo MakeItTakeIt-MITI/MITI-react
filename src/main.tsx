@@ -58,7 +58,7 @@ const router = createBrowserRouter([
           { path: ":id", element: <CourtDetails /> },
         ],
       },
-      { path: `faq/category/:categoryId`, element: <Faq /> },
+      { path: `faq`, element: <Faq /> },
       {
         path: "inquiries",
         children: [

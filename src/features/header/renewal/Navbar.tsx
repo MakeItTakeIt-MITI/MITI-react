@@ -20,7 +20,9 @@ export default function Navbar() {
           <li>
             <Link to="community">게시판</Link>
           </li>
-          <li>자주 묻는 질문</li>
+          <li>
+            <Link to={`faq?tab=all&search=""`}>자주 묻는 질문</Link>
+          </li>
           <li>사용자의 문의</li>
         </ul>
         <button className="py-2 px-3 bg-[#1ADCDF] rounded-full text-xs font-bold text-[#262626">
