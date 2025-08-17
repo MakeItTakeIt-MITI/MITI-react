@@ -8,6 +8,7 @@ interface FabContainerProps {
   setInputContent: (arg: string) => void;
   data: FaqDataField[];
   isLoading: boolean;
+  currentTab: string | null;
 }
 
 const FaqContainer = ({
@@ -15,8 +16,10 @@ const FaqContainer = ({
   setInputContent,
   data,
   isLoading,
+  currentTab,
 }: FabContainerProps) => {
-  console.log("from container", data);
+  console.log(currentTab);
+
   return (
     <article className="flex flex-col gap-4">
       <SearchBar setInputContent={setInputContent} title="FAQ" />
@@ -33,16 +36,17 @@ const FaqContainer = ({
             </p>
           ) : (
             <>
-              {data.map((faqData: FaqDataField) => (
-                <>
-                  <FaqCard
-                    key={faqData.id}
-                    title={faqData.title}
-                    content={faqData.content}
-                  />
-                  <hr className="bg-[#5C5C5C]" />
-                </>
-              ))}
+              {data
+                .filter(
+                  (faqData) =>
+                    currentTab === "all" || faqData.category === currentTab
+                )
+                .map((faqData) => (
+                  <li key={faqData.id}>
+                    <FaqCard title={faqData.title} content={faqData.content} />
+                    <hr className="bg-[#fff]  " />
+                  </li>
+                ))}
             </>
           )}
         </ul>

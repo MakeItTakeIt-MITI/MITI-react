@@ -15,22 +15,27 @@ const FaqTabs = ({ handleToggleTab }: FaqTabsProps) => {
       <Tab
         content="경기"
         isSelected={false}
-        onClick={() => handleToggleTab("games")}
+        onClick={() => handleToggleTab("game")}
+      />
+      <Tab
+        content="참가"
+        isSelected={false}
+        onClick={() => handleToggleTab("participation")}
       />
       <Tab
         content="정산"
         isSelected={false}
-        onClick={() => handleToggleTab("payments")}
+        onClick={() => handleToggleTab("settlement")}
       />{" "}
       <Tab
         content="리뷰"
         isSelected={false}
-        onClick={() => handleToggleTab("reviews")}
+        onClick={() => handleToggleTab("review")}
       />
       <Tab
         content="신고"
         isSelected={false}
-        onClick={() => handleToggleTab("reports")}
+        onClick={() => handleToggleTab("report")}
       />
       <Tab
         content="기타"

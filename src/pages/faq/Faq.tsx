@@ -30,6 +30,7 @@ const Faq = () => {
         setInputContent={setInputContent}
         data={data}
         isLoading={isLoading}
+        currentTab={searchParams.get("tab")}
       />
     </section>
   );
