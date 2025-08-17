@@ -4,7 +4,7 @@ import CourtDetailsGameCard from "./CourtDetailsGameCard.tsx";
 
 const meta: Meta<typeof CourtDetailsGameCard> = {
   component: CourtDetailsGameCard,
-  title: "Components/Courts/CourtDetailsGameCard",
+  title: "Courts/Components/CourtDetailsGameCard",
   tags: ["autodocs"],
   decorators: [
     (Story) => (

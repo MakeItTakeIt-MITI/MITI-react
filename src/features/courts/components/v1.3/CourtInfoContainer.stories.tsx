@@ -4,7 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 
 const meta: Meta<typeof CourtInfoContainer> = {
   component: CourtInfoContainer,
-  title: "Components/Courts/CourtInfoContainer",
+  title: "Courts/Components/CourtInfoContainer",
   tags: ["autodocs"],
   decorators: [
     (Story) => (
