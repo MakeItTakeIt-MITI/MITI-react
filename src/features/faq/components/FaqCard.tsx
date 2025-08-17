@@ -1,6 +1,7 @@
 import { useState } from "react";
 import drop_arrow from "../../../assets/v1.3/icon/drop_arrow.svg";
 import up_arrow from "../../../assets/v1.3/icon/drop_up.svg";
+import DOMPurify from "dompurify";
 
 interface FaqCardProps {
   title: string;
@@ -30,7 +31,7 @@ const FaqCard = ({ title, content }: FaqCardProps) => {
       </button>
       {toggle && (
         <p
-          dangerouslySetInnerHTML={{ __html: content }}
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
           className="text-sm text-[#e8e8e8] font-400 whitespace-pre-line"
         />
       )}

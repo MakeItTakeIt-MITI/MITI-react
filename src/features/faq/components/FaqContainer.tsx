@@ -28,12 +28,18 @@ const FaqContainer = ({
 
         <ul className="space-y-3">
           {isLoading ? (
-            <p>Loading...</p>
+            <p className="flex items-center justify-center text-white h-[400px]">
+              Loading...
+            </p>
           ) : (
             <>
               {data.map((faqData: FaqDataField) => (
                 <>
-                  <FaqCard title={faqData.title} content={faqData.content} />
+                  <FaqCard
+                    key={faqData.id}
+                    title={faqData.title}
+                    content={faqData.content}
+                  />
                   <hr className="bg-[#5C5C5C]" />
                 </>
               ))}
