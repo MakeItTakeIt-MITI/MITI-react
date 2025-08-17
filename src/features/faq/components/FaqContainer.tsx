@@ -1,17 +1,25 @@
-import { useState } from "react";
 import SearchBar from "../../games/components/game-list/SearchBar.tsx";
 import FaqTabs from "./FaqTabs.tsx";
 import FaqCard from "./FaqCard.tsx";
+import { FaqDataField } from "../interface/faq.ts";
 
 interface FabContainerProps {
   handleToggleTab: (arg: string) => void;
-  handleSearch: (arg: string) => void;
+  setInputContent: (arg: string) => void;
+  data: FaqDataField[];
+  isLoading: boolean;
 }
 
-const FaqContainer = ({ handleToggleTab, handleSearch }: FabContainerProps) => {
+const FaqContainer = ({
+  handleToggleTab,
+  setInputContent,
+  data,
+  isLoading,
+}: FabContainerProps) => {
+  console.log("from container", data);
   return (
     <article className="flex flex-col gap-4">
-      <SearchBar title="FAQ" />
+      <SearchBar setInputContent={setInputContent} title="FAQ" />
 
       <div className="space-y-3">
         {/* TAB LIST */}
@@ -19,14 +27,18 @@ const FaqContainer = ({ handleToggleTab, handleSearch }: FabContainerProps) => {
         {/* FAQ Cards List */}
 
         <ul className="space-y-3">
-          <FaqCard />
-          <hr className="bg-[#5C5C5C]" />
-          <FaqCard />
-          <hr className="bg-[#5C5C5C]" />
-          <FaqCard />
-          <hr className="bg-[#5C5C5C]" />
-          <FaqCard />
-          <hr className="bg-[#5C5C5C]" />
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            <>
+              {data.map((faqData: FaqDataField) => (
+                <>
+                  <FaqCard title={faqData.title} content={faqData.content} />
+                  <hr className="bg-[#5C5C5C]" />
+                </>
+              ))}
+            </>
+          )}
         </ul>
       </div>
     </article>

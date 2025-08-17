@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { faqList } from "../api/faq";
+import { faqList } from "../api/faq.ts";
 
 export const useFaqDataHook = (search?: string | undefined) => {
   return useQuery({
-    queryKey: ["FAQ list"],
+    queryKey: ["FAQ List"],
     queryFn: () => faqList(search),
     staleTime: 5000,
   });

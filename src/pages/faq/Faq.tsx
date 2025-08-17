@@ -1,8 +1,11 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import FaqContainer from "../../features/faq/components/FaqContainer.tsx";
 import { useSearchParams } from "react-router-dom";
+import { useFaqDataHook } from "../../features/faq/hooks/useFaqDataHook.tsx";
 
 const Faq = () => {
+  const [inputContent, setInputContent] = useState<string>(() => "");
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   // function passed as a prop, useCallBack to prevent re-render
@@ -14,13 +17,7 @@ const Faq = () => {
     [searchParams, setSearchParams]
   );
 
-  const handleSearch = useCallback(
-    (input: string) => {
-      const params = Object.fromEntries(searchParams.entries());
-      setSearchParams({ ...params, search: input });
-    },
-    [searchParams, setSearchParams]
-  );
+  const { data, isLoading } = useFaqDataHook(inputContent);
 
   return (
     <section className="w-[800px] min-h-[838px] mx-auto my-10 py-[30px] flex flex-col gap-[36px]">
@@ -30,7 +27,9 @@ const Faq = () => {
       </div>
       <FaqContainer
         handleToggleTab={handleToggleTab}
-        handleSearch={handleSearch}
+        setInputContent={setInputContent}
+        data={data}
+        isLoading={isLoading}
       />
     </section>
   );

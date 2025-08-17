@@ -1,4 +1,4 @@
-import axiosUrl from "../../../utils/axios"
+import axiosUrl from "../../../utils/axios.ts"
 
 export const faqList = async (search?: string | undefined) => {
     try {

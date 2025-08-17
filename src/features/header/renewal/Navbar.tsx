@@ -21,7 +21,7 @@ export default function Navbar() {
             <Link to="community">게시판</Link>
           </li>
           <li>
-            <Link to={`faq?tab=all&search=""`}>자주 묻는 질문</Link>
+            <Link to={`faq?tab=all`}>자주 묻는 질문</Link>
           </li>
           <li>사용자의 문의</li>
         </ul>
