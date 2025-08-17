@@ -28,7 +28,9 @@ const FaqCard = ({ title, content }: FaqCardProps) => {
         onKeyDown={handleToggleFaq}
         className="w-full flex items-center justify-between"
       >
-        <h1 className="text-[18px] font-[400] text-white">{title}</h1>
+        <h1 className=" truncate text-[18px] font-[400] text-white ">
+          {title}
+        </h1>
         <img src={toggle ? up_arrow : drop_arrow} alt="toggle button" />
       </button>
       {toggle && (

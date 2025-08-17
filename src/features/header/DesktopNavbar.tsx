@@ -23,7 +23,9 @@ export default function DesktopNavbar() {
           <li>
             <Link to={`faq?tab=all`}>자주 묻는 질문</Link>
           </li>
-          <li>사용자의 문의</li>
+          <li>
+            <Link to={`inquiries?page=1`}>사용자의 문의</Link>
+          </li>
         </ul>
         <button className="py-2 px-3 bg-[#1ADCDF] rounded-full text-xs font-bold text-[#262626">
           앱 다운로
