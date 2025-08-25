@@ -3,6 +3,7 @@ import Sidebar from "../../features/courts/components/v1.3/Sidebar.tsx";
 import { useCallback, useState } from "react";
 import SearchBar from "../../features/games/components/game-list/SearchBar.tsx";
 import CourtsListContainer from "../../features/courts/components/v1.3/CourtsListContainer.tsx";
+import { useAllCourts } from "../../features/courts/hooks/query/useAllCourts.tsx";
 
 export default function Courts() {
   const [inputContent, setInputContent] = useState("");
@@ -27,6 +28,10 @@ export default function Courts() {
     [setSearchParams, searchParams]
   );
 
+  const { data: courtsData } = useAllCourts();
+  const courstDataPage = courtsData?.pages[0].data.page_content;
+  console.log(courstDataPage);
+
   return (
     <section
       style={{
@@ -38,7 +43,7 @@ export default function Courts() {
         <Sidebar handleSelectRegion={handleSelectRegion} />
         <div className=" w-[800px] min-h-[1px] flex flex-col gap-[20px]">
           <SearchBar setInputContent={setInputContent} title="경기장" />
-          <CourtsListContainer />
+          <CourtsListContainer courstDataPage={courstDataPage} />
         </div>
       </article>
     </section>
