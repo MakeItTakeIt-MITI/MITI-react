@@ -15,7 +15,7 @@ export default function DesktopNavbar() {
             </Link>
           </li>
           <li>
-            <Link to={`courts?region=""`}>경기장 목록록</Link>
+            <Link to={`courts?region=&search=`}>경기장 목록록</Link>
           </li>
           <li>
             <Link to="community">게시판</Link>

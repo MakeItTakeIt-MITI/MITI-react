@@ -38,7 +38,7 @@ export default function CourtDetails() {
       <article className="flex gap-6">
         <Sidebar handleSelectRegion={handleSelectRegion} />
         <div className=" w-[800px] min-h-[1px] flex flex-col gap-[20px]">
-          <SearchBar setInputContent={setInputContent} title="경기장" />
+          {/* <SearchBar setInputContent={setInputContent} title="경기장" /> */}
           {/* <CourtsListContainer /> */}
           <div className="flex gap-[30px]">
             <MediumMap id="court_details_map" />
