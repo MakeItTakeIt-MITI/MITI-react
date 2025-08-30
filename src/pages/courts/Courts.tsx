@@ -1,11 +1,10 @@
 import { useSearchParams } from "react-router-dom";
 import Sidebar from "../../features/courts/components/v1.3/Sidebar.tsx";
 import { useCallback, useEffect, useState } from "react";
-import SearchBar from "../../features/games/components/game-list/SearchBar.tsx";
+import SearchBar from "../../features/common/components(renewal)/search/SearchBar.tsx";
 import CourtsListContainer from "../../features/courts/components/v1.3/CourtsListContainer.tsx";
 import { useAllCourts } from "../../features/courts/hooks/query/useAllCourts.tsx";
 import { useInView } from "react-intersection-observer";
-import { useCalculateDistance } from "../../features/courts/hooks/useCalculateDistance.ts";
 
 export default function Courts() {
   const [geolocation, setGeolocation] = useState<{
@@ -14,7 +13,7 @@ export default function Courts() {
   } | null>(null);
 
   const [regionParams, setRegionParams] = useSearchParams();
-  const [inputContent, setInputContent] = useSearchParams();
+  const [inputContent] = useSearchParams();
 
   // callback function to filter by region
   const handleSelectRegion = useCallback(
@@ -33,27 +32,11 @@ export default function Courts() {
     [setRegionParams, regionParams]
   );
 
-  const handleSearch = useCallback(
-    (search: string) => {
-      const params = Object.fromEntries(inputContent.entries());
-
-      // toggle
-      if (inputContent.get("search") === search) {
-        const { ...rest } = params;
-        setInputContent({ ...rest, search: "" });
-      } else {
-        setInputContent({ ...params, search });
-      }
-    },
-
-    [setRegionParams, regionParams]
-  );
-
   const {
     data: courtsData,
     hasNextPage,
     fetchNextPage,
-  } = useAllCourts("", regionParams.get("region"));
+  } = useAllCourts(inputContent.get("search"), regionParams.get("region"));
 
   const courtsDataPage = courtsData?.pages?.flatMap(
     (page) => page?.data?.page_content
@@ -96,7 +79,7 @@ export default function Courts() {
 
         <div className=" w-[880px] flex flex-col  gap-[20px]">
           <div className="w-[800px] mx-auto ">
-            <SearchBar setInputContent={setInputContent} title="경기장" />
+            <SearchBar title="경기장" paramKey="search" />
           </div>{" "}
           <CourtsListContainer
             courstDataPage={courtsDataPage}

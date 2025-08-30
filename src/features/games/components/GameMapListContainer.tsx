@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import Tab from "../../common/components(renewal)/chips/Tab.tsx";
 import GamesList from "./game-list/GamesList.tsx";
 import Card from "./card/Card.tsx";
-import SearchBar from "./game-list/SearchBar.tsx";
+import SearchBar from "../../common/components(renewal)/search/SearchBar.tsx";
 import LargeMap from "../../naver_map/components/LargeMap.tsx";
 import { useState } from "react";
 
@@ -15,11 +15,8 @@ export default function GameMapListContainer({
   handleToggleTab,
   targetRef,
 }: GameMapListContainerProps) {
-  const [inputContent, setInputContent] = useState("");
   const [serchParams] = useSearchParams();
   const tab = serchParams.get("tab");
-
-  console.log(inputContent);
 
   return (
     <div
@@ -58,7 +55,7 @@ export default function GameMapListContainer({
       ) : (
         // ALL GAMES RENDERING CONTAINER
         <div className="flex flex-col gap-5">
-          <SearchBar setInputContent={setInputContent} title="경기" />
+          <SearchBar paramKey="search" title="경기" />
           <GamesList />
         </div>
       )}

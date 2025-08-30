@@ -1,4 +1,4 @@
-import SearchBar from "../../games/components/game-list/SearchBar.tsx";
+import SearchBar from "../../common/components(renewal)/search/SearchBar.tsx";
 import { PostCard } from "./PostCard.tsx";
 
 interface CommunityContentContainerProps {
@@ -10,7 +10,7 @@ const CommunityContentContainer = ({
 }: CommunityContentContainerProps) => {
   return (
     <article className="w-full flex flex-col gap-6">
-      <SearchBar setInputContent={setInputContent} title="게시글" />
+      <SearchBar title="게시글" paramKey="search" />
       {/* Post component */}
       <ul className="flex flex-col gap-4">
         <li>

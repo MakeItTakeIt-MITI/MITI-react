@@ -1,5 +1,5 @@
 import Avatar from "../../common/components(renewal)/avatar/Avatar.tsx";
-import SearchBar from "../../games/components/game-list/SearchBar.tsx";
+import SearchBar from "../../common/components(renewal)/search/SearchBar.tsx";
 import PostUserInfo from "./PostUserInfo.tsx";
 import like_button_medium from "../../../assets/v1.3/icon/like-icon-md.svg";
 import like_button_small from "../../../assets/v1.3/icon/like-icon-sm.svg";
@@ -7,14 +7,10 @@ import LikeCommentFeatures from "./LikeCommentFeatures.tsx";
 import comment_button from "../../../assets/v1.3/icon/comment-icon-sm.svg";
 import share_button from "../../../assets/v1.3/icon/share-icon-md.svg";
 
-interface PostDetailContainerProps {
-  setInputContent: (content: string) => void;
-}
-
-const PostDetailContainer = ({ setInputContent }: PostDetailContainerProps) => {
+const PostDetailContainer = () => {
   return (
     <article className="w-full flex flex-col gap-6">
-      <SearchBar setInputContent={setInputContent} title="게시글" />
+      <SearchBar paramKey="search" title="게시글" />
       <div className="space-y-4">
         {/* Uploaded Post */}
         <div className="space-y-4">

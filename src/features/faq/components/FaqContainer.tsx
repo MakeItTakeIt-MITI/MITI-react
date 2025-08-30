@@ -1,11 +1,10 @@
-import SearchBar from "../../games/components/game-list/SearchBar.tsx";
+import SearchBar from "../../common/components(renewal)/search/SearchBar.tsx";
 import FaqTabs from "./FaqTabs.tsx";
 import FaqCard from "./FaqCard.tsx";
 import { FaqDataField } from "../interface/faq.ts";
 
 interface FabContainerProps {
   handleToggleTab: (arg: string) => void;
-  setInputContent: (arg: string) => void;
   data: FaqDataField[];
   isLoading: boolean;
   currentTab: string | null;
@@ -13,7 +12,6 @@ interface FabContainerProps {
 
 const FaqContainer = ({
   handleToggleTab,
-  setInputContent,
   data,
   isLoading,
   currentTab,
@@ -22,7 +20,7 @@ const FaqContainer = ({
 
   return (
     <article className="flex flex-col gap-4">
-      <SearchBar setInputContent={setInputContent} title="FAQ" />
+      <SearchBar paramKey="search" title="FAQ" />
 
       <div className="space-y-3">
         {/* TAB LIST */}

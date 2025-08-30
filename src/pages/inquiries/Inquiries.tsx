@@ -1,14 +1,13 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 import { useInquiriesDataHook } from "../../features/inquiries/hooks/useInquiriesDataHook.tsx";
 import Pagination from "../../features/inquiries/components/Pagination.tsx";
 import Header from "../../features/inquiries/components/Header.tsx";
-import SearchBar from "../../features/games/components/game-list/SearchBar.tsx";
+import SearchBar from "../../features/common/components(renewal)/search/SearchBar.tsx";
 import SubmitInquiryButton from "../../features/inquiries/components/SubmitInquiryButton.tsx";
 import InquiriesListContainer from "../../features/inquiries/components/InquiriesListContainer.tsx";
 
 const InquiriesList = () => {
-  const [inputContent, setInputContent] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
 
   const { data, isLoading } = useInquiriesDataHook(pageNumber);
@@ -32,7 +31,7 @@ const InquiriesList = () => {
       <div className="space-y-6">
         {/* Search bar + Submit Inquiry Bitton */}
         <div className="flex items-center gap-6">
-          <SearchBar title="문의하기" setInputContent={setInputContent} />
+          <SearchBar title="문의하기" paramKey="search" />
           <SubmitInquiryButton />
         </div>
         {/* Inquiries List */}

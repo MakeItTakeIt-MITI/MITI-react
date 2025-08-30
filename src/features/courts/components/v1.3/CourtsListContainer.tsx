@@ -30,6 +30,7 @@ const CourtsListContainer = ({
       {courstDataPage?.map((courtData) => {
         return (
           <CourtsCard
+            id={courtData.id}
             title={courtData.name}
             address={courtData.address}
             address_detail={courtData.address_detail}
