@@ -11,7 +11,7 @@ export default function GameFee({ fee, size }: GameFeeProps) {
       }}
       className="text-[#7FEEF0] font-bold "
     >
-      {fee === 0 ? "무료" : fee.toLocaleString("ko-KR") + " 원"}
+      {fee !== 0 ? fee + " 원" : "무료"}
     </p>
   );
 }

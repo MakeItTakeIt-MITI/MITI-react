@@ -1,5 +1,5 @@
 import { useParams, useSearchParams } from "react-router-dom";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import SearchBar from "../../features/common/components(renewal)/search/SearchBar.tsx";
 import Sidebar from "../../features/courts/components/v1.3/Sidebar.tsx";
 import MediumMap from "../../features/naver_map/components/MediumMap.tsx";
@@ -7,6 +7,11 @@ import CourtInfoContainer from "../../features/courts/components/v1.3/CourtInfoC
 import useCourtDetails from "../../features/courts/hooks/query/useCourtDetails.tsx";
 
 export default function CourtDetails() {
+  const [geolocation, setGeolocation] = useState<{
+    lat: number;
+    lon: number;
+  } | null>(null);
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   const { id } = useParams();
@@ -31,6 +36,22 @@ export default function CourtDetails() {
   const { data } = useCourtDetails(Number(id));
 
   const courtDetailData = data?.data;
+  console.log(courtDetailData);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setGeolocation({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          });
+        },
+        (err) => console.log(err.message),
+        { enableHighAccuracy: true }
+      );
+    }
+  }, []);
 
   return (
     <section
@@ -46,7 +67,11 @@ export default function CourtDetails() {
           {/* <CourtsListContainer /> */}
           <div className="flex gap-[30px]">
             <MediumMap id="court_details_map" />
-            <CourtInfoContainer courtDetailData={courtDetailData} />
+            <CourtInfoContainer
+              courtDetailData={courtDetailData}
+              geoLatitude={geolocation?.lat}
+              geoLongitude={geolocation?.lon}
+            />
           </div>
         </div>
       </article>
