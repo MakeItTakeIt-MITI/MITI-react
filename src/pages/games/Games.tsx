@@ -3,6 +3,7 @@ import Sidebar from "../../features/games/components/sidebar/Sidebar.tsx";
 import { useSearchParams } from "react-router-dom";
 import GameMapListContainer from "../../features/games/components/GameMapListContainer.tsx";
 import { useCallback, useRef } from "react";
+import { useMapGamesList } from "../../features/games/hooks/query/useMapGamesList.tsx";
 
 export const Games = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -54,6 +55,9 @@ export const Games = () => {
 
     [setSearchParams, searchParams]
   );
+  const { data: mapData, isLoading } = useMapGamesList();
+
+  const gamesMapData = mapData?.data;
 
   return (
     <>
@@ -76,6 +80,8 @@ export const Games = () => {
           <GameMapListContainer
             handleToggleTab={handleToggleTab}
             targetRef={targetRef}
+            gamesMapData={gamesMapData}
+            isLoading={isLoading}
           />
         </article>
       </section>

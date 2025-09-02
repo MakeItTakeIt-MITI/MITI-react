@@ -7,9 +7,36 @@ import GameParticipants from "../../../common/components(renewal)/chips/GamePart
 import GameTitle from "../../../common/components(renewal)/chips/GameTitle.tsx";
 import GameFee from "../../../common/components(renewal)/chips/GameFee.tsx";
 import { GameStatus } from "../../../common/components(renewal)/chips/GameStatus.tsx";
-import { GameStatusEnum } from "../../../enum/games.ts";
 
-export default function Card() {
+interface Court {
+  id: number;
+  name: string;
+  address: string;
+  address_detail: string;
+  latitude: string;
+  longitude: string;
+}
+
+export type GameStatus = "open" | "closed" | "canceled" | "finished";
+
+interface CardProps {
+  game: {
+    game_status: GameStatus;
+    title: string;
+    startdate: string; // e.g. "2025-09-03"
+    starttime: string; // e.g. "21:00:00"
+    enddate: string; // e.g. "2025-09-04"
+    endtime: string; // e.g. "00:00:00"
+    min_invitation: string;
+    max_invitation: string;
+    num_of_participations: number;
+    fee: number; // KRW
+    info: string;
+    court: Court;
+  };
+}
+
+export default function Card({ game }: CardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -23,20 +50,23 @@ export default function Card() {
     >
       <Link to="/games/2" className="flex flex-col gap-2.5">
         <div className="space-y-2">
-          <GameStatus status={GameStatusEnum.OPEN} />
-          <GameTitle title="[김포 사우/감정] 삼성썬더스 목요일 픽업게임 게스트 모집	" />
+          <GameStatus status={game.game_status} />
+          <GameTitle title={game.title} />
         </div>
 
         <div className="space-y-1 ">
           <GameAddress
-            address="경기 김포시 감정로 86"
-            address_detail="삼성리틀썬더스"
+            address={game.court.address}
+            address_detail={game.court.address_detail}
           />
-          <GameTime starttime="10:25" endtime="11:30" />
+          <GameTime starttime={game.starttime} endtime={game.endtime} />
 
           <div className="flex items-center justify-between">
-            <GameParticipants min_participants="5" max_participants="10" />
-            <GameFee fee={0} size="md" />
+            <GameParticipants
+              min_participants={game.min_invitation}
+              max_participants={game.max_invitation}
+            />
+            <GameFee fee={game.fee} size="md" />
           </div>
         </div>
       </Link>

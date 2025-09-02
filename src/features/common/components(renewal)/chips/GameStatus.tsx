@@ -1,12 +1,8 @@
-import { GameStatusLabel } from "../../../constants/games.ts";
-import { GameStatusEnum } from "../../../enum/games.ts";
-
 interface GameStatusProps {
-  status: GameStatusEnum;
+  status: string;
 }
 
 export const GameStatus = ({ status }: GameStatusProps) => {
-  const label = GameStatusLabel[status];
   return (
     <span
       style={{
@@ -33,7 +29,7 @@ export const GameStatus = ({ status }: GameStatusProps) => {
       }}
       className="p-1 text-[10px] rounded-[2px] h-[18px] w-full font-bold  "
     >
-      {label}
+      {status}
     </span>
   );
 };
