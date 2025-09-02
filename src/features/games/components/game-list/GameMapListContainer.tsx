@@ -1,11 +1,10 @@
 import { useSearchParams } from "react-router-dom";
-import Tab from "../../common/components(renewal)/chips/Tab.tsx";
-import GamesList from "./game-list/GamesList.tsx";
-import Card from "./card/Card.tsx";
-import SearchBar from "../../common/components(renewal)/search/SearchBar.tsx";
-import LargeMap from "../../naver_map/components/LargeMap.tsx";
-import { useState } from "react";
-import CardSkeleton from "./card/CardSkeleton.tsx";
+import Tab from "../../../common/components(renewal)/chips/Tab.tsx";
+import GamesList from "./GamesList.tsx";
+import Card from "../card/Card.tsx";
+import SearchBar from "../../../common/components(renewal)/search/SearchBar.tsx";
+import LargeMap from "../../../naver_map/components/LargeMap.tsx";
+import CardSkeleton from "../card/CardSkeleton.tsx";
 
 interface Court {
   id: number;
@@ -77,14 +76,18 @@ export default function GameMapListContainer({
               총 {gamesMapData?.length}개의 경기
             </span>
             <ul className="flex flex-col gap-2.5">
+              {gamesMapData?.length === 0 && (
+                <div className=" h-full w-full flex flex-col gap-5 items-center justify-center">
+                  <h3 className="text-lg text-white">
+                    검색된 경기가 없습니다.
+                  </h3>{" "}
+                  <p className="text-sm text-[#999]">
+                    필터를 변경하여 다른 경기를 찾아보세요!
+                  </p>
+                </div>
+              )}
               {gamesMapData?.map((game) => (
-                <>
-                  {isLoading ? (
-                    <CardSkeleton key={game.id} />
-                  ) : (
-                    <Card key={game.id} game={game} />
-                  )}
-                </>
+                <Card key={game.id} game={game} />
               ))}
             </ul>
           </div>
@@ -96,7 +99,6 @@ export default function GameMapListContainer({
           <GamesList />
         </div>
       )}
-      x
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import BannerMedium from "../../features/common/components(renewal)/banners/BannerMedium.tsx";
 import Sidebar from "../../features/games/components/sidebar/Sidebar.tsx";
 import { useSearchParams } from "react-router-dom";
-import GameMapListContainer from "../../features/games/components/GameMapListContainer.tsx";
+import GameMapListContainer from "../../features/games/components/game-list/GameMapListContainer.tsx";
 import { useCallback, useRef } from "react";
 import { useMapGamesList } from "../../features/games/hooks/query/useMapGamesList.tsx";
 
@@ -58,7 +58,7 @@ export const Games = () => {
   const { data: mapData, isLoading } = useMapGamesList();
 
   const gamesMapData = mapData?.data;
-
+  console.log(gamesMapData);
   return (
     <>
       <section

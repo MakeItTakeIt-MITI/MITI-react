@@ -4,15 +4,6 @@ export default function GamesList() {
   return (
     <ul className="flex flex-col gap-5 ">
       <CardV2 />
-      <CardV2 />
-      <CardV2 />
-      <CardV2 />
-      <CardV2 />
-      <CardV2 />
-      <CardV2 />
-      <CardV2 />
-      <CardV2 />
-      <CardV2 />
     </ul>
   );
 }

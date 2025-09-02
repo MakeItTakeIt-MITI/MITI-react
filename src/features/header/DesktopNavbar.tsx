@@ -3,6 +3,7 @@ import navbar_logo from "../../assets/v1.3/navbar-logo.svg";
 
 export default function DesktopNavbar() {
   const today = new Date().toISOString().slice(0, 10);
+  const [year, month, day] = today.split("-");
 
   return (
     <nav className="sm:hidden md:flex w-full px-[360px] h-[60px] bg-[#141414]  items-center justify-center ">
@@ -10,7 +11,9 @@ export default function DesktopNavbar() {
         <img src={navbar_logo} alt="miti logo" />
         <ul className="flex items-center gap-5 text-white font-bold text-sm">
           <li>
-            <Link to={`games?tab=map&date=${today}&time=00:00&region=""`}>
+            <Link
+              to={`games?tab=map&year=${year}&month=${month}&day=${day}&time=00:00&region=""`}
+            >
               경기 목록
             </Link>
           </li>
