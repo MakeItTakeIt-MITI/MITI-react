@@ -4,17 +4,10 @@ import GameStatusField from "./GameStatusField.tsx";
 import RegionField from "./RegionField.tsx";
 import ResetStatusField from "./ResetStatusField.tsx";
 import TimesField from "./TimesField.tsx";
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import { InitialDateField } from "../../interface/games.ts";
 
-interface SidebarProps {
-  handleSetTime: (arg1: string, arg2: string) => void;
-  handleSelectRegion: (arg: string) => void;
-}
-export default function Sidebar({
-  handleSetTime,
-  handleSelectRegion,
-}: SidebarProps) {
+export default function Sidebar() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   /**
@@ -108,6 +101,41 @@ export default function Sidebar({
       setSearchParams(params);
     },
     [searchParams]
+  );
+
+  const targetRef = useRef<HTMLDivElement | null>(null);
+
+  const handleScroll = () => {
+    targetRef.current?.scrollIntoView({ behavior: "smooth" });
+    console.log("targetRef:", targetRef.current);
+  };
+
+  // callback function to set game time
+  const handleSetTime = useCallback(
+    (hour: string, minutes: string) => {
+      const params = Object.fromEntries(searchParams.entries());
+      setSearchParams({ ...params, time: `${hour}:${minutes}` });
+    },
+    [searchParams, setSearchParams]
+  );
+
+  // callback function to filter by region
+  const handleSelectRegion = useCallback(
+    (region: string) => {
+      const params = Object.fromEntries(searchParams.entries());
+
+      // toggle
+      if (searchParams.get("region") === region) {
+        const { ...rest } = params;
+        setSearchParams({ ...rest, region: "" });
+        handleScroll();
+      } else {
+        setSearchParams({ ...params, region });
+        handleScroll();
+      }
+    },
+
+    [setSearchParams, searchParams]
   );
 
   return (

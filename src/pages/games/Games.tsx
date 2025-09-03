@@ -2,18 +2,11 @@ import BannerMedium from "../../features/common/components(renewal)/banners/Bann
 import Sidebar from "../../features/games/components/sidebar/Sidebar.tsx";
 import { useSearchParams } from "react-router-dom";
 import GameMapListContainer from "../../features/games/components/game-list/GameMapListContainer.tsx";
-import { useCallback, useRef } from "react";
+import { useCallback } from "react";
 import { useMapGamesList } from "../../features/games/hooks/query/useMapGamesList.tsx";
 
 export const Games = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const targetRef = useRef<HTMLDivElement | null>(null);
-
-  const handleScroll = () => {
-    targetRef.current?.scrollIntoView({ behavior: "smooth" });
-    console.log("targetRef:", targetRef.current);
-  };
 
   // function passed as a prop, useCallBack to prevent re-render
   const handleToggleTab = useCallback(
@@ -28,33 +21,6 @@ export const Games = () => {
     [searchParams, setSearchParams]
   );
 
-  // callback function to set game time
-  const handleSetTime = useCallback(
-    (hour: string, minutes: string) => {
-      const params = Object.fromEntries(searchParams.entries());
-      setSearchParams({ ...params, time: `${hour}:${minutes}` });
-    },
-    [searchParams, setSearchParams]
-  );
-
-  // callback function to filter by region
-  const handleSelectRegion = useCallback(
-    (region: string) => {
-      const params = Object.fromEntries(searchParams.entries());
-
-      // toggle
-      if (searchParams.get("region") === region) {
-        const { ...rest } = params;
-        setSearchParams({ ...rest, region: "" });
-        handleScroll();
-      } else {
-        setSearchParams({ ...params, region });
-        handleScroll();
-      }
-    },
-
-    [setSearchParams, searchParams]
-  );
   const { data: mapData, isLoading } = useMapGamesList();
 
   const gamesMapData = mapData?.data;
@@ -72,14 +38,10 @@ export const Games = () => {
         {/* Displays games filter sidebar and games list */}
         <article className="flex gap-[30px]">
           {/* Sidebar component to filter game rendering */}
-          <Sidebar
-            handleSetTime={handleSetTime}
-            handleSelectRegion={handleSelectRegion}
-          />
+          <Sidebar />
           {/* Main display component between game map and game list components */}
           <GameMapListContainer
             handleToggleTab={handleToggleTab}
-            targetRef={targetRef}
             gamesMapData={gamesMapData}
             isLoading={isLoading}
           />

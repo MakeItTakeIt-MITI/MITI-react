@@ -24,7 +24,6 @@ export type GameStatus =
 
 interface GameMapListContainerProps {
   handleToggleTab: (arg: string) => void;
-  targetRef: React.Ref<HTMLDivElement>;
   gamesMapData: {
     id: number;
     game_status: GameStatus;
@@ -45,7 +44,7 @@ interface GameMapListContainerProps {
 
 export default function GameMapListContainer({
   handleToggleTab,
-  targetRef,
+
   gamesMapData,
   isLoading,
 }: GameMapListContainerProps) {
@@ -53,10 +52,7 @@ export default function GameMapListContainer({
   const tab = serchParams.get("tab");
 
   return (
-    <div
-      ref={targetRef}
-      className=" w-[700px] min-h-[1px] flex flex-col gap-[20px]"
-    >
+    <div className=" w-[700px] min-h-[1px] flex flex-col gap-[20px]">
       {/* TAB  */}
       <div className="flex">
         <Tab content="지도" isSelected onClick={() => handleToggleTab("map")} />
