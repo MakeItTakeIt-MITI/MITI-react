@@ -1,29 +1,26 @@
 import { useCallback, useState } from "react";
 import GameStatus from "../../../common/components(renewal)/chips/GameFilterStatus.tsx";
+import { useSearchParams } from "react-router-dom";
 
 export default function GameStatusField() {
-  const [selectedStatuses, setSelectedStatuses] = useState<string[]>([
-    "모집 중",
-    "모집 마감",
-    "경기 완료",
-    "경기 취소",
-  ]);
+  const [searchParams] = useSearchParams();
+
+  const statuses = searchParams.getAll("game_status");
 
   const handleSelectStatus = useCallback(
     (status: string) => {
-      setSelectedStatuses((prev) => {
-        if (prev.includes(status)) {
-          // Remove if already selected
-          return prev.filter((s) => s !== status);
-        } else if (prev.length < 4) {
-          // Add if not selected and less than 4 selected
-          return [...prev, status];
-        }
-        // If already 4 selected, do nothing
-        return prev;
-      });
+      const newStatuses = [...statuses];
+      if (newStatuses.includes(status)) {
+        // Remove if already selected
+        return newStatuses.filter((s) => s !== status);
+      } else if (newStatuses.length < 4) {
+        // Add if not selected and less than 4 selected
+        return [...newStatuses, status];
+      }
+      // If already 4 selected, do nothing
+      return newStatuses;
     },
-    [setSelectedStatuses]
+    [statuses]
   );
   return (
     <div className="flex flex-col gap-4">
@@ -32,24 +29,24 @@ export default function GameStatusField() {
         <div className="flex gap-2.5">
           <GameStatus
             status="모집 중"
-            isSelected={selectedStatuses.includes("모집 중")}
+            isSelected={statuses.includes("open")}
             onClick={() => handleSelectStatus("모집 중")}
           />
           <GameStatus
             status="모집 마감"
-            isSelected={selectedStatuses.includes("모집 마감")}
+            isSelected={statuses.includes("closed")}
             onClick={() => handleSelectStatus("모집 마감")}
           />
         </div>
         <div className="flex gap-2.5">
           <GameStatus
             status="경기 완료"
-            isSelected={selectedStatuses.includes("경기 완료")}
+            isSelected={statuses.includes("completed")}
             onClick={() => handleSelectStatus("경기 완료")}
           />
           <GameStatus
             status="경기 취소"
-            isSelected={selectedStatuses.includes("경기 취소")}
+            isSelected={statuses.includes("canceled")}
             onClick={() => handleSelectStatus("경기 취소")}
           />
         </div>

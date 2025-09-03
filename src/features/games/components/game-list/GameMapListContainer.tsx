@@ -4,7 +4,6 @@ import GamesList from "./GamesList.tsx";
 import Card from "../card/Card.tsx";
 import SearchBar from "../../../common/components(renewal)/search/SearchBar.tsx";
 import LargeMap from "../../../naver_map/components/LargeMap.tsx";
-import CardSkeleton from "../card/CardSkeleton.tsx";
 
 interface Court {
   id: number;
@@ -24,7 +23,6 @@ export type GameStatus =
 
 interface GameMapListContainerProps {
   handleToggleTab: (arg: string) => void;
-  targetRef: React.Ref<HTMLDivElement>;
   gamesMapData: {
     id: number;
     game_status: GameStatus;
@@ -45,18 +43,14 @@ interface GameMapListContainerProps {
 
 export default function GameMapListContainer({
   handleToggleTab,
-  targetRef,
+
   gamesMapData,
-  isLoading,
 }: GameMapListContainerProps) {
   const [serchParams] = useSearchParams();
   const tab = serchParams.get("tab");
 
   return (
-    <div
-      ref={targetRef}
-      className=" w-[700px] min-h-[1px] flex flex-col gap-[20px]"
-    >
+    <div className=" w-[700px] min-h-[1px] flex flex-col gap-[20px]">
       {/* TAB  */}
       <div className="flex">
         <Tab content="지도" isSelected onClick={() => handleToggleTab("map")} />
