@@ -98,7 +98,7 @@ export default function Sidebar() {
         params.append("game_status", status);
       });
 
-      setSearchParams(params);
+      setSearchParams(params); // <-- This is correct!
     },
     [searchParams]
   );
@@ -116,6 +116,7 @@ export default function Sidebar() {
       const params = Object.fromEntries(searchParams.entries());
       setSearchParams({ ...params, time: `${hour}:${minutes}` });
     },
+    // handleScroll()
     [searchParams, setSearchParams]
   );
 
@@ -128,15 +129,17 @@ export default function Sidebar() {
       if (searchParams.get("region") === region) {
         const { ...rest } = params;
         setSearchParams({ ...rest, region: "" });
-        handleScroll();
       } else {
         setSearchParams({ ...params, region });
-        handleScroll();
       }
     },
 
     [setSearchParams, searchParams]
   );
+
+  // timer
+  const time = searchParams.get("time");
+  console.log("time param", time);
 
   return (
     <aside

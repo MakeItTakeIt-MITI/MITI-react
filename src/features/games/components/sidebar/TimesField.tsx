@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface TimeFiledProps {
   handleSetTime: (arg1: string, arg2: string) => void;
@@ -12,60 +12,79 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
 
   const SCROLL_STEP = 1;
 
-  const handleHourWheel = (e: React.WheelEvent<HTMLUListElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
+  // const handleHourWheel = (e: React.WheelEvent<HTMLUListElement>) => {
+  //   // e.preventDefault();
+  //   // e.stopPropagation();
 
-    if (scrollTimeout.current) return;
+  //   if (scrollTimeout.current) return;
 
-    setHour((prev) => {
-      if (e.deltaY > 0) {
-        // SCROLL DOWN and changes to next hour
-        return (prev + SCROLL_STEP) % 24;
-      } else if (e.deltaY < 0) {
-        // Scrolls up if 0, goes to 23
-        return (prev - SCROLL_STEP + 24) % 24;
-      }
-      return prev;
-    });
+  //   setHour((prev) => {
+  //     if (e.deltaY > 0) {
+  //       // SCROLL DOWN and changes to next hour
+  //       return (prev + SCROLL_STEP) % 24;
+  //     } else if (e.deltaY < 0) {
+  //       // Scrolls up if 0, goes to 23
+  //       return (prev - SCROLL_STEP + 24) % 24;
+  //     }
+  //     return prev;
+  //   });
 
-    // timeout  function  changes the scroll speed
-    scrollTimeout.current = setTimeout(() => {
-      scrollTimeout.current = null;
-    }, 50);
-  };
+  //   // timeout  function  changes the scroll speed
+  //   scrollTimeout.current = setTimeout(() => {
+  //     scrollTimeout.current = null;
+  //   }, 50);
+  // };
 
-  const handleSetHourClick = (selected: number) => {
-    setHour((prev) => (prev !== selected ? selected : prev));
-  };
+  // const handleSetHourClick = (selected: number) => {
+  // setHour(selected);
+  // setHour((prev) => (prev !== selected ? selected : prev));
+  // };
 
-  const handleSetMinuteClick = (selected: number) => {
-    setMinutes((prev) => (prev !== selected ? selected : prev));
-  };
+  // const handleSetMinuteClick = (selected: number) => {
+  // setMinutes(selected);
+  // setMinutes((prev) => (prev !== selected ? selected : prev));
+  // };
 
-  const MINUTE_SCROLL_STEP = 10;
+  const formatTime = (num: number) => num.toString().padStart(2, "0");
 
-  const handleMinuteWheel = (e: React.WheelEvent<HTMLUListElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
+  // useEffect(() => {
+  //   handleSetTime(formatTime(hour), formatTime(minutes));
+  // }, [hour, minutes, handleSetTime]);
 
-    if (scrollTimeout.current) return;
+  // const handleSetHourClick = (selected: number) => {
+  //   setHour(selected);
+  // };
 
-    setMinutes((prev) => {
-      if (e.deltaY > 0) {
-        // SCROLL DOWN and changes to next hour
-        return (prev + MINUTE_SCROLL_STEP) % 60;
-      } else if (e.deltaY < 0) {
-        // Scrolls up if 0, goes to 23
-        return (prev - MINUTE_SCROLL_STEP + 60) % 60;
-      }
-      return prev;
-    });
+  // const handleSetMinuteClick = (selected: number) => {
+  //   let newMinute = selected;
+  //   if (newMinute < 0) newMinute = 50;
+  //   if (newMinute > 50) newMinute = 0;
+  //   setMinutes(newMinute);
+  // };
 
-    scrollTimeout.current = setTimeout(() => {
-      scrollTimeout.current = null;
-    }, 50);
-  };
+  // const MINUTE_SCROLL_STEP = 10;
+
+  // const handleMinuteWheel = (e: React.WheelEvent<HTMLUListElement>) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+
+  //   if (scrollTimeout.current) return;
+
+  //   setMinutes((prev) => {
+  //     if (e.deltaY > 0) {
+  //       // SCROLL DOWN and changes to next hour
+  //       return (prev + MINUTE_SCROLL_STEP) % 60;
+  //     } else if (e.deltaY < 0) {
+  //       // Scrolls up if 0, goes to 23
+  //       return (prev - MINUTE_SCROLL_STEP + 60) % 60;
+  //     }
+  //     return prev;
+  //   });
+
+  //   scrollTimeout.current = setTimeout(() => {
+  //     scrollTimeout.current = null;
+  //   }, 50);
+  // };
 
   return (
     <div className="flex flex-col gap-4">
@@ -77,14 +96,13 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
             style={{
               scrollbarWidth: "none",
             }}
-            onWheelCapture={handleHourWheel}
+            // onWheelCapture={handleHourWheel}
             className="flex flex-col items-center justify-center h-[90px] overflow-y-scroll"
           >
             {hour === 0 && (
               <li>
                 <button
                   type="button"
-                  disabled
                   onClick={() => handleSetHourClick(hour)}
                   className="w-[66px] h-[30px] text-sm text-[#5C5C5C]"
                 >
@@ -140,7 +158,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
             style={{
               scrollbarWidth: "none",
             }}
-            onWheelCapture={handleMinuteWheel}
+            // onWheelCapture={handleMinuteWheel}
             className="flex flex-col items-center justify-center h-[90px] overflow-y-scroll"
           >
             {minutes !== 0 && (
