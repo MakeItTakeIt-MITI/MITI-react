@@ -81,6 +81,35 @@ export default function Sidebar({
   // Generate the list of 30 available dates starting from initialDate
   const INITIAL_DATES = DATES(initialDate);
 
+  const gameStatusArray = searchParams.getAll("game_status");
+  console.log("gameStatusArr", gameStatusArray);
+
+  const handleToggleGameStatus = useCallback(
+    (statusToToggle: "open" | "closed" | "canceled" | "completed") => {
+      const currentStatuses = searchParams.getAll("game_status");
+      const params = new URLSearchParams(searchParams.toString());
+
+      let updatedStatuses;
+
+      if (currentStatuses.includes(statusToToggle)) {
+        updatedStatuses = currentStatuses.filter(
+          (status) => status !== statusToToggle
+        );
+      } else {
+        updatedStatuses = [...currentStatuses, statusToToggle];
+      }
+
+      params.delete("game_status");
+
+      updatedStatuses.forEach((status) => {
+        params.append("game_status", status);
+      });
+
+      setSearchParams(params);
+    },
+    [searchParams]
+  );
+
   return (
     <aside
       style={{
@@ -105,7 +134,10 @@ export default function Sidebar({
       <TimesField handleSetTime={handleSetTime} />
 
       {/* game status filter */}
-      <GameStatusField />
+      <GameStatusField
+        handleToggleGameStatus={handleToggleGameStatus}
+        gameStatusArray={gameStatusArray}
+      />
 
       {/* region filter */}
       <RegionField handleSelectRegion={handleSelectRegion} />
