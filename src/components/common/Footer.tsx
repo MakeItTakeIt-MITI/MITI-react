@@ -25,7 +25,7 @@ const Footer = () => {
                 <div className="space-x-[1.25rem] ">
                   <span>대표 : 전재완</span>
                   <span>사업자번호 : 547-03-03467</span>
-                  <span>전화 : 010-8238-2165</span>
+                  <span>전화 : 010-8338-2165</span>
                 </div>
                 <div className="space-x-[1.25rem] ">
                   <span>주소 : 인천광역시 동구 화도진로 16</span>
