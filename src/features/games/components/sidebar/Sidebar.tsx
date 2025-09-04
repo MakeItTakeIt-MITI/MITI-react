@@ -19,15 +19,16 @@ export default function Sidebar() {
 
   const handleDateClick = useCallback(
     (date: InitialDateField) => {
-      const params = Object.fromEntries(searchParams.entries());
-      setSearchParams({
-        ...params,
-        year: date.year.toString(),
-        month: date.formattedMonth,
-        day: date.formattedDate,
-      });
+      const params = new URLSearchParams(searchParams);
+
+      // Update date params
+      params.set("year", date.year.toString());
+      params.set("month", date.formattedMonth);
+      params.set("day", date.formattedDate);
+
+      setSearchParams(params);
     },
-    [searchParams, setSearchParams] // dependencies
+    [searchParams, setSearchParams]
   );
 
   // Extract current date params from the URL
@@ -77,10 +78,31 @@ export default function Sidebar() {
   const gameStatusArray = searchParams.getAll("game_status");
   console.log("gameStatusArr", gameStatusArray);
 
+  function buildParamsWithStatuses(
+    searchParams: URLSearchParams,
+    updatedStatuses: string[]
+  ) {
+    const entries: [string, string][] = [];
+
+    // keep all non-game_status params
+    searchParams.forEach((value, key) => {
+      if (key !== "game_status") {
+        entries.push([key, value]);
+      }
+    });
+
+    // add updated statuses
+    updatedStatuses.forEach((status) => {
+      entries.push(["game_status", status]);
+    });
+
+    return entries;
+  }
+
   const handleToggleGameStatus = useCallback(
     (statusToToggle: "open" | "closed" | "canceled" | "completed") => {
       const currentStatuses = searchParams.getAll("game_status");
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(searchParams);
 
       let updatedStatuses;
 
@@ -97,12 +119,12 @@ export default function Sidebar() {
       updatedStatuses.forEach((status) => {
         params.append("game_status", status);
       });
+      setSearchParams(buildParamsWithStatuses(searchParams, updatedStatuses));
 
-      setSearchParams(params); // <-- This is correct!
+      // setSearchParams(params);
     },
     [searchParams]
   );
-
   const targetRef = useRef<HTMLDivElement | null>(null);
 
   const handleScroll = () => {

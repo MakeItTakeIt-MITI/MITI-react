@@ -21,7 +21,19 @@ export const Games = () => {
     [searchParams, setSearchParams]
   );
 
-  const { data: mapData, isLoading } = useMapGamesList();
+  const month = searchParams.get("month");
+  const day = searchParams.get("day");
+  const year = searchParams.get("year");
+
+  const startdate = `${year}-${month}-${day}`;
+  const starttime = searchParams.get("time") || "00:00";
+  const game_status = searchParams.getAll("game_status");
+
+  const { data: mapData, isLoading } = useMapGamesList(
+    startdate,
+    starttime,
+    game_status
+  );
 
   const gamesMapData = mapData?.data;
   console.log(gamesMapData);

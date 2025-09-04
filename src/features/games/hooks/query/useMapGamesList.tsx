@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchMapGamesList, mapGamesList } from "../../api/games.ts";
+import { mapGamesList } from "../../api/games.ts";
 
-export const useMapGamesList = () =>
-  // startdate: string,
-  // starttime: string,
-  // game_status: any
-  {
-    return useQuery({
-      queryKey: ["Map Games List "],
-      queryFn: () => mapGamesList(),
-    });
-  };
+export const useMapGamesList = (
+  startdate: string,
+  starttime: string,
+  game_status: string[]
+) => {
+  return useQuery({
+    queryKey: ["Map Games List ", startdate, starttime, game_status],
+    queryFn: () => mapGamesList(startdate, starttime, game_status),
+  });
+};
