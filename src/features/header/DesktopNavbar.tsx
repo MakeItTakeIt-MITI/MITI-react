@@ -2,8 +2,22 @@ import { Link } from "react-router-dom";
 import navbar_logo from "../../assets/v1.3/navbar-logo.svg";
 
 export default function DesktopNavbar() {
-  const today = new Date().toISOString().slice(0, 10);
-  const [year, month, day] = today.split("-");
+  // Get the current date
+  const now = new Date();
+
+  //Extract today's date to Korea Standard Time (KST)
+  const formatter = new Intl.DateTimeFormat("ko-KR", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+
+  // Break the formatted date into parts (year, month, day)
+  const parts = formatter.formatToParts(now);
+  const year = parts.find((p) => p.type === "year")?.value;
+  const month = parts.find((p) => p.type === "month")?.value;
+  const day = parts.find((p) => p.type === "day")?.value;
 
   return (
     <nav className="sm:hidden md:flex w-full px-[360px] h-[60px] bg-[#141414]  items-center justify-center ">
