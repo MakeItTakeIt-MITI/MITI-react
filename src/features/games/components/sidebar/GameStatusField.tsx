@@ -1,5 +1,4 @@
 import GameStatus from "../../../common/components(renewal)/chips/GameFilterStatus.tsx";
-import { useSearchParams } from "react-router-dom";
 
 interface GameStatusFieldProps {
   handleToggleGameStatus: (
@@ -19,25 +18,25 @@ export default function GameStatusField({
         <div className="flex gap-2.5">
           <GameStatus
             status="모집 중"
-            isSelected={selectedStatuses.includes("모집 중")}
-            onClick={() => handleSelectStatus("모집 중")}
+            onClick={() => handleToggleGameStatus("open")}
+            gameStatusArray={gameStatusArray}
           />
           <GameStatus
             status="모집 마감"
-            isSelected={selectedStatuses.includes("모집 마감")}
-            onClick={() => handleSelectStatus("모집 마감")}
+            onClick={() => handleToggleGameStatus("closed")}
+            gameStatusArray={gameStatusArray}
           />
         </div>
         <div className="flex gap-2.5">
           <GameStatus
             status="경기 완료"
-            isSelected={selectedStatuses.includes("경기 완료")}
-            onClick={() => handleSelectStatus("경기 완료")}
+            onClick={() => handleToggleGameStatus("completed")}
+            gameStatusArray={gameStatusArray}
           />
           <GameStatus
             status="경기 취소"
-            isSelected={selectedStatuses.includes("경기 취소")}
-            onClick={() => handleSelectStatus("경기 취소")}
+            onClick={() => handleToggleGameStatus("canceled")}
+            gameStatusArray={gameStatusArray}
           />
         </div>
       </div>
