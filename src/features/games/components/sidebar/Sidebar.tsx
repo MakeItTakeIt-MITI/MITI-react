@@ -74,6 +74,35 @@ export default function Sidebar() {
   // Generate the list of 30 available dates starting from initialDate
   const INITIAL_DATES = DATES(initialDate);
 
+  const gameStatusArray = searchParams.getAll("game_status");
+  console.log("gameStatusArr", gameStatusArray);
+
+  const handleToggleGameStatus = useCallback(
+    (statusToToggle: "open" | "closed" | "canceled" | "completed") => {
+      const currentStatuses = searchParams.getAll("game_status");
+      const params = new URLSearchParams(searchParams.toString());
+
+      let updatedStatuses;
+
+      if (currentStatuses.includes(statusToToggle)) {
+        updatedStatuses = currentStatuses.filter(
+          (status) => status !== statusToToggle
+        );
+      } else {
+        updatedStatuses = [...currentStatuses, statusToToggle];
+      }
+
+      params.delete("game_status");
+
+      updatedStatuses.forEach((status) => {
+        params.append("game_status", status);
+      });
+
+      setSearchParams(params); // <-- This is correct!
+    },
+    [searchParams]
+  );
+
   const targetRef = useRef<HTMLDivElement | null>(null);
 
   const handleScroll = () => {
@@ -87,6 +116,7 @@ export default function Sidebar() {
       const params = Object.fromEntries(searchParams.entries());
       setSearchParams({ ...params, time: `${hour}:${minutes}` });
     },
+    // handleScroll()
     [searchParams, setSearchParams]
   );
 
@@ -99,15 +129,17 @@ export default function Sidebar() {
       if (searchParams.get("region") === region) {
         const { ...rest } = params;
         setSearchParams({ ...rest, region: "" });
-        handleScroll();
       } else {
         setSearchParams({ ...params, region });
-        handleScroll();
       }
     },
 
     [setSearchParams, searchParams]
   );
+
+  // timer
+  const time = searchParams.get("time");
+  console.log("time param", time);
 
   return (
     <aside
@@ -133,7 +165,10 @@ export default function Sidebar() {
       <TimesField handleSetTime={handleSetTime} />
 
       {/* game status filter */}
-      <GameStatusField />
+      <GameStatusField
+        handleToggleGameStatus={handleToggleGameStatus}
+        gameStatusArray={gameStatusArray}
+      />
 
       {/* region filter */}
       <RegionField handleSelectRegion={handleSelectRegion} />

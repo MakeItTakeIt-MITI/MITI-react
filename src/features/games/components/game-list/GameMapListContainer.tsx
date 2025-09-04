@@ -63,7 +63,7 @@ export default function GameMapListContainer({
       {/* Games MAP/LIST */}
       {tab === "map" ? (
         <div className="flex flex-col gap-5">
-          <LargeMap id="games-list" />
+          {/* <LargeMap id="games-list" /> */}
           {/* </Suspense> */}
           <div className="flex flex-col gap-4">
             <span className="text-xs font-[400] text-white">

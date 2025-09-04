@@ -12,7 +12,7 @@ export default function DesktopNavbar() {
         <ul className="flex items-center gap-5 text-white font-bold text-sm">
           <li>
             <Link
-              to={`games?tab=map&year=${year}&month=${month}&day=${day}&time="00:00"&region=&game_status=closed&game_status=open&game_status=canceled&game_status=completed`}
+              to={`games?tab=map&year=${year}&month=${month}&day=${day}&time=00:00&region=&game_status=closed&game_status=open&game_status=canceled&game_status=completed`}
             >
               경기 목록
             </Link>
