@@ -7,33 +7,10 @@ import GameParticipants from "../../../common/components(renewal)/chips/GamePart
 import GameTitle from "../../../common/components(renewal)/chips/GameTitle.tsx";
 import GameFee from "../../../common/components(renewal)/chips/GameFee.tsx";
 import { GameStatus } from "../../../common/components(renewal)/chips/GameStatus.tsx";
-
-interface Court {
-  id: number;
-  name: string;
-  address: string;
-  address_detail: string;
-  latitude: string;
-  longitude: string;
-}
-
-export type GameStatus = "open" | "closed" | "canceled" | "finished";
+import { GameField } from "../../interface/games.ts";
 
 interface CardProps {
-  game: {
-    game_status: GameStatus;
-    title: string;
-    startdate: string; // e.g. "2025-09-03"
-    starttime: string; // e.g. "21:00:00"
-    enddate: string; // e.g. "2025-09-04"
-    endtime: string; // e.g. "00:00:00"
-    min_invitation: string;
-    max_invitation: string;
-    num_of_participations: number;
-    fee: number; // KRW
-    info: string;
-    court: Court;
-  };
+  game: GameField;
 }
 
 export default function Card({ game }: CardProps) {
@@ -44,11 +21,11 @@ export default function Card({ game }: CardProps) {
       style={{
         boxShadow: isHovered ? "0 4px 24px 0 #1ADCDF, 0 0 0 4px #141414" : "",
       }}
-      className="w-full h-[136px] flex flex-col gap-2.5 justify-center p-3 rounded-lg text-white"
+      className="cursor-pointer w-full h-[136px] flex flex-col gap-2.5 justify-center p-3 rounded-lg text-white"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Link to="/games/2" className="flex flex-col gap-2.5">
+      <div className="flex flex-col gap-2.5">
         <div className="space-y-2">
           <GameStatus status={game.game_status} />
           <GameTitle title={game.title} />
@@ -63,13 +40,13 @@ export default function Card({ game }: CardProps) {
 
           <div className="flex items-center justify-between">
             <GameParticipants
-              min_participants={game.min_invitation}
-              max_participants={game.max_invitation}
+              num_of_participations={game.num_of_participations}
+              max_invitation={game.max_invitation}
             />
             <GameFee fee={game.fee} size="md" />
           </div>
         </div>
-      </Link>
+      </div>
     </li>
   );
 }

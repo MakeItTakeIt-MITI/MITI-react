@@ -1,8 +1,14 @@
 interface GameStatusProps {
-  status: string;
+  status: "open" | "closed" | "canceled" | "completed" | (string & {});
 }
 
 export const GameStatus = ({ status }: GameStatusProps) => {
+  const statusKeyValue = {
+    open: "모집중",
+    closed: "모집마감",
+    canceled: "경기 취소",
+    completed: "경기 완료",
+  };
   return (
     <span
       style={{
@@ -29,7 +35,7 @@ export const GameStatus = ({ status }: GameStatusProps) => {
       }}
       className="p-1 text-[10px] rounded-[2px] h-[18px] w-full font-bold  "
     >
-      {status}
+      {statusKeyValue[status as keyof typeof statusKeyValue] || status}
     </span>
   );
 };

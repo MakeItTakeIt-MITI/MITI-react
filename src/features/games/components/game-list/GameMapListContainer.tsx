@@ -4,40 +4,11 @@ import GamesList from "./GamesList.tsx";
 import Card from "../card/Card.tsx";
 import SearchBar from "../../../common/components(renewal)/search/SearchBar.tsx";
 import LargeMap from "../../../naver_map/components/LargeMap.tsx";
-
-interface Court {
-  id: number;
-  name: string;
-  address: string;
-  address_detail: string | null;
-  latitude: string;
-  longitude: string;
-}
-
-export type GameStatus =
-  | "open"
-  | "closed"
-  | "canceled"
-  | "finished"
-  | (string & {});
+import { GameField } from "../../interface/games.ts";
 
 interface GameMapListContainerProps {
   handleToggleTab: (arg: string) => void;
-  gamesMapData: {
-    id: number;
-    game_status: GameStatus;
-    title: string;
-    startdate: string; // e.g. "2025-09-03"
-    starttime: string; // e.g. "21:00:00"
-    enddate: string; // e.g. "2025-09-04"
-    endtime: string; // e.g. "00:00:00"
-    min_invitation: number;
-    max_invitation: number;
-    num_of_participations: number;
-    fee: number; // KRW
-    info: string;
-    court: Court;
-  }[];
+  gamesMapData: GameField[];
   isLoading: boolean;
 }
 
@@ -63,7 +34,7 @@ export default function GameMapListContainer({
       {/* Games MAP/LIST */}
       {tab === "map" ? (
         <div className="flex flex-col gap-5">
-          <LargeMap id="games-list" gamesMapData={gamesMapData} />
+          {/* <LargeMap id="games-list" gamesMapData={gamesMapData} /> */}
           {/* </Suspense> */}
           <div className="flex flex-col gap-4">
             <span className="text-xs font-[400] text-white">
