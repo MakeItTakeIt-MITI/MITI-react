@@ -4,12 +4,10 @@ interface TabProps {
   isSelected?: boolean;
   content: string;
   onClick: () => void;
+  tab: string;
 }
 
-export default function Tab({ content, onClick }: TabProps) {
-  const [searchParams] = useSearchParams();
-  const tab = searchParams.get("tab");
-
+export default function Tab({ content, onClick, tab }: TabProps) {
   const contentToTab: Record<string, string> = {
     지도: "map",
     리스트: "list",

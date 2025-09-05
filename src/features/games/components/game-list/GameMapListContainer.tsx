@@ -1,4 +1,3 @@
-import { useSearchParams } from "react-router-dom";
 import Tab from "../../../common/components(renewal)/chips/Tab.tsx";
 import GamesList from "./GamesList.tsx";
 import Card from "../card/Card.tsx";
@@ -10,24 +9,28 @@ interface GameMapListContainerProps {
   handleToggleTab: (arg: string) => void;
   gamesMapData: GameField[];
   isLoading: boolean;
+  tab: string;
 }
 
 export default function GameMapListContainer({
   handleToggleTab,
-
+  tab,
   gamesMapData,
 }: GameMapListContainerProps) {
-  const [serchParams] = useSearchParams();
-  const tab = serchParams.get("tab");
-
   return (
     <div className=" w-[700px] min-h-[1px] flex flex-col gap-[20px]">
       {/* TAB  */}
       <div className="flex">
-        <Tab content="지도" isSelected onClick={() => handleToggleTab("map")} />
+        <Tab
+          content="지도"
+          tab={tab}
+          isSelected={tab === "map" ? true : false}
+          onClick={() => handleToggleTab("map")}
+        />
         <Tab
           content="리스트"
-          isSelected={false}
+          tab={tab}
+          isSelected={tab === "list" ? true : false}
           onClick={() => handleToggleTab("list")}
         />
       </div>

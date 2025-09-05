@@ -2,23 +2,19 @@ import BannerMedium from "../../features/common/components(renewal)/banners/Bann
 import Sidebar from "../../features/games/components/sidebar/Sidebar.tsx";
 import { useSearchParams } from "react-router-dom";
 import GameMapListContainer from "../../features/games/components/game-list/GameMapListContainer.tsx";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useMapGamesList } from "../../features/games/hooks/query/useMapGamesList.tsx";
 
 export const Games = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [tab, setTab] = useState("map");
+  const [searchParams] = useSearchParams();
 
   // function passed as a prop, useCallBack to prevent re-render
   const handleToggleTab = useCallback(
     (selected: string) => {
-      const params = Object.fromEntries(searchParams.entries());
-      setSearchParams({ ...params, tab: selected });
-
-      // ! Following function is an issue -
-      // ! it only keeps tab paramater and does not include other suchs as game status, time, date, region
-      //   setSearchParams({ tab: selected });
+      setTab(selected);
     },
-    [searchParams, setSearchParams]
+    [tab]
   );
 
   const month = searchParams.get("month");
@@ -36,7 +32,7 @@ export const Games = () => {
   );
 
   const gamesMapData = mapData?.data;
-  console.log(gamesMapData);
+
   return (
     <>
       <section
@@ -56,6 +52,7 @@ export const Games = () => {
             handleToggleTab={handleToggleTab}
             gamesMapData={gamesMapData}
             isLoading={isLoading}
+            tab={tab}
           />
         </article>
       </section>
