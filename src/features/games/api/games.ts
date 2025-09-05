@@ -1,6 +1,6 @@
 import axiosUrl from "../../../utils/axios.ts";
 
-export const gamesList = async (
+export const gamesListOnly = async (
     district: string,
     title: string,
     pageParam: number | null,
@@ -14,6 +14,8 @@ export const gamesList = async (
         throw error;
     }
 };
+
+
 export const mapGamesList = async (
     startdate: string,
     starttime: string,

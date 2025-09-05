@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import GameMapListContainer from "../../features/games/components/game-list/GameMapListContainer.tsx";
 import { useCallback, useState } from "react";
 import { useMapGamesList } from "../../features/games/hooks/query/useMapGamesList.tsx";
+import { useGamesListOnly } from "../../features/games/hooks/query/useGamesList.tsx";
 
 export const Games = () => {
   const [tab, setTab] = useState("map");
@@ -33,6 +34,11 @@ export const Games = () => {
 
   const gamesMapData = mapData?.data;
 
+  const { data: gamesData } = useGamesListOnly("", "");
+
+  const gamesListData = gamesData?.pages.map((page) => page.data.page_content);
+
+  console.log("data", gamesData);
   return (
     <>
       <section
@@ -51,6 +57,7 @@ export const Games = () => {
           <GameMapListContainer
             handleToggleTab={handleToggleTab}
             gamesMapData={gamesMapData}
+            gamesListData={gamesListData}
             isLoading={isLoading}
             tab={tab}
           />

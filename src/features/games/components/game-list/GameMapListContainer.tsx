@@ -8,6 +8,7 @@ import { GameField } from "../../interface/games.ts";
 interface GameMapListContainerProps {
   handleToggleTab: (arg: string) => void;
   gamesMapData: GameField[];
+  gamesListData: GameField[];
   isLoading: boolean;
   tab: string;
 }
@@ -16,7 +17,9 @@ export default function GameMapListContainer({
   handleToggleTab,
   tab,
   gamesMapData,
+  gamesListData,
 }: GameMapListContainerProps) {
+  console.log(gamesListData);
   return (
     <div className=" w-[700px] min-h-[1px] flex flex-col gap-[20px]">
       {/* TAB  */}
@@ -64,7 +67,7 @@ export default function GameMapListContainer({
         // ALL GAMES RENDERING CONTAINER
         <div className="flex flex-col gap-5">
           <SearchBar paramKey="search" title="경기" />
-          <GamesList />
+          <GamesList gamesListData={gamesListData} />
         </div>
       )}
     </div>
