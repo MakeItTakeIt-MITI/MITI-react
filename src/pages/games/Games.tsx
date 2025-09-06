@@ -5,6 +5,7 @@ import GameMapListContainer from "../../features/games/components/game-list/Game
 import { useCallback, useState } from "react";
 import { useMapGamesList } from "../../features/games/hooks/query/useMapGamesList.tsx";
 import { useGamesListOnly } from "../../features/games/hooks/query/useGamesList.tsx";
+import { GameField } from "../../features/games/interface/games.ts";
 
 export const Games = () => {
   const [tab, setTab] = useState("map");
@@ -36,21 +37,21 @@ export const Games = () => {
 
   const { data: gamesData } = useGamesListOnly("", "");
 
-  const gamesListData = gamesData?.pages.map((page) => page.data.page_content);
+  const gamesListData: GameField[] =
+    gamesData?.pages.flatMap((page) => page.data.page_content) ?? [];
 
-  console.log("data", gamesData);
   return (
     <>
       <section
         style={{
           backgroundColor: "#141414",
         }}
-        className="mx-auto  w-[968px] flex flex-col items-center gap-[30px] py-[30px]"
+        className="mx-auto  w-full flex flex-col items-center gap-[30px] py-[30px]"
       >
         {/* BANNER Component */}
         <BannerMedium type="manners" />
         {/* Displays games filter sidebar and games list */}
-        <article className="flex gap-[30px]">
+        <article className="flex gap-[30px] ">
           {/* Sidebar component to filter game rendering */}
           <Sidebar />
           {/* Main display component between game map and game list components */}

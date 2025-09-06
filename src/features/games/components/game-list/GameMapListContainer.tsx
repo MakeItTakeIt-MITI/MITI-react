@@ -19,7 +19,6 @@ export default function GameMapListContainer({
   gamesMapData,
   gamesListData,
 }: GameMapListContainerProps) {
-  console.log(gamesListData);
   return (
     <div className=" w-[700px] min-h-[1px] flex flex-col gap-[20px]">
       {/* TAB  */}
@@ -40,7 +39,7 @@ export default function GameMapListContainer({
       {/* Games MAP/LIST */}
       {tab === "map" ? (
         <div className="flex flex-col gap-5">
-          {/* <LargeMap id="games-list" gamesMapData={gamesMapData} /> */}
+          <LargeMap id="games-list" gamesMapData={gamesMapData} />
           {/* </Suspense> */}
           <div className="flex flex-col gap-4">
             <span className="text-xs font-[400] text-white">
@@ -65,7 +64,7 @@ export default function GameMapListContainer({
         </div>
       ) : (
         // ALL GAMES RENDERING CONTAINER
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 w-full ">
           <SearchBar paramKey="search" title="경기" />
           <GamesList gamesListData={gamesListData} />
         </div>

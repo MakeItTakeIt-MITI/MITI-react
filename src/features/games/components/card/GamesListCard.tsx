@@ -1,54 +1,64 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { GameStatus } from "../../../common/components(renewal)/chips/GameStatus";
 import GameAddress from "../../../common/components(renewal)/chips/GameAddress";
 import GameTime from "../../../common/components(renewal)/chips/GameTime";
 import GameParticipants from "../../../common/components(renewal)/chips/GameParticipants";
 import GameFee from "../../../common/components(renewal)/chips/GameFee";
+import { GameField } from "../../interface/games";
 
 interface GamesListCardProps {
-  month: string;
+  game: GameField;
 }
 
-export default function GamesListCard({ month, status, title }) {
-  const [isHovered, setIsHovered] = useState(false);
+export default function GamesListCard({ game }: GamesListCardProps) {
+  // const [isHovered, setIsHovered] = useState(false);
 
   return (
     <li
-      style={{
-        boxShadow: isHovered ? "0 4px 24px 0 #1ADCDF, 0 0 0 4px #141414" : "",
-      }}
-      className="w-full  "
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      // style={{
+      //   boxShadow: isHovered ? "0 4px 24px 0 #1ADCDF, 0 0 0 4px #141414" : "",
+      // }}
+      className="w-full  p-1"
+      // onMouseEnter={() => setIsHovered(true)}
+      // onMouseLeave={() => setIsHovered(false)}
     >
       <Link className="flex items-center   gap-5" to="/games/detail?&id=1">
         {/* DATE */}
         <div className="w-[34px] h-full text-white flex flex-col items-center justify-center">
-          <span className="text-[10px] font-[500]">{month}월</span>
-          <span className="text-sm font-bold">DD</span>
+          <span className="text-[10px] font-[500]">
+            {game.startdate.slice(5, 7)}월
+          </span>
+          <span className="text-sm font-bold">
+            {game.startdate.slice(8, 10)}
+          </span>
         </div>
         {/* GAME INFO */}
         <div className="w-full flex flex-col gap-2.5">
           {/* Game status  / title */}
           <div className="space-y-2">
-            <GameStatus status={"open"} />
+            <GameStatus status={game.game_status} />
             <h1
               className={`font-bold text-base text-white ${
-                title > 65 ? "truncate" : ""
+                game.title.length > 65 ? "truncate" : ""
               }`}
             >
-              GAME TITLE MAX LENGHT 64 MAX LINE 2
+              {game.title}
             </h1>
           </div>
           {/* Court Info / time / participants */}
           <div className="space-y-1">
-            <GameAddress address="address" address_detail="safgsag" />
-            <GameTime starttime="00" endtime="00" />
+            <GameAddress
+              address={game.court.address}
+              address_detail={game.court.address_detail}
+            />
+            <GameTime starttime={game.starttime} endtime={game.endtime} />
 
             <div className="flex justify-between">
-              <GameParticipants num_of_participations={0} max_invitation="10" />
-              <GameFee size="md" fee={0} />
+              <GameParticipants
+                num_of_participations={game.num_of_participations}
+                max_invitation={game.max_invitation}
+              />
+              <GameFee size="md" fee={game.fee} />
             </div>
           </div>
         </div>
