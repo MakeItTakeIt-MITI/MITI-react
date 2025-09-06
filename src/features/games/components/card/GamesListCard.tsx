@@ -22,7 +22,7 @@ export default function GamesListCard({ game }: GamesListCardProps) {
       // onMouseEnter={() => setIsHovered(true)}
       // onMouseLeave={() => setIsHovered(false)}
     >
-      <Link className="flex items-center   gap-5" to="/games/detail?&id=1">
+      <Link className="flex items-center   gap-5" to={`/games/${game.id}`}>
         {/* DATE */}
         <div className="w-[34px] h-full text-white flex flex-col items-center justify-center">
           <span className="text-[10px] font-[500]">

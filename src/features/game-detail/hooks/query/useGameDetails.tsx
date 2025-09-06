@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { getGameDetail } from "../api/games";
+import { getGameDetail } from "../../api/game-detail";
 
 interface GameDetailParams {
-  id: number;
+  id: string;
 }
 
-export const useGameDetailDataHook = ({ id }: GameDetailParams) => {
+export const useGameDetails = ({ id }: GameDetailParams) => {
   return useQuery({
     queryKey: ["game detail", id],
     queryFn: () => getGameDetail(id),

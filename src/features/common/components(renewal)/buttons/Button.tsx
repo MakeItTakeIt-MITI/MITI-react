@@ -14,6 +14,7 @@ export default function Button({
 
   return (
     <button
+      disabled
       className={`
         font-bold
         h-[44px]
