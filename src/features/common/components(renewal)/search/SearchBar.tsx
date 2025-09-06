@@ -16,13 +16,24 @@ export default function SearchBar({ title, paramKey }: SearchBarProps) {
     (e?: React.FormEvent) => {
       if (e) e.preventDefault();
 
+      // Keep all current params
       const newParams = new URLSearchParams(searchParams);
 
+      // Ensure game_status values persist
+      const gameStatuses = searchParams.getAll("game_status");
+
+      // Update or remove the search keyword param
       if (inputValue.trim()) {
         newParams.set(paramKey, inputValue);
       } else {
         newParams.delete(paramKey);
       }
+
+      // Re-append game_status filters (since set/delete can sometimes reset them)
+      newParams.delete("game_status");
+      gameStatuses.forEach((status) => {
+        newParams.append("game_status", status);
+      });
 
       setSearchParams(newParams);
     },

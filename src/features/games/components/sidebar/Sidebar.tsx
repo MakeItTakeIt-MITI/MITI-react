@@ -125,12 +125,12 @@ export default function Sidebar() {
     },
     [searchParams]
   );
-  const targetRef = useRef<HTMLDivElement | null>(null);
+  // const targetRef = useRef<HTMLDivElement | null>(null);
 
-  const handleScroll = () => {
-    targetRef.current?.scrollIntoView({ behavior: "smooth" });
-    console.log("targetRef:", targetRef.current);
-  };
+  // const handleScroll = () => {
+  //   targetRef.current?.scrollIntoView({ behavior: "smooth" });
+  //   console.log("targetRef:", targetRef.current);
+  // };
 
   // callback function to set game time
   const handleSetTime = useCallback(
@@ -147,21 +147,34 @@ export default function Sidebar() {
     (region: string) => {
       const params = Object.fromEntries(searchParams.entries());
 
-      // toggle
-      if (searchParams.get("region") === region) {
-        const { ...rest } = params;
-        setSearchParams({ ...rest, region: "" });
-      } else {
-        setSearchParams({ ...params, region });
-      }
-    },
+      // Keep all the current game_status values
+      const gameStatuses = searchParams.getAll("game_status");
 
+      // Toggle region
+      let updatedParams: Record<string, string | string[]> = {
+        ...params,
+        region,
+      };
+
+      if (searchParams.get("region") === region) {
+        // remove region if toggled off
+        const { region: _, ...rest } = params;
+        updatedParams = { ...rest };
+      }
+
+      // Ensure game_status values persist
+      setSearchParams(() => {
+        const newParams = new URLSearchParams(updatedParams as any);
+        gameStatuses.forEach((status) => {
+          newParams.append("game_status", status);
+        });
+        return newParams;
+      });
+    },
     [setSearchParams, searchParams]
   );
 
   // timer
-  const time = searchParams.get("time");
-  console.log("time param", time);
 
   return (
     <aside

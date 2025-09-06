@@ -27,6 +27,9 @@ export const Games = () => {
   const starttime = searchParams.get("time") || "00:00";
   const game_status = searchParams.getAll("game_status");
 
+  const regionParam = searchParams.get("region") || "";
+  const searchParam = searchParams.get("search") || "";
+
   const { data: mapData, isLoading } = useMapGamesList(
     startdate,
     starttime,
@@ -35,7 +38,7 @@ export const Games = () => {
 
   const gamesMapData = mapData?.data;
 
-  const { data: gamesData } = useGamesListOnly("", "");
+  const { data: gamesData } = useGamesListOnly(regionParam, searchParam);
 
   const gamesListData: GameField[] =
     gamesData?.pages.flatMap((page) => page.data.page_content) ?? [];
