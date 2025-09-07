@@ -1,16 +1,24 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+import { useTimeField } from "../../../../store/Sidebar/useTimeFieldStore";
 
-interface TimeFiledProps {
-  handleSetTime: (arg1: string, arg2: string) => void;
-}
+// interface TimeFiledProps {
+//   handleSetTime: (arg1: string, arg2: string) => void;
+// }
 
-export default function TimesField({ handleSetTime }: TimeFiledProps) {
-  const [hour, setHour] = useState(0);
-  const [minutes, setMinutes] = useState(0);
+export default function TimesField() {
+  const { hour, minutes, setHour, setMinutes } = useTimeField();
+
+  const handleSetHourClick = (selected: number) => {
+    setHour(selected);
+  };
+
+  const handleSetMinuteClick = (selected: number) => {
+    setMinutes(selected);
+  };
 
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
 
-  const SCROLL_STEP = 1;
+  // const SCROLL_STEP = 1;
 
   // const handleHourWheel = (e: React.WheelEvent<HTMLUListElement>) => {
   //   // e.preventDefault();
@@ -35,17 +43,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
   //   }, 50);
   // };
 
-  // const handleSetHourClick = (selected: number) => {
-  // setHour(selected);
-  // setHour((prev) => (prev !== selected ? selected : prev));
-  // };
-
-  // const handleSetMinuteClick = (selected: number) => {
-  // setMinutes(selected);
-  // setMinutes((prev) => (prev !== selected ? selected : prev));
-  // };
-
-  const formatTime = (num: number) => num.toString().padStart(2, "0");
+  // const formatTime = (num: number) => num.toString().padStart(2, "0");
 
   // useEffect(() => {
   //   handleSetTime(formatTime(hour), formatTime(minutes));
@@ -103,7 +101,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
               <li>
                 <button
                   type="button"
-                  onClick={() => handleSetHourClick(hour)}
+                  onClick={() => handleSetHourClick(23)}
                   className="w-[66px] h-[30px] text-sm text-[#5C5C5C]"
                 >
                   {23}
@@ -176,6 +174,7 @@ export default function TimesField({ handleSetTime }: TimeFiledProps) {
               <li>
                 <button
                   type="button"
+                  onClick={() => handleSetMinuteClick(50)}
                   className="w-[66px] h-[30px] text-sm text-[#5C5C5C]"
                 >
                   50

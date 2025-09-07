@@ -4,6 +4,7 @@ import Card from "../card/Card.tsx";
 import SearchBar from "../../../common/components(renewal)/search/SearchBar.tsx";
 import LargeMap from "../../../naver_map/components/LargeMap.tsx";
 import { GameField } from "../../interface/games.ts";
+import "../../../../index.css";
 
 interface GameMapListContainerProps {
   handleToggleTab: (arg: string) => void;
@@ -38,16 +39,16 @@ export default function GameMapListContainer({
       </div>
       {/* Games MAP/LIST */}
       {tab === "map" ? (
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5     ">
           <LargeMap id="games-list" gamesMapData={gamesMapData} />
           {/* </Suspense> */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 h-[528px] overflow-y-auto overflow-x-hidden custom-scrollbar px-4 ">
             <span className="text-xs font-[400] text-white">
               총 {gamesMapData?.length}개의 경기
             </span>
-            <ul className="flex flex-col gap-2.5">
+            <ul className="flex flex-col gap-2.5 h-[500px] overlflow-y-auto">
               {gamesMapData?.length === 0 && (
-                <div className=" h-[500px] w-full flex flex-col gap-4 items-center justify-center">
+                <div className="  w-full flex flex-col gap-4 items-center justify-center">
                   <h3 className="text-lg text-white">
                     검색된 경기가 없습니다.
                   </h3>{" "}

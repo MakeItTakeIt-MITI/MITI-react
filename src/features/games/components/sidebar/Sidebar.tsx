@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import DatesField from "./DatesField.tsx";
 import GameStatusField from "./GameStatusField.tsx";
-import RegionField from "./RegionField.tsx";
+// import RegionField from "./RegionField.tsx";
 import ResetStatusField from "./ResetStatusField.tsx";
 import TimesField from "./TimesField.tsx";
 import { useCallback } from "react";
@@ -135,14 +135,14 @@ export default function Sidebar() {
   // };
 
   // callback function to set game time
-  const handleSetTime = useCallback(
-    (hour: string, minutes: string) => {
-      const params = Object.fromEntries(searchParams.entries());
-      setSearchParams({ ...params, time: `${hour}:${minutes}` });
-    },
-    // handleScroll()
-    [searchParams, setSearchParams]
-  );
+  // const handleSetTime = useCallback(
+  //   (hour: string, minutes: string) => {
+  //     const params = Object.fromEntries(searchParams.entries());
+  //     setSearchParams({ ...params, time: `${hour}:${minutes}` });
+  //   },
+  //   // handleScroll()
+  //   [searchParams, setSearchParams]
+  // );
 
   // !       {/* TEMPORARILY DISABLED UNDER FURTHER UPDATE */}
   // callback function to filter by region
@@ -200,7 +200,10 @@ export default function Sidebar() {
       />
 
       {/* time selector */}
-      <TimesField handleSetTime={handleSetTime} />
+      <TimesField
+
+      // handleSetTime={handleSetTime}
+      />
 
       {/* game status filter */}
       <GameStatusField

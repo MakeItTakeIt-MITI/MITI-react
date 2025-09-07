@@ -6,6 +6,7 @@ import { useCallback, useState } from "react";
 import { useMapGamesList } from "../../features/games/hooks/query/useMapGamesList.tsx";
 import { useGamesListOnly } from "../../features/games/hooks/query/useGamesList.tsx";
 import { GameField } from "../../features/games/interface/games.ts";
+import { useTimeField } from "../../store/Sidebar/useTimeFieldStore.ts";
 
 export const Games = () => {
   const [tab, setTab] = useState("map");
@@ -23,8 +24,11 @@ export const Games = () => {
   const day = searchParams.get("day");
   const year = searchParams.get("year");
 
+  // imported from useTimeField Store
+  const { hour, minutes } = useTimeField();
+  const timeFormat = `${hour}:${minutes}`;
+
   const startdate = `${year}-${month}-${day}`;
-  const starttime = searchParams.get("time") || "00:00";
   const game_status = searchParams.getAll("game_status");
 
   const regionParam = searchParams.get("region") || "";
@@ -32,7 +36,7 @@ export const Games = () => {
 
   const { data: mapData, isLoading } = useMapGamesList(
     startdate,
-    starttime,
+    timeFormat,
     game_status
   );
 
