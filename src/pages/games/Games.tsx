@@ -56,7 +56,7 @@ export const Games = () => {
         {/* Displays games filter sidebar and games list */}
         <article className="flex gap-[30px] ">
           {/* Sidebar component to filter game rendering */}
-          <Sidebar />
+          {tab === "map" && <Sidebar />}
           {/* Main display component between game map and game list components */}
           <GameMapListContainer
             handleToggleTab={handleToggleTab}

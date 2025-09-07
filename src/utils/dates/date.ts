@@ -20,3 +20,14 @@ export function getTodaysDateKorea() {
     //   const { year, month, day } = getTodaysDateKorea();
     return { year, month, day };
 }
+
+
+export const getTodaysGamesQuery = () => {
+    const { year, month, day } = getTodaysDateKorea()
+
+    const URL = `games?year=${year}&month=${month}&day=${day}&time=00:00&region=&game_status=closed&game_status=open&game_status=canceled&game_status=completed`
+
+    return URL
+
+
+}

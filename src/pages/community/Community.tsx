@@ -1,11 +1,13 @@
 import { useState } from "react";
 import CommunityContentContainer from "../../features/community/components/CommunityContentContainer.tsx";
 import CommunityPanel from "../../features/community/components/CommunityPanel.tsx";
+import { useSearchParams } from "react-router-dom";
 
 export default function Community() {
-  const [inputContent, setInputContent] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  console.log(inputContent);
+  const getSearchParam = searchParams.get("search") || "";
+
   return (
     <section
       style={{
@@ -14,7 +16,7 @@ export default function Community() {
       className="mx-auto min-h-screen  w-[968px] flex gap-[30px] py-[30px] pb-[30px]"
     >
       <CommunityPanel />
-      <CommunityContentContainer setInputContent={setInputContent} />
+      <CommunityContentContainer getSearchParam={getSearchParam} />
     </section>
   );
 }

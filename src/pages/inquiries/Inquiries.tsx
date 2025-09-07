@@ -24,14 +24,14 @@ const InquiriesList = () => {
   }
 
   return (
-    <section className="sm:w-full  md:w-[800px]  mx-auto  md:py-[30px] flex flex-col gap-[36px]">
+    <section className="sm:w-full  md:w-[840px]  mx-auto  md:py-[30px] flex flex-col gap-[36px]">
       <Header />
 
       {/* pagination */}
       <div className="space-y-6">
         {/* Search bar + Submit Inquiry Bitton */}
         <div className="flex items-center gap-6">
-          <SearchBar title="문의하기" paramKey="search" />
+          <SearchBar title="문의" paramKey="search" />
           <SubmitInquiryButton />
         </div>
         {/* Inquiries List */}

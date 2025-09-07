@@ -47,7 +47,7 @@ export default function GameMapListContainer({
             </span>
             <ul className="flex flex-col gap-2.5">
               {gamesMapData?.length === 0 && (
-                <div className=" h-full w-full flex flex-col gap-5 items-center justify-center">
+                <div className=" h-[500px] w-full flex flex-col gap-4 items-center justify-center">
                   <h3 className="text-lg text-white">
                     검색된 경기가 없습니다.
                   </h3>{" "}

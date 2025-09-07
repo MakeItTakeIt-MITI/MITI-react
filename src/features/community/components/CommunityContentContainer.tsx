@@ -2,11 +2,11 @@ import SearchBar from "../../common/components(renewal)/search/SearchBar.tsx";
 import { PostCard } from "./PostCard.tsx";
 
 interface CommunityContentContainerProps {
-  setInputContent: (content: string) => void;
+  getSearchParam: string | "";
 }
 
 const CommunityContentContainer = ({
-  setInputContent,
+  getSearchParam,
 }: CommunityContentContainerProps) => {
   return (
     <article className="w-full flex flex-col gap-6">

@@ -30,7 +30,7 @@ export default function GameFilterStatus({
         backgroundColor: shouldHighlight ? "#1ADCDF" : "",
         color: shouldHighlight ? "#000" : "#999",
         borderColor: shouldHighlight ? "#1ADCDF" : "#707070",
-        fontWeight: shouldHighlight ? "bold" : "normal",
+        fontWeight: shouldHighlight ? "500" : "normal",
       }}
       className="py-2.5 px-3  text-sm rounded-[50px] border"
     >

@@ -4,8 +4,9 @@ import GameStatusField from "./GameStatusField.tsx";
 import RegionField from "./RegionField.tsx";
 import ResetStatusField from "./ResetStatusField.tsx";
 import TimesField from "./TimesField.tsx";
-import { useCallback, useRef } from "react";
+import { useCallback } from "react";
 import { InitialDateField } from "../../interface/games.ts";
+import { getTodaysDateKorea } from "../../../../utils/dates/date.ts";
 
 export default function Sidebar() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -41,16 +42,22 @@ export default function Sidebar() {
    * - Starts from a given date (default = today) = URL params or today
    * - Each date object includes formatted values and Korean day labels
    */
-  const DATES = (startDate: Date = new Date()) => {
-    const availableDates = [];
+  const DATES = () => {
+    const koreanDays = ["일", "월", "화", "수", "목", "금", "토"];
+    const availableDates: Date[] = [];
+
+    // Get today's date in KST
+    const { year, month, day } = getTodaysDateKorea();
+    const todayKST = new Date(`${year}-${month}-${day}`);
+
+    // Generate 30 days from today
     for (let i = 0; i < 30; i++) {
-      const newDate = new Date(startDate);
-      newDate.setDate(startDate.getDate() + i);
+      const newDate = new Date(todayKST);
+      newDate.setDate(todayKST.getDate() + i);
       availableDates.push(newDate);
     }
 
-    const koreanDays = ["일", "월", "화", "수", "목", "금", "토"];
-
+    // Map to your expected structure
     return availableDates.map((date) => ({
       year: date.getFullYear(),
       month: date.getMonth() + 1,
@@ -67,16 +74,11 @@ export default function Sidebar() {
    * - If year/month/day are present in the URL, use that as the start date
    * - Otherwise, fall back to today
    */
-  const initialDate =
-    yearParam && monthParam && dayParam
-      ? new Date(`${yearParam}-${monthParam}-${dayParam}`)
-      : new Date();
 
   // Generate the list of 30 available dates starting from initialDate
-  const INITIAL_DATES = DATES(initialDate);
+  const INITIAL_DATES = DATES();
 
   const gameStatusArray = searchParams.getAll("game_status");
-  console.log("gameStatusArr", gameStatusArray);
 
   function buildParamsWithStatuses(
     searchParams: URLSearchParams,
@@ -142,37 +144,38 @@ export default function Sidebar() {
     [searchParams, setSearchParams]
   );
 
+  // !       {/* TEMPORARILY DISABLED UNDER FURTHER UPDATE */}
   // callback function to filter by region
-  const handleSelectRegion = useCallback(
-    (region: string) => {
-      const params = Object.fromEntries(searchParams.entries());
+  // const handleSelectRegion = useCallback(
+  //   (region: string) => {
+  //     const params = Object.fromEntries(searchParams.entries());
 
-      // Keep all the current game_status values
-      const gameStatuses = searchParams.getAll("game_status");
+  //     // Keep all the current game_status values
+  //     const gameStatuses = searchParams.getAll("game_status");
 
-      // Toggle region
-      let updatedParams: Record<string, string | string[]> = {
-        ...params,
-        region,
-      };
+  //     // Toggle region
+  //     let updatedParams: Record<string, string | string[]> = {
+  //       ...params,
+  //       region,
+  //     };
 
-      if (searchParams.get("region") === region) {
-        // remove region if toggled off
-        const { region: _, ...rest } = params;
-        updatedParams = { ...rest };
-      }
+  //     if (searchParams.get("region") === region) {
+  //       // remove region if toggled off
+  //       const { region: _, ...rest } = params;
+  //       updatedParams = { ...rest };
+  //     }
 
-      // Ensure game_status values persist
-      setSearchParams(() => {
-        const newParams = new URLSearchParams(updatedParams as any);
-        gameStatuses.forEach((status) => {
-          newParams.append("game_status", status);
-        });
-        return newParams;
-      });
-    },
-    [setSearchParams, searchParams]
-  );
+  //     // Ensure game_status values persist
+  //     setSearchParams(() => {
+  //       const newParams = new URLSearchParams(updatedParams as any);
+  //       gameStatuses.forEach((status) => {
+  //         newParams.append("game_status", status);
+  //       });
+  //       return newParams;
+  //     });
+  //   },
+  //   [setSearchParams, searchParams]
+  // );
 
   // timer
 
@@ -206,7 +209,8 @@ export default function Sidebar() {
       />
 
       {/* region filter */}
-      <RegionField handleSelectRegion={handleSelectRegion} />
+      {/* TEMPORARILY DISABLED UNDER FURTHER UPDATE */}
+      {/* <RegionField handleSelectRegion={handleSelectRegion} /> */}
     </aside>
   );
 }

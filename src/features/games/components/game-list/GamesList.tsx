@@ -7,7 +7,7 @@ interface GamesListProps {
 
 export default function GamesList({ gamesListData }: GamesListProps) {
   return (
-    <ul className="w-full flex flex-col gap-[31px] h-[700px] overflow-y-auto custom-scrollbar p-1">
+    <ul className="w-full flex flex-col gap-[31px] h-[700px] overflow-y-auto custom-scrollbar p-2">
       {/* {gamesListData.length === 0 && <div>no games</div>} */}
       {gamesListData?.map((game: GameField) => (
         <GamesListCard key={game.id} game={game} />
