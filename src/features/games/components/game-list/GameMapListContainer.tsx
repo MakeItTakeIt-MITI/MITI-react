@@ -40,7 +40,7 @@ export default function GameMapListContainer({
       {/* Games MAP/LIST */}
       {tab === "map" ? (
         <div className="flex flex-col gap-5     ">
-          <LargeMap id="games-list" gamesMapData={gamesMapData} />
+          {/* <LargeMap id="games-list" gamesMapData={gamesMapData} /> */}
           {/* </Suspense> */}
           <div className="flex flex-col gap-4 h-[528px] overflow-y-auto overflow-x-hidden custom-scrollbar px-4 ">
             <span className="text-xs font-[400] text-white">
