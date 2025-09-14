@@ -1,6 +1,6 @@
 interface MapGameOverlapBadgeProps {
   overlapped: boolean;
-  number_of_games?: string[];
+  number_of_games?: number;
 }
 
 const MapGameOverlapBadge = ({
@@ -15,7 +15,7 @@ const MapGameOverlapBadge = ({
                      text-[#5C5C5C] border border-[#999] flex items-center 
                      justify-center text-[10px] font-bold bg-[#EBEBEB]"
         >
-          {number_of_games?.length}
+          {number_of_games}
         </div>
       )}
     </>

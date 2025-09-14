@@ -2,9 +2,10 @@ import Tab from "../../../common/components(renewal)/chips/Tab.tsx";
 import GamesList from "./GamesList.tsx";
 import Card from "../card/Card.tsx";
 import SearchBar from "../../../common/components(renewal)/search/SearchBar.tsx";
-import LargeMap from "../../../naver_map/components/LargeMap.tsx";
+import GameMap from "../../../naver_map/components/GameMap.tsx";
 import { GameField } from "../../interface/games.ts";
 import "../../../../index.css";
+import { useSelectedStore } from "../../../../store/NaverMap/useSelectedStore.tsx";
 
 interface GameMapListContainerProps {
   handleToggleTab: (arg: string) => void;
@@ -20,6 +21,7 @@ export default function GameMapListContainer({
   gamesMapData,
   gamesListData,
 }: GameMapListContainerProps) {
+  const { isSelected, selectedAddress } = useSelectedStore();
   return (
     <div className=" w-[700px] min-h-[1px] flex flex-col gap-[20px]">
       {/* TAB  */}
@@ -40,7 +42,7 @@ export default function GameMapListContainer({
       {/* Games MAP/LIST */}
       {tab === "map" ? (
         <div className="flex flex-col gap-5     ">
-          <LargeMap id="games-list" gamesMapData={gamesMapData} />
+          <GameMap gamesMapData={gamesMapData} />
           {/* </Suspense> */}
           <div className="flex flex-col gap-4 h-[528px] overflow-y-auto overflow-x-hidden custom-scrollbar px-4 ">
             <span className="text-xs font-[400] text-white">
@@ -57,9 +59,19 @@ export default function GameMapListContainer({
                   </p>
                 </div>
               )}
-              {gamesMapData?.map((game) => (
+
+              {(isSelected
+                ? gamesMapData?.filter(
+                    (game) => game.court.address === selectedAddress
+                  )
+                : gamesMapData
+              )?.map((game) => (
                 <Card key={game.id} game={game} />
               ))}
+              {/* 
+              {gamesMapData?.map((game) => (
+                <Card key={game.id} game={game} />
+              ))} */}
             </ul>
           </div>
         </div>
