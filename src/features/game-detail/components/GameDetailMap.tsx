@@ -18,7 +18,7 @@ export default function GameDetailMap({ lat, long }) {
   useEffect(() => {
     const map = new naver.maps.Map("game-details-map", {
       center: new naver.maps.LatLng(lat, long),
-      zoom: 14,
+      zoom: 17,
       scrollWheel: true,
       disableKineticPan: false,
     });
@@ -34,7 +34,7 @@ export default function GameDetailMap({ lat, long }) {
       // selectedMarkerHTML: selectedMarkerHTML,
       //   zIndex: gameId === game.id ? 100 : 1,
     });
-  }, []);
+  }, [lat, long]);
 
   return (
     <div id="game-details-map" className="size-[360px] rounded-[20px]">

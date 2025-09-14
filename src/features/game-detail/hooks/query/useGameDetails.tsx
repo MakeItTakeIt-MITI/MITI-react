@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getGameDetail } from "../../api/game-detail";
 
 interface GameDetailParams {
-  id: string;
+  id: string | undefined;
 }
 
 export const useGameDetails = ({ id }: GameDetailParams) => {
