@@ -1,35 +1,60 @@
 import { Link } from "react-router-dom";
+import { PostField } from "../interface/community";
+import PostCategoryChip from "./PostCategoryChip";
+import { CategoryType } from "../interface/post";
 
-export const PostCard = () => {
+interface PostcardProps {
+  post: PostField;
+}
+
+export const PostCard = ({ post }: PostcardProps) => {
+  const getDaysAgo = (createdAt: string): string => {
+    const createdDate = new Date(createdAt);
+    const today = new Date();
+
+    const msPerDay = 1000 * 60 * 60 * 24;
+    const diffTime = today.getTime() - createdDate.getTime();
+    const diffDays = Math.floor(diffTime / msPerDay);
+
+    if (diffDays === 0) return "오늘";
+    if (diffDays === 1) return "1일전";
+    return `${diffDays}일전`;
+  };
+
   return (
-    <Link to="1">
-      <div className=" flex flex-col gap-3">
-        <div className="flex items-center justify-between text-[10px] font-[400] text-[#525252]">
-          <span className="w-[47px] py-1 px-[6px] text-[10px] rounded-[4px] text-[#858585] bg-[#474747]">
-            자유주제
-          </span>
-          <span>N 일전</span>
-        </div>
-        <div className="flex justify-between gap-4">
-          <div className="space-y-4">
-            <div className="space-y-3">
-              <h1 className="font-bold text-white ">
-                POST TITLE MAX LENGTH : 32 / MAX LINE : 1
-                가나다라마바사아자차타카파하
-              </h1>
-              <p className="text-xs font-[400] text-white truncate">
-                POST CONTENT PREVIEW MAX LINE : 1 LINE TRUNCATE : !
-              </p>
+    <li className="">
+      <Link to="1">
+        <div className=" flex flex-col gap-3">
+          <div className="flex items-center justify-between text-[10px] font-[400] text-[#525252]">
+            <PostCategoryChip category={post.category as CategoryType} />
+            <span>{getDaysAgo(post.created_at.slice(0, 10))}</span>
+          </div>
+          <div className="flex justify-between gap-4">
+            <div className="space-y-4">
+              <div className="space-y-3">
+                <h1 className="font-bold text-white ">{post.title}</h1>
+                <p className={`text-xs font-[400] text-white  `}>
+                  {post.content.length > 52
+                    ? post.content.slice(0, 52)
+                    : post.content}
+                </p>
+              </div>
+              <div className="space-x-[3px] text-xs text-[#5C5C5C] font-[400]">
+                <span>{post.writer.nickname}</span>
+                <span>댓글 {post.num_of_comments}</span>
+                <span>좋아요 {post.liked_users.length}</span>
+              </div>
             </div>
-            <div className="space-x-[3px] text-xs text-[#5C5C5C] font-[400]">
-              <span>AUTHOR NICKNAME</span>
-              <span>댓글 000</span>
-              <span>좋아요 000</span>
+            <div className="size-[60px] bg-white rounded-lg">
+              <img
+                className="h-full w-full "
+                src={post.writer.profile_image_url}
+                alt="profile img"
+              />
             </div>
           </div>
-          <div className="size-[60px] bg-white"></div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </li>
   );
 };
