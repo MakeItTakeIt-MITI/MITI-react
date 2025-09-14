@@ -16,8 +16,13 @@ export default function GameMap({
 }: {
   gamesMapData: GameField[];
 }) {
-  const { toggleSelected, isSelected, setSelectedAddress, selectedAddress } =
-    useSelectedStore();
+  const {
+    toggleSelected,
+    setSelected,
+    isSelected,
+    setSelectedAddress,
+    selectedAddress,
+  } = useSelectedStore();
   const { coordinates, setCoordinates } = useMapCoordinatesStore();
 
   // keep the map instance and markers in refs
@@ -144,15 +149,26 @@ export default function GameMap({
 
       // clicking marker just updates store + map center
       window.naver.maps.Event.addListener(marker, "click", () => {
-        toggleSelected();
-        setCoordinates(game.court.latitude, game.court.longitude);
-        setSelectedAddress(game.court.address);
-        console.log(selectedAddress);
+        if (!isSelected) {
+          toggleSelected();
+          setCoordinates(game.court.latitude, game.court.longitude);
+          setSelectedAddress(game.court.address);
+        } else {
+          setSelected(false);
+          setSelectedAddress("");
+        }
       });
 
       markersRef.current.push(marker);
     });
-  }, [gamesMapData, isSelected, toggleSelected, setCoordinates]);
+  }, [
+    gamesMapData,
+    isSelected,
+    selectedAddress,
+    toggleSelected,
+    setSelected,
+    setCoordinates,
+  ]);
 
   return <div id="games-list" className="w-[700px] h-[450px] rounded-[20px]" />;
 }

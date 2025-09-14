@@ -22,6 +22,10 @@ export default function GameMapListContainer({
   gamesListData,
 }: GameMapListContainerProps) {
   const { isSelected, selectedAddress } = useSelectedStore();
+  const displayedGames = isSelected
+    ? gamesMapData?.filter((game) => game.court.address === selectedAddress)
+    : gamesMapData;
+
   return (
     <div className=" w-[700px] min-h-[1px] flex flex-col gap-[20px]">
       {/* TAB  */}
@@ -46,7 +50,7 @@ export default function GameMapListContainer({
           {/* </Suspense> */}
           <div className="flex flex-col gap-4 h-[528px] overflow-y-auto overflow-x-hidden custom-scrollbar px-4 ">
             <span className="text-xs font-[400] text-white">
-              총 {gamesMapData?.length}개의 경기
+              총 {displayedGames?.length}개의 경기
             </span>
             <ul className="flex flex-col gap-2.5 h-[500px] overlflow-y-auto">
               {gamesMapData?.length === 0 && (
@@ -68,10 +72,6 @@ export default function GameMapListContainer({
               )?.map((game) => (
                 <Card key={game.id} game={game} />
               ))}
-              {/* 
-              {gamesMapData?.map((game) => (
-                <Card key={game.id} game={game} />
-              ))} */}
             </ul>
           </div>
         </div>
