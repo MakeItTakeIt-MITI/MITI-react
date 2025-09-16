@@ -1,19 +1,9 @@
 import marker_medium from "../../../../assets/v1.3/icon/location-pin-md.svg";
 import { useCalculateDistance } from "../../hooks/useCalculateDistance";
-
-interface CourtDataField {
-  name: string;
-  address: string;
-  address_detail: string;
-  distance: number;
-  info: string;
-  latitude: string;
-  longitude: string;
-}
+import { CourtsField } from "../../interface/courts";
 
 interface CourtDetailsCardProps {
-  courtDetailData: CourtDataField;
-
+  courtDetailData: CourtsField;
   geoLatitude: string | number | null | undefined;
   geoLongitude: string | number | null | undefined;
 }

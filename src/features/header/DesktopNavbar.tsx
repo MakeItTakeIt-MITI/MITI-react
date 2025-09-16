@@ -12,7 +12,9 @@ export default function DesktopNavbar() {
             <Link to={getTodaysGamesQuery()}>경기 목록</Link>
           </li>
           <li>
-            <Link to={`courts?region=&search=`}>경기장 목록</Link>
+            <Link to={`courts?region=&isSearched=false&search=`}>
+              경기장 목록
+            </Link>
           </li>
           <li>
             <Link to="community?search=&topic=">게시판</Link>

@@ -1,17 +1,10 @@
 import CourtsCard from "./CourtsCard.tsx";
 
 import "../../../../features/common/scrollbar.css";
+import { CourtsField } from "../../interface/courts.ts";
 
-interface CourtsDataField {
-  address: string;
-  address_detail: string;
-  id: number;
-  latitude: string;
-  longitude: string;
-  name: string;
-}
 interface CourtsListContainerProps {
-  courstDataPage: CourtsDataField[] | undefined;
+  courstDataPage: CourtsField[] | undefined;
   hasNextPage: boolean;
   courtsListRef: (node?: Element | null | undefined) => void;
   geoLatitude: string | number | null | undefined;
