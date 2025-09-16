@@ -6,8 +6,13 @@ import like_button_small from "../../../assets/v1.3/icon/like-icon-sm.svg";
 import LikeCommentFeatures from "./LikeCommentFeatures.tsx";
 import comment_button from "../../../assets/v1.3/icon/comment-icon-sm.svg";
 import share_button from "../../../assets/v1.3/icon/share-icon-md.svg";
+import { CommunityPostDetail } from "../interface/post.ts";
 
-const PostDetailContainer = () => {
+interface PostDetailContainerProps {
+  postDetails: CommunityPostDetail;
+}
+
+const PostDetailContainer = ({ postDetails }: PostDetailContainerProps) => {
   return (
     <article className="w-full flex flex-col gap-6">
       <SearchBar paramKey="search" title="게시글" />
@@ -15,11 +20,10 @@ const PostDetailContainer = () => {
         {/* Uploaded Post */}
         <div className="space-y-4">
           {/* Post User Info */}
-          <PostUserInfo size="s" />
+          <PostUserInfo size="s" nickname={postDetails.writer.nickname} />
           {/* Post Content */}
           <p className="font-base text-white font-normal">
-            POST CONTENT AREA FOND TYPE : SMALL REGULAR NORMAL FONT COLOR :
-            WHITE ABCDEFGHIJKLMNOP
+            {postDetails.content}
           </p>
           {/* LIKES & SHARE */}
         </div>

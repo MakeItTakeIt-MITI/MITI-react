@@ -12,7 +12,7 @@ export interface CourtsDetailField extends CourtsField {
     soonest_games: string[];
 }
 
-interface CourtGamesDetailsField {
+export interface CourtGamesDetailsField {
     id: number;
     game_status: string;
     title: string;
