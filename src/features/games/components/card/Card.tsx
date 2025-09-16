@@ -21,7 +21,7 @@ export default function Card({ game }: CardProps) {
       style={{
         boxShadow: isHovered ? "0 4px 24px 0 #1ADCDF, 0 0 0 4px #141414" : "",
       }}
-      className="cursor-pointer w-full h-[136px] flex flex-col gap-2.5 justify-center p-3 rounded-lg text-white"
+      className="cursor-pointer w-full sm:h-[112px] md:h-[136px] flex flex-col gap-2.5 justify-center p-3 rounded-lg text-white"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

@@ -10,7 +10,7 @@ export default function GameAddress({
   address_detail,
 }: GameAddressProps) {
   return (
-    <div className="flex items-center  gap-1 text-xs font-[400] text-[#D6D6D6]">
+    <div className="flex items-center  gap-1 sm:text-[10px] md:text-xs font-[400] text-[#D6D6D6]">
       <img src={location_marker} alt="location_marker" />
       <span>{address}</span>
       <span>{address_detail}</span>

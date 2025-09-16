@@ -21,7 +21,7 @@ export default function GameMapListContainer({
   gamesListData,
 }: GameMapListContainerProps) {
   return (
-    <div className=" w-[700px] min-h-[1px] flex flex-col gap-[20px]">
+    <div className=" md:w-[700px] w-full min-h-[1px] flex flex-col gap-[20px]">
       {/* TAB  */}
       <div className="flex">
         <Tab
@@ -39,10 +39,10 @@ export default function GameMapListContainer({
       </div>
       {/* Games MAP/LIST */}
       {tab === "map" ? (
-        <div className="flex flex-col gap-5     ">
+        <div className="flex flex-col gap-5  w-full   ">
           {/* <LargeMap id="games-list" gamesMapData={gamesMapData} /> */}
           {/* </Suspense> */}
-          <div className="flex flex-col gap-4 h-[528px] overflow-y-auto overflow-x-hidden custom-scrollbar px-4 ">
+          <div className="flex flex-col gap-4 sm:h-[328px] md:h-[528px] overflow-y-auto overflow-x-hidden custom-scrollbar sm:px-0 md:px-4 ">
             <span className="text-xs font-[400] text-white">
               총 {gamesMapData?.length}개의 경기
             </span>

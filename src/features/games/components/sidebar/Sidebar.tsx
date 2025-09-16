@@ -185,7 +185,7 @@ export default function Sidebar() {
         width: "238px",
         height: "",
       }}
-      className="p-4 flex flex-col gap-5 "
+      className="p-4 sm:hidden md:flex flex-col gap-5 "
     >
       {/* reset all filters */}
       <ResetStatusField />

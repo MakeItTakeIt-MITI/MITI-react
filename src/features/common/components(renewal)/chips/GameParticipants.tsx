@@ -10,7 +10,7 @@ export default function GameParticipants({
   max_invitation,
 }: GameParticipantsProps) {
   return (
-    <div className="flex items-center gap-1 text-xs font-[400] text-[#D6D6D6]">
+    <div className="flex items-center gap-1 sm:text-[10px] md:text-xs font-[400] text-[#D6D6D6]">
       <img src={participants} alt="" />
       <span>
         {num_of_participations} / {max_invitation}

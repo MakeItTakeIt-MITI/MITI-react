@@ -7,7 +7,7 @@ interface GameTimeProps {
 
 export default function GameTime({ starttime, endtime }: GameTimeProps) {
   return (
-    <div className="flex items-center  gap-1 text-xs font-[400] text-[#D6D6D6]">
+    <div className="flex items-center  gap-1 sm:text-[10px] md:text-xs font-[400] text-[#D6D6D6]">
       <img src={time_icon} alt="" />
       <p>
         {starttime} ~ {endtime}
