@@ -2,9 +2,10 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import SearchBar from "../../features/common/components(renewal)/search/SearchBar.tsx";
 import Sidebar from "../../features/courts/components/v1.3/Sidebar.tsx";
-import MediumMap from "../../features/naver_map/components/MediumMap.tsx";
-import CourtInfoContainer from "../../features/courts/components/v1.3/CourtInfoContainer.tsx";
 import useCourtDetails from "../../features/courts/hooks/query/useCourtDetails.tsx";
+import Map from "../../features/courts/components/map/Map.tsx";
+import useCourtsGameList from "../../features/courts/hooks/query/useCourtsGameList.tsx";
+import CourtInfoContainer from "../../features/courts/components/court-details/CourtInfoContainer.tsx";
 
 export default function CourtDetails() {
   const [geolocation, setGeolocation] = useState<{
@@ -36,7 +37,18 @@ export default function CourtDetails() {
   const { data } = useCourtDetails(Number(id));
 
   const courtDetailData = data?.data;
-  console.log(courtDetailData);
+  const {
+    data: courtsGamesListData,
+    hasNextPage,
+    fetchNextPage,
+  } = useCourtsGameList(Number(id));
+  console.log("useCourtsGameList data:", courtsGamesListData);
+
+  const courtsGamesPageContent = courtsGamesListData?.pages.flatMap(
+    (page) => page.data.page_content
+  );
+
+  console.log(courtsGamesPageContent);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -66,9 +78,15 @@ export default function CourtDetails() {
           <SearchBar paramKey="search" title="경기장" />
           {/* <CourtsListContainer /> */}
           <div className="flex gap-[30px]">
-            <MediumMap id="court_details_map" />
+            <Map
+              lat={courtDetailData?.latitude}
+              long={courtDetailData?.longitude}
+            />
             <CourtInfoContainer
               courtDetailData={courtDetailData}
+              courtsGamesPageContent={courtsGamesPageContent}
+              fetchNextPage={fetchNextPage}
+              hasNextPage={hasNextPage}
               geoLatitude={geolocation?.lat}
               geoLongitude={geolocation?.lon}
             />

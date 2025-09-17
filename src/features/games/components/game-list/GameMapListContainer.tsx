@@ -2,9 +2,10 @@ import Tab from "../../../common/components(renewal)/chips/Tab.tsx";
 import GamesList from "./GamesList.tsx";
 import Card from "../card/Card.tsx";
 import SearchBar from "../../../common/components(renewal)/search/SearchBar.tsx";
-import LargeMap from "../../../naver_map/components/LargeMap.tsx";
+import GameMap from "../../../naver_map/components/GameMap.tsx";
 import { GameField } from "../../interface/games.ts";
 import "../../../../index.css";
+import { useSelectedStore } from "../../../../store/NaverMap/useSelectedStore.tsx";
 
 interface GameMapListContainerProps {
   handleToggleTab: (arg: string) => void;
@@ -20,6 +21,11 @@ export default function GameMapListContainer({
   gamesMapData,
   gamesListData,
 }: GameMapListContainerProps) {
+  const { isSelected, selectedAddress } = useSelectedStore();
+  const displayedGames = isSelected
+    ? gamesMapData?.filter((game) => game.court.address === selectedAddress)
+    : gamesMapData;
+
   return (
     <div className=" md:w-[700px] w-full min-h-[1px] flex flex-col gap-[20px]">
       {/* TAB  */}
@@ -39,12 +45,12 @@ export default function GameMapListContainer({
       </div>
       {/* Games MAP/LIST */}
       {tab === "map" ? (
-        <div className="flex flex-col gap-5  w-full   ">
-          {/* <LargeMap id="games-list" gamesMapData={gamesMapData} /> */}
+        <div className="flex flex-col gap-5     ">
+          <GameMap gamesMapData={gamesMapData} />
           {/* </Suspense> */}
           <div className="flex flex-col gap-4 sm:h-[328px] md:h-[528px] overflow-y-auto overflow-x-hidden custom-scrollbar sm:px-0 md:px-4 ">
             <span className="text-xs font-[400] text-white">
-              총 {gamesMapData?.length}개의 경기
+              총 {displayedGames?.length}개의 경기
             </span>
             <ul className="flex flex-col gap-2.5 h-[500px] overlflow-y-auto">
               {gamesMapData?.length === 0 && (
@@ -57,7 +63,13 @@ export default function GameMapListContainer({
                   </p>
                 </div>
               )}
-              {gamesMapData?.map((game) => (
+
+              {(isSelected
+                ? gamesMapData?.filter(
+                    (game) => game.court.address === selectedAddress
+                  )
+                : gamesMapData
+              )?.map((game) => (
                 <Card key={game.id} game={game} />
               ))}
             </ul>

@@ -9,3 +9,23 @@ export const getPosts = async (search: string) => {
         throw error;
     }
 }
+
+export const getPostDetail = async (id: number) => {
+    try {
+        const response = await axiosUrl.get(`posts/${id}`)
+        return response.data
+    } catch (error) {
+        console.error("Error fetching post detail:", error);
+        throw error;
+    }
+}
+
+export const getPostComments = async (id: number) => {
+    try {
+        const response = await axiosUrl.get(`posts/${id}/comments`)
+        return response.data
+    } catch (error) {
+        console.error("Error fetching post detail:", error);
+        throw error;
+    }
+}

@@ -23,7 +23,7 @@ export const PostCard = ({ post }: PostcardProps) => {
 
   return (
     <li className="">
-      <Link to="1">
+      <Link to={`/community/${post.id}`}>
         <div className=" flex flex-col gap-3">
           <div className="flex items-center justify-between text-[10px] font-[400] text-[#525252]">
             <PostCategoryChip category={post.category as CategoryType} />
