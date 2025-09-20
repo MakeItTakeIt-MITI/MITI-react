@@ -53,7 +53,7 @@ export const Games = () => {
         style={{
           backgroundColor: "#141414",
         }}
-        className="mx-auto  w-full flex flex-col items-center gap-[30px] py-[30px]"
+        className="mx-auto  sm:w-full flex flex-col md:items-center gap-[30px] pb-[30px] "
       >
         {/* BANNER Component */}
         <BannerMedium type="manners" />

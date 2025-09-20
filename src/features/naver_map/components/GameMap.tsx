@@ -170,5 +170,10 @@ export default function GameMap({
     setCoordinates,
   ]);
 
-  return <div id="games-list" className="w-[700px] h-[450px] rounded-[20px]" />;
+  return (
+    <div
+      id="games-list"
+      className="w-full md:w-[700px] sm:h-[241px] md:h-[450px] md:rounded-[20px]"
+    />
+  );
 }

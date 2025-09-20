@@ -1,20 +1,20 @@
-import GameStatus from "../../../common/components(renewal)/chips/GameFilterStatus.tsx";
+import { GameStatus } from "../../../../common/components(renewal)/chips/GameStatus";
 
-interface GameStatusFieldProps {
+interface GameStatusFieldMobileProps {
   handleToggleGameStatus: (
     statusToToggle: "open" | "closed" | "canceled" | "completed"
   ) => void;
   gameStatusArray: string[];
 }
 
-export default function GameStatusField({
+const GameStatusFieldMobile = ({
   handleToggleGameStatus,
   gameStatusArray,
-}: GameStatusFieldProps) {
+}: GameStatusFieldMobileProps) => {
   return (
     <div className="flex flex-col gap-4">
       <p className="font-bold text-sm text-[#fff]">경기 시작 시간</p>
-      <div className="flex md:flex-col gap-2.5">
+      <div className="flex flex-col gap-2.5">
         <div className="flex gap-2.5">
           <GameStatus
             status="모집 중"
@@ -26,8 +26,7 @@ export default function GameStatusField({
             onClick={() => handleToggleGameStatus("closed")}
             gameStatusArray={gameStatusArray}
           />
-        </div>
-        <div className="flex gap-2.5">
+
           <GameStatus
             status="경기 완료"
             onClick={() => handleToggleGameStatus("completed")}
@@ -42,4 +41,6 @@ export default function GameStatusField({
       </div>
     </div>
   );
-}
+};
+
+export default GameStatusFieldMobile;

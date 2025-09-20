@@ -4,8 +4,8 @@ interface GameStatusProps {
 
 export const GameStatus = ({ status }: GameStatusProps) => {
   const statusKeyValue = {
-    open: "모집중",
-    closed: "모집마감",
+    open: "모집 중",
+    closed: "모집 마감",
     canceled: "경기 취소",
     completed: "경기 완료",
   };

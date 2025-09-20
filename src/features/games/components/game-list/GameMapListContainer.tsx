@@ -6,6 +6,10 @@ import GameMap from "../../../naver_map/components/GameMap.tsx";
 import { GameField } from "../../interface/games.ts";
 import "../../../../index.css";
 import { useSelectedStore } from "../../../../store/NaverMap/useSelectedStore.tsx";
+import settings_mobile from "../../../../assets/v1.3/games/settings_icon.png";
+import SettingsContainer from "../game-filter/mobile/SettingsContainer.tsx";
+import { useState } from "react";
+import FilterBox from "../game-filter/mobile/FilterBox.tsx";
 
 interface GameMapListContainerProps {
   handleToggleTab: (arg: string) => void;
@@ -21,15 +25,21 @@ export default function GameMapListContainer({
   gamesMapData,
   gamesListData,
 }: GameMapListContainerProps) {
+  const [isFilterBoxOpen, setIsFilterBoxOpen] = useState(false);
+
   const { isSelected, selectedAddress } = useSelectedStore();
   const displayedGames = isSelected
     ? gamesMapData?.filter((game) => game.court.address === selectedAddress)
     : gamesMapData;
 
+  const handleToggleMobileFilterBox = () => {
+    setIsFilterBoxOpen((prev) => !prev);
+  };
+
   return (
-    <div className=" md:w-[700px] w-full min-h-[1px] flex flex-col gap-[20px]">
+    <div className=" md:w-[700px]   w-full min-h-[1px] flex flex-col gap-[20px]">
       {/* TAB  */}
-      <div className="flex">
+      <div className="flex px-4">
         <Tab
           content="지도"
           tab={tab}
@@ -45,14 +55,25 @@ export default function GameMapListContainer({
       </div>
       {/* Games MAP/LIST */}
       {tab === "map" ? (
-        <div className="flex flex-col gap-5     ">
+        <div className="flex flex-col gap-5   w-full h-full  ">
           <GameMap gamesMapData={gamesMapData} />
           {/* </Suspense> */}
-          <div className="flex flex-col gap-4 sm:h-[328px] md:h-[528px] overflow-y-auto overflow-x-hidden custom-scrollbar sm:px-0 md:px-4 ">
-            <span className="text-xs font-[400] text-white">
-              총 {displayedGames?.length}개의 경기
-            </span>
-            <ul className="flex flex-col gap-2.5 h-[500px] overlflow-y-auto">
+          <div className="flex flex-col gap-4 sm:h-[528px] md:h-[528px] overflow-y-auto  custom-scrollbar px-4 ">
+            <div>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-[400] text-white">
+                    총 {displayedGames?.length}개의 경기
+                  </span>
+                  <button onClick={handleToggleMobileFilterBox} type="button">
+                    <img src={settings_mobile} alt="settings_mobile" />
+                  </button>
+                </div>
+                {/* Mobile Game Status */}
+                <SettingsContainer />
+              </div>
+            </div>
+            <ul className="flex flex-col gap-2.5 h-[500px] sm:h-[512px] overlflow-y-auto">
               {gamesMapData?.length === 0 && (
                 <div className="  w-full flex flex-col gap-4 items-center justify-center">
                   <h3 className="text-lg text-white">
@@ -74,6 +95,11 @@ export default function GameMapListContainer({
               ))}
             </ul>
           </div>
+          {isFilterBoxOpen && (
+            <FilterBox
+              handleToggleMobileFilterBox={handleToggleMobileFilterBox}
+            />
+          )}
         </div>
       ) : (
         // ALL GAMES RENDERING CONTAINER
