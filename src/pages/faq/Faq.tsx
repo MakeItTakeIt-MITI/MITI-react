@@ -4,11 +4,13 @@ import { useSearchParams } from "react-router-dom";
 import { useFaqDataHook } from "../../features/faq/hooks/useFaqDataHook.tsx";
 
 const Faq = () => {
-  const [inputContent, setInputContent] = useState<string>(() => "");
+  const [inputContent] = useState<string>(() => "");
 
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const { data, isLoading } = useFaqDataHook(inputContent);
+  const search = searchParams.get("search");
+  const { data, isLoading } = useFaqDataHook(
+    inputContent ? inputContent : search ?? undefined
+  );
 
   // function passed as a prop, useCallBack to prevent re-render
   const handleToggleTab = useCallback(
@@ -31,7 +33,6 @@ const Faq = () => {
       </div>
       <FaqContainer
         handleToggleTab={handleToggleTab}
-        setInputContent={setInputContent}
         data={data}
         isLoading={isLoading}
         currentTab={searchParams.get("tab")}

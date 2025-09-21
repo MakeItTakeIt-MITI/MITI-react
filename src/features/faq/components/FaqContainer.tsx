@@ -16,15 +16,14 @@ const FaqContainer = ({
   isLoading,
   currentTab,
 }: FabContainerProps) => {
-  console.log(currentTab);
-
   return (
     <article className="flex flex-col gap-4">
       <SearchBar paramKey="search" title="FAQ" />
 
       <div className="space-y-3">
         {/* TAB LIST */}
-        <FaqTabs handleToggleTab={handleToggleTab} />
+        <FaqTabs handleToggleTab={handleToggleTab} currentTab={currentTab} />
+
         {/* FAQ Cards List */}
 
         <ul className="space-y-3">
@@ -37,7 +36,7 @@ const FaqContainer = ({
               {data
                 .filter(
                   (faqData) =>
-                    currentTab === "all" || faqData.category === currentTab
+                    currentTab === "" || faqData.category === currentTab
                 )
                 .map((faqData) => (
                   <li key={faqData.id}>

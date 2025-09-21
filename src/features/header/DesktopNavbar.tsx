@@ -20,7 +20,7 @@ export default function DesktopNavbar() {
             <Link to="community?search=&topic=">게시판</Link>
           </li>
           <li>
-            <Link to={`faq?tab=all`}>자주 묻는 질문</Link>
+            <Link to={`faq?tab=&search=`}>자주 묻는 질문</Link>
           </li>
           <li>
             <Link to={`inquiries?page=1`}>사용자의 문의</Link>
