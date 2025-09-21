@@ -19,7 +19,7 @@ const CourtsListContainer = ({
   geoLongitude,
 }: CourtsListContainerProps) => {
   return (
-    <ul className="custom-scrollbar p-6 flex flex-col gap-2 h-[560px] overflow-y-auto">
+    <ul className="custom-scrollbar sm:p-0 md:p-6 flex flex-col gap-2 sm:h-[600px] md:h-[560px] overflow-y-auto">
       {courstDataPage?.map((courtData) => {
         return (
           <CourtsCard

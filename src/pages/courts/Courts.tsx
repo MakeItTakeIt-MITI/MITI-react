@@ -5,6 +5,7 @@ import SearchBar from "../../features/common/components(renewal)/search/SearchBa
 import CourtsListContainer from "../../features/courts/components/v1.3/CourtsListContainer.tsx";
 import { useAllCourts } from "../../features/courts/hooks/query/useAllCourts.tsx";
 import { useInView } from "react-intersection-observer";
+import MobileFilterBox from "../../features/courts/components/v1.3/MobileFilterBox.tsx";
 
 export default function Courts() {
   const [geolocation, setGeolocation] = useState<{
@@ -72,15 +73,16 @@ export default function Courts() {
       style={{
         backgroundColor: "#141414",
       }}
-      className="mx-auto  w-[968px] flex flex-col items-center gap-[30px] py-[30px]"
+      className="mx-auto sm:w-full md:w-[968px] flex flex-col sm:px-4 md:px-0  md:items-center gap-[30px] py-[30px]"
     >
       <article className="flex  gap-[30px]">
         <Sidebar handleSelectRegion={handleSelectRegion} />
 
-        <div className=" w-[880px] flex flex-col  gap-[20px]">
-          <div className="w-[800px] mx-auto ">
+        <div className="sm:w-full md:w-[880px] flex flex-col  gap-[20px]">
+          <div className="sm:w-full md:w-[800px] mx-auto ">
             <SearchBar title="경기장" paramKey="search" />
           </div>{" "}
+          <MobileFilterBox />
           <CourtsListContainer
             courstDataPage={courtsDataPage}
             hasNextPage={hasNextPage}

@@ -24,10 +24,12 @@ const CourtsCard = ({
   geoLongitude,
 }: CourtsCardProps) => {
   return (
-    <li className=" w-full h-[72px]  py-3 flex ">
+    <li className=" w-full sm:h-[66px] md:h-[72px]  py-3 flex ">
       <Link to={id?.toString()} className="flex justify-between  w-full">
         <div className="space-y-2 max-w-[667px]">
-          <h2 className="text-white font-bold text-[18px] truncate">{title}</h2>
+          <h2 className="text-white font-bold  sm:text-base md:text-[18px] truncate">
+            {title}
+          </h2>
           <div className="space-x-2.5 font-[400] text-[#c2c2c2] text-xs">
             <span>{address}</span>
             <span>{address_detail}</span>

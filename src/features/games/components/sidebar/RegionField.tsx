@@ -31,7 +31,7 @@ export default function RegionField({ handleSelectRegion }: RegionFieldProps) {
   ];
   return (
     <div className="flex flex-col gap-4">
-      <p className="font-bold text-sm text-[#fff]">지역</p>
+      <p className="md:block sm:hidden font-bold text-sm text-[#fff]">지역</p>
       <ul className=" ">
         {REGIONS.map((region) => (
           <li className="py-[6px]" key={region}>
