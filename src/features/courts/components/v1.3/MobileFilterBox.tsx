@@ -1,10 +1,12 @@
 import { useSearchParams } from "react-router-dom";
 import filters from "../../../../assets/v1.3/games/settings_icon.png";
-import RegionCheck from "../../../common/components(renewal)/chips/RegionCheck";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import RegionChipMobile from "./RegionChipMobile";
+import MobileFilterPopup from "./MobileFilterPopup";
 
 const MobileFilterBox = ({}) => {
+  const [showPopup, setShowPopup] = useState(false);
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   const currentRegion = searchParams.get("region");
@@ -34,24 +36,18 @@ const MobileFilterBox = ({}) => {
     (region: string) => {
       const params = Object.fromEntries(searchParams.entries());
 
+      // "전체" sets region to ""
       if (region === "전체") {
         setSearchParams({ ...params, region: "" });
-        return;
-      }
-
-      // toggle
-      if (searchParams.get("region") === region) {
-        const { ...rest } = params;
-        setSearchParams({ ...rest, region: "" });
       } else {
         setSearchParams({ ...params, region });
       }
     },
-
     [setSearchParams, searchParams]
   );
+
   return (
-    <aside className="flex items-center justify-between gap-4">
+    <aside className="md:hidden sm:flex items-center justify-between gap-4">
       <ul className="flex items-center gap-2 overflow-x-auto">
         {REGIONS.map((region) => {
           const isSelected =
@@ -67,9 +63,20 @@ const MobileFilterBox = ({}) => {
         })}
       </ul>
 
-      <button type="button" className="w-[20%]">
+      <button
+        type="button"
+        onClick={() => setShowPopup(true)}
+        className="w-[20%]"
+      >
         <img src={filters} className="size-4" alt="filters button" />
       </button>
+
+      {showPopup && (
+        <MobileFilterPopup
+          handleSelectRegion={handleSelectRegion}
+          onClick={() => setShowPopup(!showPopup)}
+        />
+      )}
     </aside>
   );
 };

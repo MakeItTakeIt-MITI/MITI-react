@@ -65,9 +65,9 @@ export default function SearchBar({ title, paramKey }: SearchBarProps) {
       <button
         type="button"
         onClick={handleSearch}
-        className="size-6 rounded-full flex items-center justify-center bg-primary-teal ml-3"
+        className="size-6  rounded-full flex items-center justify-center bg-primary-teal ml-3"
       >
-        <img src={search_icon} alt="search" />
+        <img src={search_icon} alt="search" className="" />
       </button>
     </div>
   );

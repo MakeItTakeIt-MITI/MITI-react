@@ -84,7 +84,7 @@ export default function CourtDetails() {
             />
             <CourtInfoContainer
               courtDetailData={courtDetailData}
-              courtsGamesPageContent={courtsGamesPageContent}
+              courtsGamesPageContent={courtsGamesPageContent ?? []}
               fetchNextPage={fetchNextPage}
               hasNextPage={hasNextPage}
               geoLatitude={geolocation?.lat}

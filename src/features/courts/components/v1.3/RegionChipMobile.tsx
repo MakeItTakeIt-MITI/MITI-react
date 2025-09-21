@@ -12,7 +12,7 @@ const RegionChipMobile = ({
   <li
     onClick={() => onClick && onClick(region)}
     className={`
-      block whitespace-nowrap py-2 px-2.5 text-xs rounded-[50px] border cursor-pointer
+       whitespace-nowrap py-2 px-2.5 text-xs rounded-[50px] border cursor-pointer flex items-center justify-center
       ${
         isSelected
           ? "bg-[#1ADCDF] border-none text-[#000]"
