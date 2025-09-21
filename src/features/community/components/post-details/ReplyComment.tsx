@@ -16,7 +16,9 @@ const ReplyComment = ({ reply, formatDate }: ReplyCommentProps) => {
           <span className=" font-bold text-white">{reply.writer.nickname}</span>
           <p className=" text-[#707070]">{formatDate(reply.created_at)}</p>
         </div>
-        <p className="text-white text-xs">{reply.content}</p>
+        <p style={{ whiteSpace: "pre-line" }} className="text-white text-xs">
+          {reply.content}
+        </p>
         <div className="flex items-center gap-1.5 text-[10px] text-[#737373] font-[500]">
           <div className="flex items-center gap-1">
             <img src={like_button_small} alt={like_button_small} />

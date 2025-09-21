@@ -26,7 +26,10 @@ const PostDetailContainer = ({
           {/* Post User Info */}
           <PostUserInfo size="s" nickname={postDetails?.writer.nickname} />
           {/* Post Content */}
-          <p className="font-base text-white font-normal">
+          <p
+            style={{ whiteSpace: "pre-line" }}
+            className="font-base text-white font-normal"
+          >
             {postDetails?.content}
           </p>
           {/* LIKES & SHARE */}

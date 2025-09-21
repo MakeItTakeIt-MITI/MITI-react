@@ -1,11 +1,21 @@
 import axiosUrl from "../../../utils/axios"
 
-export const getPosts = async (search: string) => {
+export const getPosts = async (search: string, category: string) => {
     try {
-        const response = await axiosUrl.get(`posts?search=${search}`)
+        const response = await axiosUrl.get(`posts?search=${search}&category=${category}`)
         return response.data
     } catch (error) {
         console.error("Error fetching games:", error);
+        throw error;
+    }
+}
+
+export const getPopularTopics = async () => {
+    try {
+        const response = await axiosUrl.get(`/posts/popular-search-word`)
+        return response.data
+    } catch (error) {
+        console.error("Error fetching popular topics:", error);
         throw error;
     }
 }
