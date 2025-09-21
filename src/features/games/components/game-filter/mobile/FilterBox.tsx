@@ -1,9 +1,7 @@
 import { Link, useSearchParams } from "react-router-dom";
 import { useTimeField } from "../../../../../store/Sidebar/useTimeFieldStore";
 import DatesField from "../../sidebar/DatesField";
-import TimesField from "../../sidebar/TimesField";
 import GameStatusField from "../../sidebar/GameStatusField";
-import RegionField from "../../sidebar/RegionField";
 import { useCallback } from "react";
 import { InitialDateField } from "../../../interface/games";
 import {
@@ -11,9 +9,12 @@ import {
   getTodaysGamesQuery,
 } from "../../../../../utils/dates/date";
 import TimesFieldMobile from "./TimesFieldMobile";
-import GameStatusFieldMobile from "./GameStatusFieldMobile";
 
-const FilterBox = ({ handleToggleMobileFilterBox }) => {
+interface FilterBoxProps {
+  handleToggleMobileFilterBox: () => void;
+}
+
+const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const month = searchParams.get("month");
@@ -157,6 +158,15 @@ const FilterBox = ({ handleToggleMobileFilterBox }) => {
     [searchParams]
   );
 
+  const handleResetFilters = () => {
+    resetTime();
+    handleToggleMobileFilterBox();
+  };
+
+  const handleApplyFilters = () => {
+    handleToggleMobileFilterBox();
+  };
+
   return (
     <div className="fixed w-full h-full top-0 right-0 bottom-0 left-0 px-4 py-6 bg-[#141414] z-[99999]">
       <div className="flex flex-col justify-between h-full">
@@ -216,13 +226,14 @@ const FilterBox = ({ handleToggleMobileFilterBox }) => {
         <div className="flex items-center gap-[22px]">
           <button
             type="button"
-            onClick={handleToggleMobileFilterBox}
+            onClick={handleResetFilters}
             className="w-[96px] h-[44px] bg-[#999] text-white font-bold rounded-lg"
           >
             <Link to={`/${getTodaysGamesQuery()}`}> 초기화</Link>
           </button>
           <button
             type="button"
+            onClick={handleApplyFilters}
             className="w-full h-[44px] bg-[#1ADCDF] text-black font-bold rounded-lg"
           >
             적용하기
