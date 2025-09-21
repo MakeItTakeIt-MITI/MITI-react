@@ -20,7 +20,7 @@ const CourtInfoContainer = ({
   geoLongitude,
 }: CourtInfoContainerProps) => {
   return (
-    <div className="flex flex-col gap-[32px] w-[410px]">
+    <div className="flex flex-col gap-[32px] sm:w-full md:w-[410px] md:px-0 sm:px-4">
       {/* court detail info */}
       <CourtDetailsCard
         courtDetailData={courtDetailData}
