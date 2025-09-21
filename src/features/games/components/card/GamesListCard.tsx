@@ -18,7 +18,7 @@ export default function GamesListCard({ game }: GamesListCardProps) {
       // style={{
       //   boxShadow: isHovered ? "0 4px 24px 0 #1ADCDF, 0 0 0 4px #141414" : "",
       // }}
-      className="w-full  p-1"
+      className="w-full  p-1 "
       // onMouseEnter={() => setIsHovered(true)}
       // onMouseLeave={() => setIsHovered(false)}
     >
@@ -38,7 +38,7 @@ export default function GamesListCard({ game }: GamesListCardProps) {
           <div className="space-y-2">
             <GameStatus status={game.game_status} />
             <h1
-              className={`font-bold text-base text-white ${
+              className={`font-bold sm:text-sm md:text-base text-white ${
                 game.title.length > 65 ? "truncate" : ""
               }`}
             >

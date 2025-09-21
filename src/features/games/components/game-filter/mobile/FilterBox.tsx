@@ -168,7 +168,7 @@ const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
   };
 
   return (
-    <div className="fixed w-full h-full top-0 right-0 bottom-0 left-0 px-4 py-6 bg-[#141414] z-[99999]">
+    <div className="fixed w-full h-full top-0 right-0 bottom-0 left-0 px-4 py-6 bg-[#141414] z-[99999] overflow-y-hidden">
       <div className="flex flex-col justify-between h-full">
         {/* status field */}
         <div className="flex flex-col  gap-5">

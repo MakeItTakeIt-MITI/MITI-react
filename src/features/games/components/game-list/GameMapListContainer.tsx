@@ -38,6 +38,9 @@ export default function GameMapListContainer({
 
   return (
     <div className=" md:w-[700px]   w-full min-h-[1px] flex flex-col gap-[20px]">
+      {isFilterBoxOpen && (
+        <FilterBox handleToggleMobileFilterBox={handleToggleMobileFilterBox} />
+      )}
       {/* TAB  */}
       <div className="flex px-4">
         <Tab
@@ -95,16 +98,20 @@ export default function GameMapListContainer({
               ))}
             </ul>
           </div>
-          {isFilterBoxOpen && (
-            <FilterBox
-              handleToggleMobileFilterBox={handleToggleMobileFilterBox}
-            />
-          )}
         </div>
       ) : (
         // ALL GAMES RENDERING CONTAINER
-        <div className="flex flex-col gap-5 w-full ">
+        <div className="flex flex-col gap-5 w-full md:px-0 sm:px-4">
           <SearchBar paramKey="search" title="경기" />
+          {/* <div className="space-y-3 sm:block md:hidden">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-[400] text-white"></span>
+              <button onClick={handleToggleMobileFilterBox} type="button">
+                <img src={settings_mobile} alt="settings_mobile" />
+              </button>
+            </div>
+            <SettingsContainer />
+          </div> */}
           <GamesList gamesListData={gamesListData} />
         </div>
       )}
