@@ -9,15 +9,14 @@ const GameDetail = () => {
 
   const { data: gameDetailData } = useGameDetails({ id });
 
-  console.log(gameDetailData?.data);
   return (
     <section
       style={{
         backgroundColor: "#141414",
       }}
-      className="mx-auto  w-[968px] flex flex-col items-center gap-[30px] py-[30px]"
+      className="mx-auto  sm:w-full md:w-[968px] flex flex-col items-center gap-[30px] py-[30px]"
     >
-      <article className="w-full  flex justify-between">
+      <article className="w-full  flex sm:flex-col  md:flex-row justify-between">
         <GameDetailsPanel gameDetailData={gameDetailData?.data} />
         <GameDetailContainer gameDetailData={gameDetailData?.data} />
       </article>

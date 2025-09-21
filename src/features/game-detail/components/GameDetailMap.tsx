@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import { useEffect } from "react";
+import map_marker from "../../../assets/v1.3/map/map_maker_m.svg";
 
 declare global {
   interface Window {
@@ -14,7 +15,12 @@ if (!window.naver) {
 }
 const { naver } = window;
 
-export default function GameDetailMap({ lat, long }) {
+interface GameDetailMapProps {
+  lat: string;
+  long: string;
+}
+
+export default function GameDetailMap({ lat, long }: GameDetailMapProps) {
   useEffect(() => {
     const map = new naver.maps.Map("game-details-map", {
       center: new naver.maps.LatLng(lat, long),
@@ -27,18 +33,19 @@ export default function GameDetailMap({ lat, long }) {
       position: new naver.maps.LatLng(lat, long),
       zoom: 12,
       map: map,
-
-      // gameId: game.id,
-      // markerHTML: markerHTML,
-      // overlappedMarkerHTML: overlappedMarkerHTML,
-      // selectedMarkerHTML: selectedMarkerHTML,
-      //   zIndex: gameId === game.id ? 100 : 1,
     });
+    const img = document.createElement("img");
+    img.src = map_marker;
+    img.alt = "Game Location";
+    img.style.width = "32px";
+    img.style.height = "40px";
+    marker.setIcon({ content: img });
   }, [lat, long]);
 
   return (
-    <div id="game-details-map" className="size-[360px] rounded-[20px]">
-      MediumMap
-    </div>
+    <div
+      id="game-details-map"
+      className="w-full h-[241px]  md:size-[360px] md:rounded-[20px]"
+    />
   );
 }
