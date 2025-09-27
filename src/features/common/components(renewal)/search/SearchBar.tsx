@@ -47,9 +47,9 @@ export default function SearchBar({ title, paramKey }: SearchBarProps) {
   };
 
   return (
-    <div className="flex items-center w-full h-10  md:h-12 border border-[#707070] rounded-[50px] bg-[#141414] px-5">
+    <div className="flex items-center w-full h-10  md:h-12 border border-[#707070] rounded-[50px] bg-[#141414] sm:px-2 md:px-5">
       <div className="flex items-center gap-2.5 w-full">
-        <span className="text-white font-bold text-sm md:text-base sm:w-[52px] ">
+        <span className="text-white font-bold text-sm md:text-base sm:w-[52px] flex items-center justify-center">
           {title}
         </span>{" "}
         <span className="text-[#707070]">|</span>

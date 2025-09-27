@@ -1,32 +1,28 @@
 import InquiryCard from "./InquiryCard.tsx";
+import { InquiriesField } from "../interface/inquries.ts";
 
-const InquiriesListContainer = () => {
+interface InquiriesListContainerProps {
+  inquriesPageContentData: InquiriesField[];
+}
+
+const InquiriesListContainer = ({
+  inquriesPageContentData,
+}: InquiriesListContainerProps) => {
   return (
-    <ul>
-      <InquiryCard
-        isAnswered={true}
-        year="2025"
-        month="05"
-        day="19"
-        title="낵네임 변경"
-        nickname="MITI"
-      />
-      <InquiryCard
-        isAnswered={false}
-        year="2025"
-        month="05"
-        day="19"
-        title="낵네임 변경"
-        nickname="MITI"
-      />
-      <InquiryCard
-        isAnswered={true}
-        year="2025"
-        month="05"
-        day="19"
-        title="낵네임 변경"
-        nickname="MITI"
-      />
+    <ul className="sm:h-full md:min-h-[520px]">
+      {inquriesPageContentData?.map((inquiry) => (
+        <li key={inquiry.id}>
+          <InquiryCard
+            isAnswered={inquiry.num_of_answers > 0}
+            id={inquiry.id}
+            year={inquiry.created_at.split("T")[0].split("-")[0]}
+            month={inquiry.created_at.split("T")[0].split("-")[1]}
+            day={inquiry.created_at.split("T")[0].split("-")[2]}
+            title={inquiry.title}
+            nickname={inquiry.nickname}
+          />
+        </li>
+      ))}
     </ul>
   );
 };

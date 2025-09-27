@@ -1,12 +1,24 @@
 import left from "../../../assets/v11/pagination-left.svg";
 import right from "../../../assets/v11/pagination-right.svg";
 
-const Pagination = ({ setPageNumber, currentPage, pages, pageLength }) => {
+interface PaginationProps {
+  setPageNumber: (value: number | ((prev: number) => number)) => void;
+  currentPage: number;
+  pages: number[];
+  pageLength: number;
+}
+
+const Pagination = ({
+  setPageNumber,
+  currentPage,
+  pages,
+  pageLength,
+}: PaginationProps) => {
   return (
     <div className="flex justify-center items-center gap-5">
       <button
         type="button"
-        onClick={() => setPageNumber((prev) => Math.max(prev - 1, 1))}
+        onClick={() => setPageNumber((prev: number) => Math.max(prev - 1, 1))}
         disabled={currentPage === 1}
       >
         <img src={left} alt="left" />
@@ -27,7 +39,9 @@ const Pagination = ({ setPageNumber, currentPage, pages, pageLength }) => {
       </div>
       <button
         type="button"
-        onClick={() => setPageNumber((prev) => Math.min(prev + 1, pageLength))}
+        onClick={() =>
+          setPageNumber((prev: number) => Math.min(prev + 1, pageLength))
+        }
         disabled={currentPage === pageLength}
       >
         <img src={right} alt="right" />

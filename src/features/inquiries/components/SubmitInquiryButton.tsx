@@ -8,7 +8,7 @@ const SubmitInquiryButton = () => {
       style={{
         lineHeight: "24px",
       }}
-      className=" w-[134px] h-[48px] p-3 flex items-center justify-center gap-2 rounded-[50px]  bg-[#1ADCDF] "
+      className="sm:hidden w-[134px] h-[48px] p-3 md:flex items-center justify-center gap-2 rounded-[50px]  bg-[#1ADCDF] "
     >
       <img src={inquiry_button} alt="inquiry_button" />
       <span className=" font-bold">문의하기</span>
