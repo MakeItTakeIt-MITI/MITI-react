@@ -6,7 +6,9 @@ export default function DesktopNavbar() {
   return (
     <nav className="sm:hidden md:flex w-full px-[360px] h-[60px] bg-[#141414]  items-center justify-center ">
       <div className=" h-[28px] w-[1200px]  flex items-center  justify-between">
-        <img src={navbar_logo} alt="miti logo" />
+        <Link to="/">
+          <img src={navbar_logo} alt="miti logo" />
+        </Link>
         <ul className="flex items-center gap-5 text-white font-bold text-sm">
           <li>
             <Link to={getTodaysGamesQuery()}>경기 목록</Link>
