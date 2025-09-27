@@ -33,7 +33,7 @@ const Modal = ({
   };
 
   return (
-    <div className="fixed top-0 right-0 bottom-0 left-0 h-full w-full flex items-center justify-center bg-secondary-black">
+    <div className="fixed top-0 right-0 bottom-0 left-0 h-full w-full flex items-center justify-center bg-[#141414]">
       <div className="w-[335px] h-[252px] pt-[30px] px-5 pb-5 bg-dark-card rounded-xl">
         <div className="space-y-3">
           <h1 className="text-[#f0f0f0] text-base font-bold ">비밀번호 입력</h1>

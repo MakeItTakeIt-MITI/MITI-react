@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useInquiryDetailsHook } from "../../features/inquiries/hooks/useInquiryDetailsHook";
 import Modal from "../../features/inquiries/components/Modal";
 import { InquiryDetailsField } from "../../interfaces/support";
-import MoveToAppBanner from "../../features/common/components/MoveToAppBanner";
+// import MoveToAppBanner from "../../features/common/components/MoveToAppBanner";
 import Footer from "../../features/common/components/Footer";
+import chevron_left from "../../assets/v1.3/inquiries/chevron-left.svg";
+import UserInquiryInfo from "../../features/inquiry-details/components/UserInquiryInfo";
+import AdminReplyField from "../../features/inquiry-details/components/AdminReplyField";
 
 const InquiryDetail = () => {
   const [displayModal, setDisplayModal] = useState(false);
@@ -41,65 +44,32 @@ const InquiryDetail = () => {
         />
       ) : (
         <>
-          {" "}
-          <section className="min-h-screen bg-secondary-black md:pt-[3.75rem] md:pb-[6.25rem] sm:py-[1.88rem] sm:px-[1.25rem]  md:space-y-[100px]">
-            <div className="md:w-[767px] sm:w-full space-y-[40px] mx-auto">
+          <section className="sm:w-full md:w-[840px] sm:h-full md:min-h-[800px] sm:px-4 md:px-0 mx-auto sm:py-[20px] md:py-[30px] flex flex-col sm:gap-[12px] md:gap-[42px]">
+            <div className="flex flex-col-reverse  gap-1">
+              <h1 className=" md:text-[48px] sm:text-[24px] font-bold text-white ">
+                문의 상세
+              </h1>
+              <Link
+                to="/inquiries"
+                className="md:hidden sm:flex items-center gap-1"
+              >
+                <img src={chevron_left} alt="chevron_left" />{" "}
+                <span className="text-[10px] text-[#999]">목록</span>
+              </Link>
+            </div>
+            <div className="w-full space-y-[40px] ">
               {/* top */}
-              <div className="space-y-5 text-white">
-                <h1 className=" md:text-[32px] sm:text-[26px] font-semibold ">
-                  문의 상세 내용
-                </h1>
-
-                <div className="space-y-3">
-                  <h2 className=" md:text-xl sm:text-sm font-normal ">
-                    {data?.data.title}
-                  </h2>
-                  <div className="flex items-center gap-5 md:text-xs sm:text-[10px] font-light ">
-                    <p className="">
-                      {`${data?.data.created_at.slice(
-                        0,
-                        4
-                      )}년 ${data?.data.created_at
-                        .slice(5, 7)
-                        .padStart(2, "0")}월 ${data?.data.created_at
-                        .slice(8, 10)
-                        .padStart(2, "0")}일`}
-                    </p>
-                    <p>{data?.data.nickname}</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* main container */}
-              <div className="space-y-[30px]">
-                <hr className="bg-[#525252] h-1" />
-                <p className="text-[#f0f0f0] text-sm font-normal ">
-                  {data?.data.content}
-                </p>
-                {data?.data.answers.map((answer: InquiryDetailsField) => (
-                  <div
-                    key={answer.id}
-                    className=" text-white w-full min-h-[257px] p-5 space-y-[10px] bg-[#404040] rounded-xl"
-                  >
-                    {/* <p className="  text-xs font-light ">2024년 10월 12일</p> */}
-                    <p className="  text-xs font-light ">
-                      {" "}
-                      {`${answer.created_at.slice(0, 4)}년 ${answer.created_at
-                        .slice(5, 7)
-                        .padStart(2, "0")}월 ${answer.created_at
-                        .slice(8, 10)
-                        .padStart(2, "0")}일`}
-                    </p>
-                    <p className="text-sm font-[400]">{answer.content}</p>
-                  </div>
-                ))}
-
-                <hr className="bg-[#525252] h-1" />
-              </div>
-              <MoveToAppBanner />
+              <UserInquiryInfo inquiryDetailData={data?.data} />
+              <hr className="border-0 h-[1px] bg-[#999] w-full" />
+              {/* <AdminReplyField inquiryDetailData={data?.data} /> */}
+              {/* {data?.data.answers.length > 0 && (
+                <>
+                  <hr className="border-0 h-[1px] bg-[#999] w-full" />
+                  <AdminReplyField inquiryDetailData={data?.data} />
+                </>
+              )} */}
             </div>
           </section>
-          <Footer />{" "}
         </>
       )}
     </>
