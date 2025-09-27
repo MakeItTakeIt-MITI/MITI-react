@@ -3,6 +3,7 @@ import CommunityPanel from "../../features/community/components/CommunityPanel.t
 import { useSearchParams } from "react-router-dom";
 import { useGetPosts } from "../../features/community/hooks/query/useGetPosts.tsx";
 import { useGetPopularTopics } from "../../features/community/hooks/query/useGetPopularTopics.tsx";
+import { useGetPopularPosts } from "../../features/community/hooks/query/useGetPopularPosts.tsx";
 
 export default function Community() {
   const [searchParams] = useSearchParams();
@@ -14,6 +15,7 @@ export default function Community() {
 
   const { data: postsData } = useGetPosts(getSearchParam, getCategoryParam);
   const { data: popularTopicsData } = useGetPopularTopics();
+  const { data: popularPostsData } = useGetPopularPosts();
 
   return (
     <section
@@ -23,7 +25,10 @@ export default function Community() {
       className="mx-auto min-h-screen  sm:w-full md:w-[968px] flex gap-[30px] py-[30px] sm:px-4 md:px-0"
     >
       <CommunityPanel popularTopicsData={popularTopicsData?.data} />
-      <CommunityContentContainer postsData={postsData?.data} />
+      <CommunityContentContainer
+        postsData={postsData?.data}
+        popularTopicsData={popularPostsData?.data}
+      />
     </section>
   );
 }

@@ -20,6 +20,16 @@ export const getPopularTopics = async () => {
     }
 }
 
+export const getPopularPosts = async () => {
+    try {
+        const response = await axiosUrl.get(`/posts/popular-posts`)
+        return response.data
+    } catch (error) {
+        console.error("Error fetching popular posts:", error);
+        throw error;
+    }
+}
+
 export const getPostDetail = async (id: number) => {
     try {
         const response = await axiosUrl.get(`posts/${id}`)

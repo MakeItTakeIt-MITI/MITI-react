@@ -7,6 +7,7 @@ import { CommunityPostDetail } from "../../interface/post.ts";
 import LikeCommentFeatures from "./LikeCommentFeatures.tsx";
 import CommentsContainer from "./CommentsContainer.tsx";
 import { UserCommentsField } from "../../interface/comments.ts";
+import PostCategoryChip from "../PostCategoryChip.tsx";
 
 interface PostDetailContainerProps {
   postDetails: CommunityPostDetail;
@@ -19,10 +20,12 @@ const PostDetailContainer = ({
 }: PostDetailContainerProps) => {
   return (
     <article className="w-full flex flex-col gap-6">
-      <SearchBar paramKey="search" title="게시글" />
+      {/* <SearchBar paramKey="search" title="게시글" /> */}
       <div className="space-y-4">
         {/* Uploaded Post */}
         <div className="space-y-4">
+          <PostCategoryChip category={postDetails?.category as CategoryType} />
+
           {/* Post User Info */}
           <PostUserInfo size="s" nickname={postDetails?.writer.nickname} />
           {/* Post Content */}
@@ -32,6 +35,16 @@ const PostDetailContainer = ({
           >
             {postDetails?.content}
           </p>
+          <div className="flex flex-col gap-2">
+            {postDetails?.images.map((imageUrl, index) => (
+              <img
+                key={index}
+                src={imageUrl}
+                alt={`Post Image ${index + 1}`}
+                className="w-full max-w-[700px] h-auto "
+              />
+            ))}
+          </div>
           {/* LIKES & SHARE */}
         </div>
         <div className="flex flex-col gap-3">

@@ -39,7 +39,7 @@ const CommentsContainer = ({ postComments }: CommentsContainerProps) => {
           comment_src={comment_button}
           comments_count={postComments?.reply_comments.length}
         />
-        <hr className="bg-[#5C5C5C] h-[1px]  w-full block" />
+        {/* <hr className="bg-[#5C5C5C] h-[1px]  w-full" /> */}
         {/* Reply Section   */}
         {postComments.reply_comments.length >= 1 &&
           postComments.reply_comments.map((reply) => (

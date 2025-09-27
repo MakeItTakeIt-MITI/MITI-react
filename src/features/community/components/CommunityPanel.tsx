@@ -67,9 +67,9 @@ const CommunityPanel = ({ popularTopicsData }: CommunityPanelProps) => {
       <div className="flex flex-col gap-4">
         <h2 className="font-bold text-white">카테고리</h2>
         <div className="flex flex-col gap-2">
-          {topicCategories.map((categoryGroup, groupIdx) => (
+          {topicCategories?.map((categoryGroup, groupIdx) => (
             <div key={groupIdx} className="flex items-center gap-2">
-              {categoryGroup.map((category) => {
+              {categoryGroup?.map((category) => {
                 const isSelected =
                   searchParams.get("category") === category.key ||
                   searchParams.get("category") === category.label;
@@ -91,7 +91,7 @@ const CommunityPanel = ({ popularTopicsData }: CommunityPanelProps) => {
       <div className="flex flex-col gap-4">
         <h2 className="font-bold text-white">인기 검색어</h2>
         <ul className="grid grid-cols-3 grid-row-6 gap-2">
-          {popularTopicsData.map(
+          {popularTopicsData?.map(
             (topic: { search_word: string }, idx: number) => (
               <li
                 key={idx}

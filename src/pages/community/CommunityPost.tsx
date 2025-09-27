@@ -17,9 +17,9 @@ export default function CommunityPost() {
       style={{
         backgroundColor: "#141414",
       }}
-      className="mx-auto min-h-screen  w-[968px] flex gap-[30px] py-[30px] pb-[30px]"
+      className="mx-auto min-h-screen  md:w-[968px] sm:w-full flex gap-[30px] sm:px-4 md:px-0 md:py-[30px] md:pb-[30px]"
     >
-      <CommunityPanel />
+      {/* <CommunityPanel /> */}
       <PostDetailContainer
         postDetails={postDetails}
         postComments={postComments}

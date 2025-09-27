@@ -32,22 +32,26 @@ export const PostCard = ({ post }: PostcardProps) => {
           <div className="flex justify-between gap-4">
             <div className="space-y-4">
               <div className="space-y-3">
-                <h1 className="font-bold text-white ">{post.title}</h1>
-                <p className={`text-xs font-[400] text-white  `}>
+                <h1 className={`font-bold text-white sm:text-sm `}>
+                  {post.title}
+                </h1>
+                <p
+                  className={`sm:text-[10px] md:text-xs font-[400] text-white  `}
+                >
                   {post.content.length > 52
                     ? post.content.slice(0, 52)
                     : post.content}
                 </p>
               </div>
-              <div className="space-x-[3px] text-xs text-[#5C5C5C] font-[400]">
+              <div className="space-x-[3px] sm:text-[10px] md:text-xs text-[#5C5C5C] font-[400]">
                 <span>{post.writer.nickname}</span>
                 <span>댓글 {post.num_of_comments}</span>
                 <span>좋아요 {post.liked_users.length}</span>
               </div>
             </div>
-            <div className="size-[60px] bg-white rounded-lg">
+            <div className=" rounded-lg">
               <img
-                className="h-full w-full "
+                className="h-full w-full sm:w-[50px] sm:h-[50px] md:w-[60px] md:h-[60px]"
                 src={post.writer.profile_image_url}
                 alt="profile img"
               />

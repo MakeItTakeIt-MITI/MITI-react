@@ -28,7 +28,7 @@ const ReplyComment = ({ reply, formatDate }: ReplyCommentProps) => {
             </div>
           </div>
         </div>
-        <hr className="bg-[#5C5C5C] h-[1px]  w-full block" />
+        {/* <hr className="bg-[#5C5C5C] h-[1px]  w-full block" /> */}
       </div>
     </div>
   );
