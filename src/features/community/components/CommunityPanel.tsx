@@ -15,9 +15,13 @@ import { useSearchParams } from "react-router-dom";
 
 interface CommunityPanelProps {
   popularTopicsData: { search_word: string }[];
+  handleSetToSearchParams: (selected: string) => void;
 }
 
-const CommunityPanel = ({ popularTopicsData }: CommunityPanelProps) => {
+const CommunityPanel = ({
+  popularTopicsData,
+  handleSetToSearchParams,
+}: CommunityPanelProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleCategoryClick = (categoryKey: string) => {
@@ -95,7 +99,18 @@ const CommunityPanel = ({ popularTopicsData }: CommunityPanelProps) => {
             (topic: { search_word: string }, idx: number) => (
               <li
                 key={idx}
-                className="py-2.5 px-[14px] border border-[#5C5C5C] rounded-[50px] whitespace-nowrap text-xs text-[#999] flex items-center justify-center "
+                onClick={() => handleSetToSearchParams(topic.search_word)}
+                style={{
+                  backgroundColor:
+                    searchParams.get("search") === topic.search_word
+                      ? "#A3F1F2"
+                      : "",
+                  color:
+                    searchParams.get("search") === topic.search_word
+                      ? "#000"
+                      : "#999",
+                }}
+                className="transition duration-300 ease-in-out cursor-pointer py-2.5 px-[14px] border border-[#5C5C5C] rounded-[50px] whitespace-nowrap text-xs  flex items-center justify-center "
               >
                 {topic.search_word}
               </li>

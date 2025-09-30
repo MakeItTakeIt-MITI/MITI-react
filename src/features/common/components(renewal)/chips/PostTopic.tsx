@@ -16,6 +16,7 @@ export default function PostTopic({
       type="button"
       onClick={onClick}
       className={`px-3.5 py-2.5 text-xs rounded-[100px] flex items-center justify-center gap-2 whitespace-nowrap border
+        transition duration-300 ease-in-out
         ${
           selected
             ? "bg-[#A3F1F2] text-black border-none "
