@@ -17,6 +17,7 @@ interface GameMapListContainerProps {
   gamesListData: GameField[];
   isLoading: boolean;
   tab: string;
+  isGamesListLoading: boolean;
 }
 
 export default function GameMapListContainer({
@@ -24,6 +25,7 @@ export default function GameMapListContainer({
   tab,
   gamesMapData,
   gamesListData,
+  isGamesListLoading,
 }: GameMapListContainerProps) {
   const [isFilterBoxOpen, setIsFilterBoxOpen] = useState(false);
 
@@ -68,7 +70,11 @@ export default function GameMapListContainer({
                   <span className="text-xs font-[400] text-white">
                     총 {displayedGames?.length}개의 경기
                   </span>
-                  <button onClick={handleToggleMobileFilterBox} type="button">
+                  <button
+                    className="md:hidden sm:block"
+                    onClick={handleToggleMobileFilterBox}
+                    type="button"
+                  >
                     <img src={settings_mobile} alt="settings_mobile" />
                   </button>
                 </div>
@@ -103,16 +109,10 @@ export default function GameMapListContainer({
         // ALL GAMES RENDERING CONTAINER
         <div className="flex flex-col gap-5 w-full md:px-0 sm:px-4">
           <SearchBar paramKey="search" title="경기" />
-          {/* <div className="space-y-3 sm:block md:hidden">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-[400] text-white"></span>
-              <button onClick={handleToggleMobileFilterBox} type="button">
-                <img src={settings_mobile} alt="settings_mobile" />
-              </button>
-            </div>
-            <SettingsContainer />
-          </div> */}
-          <GamesList gamesListData={gamesListData} />
+          <GamesList
+            gamesListData={gamesListData}
+            isGamesListLoading={isGamesListLoading}
+          />
         </div>
       )}
     </div>

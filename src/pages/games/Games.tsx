@@ -2,7 +2,7 @@ import BannerMedium from "../../features/common/components(renewal)/banners/Bann
 import Sidebar from "../../features/games/components/sidebar/Sidebar.tsx";
 import { useSearchParams } from "react-router-dom";
 import GameMapListContainer from "../../features/games/components/game-list/GameMapListContainer.tsx";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useMapGamesList } from "../../features/games/hooks/query/useMapGamesList.tsx";
 import { useGamesListOnly } from "../../features/games/hooks/query/useGamesList.tsx";
 import { GameField } from "../../features/games/interface/games.ts";
@@ -42,10 +42,22 @@ export const Games = () => {
 
   const gamesMapData = mapData?.data;
 
-  const { data: gamesData } = useGamesListOnly(regionParam, searchParam);
+  const {
+    data: gamesData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading: isGamesListLoading,
+  } = useGamesListOnly(regionParam, searchParam);
 
   const gamesListData: GameField[] =
     gamesData?.pages.flatMap((page) => page.data.page_content) ?? [];
+
+  useEffect(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
     <>
@@ -68,6 +80,7 @@ export const Games = () => {
             gamesListData={gamesListData}
             isLoading={isLoading}
             tab={tab}
+            isGamesListLoading={isGamesListLoading}
           />
         </article>
       </section>

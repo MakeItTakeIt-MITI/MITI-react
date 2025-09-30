@@ -5,6 +5,7 @@ import GameTime from "../../../common/components(renewal)/chips/GameTime";
 import GameParticipants from "../../../common/components(renewal)/chips/GameParticipants";
 import GameFee from "../../../common/components(renewal)/chips/GameFee";
 import { GameField } from "../../interface/games";
+import "./card.css";
 
 interface GamesListCardProps {
   game: GameField;
@@ -14,14 +15,7 @@ export default function GamesListCard({ game }: GamesListCardProps) {
   // const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <li
-      // style={{
-      //   boxShadow: isHovered ? "0 4px 24px 0 #1ADCDF, 0 0 0 4px #141414" : "",
-      // }}
-      className="w-full  p-1 "
-      // onMouseEnter={() => setIsHovered(true)}
-      // onMouseLeave={() => setIsHovered(false)}
-    >
+    <li className="w-full  p-1  hover:custom-card-shadow  hover:transition-all ease-in-out">
       <Link className="flex items-center   gap-5" to={`/games/${game.id}`}>
         {/* DATE */}
         <div className="w-[34px] h-full text-white flex flex-col items-center justify-center">
