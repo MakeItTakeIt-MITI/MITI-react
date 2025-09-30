@@ -55,7 +55,6 @@ const CourtsCard = ({
                     longitude
                   ).toFixed(1)
                 : ""}{" "}
-              km
             </span>
             <span>km</span>
           </div>
