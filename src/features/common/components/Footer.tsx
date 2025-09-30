@@ -1,117 +1,102 @@
-import instagram from "../../../assets/v11/instagram.svg";
-import miti_logo from "../../../assets/v11/footer-logo.svg";
-import playstore from "../../../assets/v11/google-play.svg";
-import applestore from "../../../assets/v11/apple-store.svg";
+import instagram_icon from "../../../assets/v1.3/footer/instagram-link.svg";
+import youtube_icon from "../../../assets/v1.3/footer/youtube.svg";
+import miti_logo from "../../../assets/v1.3/footer/miti_logo.svg";
+import miti_logo_sm from "../../../assets/v1.3/footer/miti_logo_sm.svg";
+import playstore from "../../../assets/v1.3/footer/google-play.svg";
+import applestore from "../../../assets/v1.3/footer/Apple Store.svg";
 import { Link } from "react-router-dom";
 import { APPLE_STORE, PLAYSTORE } from "../../../utils/app.ts";
 
 const Footer = () => {
   return (
     <>
-      {/* NON MOBILE */}
-      <footer className="sm:hidden md:block h-[17.5rem] w-full bg-primary-black   pt-[3.75rem] pb-[5rem]">
-        <div className="flex items-center justify-between w-[768px] mx-auto ">
-          {/* LEFT Container */}
-          <div className="space-y-[2rem]">
-            {/* top text */}
-            <div className="space-y-[1.25rem]">
-              {/* 이용약관 / 개인정보 / 위치기반 이용약관 */}
-              <div className="space-x-[1.25rem] text-[#E5E5E5] text-[12px] font-bold">
-                <Link to="/policies">서비스 약관</Link>
+      <footer className="w-full md:h-[246px] sm:h-[300px] bg-[#141414]  sm:px-4 md:px-0 py-[30px] flex flex-col items-center justify-center gap-5">
+        <div className="md:w-[668px] sm:w-full h-full flex sm:flex-col-reverse md:flex-row justify-between sm:gap-5 md:gap-0 py-[20px]">
+          {/* LEFT */}
+          <div className="flex flex-col gap-5">
+            {/* 서비스 약관 및 고객센타 */}
+            <ul className="flex items-center gap-4 text-white font-fold text-xs">
+              <li>
+                {" "}
+                <Link to="/policies" className="font-bold">
+                  서비스 약관
+                </Link>
+              </li>
+              <li className="w-[1px] h-[10px] bg-white "></li>
+              <li>
+                <Link to="/inquiries" className="font-bold">
+                  고객센터
+                </Link>
+              </li>
+            </ul>
+            {/* 미티 및 대표 정보 */}
+            <ul className="text-[#999] text-xs font-[400] space-y-2">
+              <li className="flex items-center gap-3">
+                <span>대표 </span> <span>전재완</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <span>메일</span> <span>miti.official@gmail.com </span>
+              </li>
+              <li className="flex items-center gap-3">
+                <span>주소</span> <span>인천광역시 동구 화도진로 16</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <span>사업자 번호</span> <span>547-03-03467 </span>
+              </li>
+            </ul>
+            {/* SNS 바로가기 */}
+            <div className="flex items-center gap-5">
+              <div>
+                <a
+                  href="https://www.instagram.com/miti_makeittakeit_official/"
+                  target="_blank"
+                >
+                  <img src={instagram_icon} alt="instagram_icon" />
+                </a>
               </div>
-
-              {/* contact */}
-              <div className="space-y-[0.75rem] font-[400] text-[12px] text-[#D4D4D4]">
-                <div className="space-x-[1.25rem] ">
-                  <span>대표 : 전재완</span>
-                  <span>사업자번호 : 547-03-03467</span>
-                  <span>전화 : 010-8238-2165</span>
-                </div>
-                <div className="space-x-[1.25rem] ">
-                  <span>주소 : 인천광역시 동구 화도진로 16</span>
-                  <span>메일 : miti.makeittakeit@makeittakeit.kr</span>
-                </div>
+              <div>
+                <a
+                  href="https://www.youtube.com/@MITI_MakeItTakeIt/"
+                  target="_blank"
+                >
+                  <img src={youtube_icon} alt="youtube_icon" />
+                </a>
               </div>
-            </div>
-            {/* icon */}
-            <div>
-              <a
-                href="https://www.instagram.com/miti_makeittakeit_official/"
-                target="_blank"
-              >
-                <img src={instagram} alt="instagram" />
-              </a>
             </div>
           </div>
-          {/* RIGHT container */}
-          <div className="flex flex-col items-center w-[16.5rem] h-[8rem] space-y-[2.88rem]">
-            <div className="">
-              <img src={miti_logo} alt="logo" className="h-[42px]" />
-            </div>
-
-            <div className="flex gap-[0.75rem]">
+          {/* RIGHT */}
+          <div className="flex flex-col items-center justify-center gap-[38px] ">
+            {/* LOGO */}
+            <img
+              src={miti_logo}
+              alt="make it take it logo"
+              className="sm:hidden md:block"
+            />
+            <img
+              src={miti_logo_sm}
+              alt="make it take it logo"
+              className="md:hidden sm:block"
+            />
+            {/*  STORsE */}
+            <div className="sm:hidden md:flex gap-[0.75rem]">
               <a href={PLAYSTORE} target="_blank">
-                <button className="flex items-center justify-center  rounded-[10px] text-[#fff] bg-dark-card space-x-[8px] py-2 px-4 ">
+                <button className="flex items-center justify-center  rounded-lg text-[#999]  bg-transparent border border-[#999] space-x-[8px] py-2 px-4 ">
                   <img src={playstore} alt="google playstore" />
-                  <span className="text-[12px] font-bold">Google Play</span>
+                  <span className="text-xs font-bold">Google Play</span>
                 </button>
               </a>
               <a href={APPLE_STORE} target="_blank">
-                <button className="flex items-center justify-center  rounded-[10px] text-[#fff]  bg-dark-card space-x-[8px]  py-2 px-4">
+                <button className="flex items-center justify-center  rounded-lg text-[#999]  bg-transparent border border-[#999]  space-x-[8px]  py-2 px-4">
                   <img src={applestore} alt="app store" />
-                  <span className="text-[12px] font-bold">App Store</span>
+                  <span className="text-xs font-bold">App Store</span>
                 </button>
               </a>
             </div>
           </div>
         </div>
-      </footer>
-
-      {/* MOBILE */}
-      <footer className=" sm:flex items-center justify-center h-[26rem] px-[0.81rem] py-[3.75rem] md:hidden bg-primary-black">
-        <div className="space-y-[2.5rem]">
-          <div className="flex justify-center">
-            <img
-              src={miti_logo}
-              alt="miti logo"
-              className=" w-[82px] h-[42px]"
-            />
-          </div>
-
-          <div className="space-y-[1.25rem]">
-            <div className="flex items-center gap-[1.25rem] text-[#E5E5E5] font-bold text-[12px]">
-              <Link to="/policies">서비스 약관</Link>
-              <p>|</p>
-              <Link to="/inquiries">고객센터</Link>
-            </div>
-            <div className="space-y-[0.75rem] text-[#d4d4d4] font-[400] text-[12px]">
-              <div className="flex items-center gap-[1.25rem]">
-                <span>대표 : 전재완</span>
-                <span>사업자번호 : 547-03-03467</span>
-              </div>
-
-              <div className="flex items-center gap-[1.25rem]">
-                <span>전화 : 010-8238-2165</span>
-                <span>메일 : miti.makeittakeit@makeittakeit.kr</span>
-              </div>
-              <div>
-                <span>주소 : 인천광역시 동구 화도진로 16</span>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <a
-              href="https://www.instagram.com/miti_makeittakeit_official/"
-              target="_blank"
-            >
-              <img src={instagram} alt="instagram" />
-            </a>
-          </div>
-          <h2 className="text-center text-[10px] text-[#C8C8C8] font-[300]">
-            Copyright MITI All Rights Reserved.
-          </h2>
-        </div>
+        <span className="text-[#707070] font-[500] text-[10px]">
+          Copyright MITI All Rights Reserved.
+        </span>
       </footer>
     </>
   );
