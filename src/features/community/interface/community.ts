@@ -15,6 +15,7 @@ export interface PostField {
     created_at: string;
     liked_users: number[];
     writer: WriterField;
+    images: string[]
 }
 
 export interface PostDataField {

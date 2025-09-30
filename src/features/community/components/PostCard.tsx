@@ -49,13 +49,15 @@ export const PostCard = ({ post }: PostcardProps) => {
                 <span>좋아요 {post.liked_users.length}</span>
               </div>
             </div>
-            <div className=" rounded-lg">
-              <img
-                className="h-full w-full sm:w-[50px] sm:h-[50px] md:w-[60px] md:h-[60px]"
-                src={post.writer.profile_image_url}
-                alt="profile img"
-              />
-            </div>
+            {post.images.length > 0 && (
+              <div className=" rounded-lg">
+                <img
+                  className="h-full w-full sm:w-[50px] sm:h-[50px] md:w-[60px] md:h-[60px]"
+                  src={post.images[0]}
+                  alt=""
+                />
+              </div>
+            )}
           </div>
         </div>
       </Link>

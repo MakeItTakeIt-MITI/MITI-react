@@ -3,7 +3,7 @@ import { getPosts } from "../../api/community";
 
 export const useGetPosts = (search: string, category: string) => {
   return useQuery({
-    queryKey: ["Get Posts Data", search, category],
+    queryKey: ["Fetch All Posts List", search, category],
     queryFn: () => getPosts(search, category),
   });
 };
