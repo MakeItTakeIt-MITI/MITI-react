@@ -35,7 +35,10 @@ const Footer = () => {
                 <span>대표 </span> <span>전재완</span>
               </li>
               <li className="flex items-center gap-3">
-                <span>메일</span> <span>miti.official@gmail.com </span>
+                <span>전화 </span> <span>010-8039-2165</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <span>메일</span> <span>makeittakeit.official@gmail.com </span>
               </li>
               <li className="flex items-center gap-3">
                 <span>주소</span> <span>인천광역시 동구 화도진로 16</span>
