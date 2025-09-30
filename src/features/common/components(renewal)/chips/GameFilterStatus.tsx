@@ -32,7 +32,7 @@ export default function GameFilterStatus({
         borderColor: shouldHighlight ? "#1ADCDF" : "#707070",
         fontWeight: shouldHighlight ? "500" : "normal",
       }}
-      className="py-2.5 px-3  text-sm rounded-[50px] border"
+      className="py-2.5 px-3  text-sm rounded-[50px] border transition-all duration-500 ease-in-out"
     >
       <button onClick={onClick} type="button">
         {status}
