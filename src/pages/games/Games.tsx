@@ -34,7 +34,7 @@ export const Games = () => {
   const regionParam = searchParams.get("region") || "";
   const searchParam = searchParams.get("search") || "";
 
-  const { data: mapData, isLoading } = useMapGamesList(
+  const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(
     startdate,
     timeFormat,
     game_status
@@ -78,7 +78,7 @@ export const Games = () => {
             handleToggleTab={handleToggleTab}
             gamesMapData={gamesMapData}
             gamesListData={gamesListData}
-            isLoading={isLoading}
+            isMapGameListLoading={isMapGameListLoading}
             tab={tab}
             isGamesListLoading={isGamesListLoading}
           />

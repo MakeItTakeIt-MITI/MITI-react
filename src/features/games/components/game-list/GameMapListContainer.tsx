@@ -10,12 +10,13 @@ import settings_mobile from "../../../../assets/v1.3/games/settings_icon.png";
 import SettingsContainer from "../game-filter/mobile/SettingsContainer.tsx";
 import { useState } from "react";
 import FilterBox from "../game-filter/mobile/FilterBox.tsx";
+import MapGameListCardSkeleton from "../card/MapGameListCardSkeleton.tsx";
 
 interface GameMapListContainerProps {
   handleToggleTab: (arg: string) => void;
   gamesMapData: GameField[];
   gamesListData: GameField[];
-  isLoading: boolean;
+  isMapGameListLoading: boolean;
   tab: string;
   isGamesListLoading: boolean;
 }
@@ -25,6 +26,7 @@ export default function GameMapListContainer({
   tab,
   gamesMapData,
   gamesListData,
+  isMapGameListLoading,
   isGamesListLoading,
 }: GameMapListContainerProps) {
   const [isFilterBoxOpen, setIsFilterBoxOpen] = useState(false);
@@ -99,9 +101,13 @@ export default function GameMapListContainer({
                     (game) => game.court.address === selectedAddress
                   )
                 : gamesMapData
-              )?.map((game) => (
-                <Card key={game.id} game={game} />
-              ))}
+              )?.map((game) =>
+                isMapGameListLoading ? (
+                  <MapGameListCardSkeleton />
+                ) : (
+                  <Card key={game.id} game={game} />
+                )
+              )}
             </ul>
           </div>
         </div>
