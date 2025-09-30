@@ -63,6 +63,9 @@ const Footer = () => {
                 </a>
               </div>
             </div>
+            <span className="text-[#707070] font-[500] text-[10px] sm:block md:hidden text-center">
+              Copyright MITI All Rights Reserved.
+            </span>
           </div>
           {/* RIGHT */}
           <div className="flex flex-col items-center justify-center gap-[38px] ">
@@ -94,7 +97,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <span className="text-[#707070] font-[500] text-[10px]">
+        <span className="text-[#707070] font-[500] text-[10px] sm:hidden md:block">
           Copyright MITI All Rights Reserved.
         </span>
       </footer>
