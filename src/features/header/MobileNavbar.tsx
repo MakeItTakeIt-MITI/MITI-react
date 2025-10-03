@@ -42,6 +42,16 @@ export default function MobileNavbar() {
             <li onClick={() => setDisplayMenu(false)}>
               <Link to={`inquiries?page=1`}>사용자의 문의</Link>
             </li>
+            <li>
+              <button
+                style={{
+                  color: "#262626",
+                }}
+                className="py-2 px-3 bg-[#1ADCDF] rounded-full text-xs font-bold "
+              >
+                앱 다운로
+              </button>
+            </li>
           </ul>
         </div>
       )}
