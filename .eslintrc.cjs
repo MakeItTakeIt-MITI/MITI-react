@@ -13,6 +13,11 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   plugins: ["react-refresh", "import"],
   rules: {
+    "import/no-unused-modules": [
+      1,
+      { unusedExports: true, missingExports: true },
+    ],
+
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },
