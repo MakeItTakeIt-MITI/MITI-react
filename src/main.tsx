@@ -88,11 +88,18 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <RouterProvider router={router}></RouterProvider>
-    </QueryClientProvider>
-  </React.StrictMode>
-);
+async function deferRender() {
+  const { worker } = await import("./mocks/browser.ts");
+  return worker.start();
+}
+
+deferRender().then(() => {
+  ReactDOM.createRoot(document.getElementById("root")!).render(
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <RouterProvider router={router}></RouterProvider>
+      </QueryClientProvider>
+    </React.StrictMode>
+  );
+});
