@@ -1,10 +1,7 @@
-import hero from "../../assets/v11/landing-hero-bg.png";
 import googlePlay from "../../assets/v11/google-play-teal.svg";
 import appleStore from "../../assets/v11/apple-store-teal.svg";
-import mobile_top from "../../assets/v11/mobile-landing.png";
 import { APPLE_STORE, PLAYSTORE } from "../../utils/app.ts";
 import "../../index.css";
-import CardsContainer from "../../features/landing/components/CardsContainer.tsx";
 import landing from "../../assets/v1.3/landing-header.png";
 import landing_sm from "../../assets/v1.3/landing/sm_header.png";
 import basketball_bg from "../../assets/v1.3/landing-basketball-bg.png";
