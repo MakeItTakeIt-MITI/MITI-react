@@ -3,120 +3,76 @@ import googlePlay from "../../assets/v11/google-play-teal.svg";
 import appleStore from "../../assets/v11/apple-store-teal.svg";
 import mobile_top from "../../assets/v11/mobile-landing.png";
 import { APPLE_STORE, PLAYSTORE } from "../../utils/app.ts";
-import { Games } from "../games/Games";
-import GameStatusFieldMobile from "../../features/games/components/game-filter/mobile/GameStatusFieldMobile.tsx";
-import Courts from "../courts/Courts";
+import "../../index.css";
+import CardsContainer from "../../features/landing/components/CardsContainer.tsx";
+import landing from "../../assets/v1.3/landing-header.png";
+import landing_sm from "../../assets/v1.3/landing/sm_header.png";
+import basketball_bg from "../../assets/v1.3/landing-basketball-bg.png";
+
+const StoreButton = ({
+  href,
+  img,
+  label,
+}: {
+  href: string;
+  img: string;
+  label: string;
+}) => (
+  <a href={href} target="_blank" rel="noreferrer">
+    <button
+      type="button"
+      className="text-[18px] text-sm font-[600] flex items-center justify-center gap-3 bg-[#363636] sm:h-[45px] md:h-[58px] sm:w-[140px] md:w-[180px] rounded-[14px] text-[#BFF9FA]"
+    >
+      <img src={img} alt={label} />
+      <p>{label}</p>
+    </button>
+  </a>
+);
 
 const Landing = () => {
   return (
-    <div className=" w-full bg-[#000]">
-      {/* desktop top */}
-      <section
-        style={{
-          backgroundImage: `url(${hero})`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-        }}
-        className="relative h-[800px] w-full sm:hidden md:block"
-      >
-        <div className="z-30  flex flex-col justify-end h-full  space-y-[2rem] sm:px-[1.5rem] md:pl-[22.5rem] md:pb-[8.44rem] sm:pb-[calc(5.87rem+0.75rem)] ">
-          <p className=" toast md:text-[#9EEFF0]   md:text-[32px] sm:text-[#9EEFF0] sm:text-[24px] font-bold  ">
-            MITI 서비스 런칭
-          </p>
-          <p className=" toast text-[#fff]  md:text-[52px] sm:text-[24px]  font-bold  ">
-            농구 경기 더 쉽게, 더 즐겁게!
-          </p>
-          <p className=" toast text-[#fff]  sm:text-sm md:text-xl font-[400] ">
-            번거로움은 빼고 농구에 재미를 더하세요! <br />
-            지금 다운로드하고 오늘 퇴근 후에 농구 어떠세요?
-          </p>
-          <div
-            className={`shake flex items-center sm:justify-center md:justify-start sm:gap-3 md:gap-4 text-primary-white sm:px-[17.5px] md:px-0  `}
-          >
-            <a href={PLAYSTORE} target="_blank">
-              <button
-                type="button"
-                className="text-[18px] text-sm font-[600] flex items-center justify-center gap-3 bg-[#363636]  sm:h-[45px] md:h-[58px] sm:w-[140px] md:w-[180px] rounded-[14px] text-[#BFF9FA] "
-              >
-                <img src={googlePlay} alt="Google store" />
-                <p>Google Play</p>
-              </button>
-            </a>
-
-            <a href={APPLE_STORE} target="_blank">
-              <button
-                type="button"
-                className="text-[18px] text-sm font-[600] flex items-center justify-center gap-3 bg-[#363636] sm:h-[45px] md:h-[58px] sm:w-[140px] md:w-[180px] rounded-[14px] text-[#BFF9FA] "
-              >
-                <img src={appleStore} alt="Apple Store" />
-                <p>App Store</p>
-              </button>
-            </a>
-          </div>{" "}
+    <section className="relative overflow-hidden md:h-[850px] sm:h-[600px] md:mb-0 sm:mb-[85px]  ">
+      <div className="sm:w-full md:w-[1074px] mx-auto py-[116.5px] flex flex-col gap-12 relative z-20 md:px-0 sm:px-4">
+        <div className="flex items-center justify-center">
+          <img src={landing} alt={landing} className="sm:hidden md:block" />
+          <img
+            src={landing_sm}
+            alt={landing_sm}
+            className="md:hidden sm:block"
+          />
         </div>
-      </section>
-
-      {/* mobile top */}
-      <section
-        style={{
-          backgroundImage: `url(${mobile_top})`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-        }}
-        className="h-[650px] w-full relative md:hidden"
-      >
-        <div className="z-30  flex flex-col justify-end h-full  space-y-[2rem] sm:px-[1.5rem] md:pl-[22.5rem] md:pb-[8.44rem] sm:pb-[calc(5.87rem+0.75rem)] ">
-          <p className=" toast md:text-[#9EEFF0]   md:text-[32px] sm:text-[#9EEFF0] sm:text-[24px] font-bold  ">
-            MITI 서비스 런칭
-          </p>
-          <p className=" toast text-[#fff]  md:text-[52px] sm:text-[24px]  font-bold  ">
-            농구 경기 더 쉽게, 더 즐겁게!
-          </p>
-          <p className=" toast text-[#fff]  sm:text-sm md:text-xl font-[400] ">
-            번거로움은 빼고 농구에 재미를 더하세요! <br />
-            지금 다운로드하고 오늘 퇴근 후에 농구 어떠세요?
-          </p>
-          <div
-            className={`shake flex items-center sm:justify-center md:justify-start sm:gap-3 md:gap-4 text-primary-white sm:px-[17.5px] md:px-0  `}
-          >
-            <a href={PLAYSTORE} target="_blank">
-              <button
-                type="button"
-                className="text-[18px] text-sm font-[600] flex items-center justify-center gap-3 bg-[#363636]  sm:h-[45px] md:h-[58px] sm:w-[140px] md:w-[180px] rounded-[14px] text-[#BFF9FA] "
-              >
-                <img src={googlePlay} alt="Google store" />
-                <p>Google Play</p>
-              </button>
-            </a>
-            <a href={APPLE_STORE} target="_blank">
-              <button
-                type="button"
-                className="text-[18px] text-sm font-[600] flex items-center justify-center gap-3 bg-[#363636] sm:h-[45px] md:h-[58px] sm:w-[140px] md:w-[180px] rounded-[14px] text-[#BFF9FA] "
-              >
-                <img src={appleStore} alt="Apple Store" />
-                <p>App Store</p>
-              </button>
-            </a>
-          </div>{" "}
+        {/* <CardsContainer /> */}
+        <div className="absolute  right-4  bottom-0  flex gap-6 ">
+          <StoreButton href={PLAYSTORE} img={googlePlay} label="Google Play" />
+          <StoreButton href={APPLE_STORE} img={appleStore} label="App Store" />
         </div>
-      </section>
-      {/* <HeroMobile /> */}
-      {/* <Games />
-      <GameStatusFieldMobile />
-      <Courts />
-      <CourtsMobile />
-      <Payments />
-      <PaymentsMobile /> */}
-    </div>
+      </div>
+      <img
+        src={basketball_bg}
+        alt={basketball_bg}
+        className="md:block absolute sm:hidden -left-[100px] -bottom-[120px] max-w-[50vw] z-10"
+        style={{
+          transform: "rotate(-4.339deg)",
+          willChange: "transform",
+        }}
+      />
+
+      <div className="md:hidden sm:block absolute -bottom-[180px] left-0 right-0">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="375"
+          height="569"
+          viewBox="0 0 375 569"
+          fill="none"
+        >
+          <path
+            d="M269.288 526.111C267.213 529.697 268.439 534.284 272.024 536.359C275.609 538.433 280.197 537.208 282.272 533.622L269.288 526.111ZM284.625 351.875L291.581 349.071L291.581 349.071L284.625 351.875ZM388.934 151.7C392.766 150.127 394.598 145.746 393.026 141.914C391.454 138.082 387.073 136.25 383.241 137.822L388.934 151.7ZM-104.326 418.737C-104.414 422.878 -101.129 426.307 -96.9882 426.396C-92.847 426.484 -89.4179 423.199 -89.3291 419.058L-104.326 418.737ZM-7.28831 270.159L-11.7771 264.15L-11.7779 264.151L-7.28831 270.159ZM21.7534 36.1377C19.2945 32.8044 14.599 32.0955 11.2657 34.5545C7.93233 37.0134 7.22347 41.7089 9.68237 45.0422L21.7534 36.1377ZM-122.48 209.206L-115.258 211.227C-75.2353 68.2555 74.2016 -15.0148 218.617 25.412L220.639 18.1897L222.661 10.9673C70.3897 -31.6585 -87.4128 56.1127 -129.703 207.184L-122.48 209.206ZM220.639 18.1897L218.617 25.412C363.032 65.8388 447.518 214.592 407.495 357.564L414.718 359.586L421.94 361.608C464.23 210.536 374.931 53.5931 222.661 10.9673L220.639 18.1897ZM414.718 359.586L407.495 357.564C367.472 500.536 218.035 583.806 73.6201 543.38L71.5983 550.602L69.5765 557.824C221.847 600.45 379.65 512.679 421.94 361.608L414.718 359.586ZM71.5983 550.602L73.6201 543.38C-70.7953 502.953 -155.281 354.199 -115.258 211.227L-122.48 209.206L-129.703 207.184C-171.993 358.255 -82.6943 515.198 69.5765 557.824L71.5983 550.602ZM-122.48 209.206L-115.258 211.227C-75.2342 68.2514 74.1975 -15.016 218.617 25.412L220.639 18.1897L222.661 10.9673C70.3857 -31.6597 -87.4116 56.1087 -129.703 207.184L-122.48 209.206ZM220.639 18.1897L218.617 25.412C363.036 65.84 447.519 214.588 407.495 357.564L414.718 359.586L421.94 361.608C464.231 210.532 374.936 53.5943 222.661 10.9673L220.639 18.1897ZM414.718 359.586L407.495 357.564C367.471 500.54 218.04 583.808 73.6201 543.38L71.5983 550.602L69.5765 557.824C221.851 600.451 379.649 512.683 421.94 361.608L414.718 359.586ZM71.5983 550.602L73.6201 543.38C-70.7994 502.952 -155.282 354.204 -115.258 211.227L-122.48 209.206L-129.703 207.184C-171.994 358.259 -82.6984 515.197 69.5765 557.824L71.5983 550.602ZM414.718 359.586L421.352 356.087C377.145 272.26 289.559 201.935 177.948 170.691L175.927 177.913L173.905 185.136C282.008 215.398 366.011 283.302 408.083 363.084L414.718 359.586ZM175.927 177.913L177.948 170.691C66.3377 139.447 -45.0305 154.078 -126.334 202.771L-122.48 209.206L-118.627 215.64C-41.2473 169.297 65.8016 154.874 173.905 185.136L175.927 177.913ZM71.5983 550.602L78.8206 552.624L227.861 20.2114L220.639 18.1897L213.416 16.1679L64.3759 548.58L71.5983 550.602ZM275.78 529.867L282.272 533.622C293.657 513.942 302.629 484.508 305.495 451.899C308.366 419.219 305.158 382.755 291.581 349.071L284.625 351.875L277.669 354.679C290.176 385.71 293.265 419.713 290.552 450.586C287.833 481.529 279.341 508.733 269.288 526.111L275.78 529.867ZM284.625 351.875L291.581 349.071C278.281 316.086 272.963 279.094 285.338 244.523C297.639 210.159 327.953 176.719 388.934 151.7L386.087 144.761L383.241 137.822C319.449 163.995 285.312 200.087 271.216 239.468C257.193 278.644 263.53 319.613 277.669 354.68L284.625 351.875ZM-96.8274 418.897L-89.3291 419.058C-88.9053 399.285 -81.0438 373.775 -66.1696 347.875C-51.3518 322.072 -29.8582 296.387 -2.79878 276.166L-7.28831 270.159L-11.7779 264.151C-40.6107 285.697 -63.4278 312.98 -79.1772 340.405C-94.87 367.731 -103.832 395.707 -104.326 418.737L-96.8274 418.897ZM-7.28831 270.159L-2.79954 276.167C27.4398 253.576 54.6748 221.92 63.6065 181.213C72.5946 140.248 62.7152 91.6663 21.7534 36.1377L15.7179 40.59L9.68237 45.0422C48.7813 98.0455 56.7897 142.29 48.955 177.998C41.0637 213.964 16.7653 242.827 -11.7771 264.15L-7.28831 270.159Z"
+            fill="#14B0B2"
+          />
+        </svg>
+      </div>
+    </section>
   );
 };
 
 export default Landing;
-// <section className="w-[1074px] mx-auto py-[116.5px] flex flex-col gap-12">
-//   <div>
-//     <img src={landing_header} alt={landing_header} />
-//   </div>
-//   <CardsContainer />
-
-// </section>

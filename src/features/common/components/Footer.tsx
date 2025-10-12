@@ -10,7 +10,7 @@ import { APPLE_STORE, PLAYSTORE } from "../../../utils/app.ts";
 const Footer = () => {
   return (
     <>
-      <footer className="w-full md:h-[246px] sm:h-[300px] bg-[#141414]  sm:px-4 md:px-0 py-[30px] flex flex-col items-center justify-center gap-5">
+      <footer className="z-[9999px] w-full md:h-[246px] sm:h-[300px] bg-[#141414]  sm:px-4 md:px-0 py-[30px] flex flex-col items-center justify-center gap-5">
         <div className="md:w-[668px] sm:w-full h-full flex sm:flex-col-reverse md:flex-row justify-between sm:gap-5 md:gap-0 py-[20px]">
           {/* LEFT */}
           <div className="flex flex-col gap-5">

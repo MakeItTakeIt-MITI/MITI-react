@@ -9,7 +9,7 @@ interface CardProps {
 
 function Card({ title, card_header, button_text }: CardProps) {
   return (
-    <div className="w-[409px] h-[165px] p-6 flex flex-col gap-3 bg-[#142323] rounded-lg">
+    <div className="w-[409px] h-[165px] p-6 flex flex-col gap-3 bg-[#14232377] rounded-lg z-[888px] ">
       <div className="space-y-6">
         <h1 className="font-bold text-base text-[#47E3E5]">{title}</h1>
         <h2 className="text-[24px] font-bold text-white">{card_header}</h2>
