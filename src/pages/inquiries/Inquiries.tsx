@@ -11,14 +11,14 @@ import { Link } from "react-router-dom";
 const InquiriesList = () => {
   const [pageNumber, setPageNumber] = useState(1);
 
-  // const { data: inquriesData, isLoading } = useInquiriesList(pageNumber);
+  const { data: inquriesData, isLoading } = useInquiriesList(pageNumber);
 
-  // const inquriesPageContentData = inquriesData?.pages?.flatMap(
-  //   (page) => page?.data?.page_content
-  // );
-  // const currentPage = inquriesData?.pages?.[0]?.data?.current_index || 1;
-  // const pageLength = inquriesData?.pages?.[0]?.data?.page_content?.length || 1;
-  // const pagesArray = [1];
+  const inquriesPageContentData = inquriesData?.pages?.flatMap(
+    (page) => page?.data?.page_content
+  );
+  const currentPage = inquriesData?.pages?.[0]?.data?.current_index || 1;
+  const pageLength = inquriesData?.pages?.[0]?.data?.page_content?.length || 1;
+  const pagesArray = [1];
 
   useEffect(() => {
     const fetchInquiries = async () => {
@@ -41,17 +41,17 @@ const InquiriesList = () => {
           <SubmitInquiryButton />
         </div>
         {/* Inquiries List */}
-        {/* <InquiriesListContainer
+        <InquiriesListContainer
           inquriesPageContentData={inquriesPageContentData ?? []}
-        /> */}
+        />
         {/* Pagination */}
-        {/* 
+
         <Pagination
           setPageNumber={setPageNumber}
           currentPage={currentPage}
           pages={pagesArray}
           pageLength={pageLength}
-        /> */}
+        />
 
         <Link
           to="new"
