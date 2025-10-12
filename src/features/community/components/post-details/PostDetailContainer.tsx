@@ -1,9 +1,8 @@
-import SearchBar from "../../../common/components(renewal)/search/SearchBar.tsx";
 import PostUserInfo from "./PostUserInfo.tsx";
 import like_button_medium from "../../../../assets/v1.3/icon/like-icon-md.svg";
 
 import share_button from "../../../../assets/v1.3/icon/share-icon-md.svg";
-import { CommunityPostDetail } from "../../interface/post.ts";
+import { CategoryType, CommunityPostDetail } from "../../interface/post.ts";
 import LikeCommentFeatures from "./LikeCommentFeatures.tsx";
 import CommentsContainer from "./CommentsContainer.tsx";
 import { UserCommentsField } from "../../interface/comments.ts";
@@ -27,7 +26,11 @@ const PostDetailContainer = ({
           <PostCategoryChip category={postDetails?.category as CategoryType} />
 
           {/* Post User Info */}
-          <PostUserInfo size="s" nickname={postDetails?.writer.nickname} />
+          <PostUserInfo
+            size="s"
+            nickname={postDetails?.writer.nickname}
+            date={postDetails?.created_at}
+          />
           {/* Post Content */}
           <p
             style={{ whiteSpace: "pre-line" }}

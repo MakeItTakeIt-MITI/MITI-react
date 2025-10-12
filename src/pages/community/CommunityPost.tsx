@@ -1,5 +1,3 @@
-import { useState } from "react";
-import CommunityPanel from "../../features/community/components/CommunityPanel.tsx";
 import PostDetailContainer from "../../features/community/components/post-details/PostDetailContainer.tsx";
 import { useGetPostDetails } from "../../features/community/hooks/query/useGetPostDetails.tsx";
 import { useParams } from "react-router-dom";

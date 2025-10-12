@@ -1,6 +1,18 @@
-import { CategoryType } from "../interface/post";
+type CategoryKey =
+  | "general"
+  | "court_info"
+  | "tournament"
+  | "tactic"
+  | "shoes_revie"
+  | "tip"
+  | "team_recruitment"
+  | "game_review"
+  | "foreign_issue"
+  | "domestic_issue"
+  | "injury"
+  | "gear";
 
-const categoryLabels: Record<CategoryType, string> = {
+const CATEGORY_LABELS: Record<CategoryKey, string> = {
   general: "자유주제",
   court_info: "코트 정보",
   tournament: "대회 정보",
@@ -16,13 +28,13 @@ const categoryLabels: Record<CategoryType, string> = {
 };
 
 interface PostCategoryChipProps {
-  category: CategoryType;
+  category: CategoryKey;
 }
 
 const PostCategoryChip = ({ category }: PostCategoryChipProps) => {
   return (
     <span className="py-1 px-[6px] text-[10px] rounded-[4px] text-[#858585] bg-[#474747]">
-      {categoryLabels[category]}
+      {CATEGORY_LABELS[category]}
     </span>
   );
 };
