@@ -5,20 +5,6 @@ import { getTodaysGamesQuery } from "../../utils/dates/date";
 export default function DesktopNavbar() {
   const { pathname } = useLocation();
 
-  const path = pathname.startsWith("/games")
-    ? "/games"
-    : pathname.startsWith("/courts")
-    ? "/courts"
-    : pathname.startsWith("/community")
-    ? "/community"
-    : pathname.startsWith("/faq")
-    ? "/faq"
-    : pathname.startsWith("/inquiries")
-    ? "/inquiries"
-    : pathname === "/"
-    ? "/"
-    : "";
-
   return (
     <nav className="sm:hidden md:flex w-full px-[360px] h-[60px] bg-[#141414]  items-center justify-center ">
       <div className=" h-[28px] w-[1200px]  flex items-center  justify-between">
