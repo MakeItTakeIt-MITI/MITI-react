@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import navbar_logo from "../../assets/v1.3/navbar-logo.svg";
 import { getTodaysGamesQuery } from "../../utils/dates/date";
+import { isActivePath } from "./utils/isActivePath";
 
 export default function DesktopNavbar() {
   const { pathname } = useLocation();
@@ -14,14 +15,14 @@ export default function DesktopNavbar() {
         <ul className="flex items-center gap-5 text-white font-bold text-sm">
           <li
             style={{
-              color: pathname.startsWith("/games") ? "#1ADCDF" : "white",
+              color: isActivePath(pathname, "/games") ? "#1ADCDF" : "white",
             }}
           >
             <Link to={getTodaysGamesQuery()}>경기 목록</Link>
           </li>
           <li
             style={{
-              color: pathname.startsWith("/courts") ? "#1ADCDF" : "white",
+              color: isActivePath(pathname, "/courts") ? "#1ADCDF" : "white",
             }}
           >
             <Link to={`courts?region=&isSearched=false&search=`}>
@@ -30,21 +31,21 @@ export default function DesktopNavbar() {
           </li>
           <li
             style={{
-              color: pathname.startsWith("/community") ? "#1ADCDF" : "white",
+              color: isActivePath(pathname, "/community") ? "#1ADCDF" : "white",
             }}
           >
             <Link to="community?search=&category=all">게시판</Link>
           </li>
           <li
             style={{
-              color: pathname.startsWith("/faq") ? "#1ADCDF" : "white",
+              color: isActivePath(pathname, "/faq") ? "#1ADCDF" : "white",
             }}
           >
             <Link to={`faq?tab=&search=`}>자주 묻는 질문</Link>
           </li>
           <li
             style={{
-              color: pathname.startsWith("/inquiries") ? "#1ADCDF" : "white",
+              color: isActivePath(pathname, "/inquiries") ? "#1ADCDF" : "white",
             }}
           >
             <Link to={`inquiries?page=1`}>사용자의 문의</Link>
