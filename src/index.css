@@ -7,22 +7,27 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family:
-    "Pretendard Variable",
-    Pretendard,
-    -apple-system,
-    BlinkMacSystemFont,
-    system-ui,
-    Roboto,
-    "Helvetica Neue",
-    "Segoe UI",
-    "Apple SD Gothic Neo",
-    "Noto Sans KR",
-    "Malgun Gothic",
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol",
-    sans-serif;
+  /* background: "#262626"; */
+  /* background: #141414; */
+  font-family: "Pretendard Variable", Pretendard;
+  /* -apple-system; */
+}
+
+html {
+  /* background: #171717; */
+  background: #141414;
+}
+
+body {
+  overflow: auto;
+  height: 100%;
+  /* background: #171717; */
+  background: #141414;
+}
+
+section {
+  /* background: #262626; */
+  background: #141414;
 }
 
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {
@@ -30,8 +35,18 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   background: url("./assets//calender_icon_vector.svg") no-repeat;
 }
 
-li:hover {
-  /* text-decoration: underline; */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #a3a3a3;
+  border-radius: 20px;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 80px;
+}
+
+.custom-dates-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 @layer components {
@@ -40,7 +55,19 @@ li:hover {
   }
 
   .section-layer {
-    @apply laptop:my-[69px] mobile:mb-12;
+    @apply md:my-[69px] sm:mb-12;
+  }
+
+  .flexCenter {
+    @apply flex items-center justify-center;
+  }
+
+  .page-layer {
+    @apply md:w-[48rem] sm:w-full mx-auto;
+  }
+
+  .page-padding {
+    @apply pt-[3.75rem] md:pb-[6.25rem] sm:pb-[3.76rem];
   }
 }
 
@@ -64,4 +91,63 @@ input[type="number"] {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
+}
+
+.disable-scroll {
+  overflow: hidden;
+}
+
+.shadow-image {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0) 15.95%, #151E1C96.62%),
+    url(./assets/v11//hero.png) lightgray 50% / cover no-repeat;
+}
+
+.disable-scrollbar::-webkit-scrollbar-thumb {
+  background: #a3a3a3;
+  border-radius: 20px;
+}
+
+.disable-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 80px;
+}
+
+.courtsPlaceHolder::placeholder {
+  font-size: 15px;
+  font-weight: 500;
+  color: #525252;
+  border: none;
+}
+
+.courtsPlaceHolder:focus {
+  outline: none;
+  border: none;
+}
+
+/* game list animation slide */
+.cssanimation,
+.cssanimation {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.cssanimation {
+  display: inline-block;
+}
+
+.fadeInBottom {
+  animation-name: fadeInBottom;
+}
+@keyframes fadeInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.custom-dotted-list {
+  list-style-type: circle;
 }

@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+// eslint-disable-next-line import/extensions
 import { persist } from 'zustand/middleware';
 
 interface GamesField {

@@ -1,8 +1,7 @@
 import { Outlet } from "react-router-dom";
-import { Header } from "./components/home/Header";
-import { AdvertisementBanner } from "./components/ui/advertisement/AdvertisementBanner";
-import { ScrollToTop } from "./components/ui/common/ScrollToTop";
-import { Footer } from "./components/ui/common/Footer";
+import { ScrollToTop } from "./features/common/components/ScrollToTop.tsx";
+import Footer from "./features/common/components/Footer.tsx";
+import Header from "./features/header/Header.tsx";
 
 function App() {
   return (
@@ -10,7 +9,6 @@ function App() {
       <ScrollToTop />
       <Header />
       <Outlet />
-      <AdvertisementBanner />
       <Footer />
     </>
   );
