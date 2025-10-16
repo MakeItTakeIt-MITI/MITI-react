@@ -4,20 +4,28 @@ import miti_logo from "../../../assets/v1.3/footer/miti_logo.svg";
 import miti_logo_sm from "../../../assets/v1.3/footer/miti_logo_sm.svg";
 import playstore from "../../../assets/v1.3/footer/google-play.svg";
 import applestore from "../../../assets/v1.3/footer/Apple Store.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { APPLE_STORE, PLAYSTORE } from "../../../utils/app.ts";
 
 const Footer = () => {
+  const { pathname } = useLocation();
+  const isLanding = pathname === "/";
+
   return (
     <>
-      <footer className="z-[9999px] w-full md:h-[246px] sm:h-[300px] bg-[#141414]  sm:px-4 md:px-0 py-[30px] flex flex-col items-center justify-center gap-5">
+      <footer
+        className={
+          isLanding
+            ? "bg-[#000000D9] absolute bottom-0 left-0 right-0  z-[9999] w-full md:h-[246px] sm:h-[400px] sm:px-4 md:px-0 py-[30px] flex flex-col items-center justify-center gap-5"
+            : "bg-[#141414] z-[9999] w-full md:h-[246px] sm:h-[300px] sm:px-4 md:px-0 py-[30px] flex flex-col items-center justify-center gap-5"
+        }
+      >
         <div className="md:w-[668px] sm:w-full h-full flex sm:flex-col-reverse md:flex-row justify-between sm:gap-5 md:gap-0 py-[20px]">
           {/* LEFT */}
           <div className="flex flex-col gap-5">
             {/* 서비스 약관 및 고객센타 */}
             <ul className="flex items-center gap-4 text-white font-fold text-xs">
               <li>
-                {" "}
                 <Link to="/policies" className="font-bold">
                   서비스 약관
                 </Link>

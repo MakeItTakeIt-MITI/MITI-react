@@ -2,17 +2,27 @@ import miti_logo from "../../assets/v1.3/navbar-logo.svg";
 import hamburger from "../../assets/v1.3/hamburger.svg";
 import toggle_close from "../../assets/v1.3/navigation/toggle_close.png";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { getTodaysGamesQuery } from "../../utils/dates/date";
 
 export default function MobileNavbar() {
   const [displayMenu, setDisplayMenu] = useState(false);
 
+  const { pathname } = useLocation();
+  const isLanding = pathname === "/";
+
   const handleToggleMenu = () => {
     setDisplayMenu(!displayMenu);
   };
+
   return (
-    <nav className="sm:flex md:hidden relative flex-col gap-4 w-full bg-[#141414] p-4">
+    <nav
+      className={
+        isLanding
+          ? "sm:flex md:hidden absolute top-0 left-0 right-0 z-40 flex-col gap-4 w-full bg-[#000000D9] p-4"
+          : "sm:flex md:hidden relative flex-col gap-4 w-full bg-[#141414] p-4"
+      }
+    >
       <div className="flex w-full justify-between items-center">
         <Link to="/">
           <img src={miti_logo} alt="miti logo" />
