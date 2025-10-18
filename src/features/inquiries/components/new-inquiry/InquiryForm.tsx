@@ -41,7 +41,7 @@ const InquiryForm = () => {
       <FormTitleInput register={register} erase_input={erase_input} />
 
       <FormContentInput register={register} />
-      <div className="flex items-center justify-center gap-[32px] w-full ">
+      <div className="flex md:flex-row sm:flex-col items-center justify-center md:gap-[32px] sm:gap-5 w-full ">
         <FormNicknameInput register={register} erase_input={erase_input} />
         <FormPasswordInput
           register={register}

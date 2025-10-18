@@ -1,6 +1,6 @@
 const InquiryFormHeader = () => {
   return (
-    <div className="space-y-[60px]">
+    <div className="md:space-y-[60px] sm:space-y-[32px]">
       <div className="space-y-5 text-white">
         <h1 className="md:text-[48px] sm:text-[28px] font-bold">문의하기</h1>
         <p className="md:text-[18px]  sm:text-[16px]">
