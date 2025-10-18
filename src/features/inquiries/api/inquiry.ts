@@ -12,14 +12,6 @@ export const addPrivateInquiry = async (data: PrivateInquiryField) => {
 
 
 
-export const privateInquiriesData = async (page: number) => {
-    try {
-        const response = await axiosUrl.get(`support/anonymous-questions?page=${page}`)
-        return response.data
-    } catch {
-        throw new Error
-    }
-}
 
 
 export const privateInquiryDetails = async (inquiryId: number, password: InquiryDetailField, setErrorStatus: (arg: number) => void) => {
