@@ -16,8 +16,8 @@ const Footer = () => {
       <footer
         className={
           isLanding
-            ? "bg-[#000000D9] absolute bottom-0 left-0 right-0  z-[9999] w-full md:h-[246px] sm:h-[400px] sm:px-4 md:px-0 py-[30px] flex flex-col items-center justify-center gap-5"
-            : "bg-[#141414] z-[9999] w-full md:h-[246px] sm:h-[300px] sm:px-4 md:px-0 py-[30px] flex flex-col items-center justify-center gap-5"
+            ? "bg-[#000000D9] md:absolute md:bottom-0 md:left-0 md:right-0   z-[9999] w-full md:h-[246px] sm:h-[400px] sm:px-4 md:px-0 py-[30px] flex flex-col items-center justify-center gap-5"
+            : "bg-[#141414] z-[9999] w-full md:h-[246px] sm:h-[400px] sm:px-4 md:px-0 py-[30px] flex flex-col items-center justify-center gap-5"
         }
       >
         <div className="md:w-[668px] sm:w-full h-full flex sm:flex-col-reverse md:flex-row justify-between sm:gap-5 md:gap-0 py-[20px]">

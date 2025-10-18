@@ -13,7 +13,7 @@ const Landing = () => {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
-      className="relative overflow-hidden md:min-h-screen sm:h-[800px] md:mb-0 sm:mb-[160px]  "
+      className="relative overflow-hidden md:min-h-screen sm:h-full  "
     >
       <div className="sm:w-full md:w-[1074px] mx-auto py-[176.5px] flex flex-col gap-12 relative z-20 md:px-0 sm:px-4">
         <div className="flex items-center justify-center">
