@@ -14,7 +14,10 @@ export default function Community() {
   const getCategoryParam =
     getCategoryParamRaw === "all" ? "" : getCategoryParamRaw;
 
-  const { data: postsData } = useGetPosts(getSearchParam, getCategoryParam);
+  const { data: postsData, isLoading } = useGetPosts(
+    getSearchParam,
+    getCategoryParam
+  );
   const { data: popularTopicsData } = useGetPopularTopics();
   const { data: popularPostsData } = useGetPopularPosts();
 
@@ -30,6 +33,7 @@ export default function Community() {
     },
     [searchParams, setSearchParams]
   );
+
   return (
     <section
       style={{

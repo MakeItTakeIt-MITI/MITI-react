@@ -118,10 +118,6 @@ const CommunityPanel = ({
           )}
         </ul>
       </div>
-      {/* 최근 검색어 */}
-      {/* <div className="flex flex-col gap-4">
-        <h2 className="font-bold text-white">최근 검색어</h2>
-      </div> */}
     </aside>
   );
 };
