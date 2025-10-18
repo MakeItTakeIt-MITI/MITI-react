@@ -4,7 +4,6 @@ import toggle_close from "../../../assets/v1.3/navigation/toggle_close.png";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { getTodaysGamesQuery } from "../../../utils/dates/date";
-import App from "@/App";
 import AppDownloadBtn from "./AppDownloadBtn";
 
 export default function MobileNavbar() {

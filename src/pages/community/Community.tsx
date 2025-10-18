@@ -48,6 +48,7 @@ export default function Community() {
       <CommunityContentContainer
         postsData={postsData?.data}
         popularPostsData={popularPostsData?.data}
+        isLoading={isLoading}
       />
     </section>
   );
