@@ -21,6 +21,8 @@ const Faq = () => {
     [searchParams, setSearchParams]
   );
 
+  const currentTab = searchParams.get("tab");
+
   return (
     <section className="sm:w-full sm:py-3 sm:px-4  md:w-[800px] min-h-[838px] mx-auto md:my-10 md:py-[30px] flex flex-col gap-[36px]">
       <div className="space-y-5 text-white">
@@ -35,7 +37,7 @@ const Faq = () => {
         handleToggleTab={handleToggleTab}
         data={data}
         isLoading={isLoading}
-        currentTab={searchParams.get("tab")}
+        currentTab={currentTab}
       />
     </section>
   );
