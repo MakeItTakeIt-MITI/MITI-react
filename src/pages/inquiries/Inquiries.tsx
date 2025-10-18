@@ -7,6 +7,7 @@ import SearchBar from "../../features/common/components(renewal)/search/SearchBa
 import SubmitInquiryButton from "../../features/inquiries/components/SubmitInquiryButton.tsx";
 import InquiriesListContainer from "../../features/inquiries/components/InquiriesListContainer.tsx";
 import { Link } from "react-router-dom";
+import { useAnonymousInquriesList } from "../../features/inquiries/hooks/useAnonymousInquriesList.tsx";
 
 const InquiriesList = () => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -16,8 +17,7 @@ const InquiriesList = () => {
   const inquriesPageContentData = inquriesData?.pages?.flatMap(
     (page) => page?.data?.page_content
   );
-  const currentPage = inquriesData?.pages?.[0]?.data?.current_index || 1;
-  const pageLength = inquriesData?.pages?.[0]?.data?.page_content?.length || 1;
+
   const pagesArray = [1];
 
   useEffect(() => {
@@ -29,6 +29,14 @@ const InquiriesList = () => {
     };
     fetchInquiries();
   }, []);
+
+  const { data: anonymousInquiresData } = useAnonymousInquriesList();
+  console.log("anonymousInquiresData", anonymousInquiresData);
+
+  const currentPage =
+    anonymousInquiresData?.pages?.[0]?.data?.current_index || 1;
+  const pageLength =
+    anonymousInquiresData?.pages?.[0]?.data?.page_content?.length || 1;
   return (
     <section className="sm:w-full  md:w-[840px] ] sm:px-4 md:px-0  mx-auto sm:py-[20px]  md:py-[30px] flex flex-col gap-[36px]">
       <Header />
