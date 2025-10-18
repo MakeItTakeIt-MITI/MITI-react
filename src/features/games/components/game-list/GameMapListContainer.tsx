@@ -24,51 +24,55 @@ interface GameMapListContainerProps {
 export default function GameMapListContainer({
   handleToggleTab,
   tab,
-  gamesMapData,
-  gamesListData,
+  gamesMapData = [],
+  gamesListData = [],
   isMapGameListLoading,
   isGamesListLoading,
 }: GameMapListContainerProps) {
   const [isFilterBoxOpen, setIsFilterBoxOpen] = useState(false);
 
   const { isSelected, selectedAddress } = useSelectedStore();
+
+  // choose displayed games depending on selection
   const displayedGames = isSelected
     ? gamesMapData?.filter((game) => game.court.address === selectedAddress)
-    : gamesMapData;
+    : gamesMapData ?? [];
 
   const handleToggleMobileFilterBox = () => {
     setIsFilterBoxOpen((prev) => !prev);
   };
 
   return (
-    <div className=" md:w-[700px]   w-full min-h-[1px] flex flex-col gap-[20px]">
+    <div className="md:w-[700px] w-full min-h-[1px] flex flex-col gap-[20px]">
       {isFilterBoxOpen && (
         <FilterBox handleToggleMobileFilterBox={handleToggleMobileFilterBox} />
       )}
+
       {/* TAB  */}
       <div className="flex px-4">
         <Tab
           content="지도"
-          isSelected={tab === "map" ? true : false}
+          isSelected={tab === "map"}
           onClick={() => handleToggleTab("map")}
         />
         <Tab
           content="리스트"
-          isSelected={tab === "list" ? true : false}
+          isSelected={tab === "list"}
           onClick={() => handleToggleTab("list")}
         />
       </div>
+
       {/* Games MAP/LIST */}
       {tab === "map" ? (
-        <div className="flex flex-col gap-5   w-full h-full  ">
+        <div className="flex flex-col gap-5 w-full h-full">
           <GameMap gamesMapData={gamesMapData} />
-          {/* </Suspense> */}
-          <div className="flex flex-col gap-4 sm:h-[528px] md:h-[528px] overflow-y-auto  custom-scrollbar px-4 ">
+
+          <div className="flex flex-col gap-4 sm:h-[528px] md:h-[528px] overflow-y-auto custom-scrollbar px-4">
             <div>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-[400] text-white">
-                    총 {displayedGames?.length}개의 경기
+                    총 {displayedGames?.length ?? 0}개의 경기
                   </span>
                   <button
                     className="md:hidden sm:block"
@@ -78,33 +82,37 @@ export default function GameMapListContainer({
                     <img src={settings_mobile} alt="settings_mobile" />
                   </button>
                 </div>
+
                 {/* Mobile Game Status */}
                 <SettingsContainer />
               </div>
             </div>
-            <ul className="flex flex-col gap-2.5 h-[500px] sm:h-[512px] overlflow-y-auto">
-              {gamesMapData?.length === 0 && (
-                <div className="  w-full flex flex-col gap-4 items-center justify-center">
-                  <h3 className="text-lg text-white">
-                    검색된 경기가 없습니다.
-                  </h3>{" "}
-                  <p className="text-sm text-[#999]">
-                    필터를 변경하여 다른 경기를 찾아보세요!
-                  </p>
-                </div>
-              )}
 
-              {(isSelected
-                ? gamesMapData?.filter(
-                    (game) => game.court.address === selectedAddress
-                  )
-                : gamesMapData
-              )?.map((game) =>
-                isMapGameListLoading ? (
-                  <MapGameListCardSkeleton />
-                ) : (
-                  <Card key={game.id} game={game} />
-                )
+            <ul className="flex flex-col gap-2.5 h-[500px] sm:h-[512px] overflow-y-auto">
+              {/* loading skeletons */}
+              {isMapGameListLoading ? (
+                <>
+                  {Array.from({ length: 6 }).map((_, i) => (
+                    <MapGameListCardSkeleton key={`map-skel-${i}`} />
+                  ))}
+                </>
+              ) : (
+                <>
+                  {displayedGames?.length === 0 ? (
+                    <div className="w-full flex flex-col gap-4 items-center justify-center py-10">
+                      <h3 className="text-lg text-white">
+                        검색된 경기가 없습니다.
+                      </h3>
+                      <p className="text-sm text-[#999]">
+                        필터를 변경하여 다른 경기를 찾아보세요!
+                      </p>
+                    </div>
+                  ) : (
+                    displayedGames.map((game) => (
+                      <Card key={game.id} game={game} />
+                    ))
+                  )}
+                </>
               )}
             </ul>
           </div>

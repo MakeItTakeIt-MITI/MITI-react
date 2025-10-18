@@ -60,31 +60,28 @@ export const Games = () => {
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
-    <>
-      <section
-        style={{
-          backgroundColor: "#141414",
-        }}
-        className="mx-auto  sm:w-full flex flex-col md:items-center gap-[30px] pb-[30px] "
-      >
-        {/* BANNER Component */}
-        <BannerMedium type="manners" />
-        {/* Displays games filter sidebar and games list */}
-        <article className="flex gap-[30px] ">
-          {/* Sidebar component to filter game rendering */}
-          {tab === "map" && <Sidebar />}
-          {/* Main display component between game map and game list components */}
-          <GameMapListContainer
-            handleToggleTab={handleToggleTab}
-            gamesMapData={gamesMapData}
-            gamesListData={gamesListData}
-            isMapGameListLoading={isMapGameListLoading}
-            tab={tab}
-            isGamesListLoading={isGamesListLoading}
-          />
-        </article>
-      </section>
-      {/* <Footer /> */}
-    </>
+    <section
+      style={{
+        backgroundColor: "#141414",
+      }}
+      className="mx-auto  sm:w-full flex flex-col md:items-center gap-[30px] pb-[30px] "
+    >
+      {/* BANNER Component */}
+      <BannerMedium type="manners" />
+      {/* Displays games filter sidebar and games list */}
+      <article className="flex gap-[30px] ">
+        {/* Sidebar component to filter game rendering */}
+        {tab === "map" && <Sidebar />}
+        {/* Main display component between game map and game list components */}
+        <GameMapListContainer
+          handleToggleTab={handleToggleTab}
+          gamesMapData={gamesMapData}
+          gamesListData={gamesListData}
+          isMapGameListLoading={isMapGameListLoading}
+          tab={tab}
+          isGamesListLoading={isGamesListLoading}
+        />
+      </article>
+    </section>
   );
 };
