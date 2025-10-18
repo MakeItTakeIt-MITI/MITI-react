@@ -88,12 +88,20 @@ const router = createBrowserRouter([
   },
 ]);
 
-async function deferRender() {
-  const { worker } = await import("./mocks/browser.ts");
-  return worker.start();
-}
+async function initApp() {
+  // only start MSW in dev to avoid loading mocks in production
+  if (import.meta.env.DEV) {
+    try {
+      const { worker } = await import("./mocks/browser.ts");
+      await worker.start();
+    } catch (e) {
+      // don't crash app if msw setup fails in some environment
+      // keep this quiet in production logs
+      // eslint-disable-next-line no-console
+      console.warn("MSW worker failed to start:", e);
+    }
+  }
 
-deferRender().then(() => {
   ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
@@ -102,4 +110,6 @@ deferRender().then(() => {
       </QueryClientProvider>
     </React.StrictMode>
   );
-});
+}
+
+initApp();
