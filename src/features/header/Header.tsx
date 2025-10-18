@@ -1,5 +1,5 @@
-import DesktopNavbar from "./DesktopNavbar.tsx";
-import MobileNavbar from "./MobileNavbar.tsx";
+import DesktopNavbar from "./components/DesktopNavbar";
+import MobileNavbar from "./components/MobileNavbar";
 
 export default function Header() {
   return (

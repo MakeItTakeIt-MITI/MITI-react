@@ -1,9 +1,11 @@
-import miti_logo from "../../assets/v1.3/navbar-logo.svg";
-import hamburger from "../../assets/v1.3/hamburger.svg";
-import toggle_close from "../../assets/v1.3/navigation/toggle_close.png";
+import miti_logo from "../../../assets/v1.3/navbar-logo.svg";
+import hamburger from "../../../assets/v1.3/hamburger.svg";
+import toggle_close from "../../../assets/v1.3/navigation/toggle_close.png";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { getTodaysGamesQuery } from "../../utils/dates/date";
+import { getTodaysGamesQuery } from "../../../utils/dates/date";
+import App from "@/App";
+import AppDownloadBtn from "./AppDownloadBtn";
 
 export default function MobileNavbar() {
   const [displayMenu, setDisplayMenu] = useState(false);
@@ -53,14 +55,7 @@ export default function MobileNavbar() {
               <Link to={`inquiries?page=1`}>사용자의 문의</Link>
             </li>
             <li>
-              <button
-                style={{
-                  color: "#262626",
-                }}
-                className="py-2 px-3 bg-[#1ADCDF] rounded-full text-xs font-bold "
-              >
-                앱 다운로
-              </button>
+              <AppDownloadBtn />
             </li>
           </ul>
         </div>
