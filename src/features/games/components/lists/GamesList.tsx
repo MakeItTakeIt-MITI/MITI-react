@@ -1,7 +1,10 @@
 import { GameField } from "../../interface/games.ts";
 import GamesListCard from "../card/GamesListCard.tsx";
 import SkeletonCard from "../card/SkeletonCard.tsx";
-import "./scrollbar.css";
+
+import "../styles/scrollbar.css";
+
+
 interface GamesListProps {
   gamesListData: GameField[];
   isGamesListLoading: boolean;

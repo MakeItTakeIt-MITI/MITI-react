@@ -3,7 +3,7 @@ import participants from "../../assets/v11/participants.svg";
 import { Game } from "../../interfaces/games.ts";
 import { Link } from "react-router-dom";
 import { GameStatus } from "../common/components(renewal)/chips/GameStatus.tsx";
-import { Fee } from "../../features/games/components/Fee.tsx";
+import { Fee } from "./components/ui/Fee.tsx";
 
 interface MobileGameListCardProp {
   game: Game;
