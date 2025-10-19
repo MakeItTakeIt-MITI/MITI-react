@@ -37,6 +37,7 @@ export default function Courts() {
     data: courtsData,
     hasNextPage,
     fetchNextPage,
+    isLoading
   } = useAllCourts(inputContent.get("search"), regionParams.get("region"));
 
   const courtsDataPage = courtsData?.pages?.flatMap(
@@ -89,6 +90,7 @@ export default function Courts() {
             courtsListRef={courtsListRef}
             geoLatitude={geolocation?.lat}
             geoLongitude={geolocation?.lon}
+            isLoading={isLoading}
           />
         </div>
       </article>
