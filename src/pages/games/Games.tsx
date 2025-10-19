@@ -1,91 +1,47 @@
-import { useEffect, useState } from "react";
-import MainContent from "../../components/games/MainContent.tsx";
-import GameFilterContainer from "../../components/game-filter/GameFilterContainer.tsx";
-import Footer from "../../components/common/Footer.tsx";
-import useDateSelectionStore from "../../store/useDateSelectionStore.ts";
-import useTimeFieldStore from "../../store/useTimeStore.ts";
-import useStatusSelectionStore from "../../store/useStatusSelectionStore.ts";
-
-import useCurrentMonthStore from "../../store/useCurrentMonthStore.ts";
-
-import { useFilterBox } from "../../features/games/hooks/useFilterBox.tsx";
-import { useFilterBoxSettings } from "../../features/games/hooks/useFilterBoxSettings.tsx";
-import { useMapGamesList } from "../../features/games/hooks/useMapGamesList.tsx";
+import BannerMedium from "../../features/common/components(renewal)/banners/BannerMedium.tsx";
+import Sidebar from "../../features/games/components/sidebar/Sidebar.tsx";
+import GameMapListContainer from "../../features/games/components/layouts/GameMapListContainer.tsx";
+import { useGamesPage } from "../../features/games/hooks/useGamesPage.ts";
 
 export const Games = () => {
-  const [displayFilterBox, setDisplayFilterBox] = useState<boolean>(false);
 
-  // react custom hooks
-  const { handleToggleFilterBox } = useFilterBox(
-    displayFilterBox,
-    setDisplayFilterBox
-  );
 
-  const { handleResetFilters, handleApplyFilters } =
-    useFilterBoxSettings(setDisplayFilterBox);
-
-  //zustand store
-  const { yearMonthDay } = useDateSelectionStore();
-  const { formattedFullTime } = useTimeFieldStore();
-  const { selectedStatuses } = useStatusSelectionStore();
-  const { currentMonth } = useCurrentMonthStore();
-
-  const { data: mapGamesData, isLoading } = useMapGamesList(
-    yearMonthDay,
-    formattedFullTime,
-    selectedStatuses
-  );
-
-  useEffect(() => {}, [selectedStatuses, displayFilterBox]);
+// Custom Hook to manages games data, state and interactions
+  const {
+    tab,
+    isFilterBoxOpen,
+    handleToggleTab,
+    handleToggleMobileFilterBox,
+    isMapGameListLoading,
+    isGamesListLoading,
+    gamesMapData,   // imported from useGameDataProcessing
+    gamesListData, // imported from useGameDataProcessing
+    displayedGames, // imported from useGameDataProcessing
+  } = useGamesPage();
 
   return (
-    <>
-      {displayFilterBox && (
-        <GameFilterContainer
-          handleToggleFilterBox={handleToggleFilterBox}
-          handleResetFilters={handleResetFilters}
-          handleApplyFilters={handleApplyFilters}
-          currentMonth={currentMonth}
+    <section
+      style={{
+        backgroundColor: "#141414",
+      }}
+      className="mx-auto  sm:w-full flex flex-col md:items-center gap-[30px] pb-[30px] "
+    >
+
+      <BannerMedium type="manners" />
+      <article className="flex gap-[30px] ">
+        {tab === "map" && <Sidebar />}
+        <GameMapListContainer
+          handleToggleTab={handleToggleTab}
+          handleToggleMobileFilterBox={handleToggleMobileFilterBox}
+          gamesMapData={gamesMapData} // Raw map data for map markers
+          gamesListData={gamesListData} //  Games list data without scrolling/pagination
+          displayedGames={displayedGames}  // Filtered data for cards display
+          isMapGameListLoading={isMapGameListLoading}
+          isGamesListLoading={isGamesListLoading}
+          isFilterBoxOpen={isFilterBoxOpen}
+          tab={tab}
         />
-      )}
-      <header className="bg-games_web bg-center bg-cover bg-no-repeat  h-[20rem] sm:hidden md:flex justify-center items-center bg-[#000] relative">
-        {/* pc hero */}
-        <div className="absolute md:w-[768px] flex flex-col sm:items-center md:items-start justify-center gap-[1.25rem] text-[#fff] ">
-          <p className="text-base font-bold text-primary-teal">
-            MITI 서비스 런칭
-          </p>
-          <h1 className="font-bold  text-[44px]">
-            오늘 퇴근하고 농구 어떠세요?
-          </h1>
-          <p className="font-[400] text-[20px]">
-            당신 근처의 경기를 지금 찾아보세요.
-          </p>
-        </div>
-      </header>
-
-      {/* mobile hero */}
-      <header className="bg-games_mobile bg-center bg-cover bg-no-repeat    sm:flex items-center  justify-center md:hidden h-[16.125rem]  ">
-        <div className="flexCenter flex-col gap-[1.5rem] text-[#fff]  ">
-          <div className="space-y-[.75rem] text-center">
-            <p className="text-sm font-bold text-primary-teal">
-              MITI 서비스 런칭
-            </p>
-            <h1 className="font-bold text-[24px]">
-              오늘 퇴근하고 농구 어떠세요?
-            </h1>
-          </div>
-          <h2 className="font-[300] text-sm">
-            당신 근처의 경기를 지금 찾아보세요.{" "}
-          </h2>
-        </div>
-      </header>
-      <MainContent
-        handleToggleFilterBox={handleToggleFilterBox}
-        allGamesData={mapGamesData?.data}
-        isLoading={isLoading}
-      />
-
-      <Footer />
-    </>
+      </article>
+    </section>
   );
 };

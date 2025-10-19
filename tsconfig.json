@@ -6,12 +6,16 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "esModuleInterop": true,
+    "baseUrl": "./", // The base directory for non-relative imports
+    "paths": {
+      "@/*": ["src/*"] // Path aliasing for the src directory
+    },
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": true, // originally true
     "jsx": "react-jsx",
     "types": ["vitest/globals", "jest", "@testing-library/jest-dom"],
 

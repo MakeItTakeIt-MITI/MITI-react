@@ -1,30 +1,23 @@
-# React + TypeScript + Vite
+## MITI (Make It Take It)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+전국 농구 경기 참여 및 호스팅 플랫폼
 
-Currently, two official plugins are available:
+MITI는 농구를 사랑하는 사람들을 위한 올인원 플랫폼입니다.
+원하는 시간, 원하는 장소에서 농구 경기를 예약, 참여, 모집, 결제까지 간편하게!
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+우리 동네 경기에 바로 참가하거나
 
-## Expanding the ESLint configuration
+직접 경기를 열고 함께할 사람을 모집하세요
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+근처 농구장도 쉽게 검색 가능!
 
-- Configure the top-level `parserOptions` property like this:
+---
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## 소개 
+Web : https://www.makeittakeit.kr/
+Android: https://play.google.com/store/apps/details?id=com.miti.miti&hl=ko&pli=1
+IOS: https://apps.apple.com/us/app/miti/id6503062372
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+--
+
+## 

@@ -1,18 +1,16 @@
 import { Outlet } from "react-router-dom";
-import { Navbar } from "./components/navigation/Navbar.tsx";
-import { ScrollToTop } from "./components/common/ScrollToTop.tsx";
+import { ScrollToTop } from "./features/common/components/ScrollToTop.tsx";
+import Footer from "./features/common/components/Footer.tsx";
+import Header from "./features/header/Header.tsx";
 
 function App() {
   return (
-    <main
-    // style={{
-    //   backgroundColor: "#171717",
-    // }}
-    >
+    <>
       <ScrollToTop />
-      <Navbar />
+      <Header />
       <Outlet />
-    </main>
+      <Footer />
+    </>
   );
 }
 
