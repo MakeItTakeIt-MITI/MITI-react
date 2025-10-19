@@ -23,8 +23,8 @@ export default function Card({ game }: CardProps) {
 
   return (
     <li
-      className={`cursor-pointer w-full sm:h-[128px] md:h-[136px] flex flex-col gap-2.5 justify-center md:p-3 rounded-lg text-white transition-shadow
-    ${isHovered ? "md:shadow-[0_4px_24px_0_#1ADCDF,0_0_0_4px_#141414]" : ""}
+      className={` cursor-pointer w-full sm:h-[128px] md:h-[136px] flex flex-col gap-2.5 justify-center md:p-3 rounded-lg text-white transition-shadow
+${isHovered ? "md:shadow-[8px_8px_56px_0_rgba(26,220,223,0.25)] m-[6px] transition delay-150 border-none" : ""}
   `}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

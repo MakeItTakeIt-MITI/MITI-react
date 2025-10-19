@@ -3,6 +3,7 @@ import GameMap from "../../../naver_map/components/GameMap.tsx";
 import { GameField } from "../../interface/games.ts";
 import ScrollableGameList from "../lists/ScrollableGameList.tsx";
 import GameHeader from "../ui/GameHeader.tsx";
+import "../../scrollbar.css";
 
 interface MapViewProps {
   gamesMapData: GameField[];

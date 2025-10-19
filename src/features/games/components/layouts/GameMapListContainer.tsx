@@ -32,7 +32,7 @@ export default function GameMapListContainer({
 
 
   return (
-    <div className="md:w-[700px] w-full min-h-[1px] flex flex-col gap-[20px]">
+    <div className="md:w-[720px] w-full min-h-[1px] flex flex-col gap-[20px]">
       {/* Mobile Filter Modal */}
       {isFilterBoxOpen && (
         <FilterBox handleToggleMobileFilterBox={handleToggleMobileFilterBox} />
