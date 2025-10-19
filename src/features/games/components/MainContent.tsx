@@ -3,11 +3,11 @@ import useGameFilterStore from "../../../store/useGameFilterStore.ts";
 import { Game } from "../../../interfaces/games.ts";
 import { useState } from "react";
 import FilteredGameListContainer from "./FilteredGameListContainer.tsx";
+import FilteredStatus from "./FilteredStatus.tsx";
 import MoveToAppBanner from "../../common/components/MoveToAppBanner.tsx";
 
 import right_arrow from "../../../assets/v11.2/right_arrow.svg";
 import { Link } from "react-router-dom";
-import FilteredStatus from "./game-filter/FilteredStatus.tsx";
 import NaverMap from "../NaverMap.tsx";
 import GameListContainer from "../GameListContainer.tsx";
 import MobileGameListContainer from "../MobileGameListContainer.tsx";
@@ -131,7 +131,7 @@ const MainContent = ({
                 type="button"
                 className="text-xs font-[600] text-[#fff] flex"
               >
-                <span> 전체 경기</span>
+                <span>전체 경기</span>
                 <img src={right_arrow} alt="right" />
               </button>
             </Link>
