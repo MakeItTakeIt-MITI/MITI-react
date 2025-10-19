@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { Fee } from "./Fee.tsx";
 import { GameStatus } from "../../common/components(renewal)/chips/GameStatus.tsx";
 import participants from "../../../assets/v11/participants.svg";
 import time from "../../../assets/v11/time.svg";
 import { GameField } from "../interface/games.ts";
+import { Fee } from "./ui/Fee.tsx";
 
 interface GameListCardProp {
   game: GameField;

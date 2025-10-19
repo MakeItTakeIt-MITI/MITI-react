@@ -1,6 +1,5 @@
-import { Link, useSearchParams } from "react-router-dom";
-import { useTimeField } from "../../../../../store/Sidebar/useTimeFieldStore";
-import { getTodaysGamesQuery } from "../../../../../utils/dates/date";
+import {  useSearchParams } from "react-router-dom";
+import { useTimeField } from "../../../../../../store/Sidebar/useTimeFieldStore";
 
 const SettingsContainer = () => {
   const [searchParams] = useSearchParams();
@@ -48,10 +47,9 @@ const SettingsContainer = () => {
       <ul className="flex items-center gap-1.5 min-w-max">
         <li className="text-[#474747] text-xs font-[500] border border-[#474747] rounded-[50px] py-2 px-3">
           <button onClick={handleResetSidebarSettings} type="button">
-            <Link to={`/${getTodaysGamesQuery()}`}>초기화</Link>
+            초기화
           </button>
         </li>
-        <li className="bg-[#474747] h-[26px] w-[1px]" />
         {/* ...other list items... */}
         <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3">
           {startdate}

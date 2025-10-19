@@ -1,63 +1,23 @@
 import BannerMedium from "../../features/common/components(renewal)/banners/BannerMedium.tsx";
 import Sidebar from "../../features/games/components/sidebar/Sidebar.tsx";
-import { useSearchParams } from "react-router-dom";
-import GameMapListContainer from "../../features/games/components/game-list/GameMapListContainer.tsx";
-import { useCallback, useEffect, useState } from "react";
-import { useMapGamesList } from "../../features/games/hooks/query/useMapGamesList.tsx";
-import { useGamesListOnly } from "../../features/games/hooks/query/useGamesList.tsx";
-import { GameField } from "../../features/games/interface/games.ts";
-import { useTimeField } from "../../store/Sidebar/useTimeFieldStore.ts";
+import GameMapListContainer from "../../features/games/components/layouts/GameMapListContainer.tsx";
+import { useGamesPage } from "../../features/games/hooks/useGamesPage.ts";
 
 export const Games = () => {
-  const [tab, setTab] = useState("map");
-  const [searchParams] = useSearchParams();
 
-  // function passed as a prop, useCallBack to prevent re-render
-  const handleToggleTab = useCallback(
-    (selected: string) => {
-      setTab(selected);
-    },
-    [tab]
-  );
 
-  const month = searchParams.get("month");
-  const day = searchParams.get("day");
-  const year = searchParams.get("year");
-
-  // imported from useTimeField Store
-  const { hour, minutes } = useTimeField();
-  const timeFormat = `${hour}:${minutes}`;
-
-  const startdate = `${year}-${month}-${day}`;
-  const game_status = searchParams.getAll("game_status");
-
-  const regionParam = searchParams.get("region") || "";
-  const searchParam = searchParams.get("search") || "";
-
-  const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(
-    startdate,
-    timeFormat,
-    game_status
-  );
-
-  const gamesMapData = mapData?.data;
-
+// Custom Hook to manages games data, state and interactions
   const {
-    data: gamesData,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    isLoading: isGamesListLoading,
-  } = useGamesListOnly(regionParam, searchParam);
-
-  const gamesListData: GameField[] =
-    gamesData?.pages.flatMap((page) => page.data.page_content) ?? [];
-
-  useEffect(() => {
-    if (hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+    tab,
+    isFilterBoxOpen,
+    handleToggleTab,
+    handleToggleMobileFilterBox,
+    isMapGameListLoading,
+    isGamesListLoading,
+    gamesMapData,   // imported from useGameDataProcessing
+    gamesListData, // imported from useGameDataProcessing
+    displayedGames, // imported from useGameDataProcessing
+  } = useGamesPage();
 
   return (
     <section
@@ -66,20 +26,20 @@ export const Games = () => {
       }}
       className="mx-auto  sm:w-full flex flex-col md:items-center gap-[30px] pb-[30px] "
     >
-      {/* BANNER Component */}
+
       <BannerMedium type="manners" />
-      {/* Displays games filter sidebar and games list */}
       <article className="flex gap-[30px] ">
-        {/* Sidebar component to filter game rendering */}
         {tab === "map" && <Sidebar />}
-        {/* Main display component between game map and game list components */}
         <GameMapListContainer
           handleToggleTab={handleToggleTab}
-          gamesMapData={gamesMapData}
-          gamesListData={gamesListData}
+          handleToggleMobileFilterBox={handleToggleMobileFilterBox}
+          gamesMapData={gamesMapData} // Raw map data for map markers
+          gamesListData={gamesListData} //  Games list data without scrolling/pagination
+          displayedGames={displayedGames}  // Filtered data for cards display
           isMapGameListLoading={isMapGameListLoading}
-          tab={tab}
           isGamesListLoading={isGamesListLoading}
+          isFilterBoxOpen={isFilterBoxOpen}
+          tab={tab}
         />
       </article>
     </section>

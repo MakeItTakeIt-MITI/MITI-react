@@ -8,11 +8,118 @@ import GameTitle from "../../common/components(renewal)/chips/GameTitle.tsx";
 import { GameDetail } from "../interface/game-detail.ts";
 import five_stars from "../../../assets/v1.3/reviews/five-star.svg";
 
+// Skeleton components for loading state
+const SkeletonGameStatus = () => (
+  <div className="animate-pulse">
+    <div className="h-6 w-20 bg-[#2A2A2A] rounded" />
+  </div>
+);
+
+const SkeletonGameTitle = () => (
+  <div className="animate-pulse">
+    <div className="h-8 w-48 bg-[#2A2A2A] rounded" />
+  </div>
+);
+
+const SkeletonGameDate = () => (
+  <div className="animate-pulse space-y-1">
+    <div className="flex space-x-2">
+      <div className="h-4 w-12 bg-[#2A2A2A] rounded" />
+      <div className="h-4 w-8 bg-[#2A2A2A] rounded" />
+      <div className="h-4 w-8 bg-[#2A2A2A] rounded" />
+    </div>
+    <div className="flex space-x-2">
+      <div className="h-4 w-12 bg-[#2A2A2A] rounded" />
+      <div className="h-4 w-8 bg-[#2A2A2A] rounded" />
+    </div>
+  </div>
+);
+
+const SkeletonGameAddress = () => (
+  <div className="animate-pulse">
+    <div className="h-5 w-64 bg-[#2A2A2A] rounded" />
+  </div>
+);
+
+const SkeletonGameTime = () => (
+  <div className="animate-pulse">
+    <div className="h-5 w-32 bg-[#2A2A2A] rounded" />
+  </div>
+);
+
+const SkeletonGameParticipants = () => (
+  <div className="animate-pulse">
+    <div className="h-5 w-24 bg-[#2A2A2A] rounded" />
+  </div>
+);
+
+const SkeletonGameFee = () => (
+  <div className="animate-pulse flex gap-1">
+    <div className="h-6 w-12 bg-[#2A2A2A] rounded" />
+    <div className="h-6 w-16 bg-[#2A2A2A] rounded" />
+  </div>
+);
+
+const SkeletonHostIntro = () => (
+  <div className="animate-pulse space-y-4 md:hidden sm:block">
+    <div className="h-6 w-20 bg-[#2A2A2A] rounded" />
+    <div className="flex items-center gap-3">
+      <div className="w-10 h-10 bg-[#2A2A2A] rounded-full" />
+      <div className="flex flex-col gap-1">
+        <div className="h-4 w-24 bg-[#2A2A2A] rounded" />
+        <div className="flex items-center space-x-2">
+          <div className="h-3 w-16 bg-[#2A2A2A] rounded" />
+          <div className="h-3 w-8 bg-[#2A2A2A] rounded" />
+          <div className="h-3 w-8 bg-[#2A2A2A] rounded" />
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const SkeletonGameInfo = () => (
+  <div className="animate-pulse space-y-2">
+    <div className="h-4 w-full bg-[#2A2A2A] rounded" />
+    <div className="h-4 w-5/6 bg-[#2A2A2A] rounded" />
+    <div className="h-4 w-4/6 bg-[#2A2A2A] rounded" />
+    <div className="h-4 w-3/6 bg-[#2A2A2A] rounded" />
+  </div>
+);
+
+const GameDetailSkeleton = () => (
+  <div className="space-y-[30px] sm:w-full md:w-[578px] md:min-h-screen md:py-0 sm:py-2 sm:px-4 md:px-0">
+    {/* game details skeleton */}
+    <ul className="space-y-3">
+      <li><SkeletonGameStatus /></li>
+      <li><SkeletonGameTitle /></li>
+      <li><SkeletonGameDate /></li>
+      <li><SkeletonGameAddress /></li>
+      <li><SkeletonGameTime /></li>
+      <li><SkeletonGameParticipants /></li>
+      <li><SkeletonGameFee /></li>
+    </ul>
+
+    <SkeletonHostIntro />
+
+    <SkeletonGameInfo />
+  </div>
+);
+
 interface GameDetailContainerProps {
-  gameDetailData: GameDetail;
+  gameDetailData?: GameDetail;
+  isLoading?: boolean;
 }
 
-const GameDetailContainer = ({ gameDetailData }: GameDetailContainerProps) => {
+const GameDetailContainer = ({ gameDetailData, isLoading = false }: GameDetailContainerProps) => {
+  if (isLoading) {
+    return <GameDetailSkeleton />;
+  }
+
+  // Return skeleton if no data is available
+  if (!gameDetailData) {
+    return <GameDetailSkeleton />;
+  }
+
   function getGameDurationInMinutes(start: string, end: string): number {
     if (!start || !end) return 0;
 
@@ -30,8 +137,8 @@ const GameDetailContainer = ({ gameDetailData }: GameDetailContainerProps) => {
   }
 
   const duration = getGameDurationInMinutes(
-    gameDetailData?.starttime.slice(0, 5),
-    gameDetailData?.endtime.slice(0, 5)
+    gameDetailData.starttime.slice(0, 5),
+    gameDetailData.endtime.slice(0, 5)
   );
 
   return (

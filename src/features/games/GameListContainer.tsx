@@ -4,9 +4,9 @@ import { GameCardSkeleton } from "../../features/games/components/GameCardSkelet
 // import GameListCard from "./GameListCard.tsx";
 
 import "./scrollbar.css";
-import { GameCardStatic } from "../../features/games/components/GameCardStatic.tsx";
 import { GameCardLink } from "../../features/games/components/GameCardLink.tsx";
 import { ListContainerLayout } from "../../features/common/components/ListContainerLayout.tsx";
+import { GameCardStatic } from "./components/cards/GameCardStatic.tsx";
 
 interface GameListProps extends AllGamesProps {
   handleSetCoords: (arg1: string, arg2: string, arg3: number) => void;

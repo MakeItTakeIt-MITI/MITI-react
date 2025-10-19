@@ -1,11 +1,10 @@
 
 import { GameField } from "../../interface/games.ts";
 import "../../../../index.css";
-
-import TabNavigation from "../navigation/TabNavigation.tsx"
+import FilterBox from "../filters/game-filter/mobile/FilterBox.tsx";
+import TabNavigation from "../navigation/TabNavigation.tsx";
 import MapView from "../views/MapView.tsx";
 import ListView from "../views/ListView.tsx";
-import FilterBox from "../filters/game-filter/mobile/FilterBox.tsx";
 
 interface GameMapListContainerProps {
   handleToggleTab: (arg: string) => void;

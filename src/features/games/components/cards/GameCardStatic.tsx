@@ -1,8 +1,8 @@
-import { Game } from "../../../interfaces/games.ts";
-import { GameStatus } from "../../common/components(renewal)/chips/GameStatus.tsx";
-import time from "../../../assets/v11/time.svg";
-import participants from "../../../assets/v11/participants.svg";
-import { Fee } from "./Fee.tsx";
+import { Game } from "../../../../interfaces/games.ts";
+import { GameStatus } from "../../../common/components(renewal)/chips/GameStatus.tsx";
+import time from "../../../../assets/v11/time.svg";
+import participants from "../../../../assets/v11/participants.svg";
+import { Fee } from "../ui/Fee.tsx";
 
 interface GameListCardProp {
   game: Game;
@@ -54,7 +54,6 @@ export const GameCardStatic = ({
             </span>
           </div>
         </div>
-        {/* FEE */}
         <Fee fee={game.fee} />
       </div>
     </div>

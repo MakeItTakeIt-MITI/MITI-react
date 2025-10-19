@@ -1,13 +1,13 @@
 import { Link, useSearchParams } from "react-router-dom";
-import { useTimeField } from "../../../../../store/Sidebar/useTimeFieldStore";
-import DatesField from "../../sidebar/DatesField";
-import GameStatusField from "../../sidebar/GameStatusField";
+import { useTimeField } from "../../../../../../store/Sidebar/useTimeFieldStore";
+import DatesField from "../../../sidebar/DatesField";
+import GameStatusField from "../../../sidebar/GameStatusField";
 import { useCallback } from "react";
-import { InitialDateField } from "../../../interface/games";
+import { InitialDateField } from "../../../../interface/games";
 import {
   getTodaysDateKorea,
   getTodaysGamesQuery,
-} from "../../../../../utils/dates/date";
+} from "../../../../../../utils/dates/date";
 import TimesFieldMobile from "./TimesFieldMobile";
 
 interface FilterBoxProps {
@@ -200,29 +200,28 @@ const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
           {/* set datesfield */}
           <DatesField
             INITIAL_DATES={INITIAL_DATES}
+            handleDateClick={handleDateClick}
             yearParam={yearParam}
             monthParam={monthParam}
             dayParam={dayParam}
-            handleDateClick={handleDateClick}
           />
 
-          {/*set  time field */}
+          {/* time field mobile */}
           <TimesFieldMobile />
-          {/* set status field */}
-          {/* <GameStatusFieldMobile
-            handleToggleGameStatus={handleToggleGameStatus}
-            gameStatusArray={gameStatusArray}
-          /> */}
+
+          {/* game status field */}
           <GameStatusField
-            handleToggleGameStatus={handleToggleGameStatus}
             gameStatusArray={gameStatusArray}
+            handleToggleGameStatus={handleToggleGameStatus}
           />
 
-          {/* set region field */}
-          {/* <RegionField /> */}
+          {/* <GameStatusFieldMobile
+            gameStatusArray={gameStatusArray}
+            handleToggleGameStatus={handleToggleGameStatus}
+          /> */}
         </div>
 
-        {/* buttons */}
+        {/* filter buttons */}
         <div className="flex items-center gap-[22px]">
           <button
             type="button"

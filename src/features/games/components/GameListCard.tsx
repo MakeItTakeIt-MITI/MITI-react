@@ -1,10 +1,10 @@
 // import { GameStatus } from "./GameStatus.tsx";
 import time from "../../../assets/v11.2/time.svg";
 import participants from "../../../assets/v11.2/participants.svg";
-import { Fee } from "./Fee.tsx";
 import { Link } from "react-router-dom";
 import { GameField } from "../interface/games.ts";
 import { GameStatus } from "../../common/components(renewal)/chips/GameStatus.tsx";
+import { Fee } from "./ui/Fee.tsx";
 
 interface GameListCardProps {
   game: GameField;
