@@ -34,11 +34,10 @@ const FaqCard = ({ title, content }: FaqCardProps) => {
       </button>
       {toggle && (
         <p
-    style={{ whiteSpace: 'pre-line' }}
+          style={{ whiteSpace: 'pre-line' }}
           className=" text-[#e8e8e8] font-400 "
-        >
-          {content}
-        </p>
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
       )}
     </li>
   );
