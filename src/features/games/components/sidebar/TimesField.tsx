@@ -1,11 +1,12 @@
+import { useRef, useState, useEffect } from "react";
 import { useTimeField } from "../../../../store/Sidebar/useTimeFieldStore";
 
-// interface TimeFiledProps {
-//   handleSetTime: (arg1: string, arg2: string) => void;
-// }
+
 
 export default function TimesField() {
   const { hour, minutes, setHour, setMinutes } = useTimeField();
+  const [isHourScrolling, setIsHourScrolling] = useState(false);
+  const [isMinuteScrolling, setIsMinuteScrolling] = useState(false);
 
   const handleSetHourClick = (selected: number) => {
     setHour(selected);
@@ -15,86 +16,98 @@ export default function TimesField() {
     setMinutes(selected);
   };
 
-  // const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+  const hourScrollRef = useRef<HTMLUListElement>(null);
+  const minuteScrollRef = useRef<HTMLUListElement>(null);
 
-  // const SCROLL_STEP = 1;
+  const SCROLL_STEP = 1;
 
-  // const handleHourWheel = (e: React.WheelEvent<HTMLUListElement>) => {
-  //   // e.preventDefault();
-  //   // e.stopPropagation();
+  const MINUTE_SCROLL_STEP = 10;
 
-  //   if (scrollTimeout.current) return;
+  // Add event listeners with passive: false to ensure preventDefault works
+  useEffect(() => {
+    const hourElement = hourScrollRef.current;
+    const minuteElement = minuteScrollRef.current;
 
-  //   setHour((prev) => {
-  //     if (e.deltaY > 0) {
-  //       // SCROLL DOWN and changes to next hour
-  //       return (prev + SCROLL_STEP) % 24;
-  //     } else if (e.deltaY < 0) {
-  //       // Scrolls up if 0, goes to 23
-  //       return (prev - SCROLL_STEP + 24) % 24;
-  //     }
-  //     return prev;
-  //   });
+    const hourWheelHandler = (e: WheelEvent) => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      
+      if (scrollTimeout.current) return;
+      
+      setIsHourScrolling(true);
+      
+      if (e.deltaY > 0) {
+        setHour((hour + SCROLL_STEP) % 24);
+      } else if (e.deltaY < 0) {
+        setHour((hour - SCROLL_STEP + 24) % 24);
+      }
+      
+      scrollTimeout.current = setTimeout(() => {
+        scrollTimeout.current = null;
+        setIsHourScrolling(false);
+      }, 150);
+    };
 
-  //   // timeout  function  changes the scroll speed
-  //   scrollTimeout.current = setTimeout(() => {
-  //     scrollTimeout.current = null;
-  //   }, 50);
-  // };
+    const minuteWheelHandler = (e: WheelEvent) => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      
+      if (scrollTimeout.current) return;
+      
+      setIsMinuteScrolling(true);
+      
+      if (e.deltaY > 0) {
+        const newMinutes = (minutes + MINUTE_SCROLL_STEP) % 60;
+        setMinutes(newMinutes);
+      } else if (e.deltaY < 0) {
+        const newMinutes = (minutes - MINUTE_SCROLL_STEP + 60) % 60;
+        setMinutes(newMinutes);
+      }
+      
+      scrollTimeout.current = setTimeout(() => {
+        scrollTimeout.current = null;
+        setIsMinuteScrolling(false);
+      }, 150);
+    };
 
-  // const formatTime = (num: number) => num.toString().padStart(2, "0");
+    if (hourElement) {
+      hourElement.addEventListener('wheel', hourWheelHandler, { passive: false });
+    }
+    
+    if (minuteElement) {
+      minuteElement.addEventListener('wheel', minuteWheelHandler, { passive: false });
+    }
 
-  // useEffect(() => {
-  //   handleSetTime(formatTime(hour), formatTime(minutes));
-  // }, [hour, minutes, handleSetTime]);
-
-  // const handleSetHourClick = (selected: number) => {
-  //   setHour(selected);
-  // };
-
-  // const handleSetMinuteClick = (selected: number) => {
-  //   let newMinute = selected;
-  //   if (newMinute < 0) newMinute = 50;
-  //   if (newMinute > 50) newMinute = 0;
-  //   setMinutes(newMinute);
-  // };
-
-  // const MINUTE_SCROLL_STEP = 10;
-
-  // const handleMinuteWheel = (e: React.WheelEvent<HTMLUListElement>) => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-
-  //   if (scrollTimeout.current) return;
-
-  //   setMinutes((prev) => {
-  //     if (e.deltaY > 0) {
-  //       // SCROLL DOWN and changes to next hour
-  //       return (prev + MINUTE_SCROLL_STEP) % 60;
-  //     } else if (e.deltaY < 0) {
-  //       // Scrolls up if 0, goes to 23
-  //       return (prev - MINUTE_SCROLL_STEP + 60) % 60;
-  //     }
-  //     return prev;
-  //   });
-
-  //   scrollTimeout.current = setTimeout(() => {
-  //     scrollTimeout.current = null;
-  //   }, 50);
-  // };
+    return () => {
+      if (hourElement) {
+        hourElement.removeEventListener('wheel', hourWheelHandler);
+      }
+      if (minuteElement) {
+        minuteElement.removeEventListener('wheel', minuteWheelHandler);
+      }
+    };
+  }, [hour, minutes, setHour, setMinutes]);
 
   return (
     <div className="flex flex-col gap-4">
-      <p className="font-bold text-sm text-[#fff]">경기 시작 시간</p>
+        <p className="font-bold text-sm text-[#fff]">경기 시작 시간</p>
+     
       <div className="flex gap-3 items-center">
-        <div className="flex gap-2 items-center">
+        <div 
+          className="flex gap-2 items-center relative"
+          style={{ isolation: "isolate" }}
+        >
           {/* hour */}
           <ul
+            ref={hourScrollRef}
             style={{
               scrollbarWidth: "none",
+              touchAction: "none", // Prevent touch scrolling on mobile
             }}
-            // onWheelCapture={handleHourWheel}
-            className="flex flex-col items-center justify-center h-[90px] overflow-y-scroll"
+            className={`flex flex-col items-center justify-center h-[90px] overflow-hidden relative cursor-pointer transition-all duration-150 ${
+              isHourScrolling ? "bg-gray-800 bg-opacity-20 rounded-lg" : ""
+            }`}
           >
             {hour === 0 && (
               <li>
@@ -152,11 +165,14 @@ export default function TimesField() {
           </ul>
           {/* minute */}
           <ul
+            ref={minuteScrollRef}
             style={{
               scrollbarWidth: "none",
+              touchAction: "none", // Prevent touch scrolling on mobile
             }}
-            // onWheelCapture={handleMinuteWheel}
-            className="flex flex-col items-center justify-center h-[90px] overflow-y-scroll"
+            className={`flex flex-col items-center justify-center h-[90px] overflow-hidden relative cursor-pointer transition-all duration-150 ${
+              isMinuteScrolling ? "bg-gray-800 bg-opacity-20 rounded-lg" : ""
+            }`}
           >
             {minutes !== 0 && (
               <li>
