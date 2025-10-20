@@ -4,7 +4,7 @@ import GameStatusField from "./GameStatusField.tsx";
 // import RegionField from "./RegionField.tsx";
 import ResetStatusField from "./ResetStatusField.tsx";
 import TimesField from "./TimesField.tsx";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { InitialDateField } from "../../interface/games.ts";
 import { getTodaysDateKorea } from "../../../../utils/dates/date.ts";
 
@@ -78,55 +78,65 @@ export default function Sidebar() {
   // Generate the list of 30 available dates starting from initialDate
   const INITIAL_DATES = DATES();
 
-  const gameStatusArray = searchParams.getAll("game_status");
+  // const gameStatusArray = searchParams.getAll("game_status");
+  // const gameStatusArray = ["open", "closed", "canceled", "completed"];
 
-  function buildParamsWithStatuses(
-    searchParams: URLSearchParams,
-    updatedStatuses: string[]
-  ) {
-    const entries: [string, string][] = [];
+  const [gameStatus, setGameStatuses] = useState([
+    [
+      { status: "open", isSelected: true },
+      { status: "closed", isSelected: true },
+    ],
+    [
+      { status: "canceled", isSelected: true },
+      { status: "completed", isSelected: true },
+    ],
+  ]);
 
-    // keep all non-game_status params
-    searchParams.forEach((value, key) => {
-      if (key !== "game_status") {
-        entries.push([key, value]);
-      }
-    });
+  // function buildParamsWithStatuses(
+  //   searchParams: URLSearchParams,
+  //   updatedStatuses: string[]
+  // ) {
+  //   const entries: [string, string][] = [];
 
-    // add updated statuses
-    updatedStatuses.forEach((status) => {
-      entries.push(["game_status", status]);
-    });
+  //   // keep all non-game_status params
+  //   searchParams.forEach((value, key) => {
+  //     if (key !== "game_status") {
+  //       entries.push([key, value]);
+  //     }
+  //   });
 
-    return entries;
-  }
+  //   // add updated statuses
+  //   updatedStatuses.forEach((status) => {
+  //     entries.push(["game_status", status]);
+  //   });
 
-  const handleToggleGameStatus = useCallback(
-    (statusToToggle: "open" | "closed" | "canceled" | "completed") => {
-      const currentStatuses = searchParams.getAll("game_status");
-      const params = new URLSearchParams(searchParams);
+  //   return entries;
+  // }
 
-      let updatedStatuses;
+  // const handleToggleGameStatus = useCallback(
+  //   (statusToToggle: "open" | "closed" | "canceled" | "completed") => {
+  //     const currentStatuses = searchParams.getAll("game_status");
+  //     const params = new URLSearchParams(searchParams);
 
-      if (currentStatuses.includes(statusToToggle)) {
-        updatedStatuses = currentStatuses.filter(
-          (status) => status !== statusToToggle
-        );
-      } else {
-        updatedStatuses = [...currentStatuses, statusToToggle];
-      }
+  //     let updatedStatuses;
 
-      params.delete("game_status");
+  //     if (currentStatuses.includes(statusToToggle)) {
+  //       updatedStatuses = currentStatuses.filter(
+  //         (status) => status !== statusToToggle
+  //       );
+  //     } else {
+  //       updatedStatuses = [...currentStatuses, statusToToggle];
+  //     }
 
-      updatedStatuses.forEach((status) => {
-        params.append("game_status", status);
-      });
-      setSearchParams(buildParamsWithStatuses(searchParams, updatedStatuses));
+  //     params.delete("game_status");
 
-      // setSearchParams(params);
-    },
-    [searchParams]
-  );
+  //     updatedStatuses.forEach((status) => {
+  //       params.append("game_status", status);
+  //     });
+  //     setSearchParams(buildParamsWithStatuses(searchParams, updatedStatuses));
+  //   },
+  //   [searchParams]
+  // );
   // const targetRef = useRef<HTMLDivElement | null>(null);
 
   // const handleScroll = () => {
@@ -206,10 +216,50 @@ export default function Sidebar() {
       />
 
       {/* game status filter */}
-      <GameStatusField
+      {/* <GameStatusField
         handleToggleGameStatus={handleToggleGameStatus}
         gameStatusArray={gameStatusArray}
-      />
+      /> */}
+
+      <div className="flex flex-col gap-4">
+        <p className="font-bold text-sm text-[#fff]">경기 상태</p>
+        <div className="flex md:flex-col gap-2.5">
+          {gameStatus.map((group, groupIndex) => (
+            <div key={groupIndex} className="flex gap-2.5">
+              {group.map((item) => (
+                <span
+                  key={item.status}
+                  style={{
+                    backgroundColor:
+                      item.status === "open"
+                        ? "#1ADCDF33"
+                        : item.status === "canceled"
+                        ? "#99999933"
+                        : item.status === "closed"
+                        ? "#FF711433"
+                        : item.status === "completed"
+                        ? "#FFFFFF33"
+                        : "",
+                    color:
+                      item.status === "open"
+                        ? "#1ADCDF"
+                        : item.status === "canceled"
+                        ? "#999999"
+                        : item.status === "closed"
+                        ? "#FF7114"
+                        : item.status === "completed"
+                        ? "#fff"
+                        : "",
+                  }}
+                  className="p-1 text-[10px] rounded-[2px] h-[64px] w-full font-bold flex items-center justify-center"
+                >
+                  {item.status}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* region filter */}
       {/* TEMPORARILY DISABLED UNDER FURTHER UPDATE */}
