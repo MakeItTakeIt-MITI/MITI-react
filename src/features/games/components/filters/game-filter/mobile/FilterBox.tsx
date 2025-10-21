@@ -1,7 +1,7 @@
 import { Link, useSearchParams } from "react-router-dom";
 import { useTimeField } from "../../../../../../store/Sidebar/useTimeFieldStore";
 import DatesField from "../../../sidebar/DatesField";
-import GameStatusField from "../../../sidebar/GameStatusField";
+import GameStatusField from "../../../sidebar/_GameStatusField";
 import { useCallback } from "react";
 import { InitialDateField } from "../../../../interface/games";
 import {

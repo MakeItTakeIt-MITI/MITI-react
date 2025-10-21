@@ -11,7 +11,6 @@ interface UseGameUrlParamsReturn {
   isValidDate: boolean;
   
   // Filter parameters
-  game_status: string[];
   regionParam: string;
   searchParam: string;
 }
@@ -25,7 +24,6 @@ export const useGameUrlParams = (): UseGameUrlParamsReturn => {
   const year = searchParams.get("year");
   
   // Extract filter parameters
-  const game_status = searchParams.getAll("game_status");
   const regionParam = searchParams.get("region") || "";
   const searchParam = searchParams.get("search") || "";
 
@@ -42,7 +40,7 @@ export const useGameUrlParams = (): UseGameUrlParamsReturn => {
     startdate,
     displayDate,
     isValidDate,
-    game_status,
+   
     regionParam,
     searchParam,
   };

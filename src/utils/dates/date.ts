@@ -25,7 +25,8 @@ export function getTodaysDateKorea() {
 export const getTodaysGamesQuery = () => {
     const { year, month, day } = getTodaysDateKorea()
 
-    const URL = `games?year=${year}&month=${month}&day=${day}&region=&game_status=closed&game_status=open&game_status=canceled&game_status=completed`
+    const URL = `games?year=${year}&month=${month}&day=${day}`
+    // const URL = `games?year=${year}&month=${month}&day=${day}&region=&game_status=closed&game_status=open&game_status=canceled&game_status=completed`
 
     return URL
 

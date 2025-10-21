@@ -1,15 +1,24 @@
 import { useSearchParams } from "react-router-dom";
 import DatesField from "./DatesField.tsx";
-import GameStatusField from "./GameStatusField.tsx";
-// import RegionField from "./RegionField.tsx";
 import ResetStatusField from "./ResetStatusField.tsx";
 import TimesField from "./TimesField.tsx";
 import { useCallback, useState } from "react";
 import { InitialDateField } from "../../interface/games.ts";
 import { getTodaysDateKorea } from "../../../../utils/dates/date.ts";
-
+import GameStatusContainer from "./GameStatusContainer.tsx";
 export default function Sidebar() {
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const [gameStatusArray, setGameStatusArray] = useState([
+    [
+      { status: "open", tag: '모집 중', isSelected: true },
+      { status: "closed", tag: '모집 마감', isSelected: true },
+    ],
+    [
+      { status: "canceled", tag: '경기 취소', isSelected: true },
+      { status: "completed", tag: '경기 완료', isSelected: true },
+    ],
+  ]);
 
   /**
    * Date click handler
@@ -81,17 +90,13 @@ export default function Sidebar() {
   // const gameStatusArray = searchParams.getAll("game_status");
   // const gameStatusArray = ["open", "closed", "canceled", "completed"];
 
-  const [gameStatus, setGameStatuses] = useState([
-    [
-      { status: "open", isSelected: true },
-      { status: "closed", isSelected: true },
-    ],
-    [
-      { status: "canceled", isSelected: true },
-      { status: "completed", isSelected: true },
-    ],
-  ]);
 
+  // const [gameStatusArray, setGameStatusArray] = useState(["open", "closed", "canceled", "completed"]) ;
+
+  // const handleToggleGameStatus = (arg) => {
+  //   if (gameStatusArray)
+  // }
+    
   // function buildParamsWithStatuses(
   //   searchParams: URLSearchParams,
   //   updatedStatuses: string[]
@@ -189,6 +194,24 @@ export default function Sidebar() {
 
   // timer
 
+    // Handle the button click
+  const handleButtonClick = (rowIndex: number, cellIndex: number) => {
+    setGameStatusArray(prevArray => {
+      const newArray = prevArray.map((row, rIndex) => {
+        if (rIndex === rowIndex) {
+          return row.map((cell, cIndex) => {
+            if (cIndex === cellIndex) {
+              return { ...cell, isSelected: !cell.isSelected }; // Toggle the 'isSelected' value
+            }
+            return cell; // Return the cell as is if it's not the clicked one
+          });
+        }
+        return row; // Return the row as is if it's not the clicked one
+      });
+      return newArray;
+    });
+  };
+
   return (
     <aside
       style={{
@@ -211,55 +234,22 @@ export default function Sidebar() {
 
       {/* time selector */}
       <TimesField
-
-      // handleSetTime={handleSetTime}
       />
 
-      {/* game status filter */}
-      {/* <GameStatusField
+<GameStatusContainer 
+
+
+/>
+
+      {/* game clearLine. filter */}
+      {/* <GameclearLine.Field
         handleToggleGameStatus={handleToggleGameStatus}
         gameStatusArray={gameStatusArray}
       /> */}
 
-      <div className="flex flex-col gap-4">
-        <p className="font-bold text-sm text-[#fff]">경기 상태</p>
-        <div className="flex md:flex-col gap-2.5">
-          {gameStatus.map((group, groupIndex) => (
-            <div key={groupIndex} className="flex gap-2.5">
-              {group.map((item) => (
-                <span
-                  key={item.status}
-                  style={{
-                    backgroundColor:
-                      item.status === "open"
-                        ? "#1ADCDF33"
-                        : item.status === "canceled"
-                        ? "#99999933"
-                        : item.status === "closed"
-                        ? "#FF711433"
-                        : item.status === "completed"
-                        ? "#FFFFFF33"
-                        : "",
-                    color:
-                      item.status === "open"
-                        ? "#1ADCDF"
-                        : item.status === "canceled"
-                        ? "#999999"
-                        : item.status === "closed"
-                        ? "#FF7114"
-                        : item.status === "completed"
-                        ? "#fff"
-                        : "",
-                  }}
-                  className="p-1 text-[10px] rounded-[2px] h-[64px] w-full font-bold flex items-center justify-center"
-                >
-                  {item.status}
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
+  
+
+      
 
       {/* region filter */}
       {/* TEMPORARILY DISABLED UNDER FURTHER UPDATE */}

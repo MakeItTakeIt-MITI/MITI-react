@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useMemo } from "react";
 import { useMapGamesList } from "./query/useMapGamesList.tsx";
 import { useGamesListOnly } from "./query/useGamesList.tsx";
 import { useGameUrlParams } from "./useGameUrlParams.ts";
 import { useTimeFormatting } from "./useTimeFormatting.ts";
 import { useGameDataProcessing } from "./useGameDataProcessing.ts";
+import useGameStatusStore from "../store/useGameStatusStore.ts";
 
 export const useGamesPage = () => {
   // UI State Management
@@ -11,15 +12,28 @@ export const useGamesPage = () => {
   const [isFilterBoxOpen, setIsFilterBoxOpen] = useState(false);
 
   // 1. Get URL params & time format
-  const { startdate, game_status, regionParam, searchParam } = useGameUrlParams();
+  const { startdate, regionParam, searchParam } = useGameUrlParams();
   const { timeFormat } = useTimeFormatting();
 
-    // 2. Fetch raw data from APIs
-  const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(
-    startdate,
-    timeFormat,
-    game_status
-  );
+  
+const { gameStatusArray } = useGameStatusStore()
+
+// Extract selected statuses reactively with memoization
+const selectedStatusesArray = useMemo(() => {
+  return gameStatusArray
+    .flat()
+    .filter((status) => status.isSelected)
+    .map((status) => status.status);
+}, [gameStatusArray]);
+
+console.log('Selected statuses:', selectedStatusesArray)
+
+// 2. Fetch raw data from APIs
+const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(
+  startdate,
+  timeFormat,
+  selectedStatusesArray, // reactive game status filter
+);
 
     // 3. Process & filter the data ← HERE'S WHERE useGameDataProcessing IS USED
 
