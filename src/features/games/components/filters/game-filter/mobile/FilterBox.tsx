@@ -2,13 +2,14 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useTimeField } from "../../../../../../store/Sidebar/useTimeFieldStore";
 import DatesField from "../../../sidebar/DatesField";
 import GameStatusField from "../../../sidebar/_GameStatusField";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { InitialDateField } from "../../../../interface/games";
 import {
   getTodaysDateKorea,
   getTodaysGamesQuery,
 } from "../../../../../../utils/dates/date";
 import TimesFieldMobile from "./TimesFieldMobile";
+import useGameStatusStore from "../../../../store/useGameStatusStore";
 
 interface FilterBoxProps {
   handleToggleMobileFilterBox: () => void;
@@ -25,6 +26,7 @@ const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
 
   // imported from useTimeField Store
   const { hour, minutes, resetTime } = useTimeField();
+  const { gameStatusArray, resetAllStatuses } = useGameStatusStore();
   const getKoreanTimeFormat = (
     hour: string | number,
     minutes: string | number
@@ -46,7 +48,6 @@ const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
           days[new Date(Number(year), Number(month) - 1, Number(day)).getDay()]
         })`
       : "";
-  const game_status = searchParams.getAll("game_status");
 
   const handleDateClick = useCallback(
     (date: InitialDateField) => {
@@ -108,58 +109,46 @@ const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
   // Generate the list of 30 available dates starting from initialDate
   const INITIAL_DATES = DATES();
 
-  const gameStatusArray = searchParams.getAll("game_status");
+  // Get selected game statuses from store
+  const selectedGameStatuses = useMemo(() => {
+    return gameStatusArray
+      .flat()
+      .filter(status => status.isSelected)
+      .map(status => ({
+        id: status.status,
+        name: status.tag
+      }));
+  }, [gameStatusArray]);
 
-  function buildParamsWithStatuses(
-    searchParams: URLSearchParams,
-    updatedStatuses: string[]
-  ) {
-    const entries: [string, string][] = [];
+  const game_status = selectedGameStatuses.map(status => status.id);
 
-    // keep all non-game_status params
-    searchParams.forEach((value, key) => {
-      if (key !== "game_status") {
-        entries.push([key, value]);
-      }
-    });
-
-    // add updated statuses
-    updatedStatuses.forEach((status) => {
-      entries.push(["game_status", status]);
-    });
-
-    return entries;
-  }
+  const { toggleStatusSelection } = useGameStatusStore();
 
   const handleToggleGameStatus = useCallback(
     (statusToToggle: "open" | "closed" | "canceled" | "completed") => {
-      const currentStatuses = searchParams.getAll("game_status");
-      const params = new URLSearchParams(searchParams);
+      // Find the row and cell indices for the status to toggle
+      let rowIndex = -1;
+      let cellIndex = -1;
 
-      let updatedStatuses;
-
-      if (currentStatuses.includes(statusToToggle)) {
-        updatedStatuses = currentStatuses.filter(
-          (status) => status !== statusToToggle
-        );
-      } else {
-        updatedStatuses = [...currentStatuses, statusToToggle];
-      }
-
-      params.delete("game_status");
-
-      updatedStatuses.forEach((status) => {
-        params.append("game_status", status);
+      gameStatusArray.forEach((row, rIdx) => {
+        row.forEach((status, cIdx) => {
+          if (status.status === statusToToggle) {
+            rowIndex = rIdx;
+            cellIndex = cIdx;
+          }
+        });
       });
-      setSearchParams(buildParamsWithStatuses(searchParams, updatedStatuses));
 
-      // setSearchParams(params);
+      if (rowIndex !== -1 && cellIndex !== -1) {
+        toggleStatusSelection(rowIndex, cellIndex);
+      }
     },
-    [searchParams]
+    [gameStatusArray, toggleStatusSelection]
   );
 
   const handleResetFilters = () => {
     resetTime();
+    resetAllStatuses();
     handleToggleMobileFilterBox();
   };
 
@@ -182,14 +171,11 @@ const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
                 {timeFormat}
               </li>{" "}
               <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3">
-                {game_status.length > 0
-                  ? game_status.map((status, idx) => (
-                      <span key={status}>
-                        {status === "open" && "모집 중"}
-                        {status === "closed" && "모집 마감"}
-                        {status === "canceled" && "경기 취소"}
-                        {status === "completed" && "경기 완료"}
-                        {idx < game_status.length - 1 && ", "}
+                {selectedGameStatuses.length > 0
+                  ? selectedGameStatuses.map((status, idx) => (
+                      <span key={status.id}>
+                        {status.name}
+                        {idx < selectedGameStatuses.length - 1 && ", "}
                       </span>
                     ))
                   : "경기 상태"}
@@ -211,7 +197,7 @@ const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
 
           {/* game status field */}
           <GameStatusField
-            gameStatusArray={gameStatusArray}
+            gameStatusArray={game_status}
             handleToggleGameStatus={handleToggleGameStatus}
           />
 

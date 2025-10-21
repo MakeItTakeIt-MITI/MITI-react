@@ -1,5 +1,7 @@
 import {  useSearchParams } from "react-router-dom";
 import { useTimeField } from "../../../../../../store/Sidebar/useTimeFieldStore";
+import useGameStatusStore from "../../../../store/useGameStatusStore";
+import { useMemo } from "react";
 
 const SettingsContainer = () => {
   const [searchParams] = useSearchParams();
@@ -12,6 +14,7 @@ const SettingsContainer = () => {
 
   // imported from useTimeField Store
   const { hour, minutes, resetTime } = useTimeField();
+  const { gameStatusArray, resetAllStatuses } = useGameStatusStore();
   const getKoreanTimeFormat = (
     hour: string | number,
     minutes: string | number
@@ -25,6 +28,17 @@ const SettingsContainer = () => {
 
   const timeFormat = getKoreanTimeFormat(hour, minutes);
 
+  // Get selected game statuses from store
+  const selectedGameStatuses = useMemo(() => {
+    return gameStatusArray
+      .flat()
+      .filter(status => status.isSelected)
+      .map(status => ({
+        id: status.status,
+        name: status.tag
+      }));
+  }, [gameStatusArray]);
+
   //   const startdate = `${month}.${day}`;
 
   const startdate =
@@ -33,13 +47,13 @@ const SettingsContainer = () => {
           days[new Date(Number(year), Number(month) - 1, Number(day)).getDay()]
         })`
       : "";
-  const game_status = searchParams.getAll("game_status");
 
   // const regionParam = searchParams.get("region") || "";
   // const searchParam = searchParams.get("search") || "";
 
   const handleResetSidebarSettings = () => {
     resetTime();
+    resetAllStatuses();
   };
 
   return (
@@ -58,14 +72,11 @@ const SettingsContainer = () => {
           {timeFormat}
         </li>{" "}
         <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3">
-          {game_status.length > 0
-            ? game_status.map((status, idx) => (
-                <span key={status}>
-                  {status === "open" && "모집 중"}
-                  {status === "closed" && "모집 마감"}
-                  {status === "canceled" && "경기 취소"}
-                  {status === "completed" && "경기 완료"}
-                  {idx < game_status.length - 1 && ", "}
+          {selectedGameStatuses.length > 0
+            ? selectedGameStatuses.map((status, idx) => (
+                <span key={status.id}>
+                  {status.name}
+                  {idx < selectedGameStatuses.length - 1 && ", "}
                 </span>
               ))
             : "경기 상태"}
