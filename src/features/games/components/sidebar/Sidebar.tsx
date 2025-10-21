@@ -2,23 +2,13 @@ import { useSearchParams } from "react-router-dom";
 import DatesField from "./DatesField.tsx";
 import ResetStatusField from "./ResetStatusField.tsx";
 import TimesField from "./TimesField.tsx";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { InitialDateField } from "../../interface/games.ts";
 import { getTodaysDateKorea } from "../../../../utils/dates/date.ts";
 import GameStatusContainer from "./GameStatusContainer.tsx";
 export default function Sidebar() {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [gameStatusArray, setGameStatusArray] = useState([
-    [
-      { status: "open", tag: '모집 중', isSelected: true },
-      { status: "closed", tag: '모집 마감', isSelected: true },
-    ],
-    [
-      { status: "canceled", tag: '경기 취소', isSelected: true },
-      { status: "completed", tag: '경기 완료', isSelected: true },
-    ],
-  ]);
 
   /**
    * Date click handler
@@ -87,77 +77,6 @@ export default function Sidebar() {
   // Generate the list of 30 available dates starting from initialDate
   const INITIAL_DATES = DATES();
 
-  // const gameStatusArray = searchParams.getAll("game_status");
-  // const gameStatusArray = ["open", "closed", "canceled", "completed"];
-
-
-  // const [gameStatusArray, setGameStatusArray] = useState(["open", "closed", "canceled", "completed"]) ;
-
-  // const handleToggleGameStatus = (arg) => {
-  //   if (gameStatusArray)
-  // }
-    
-  // function buildParamsWithStatuses(
-  //   searchParams: URLSearchParams,
-  //   updatedStatuses: string[]
-  // ) {
-  //   const entries: [string, string][] = [];
-
-  //   // keep all non-game_status params
-  //   searchParams.forEach((value, key) => {
-  //     if (key !== "game_status") {
-  //       entries.push([key, value]);
-  //     }
-  //   });
-
-  //   // add updated statuses
-  //   updatedStatuses.forEach((status) => {
-  //     entries.push(["game_status", status]);
-  //   });
-
-  //   return entries;
-  // }
-
-  // const handleToggleGameStatus = useCallback(
-  //   (statusToToggle: "open" | "closed" | "canceled" | "completed") => {
-  //     const currentStatuses = searchParams.getAll("game_status");
-  //     const params = new URLSearchParams(searchParams);
-
-  //     let updatedStatuses;
-
-  //     if (currentStatuses.includes(statusToToggle)) {
-  //       updatedStatuses = currentStatuses.filter(
-  //         (status) => status !== statusToToggle
-  //       );
-  //     } else {
-  //       updatedStatuses = [...currentStatuses, statusToToggle];
-  //     }
-
-  //     params.delete("game_status");
-
-  //     updatedStatuses.forEach((status) => {
-  //       params.append("game_status", status);
-  //     });
-  //     setSearchParams(buildParamsWithStatuses(searchParams, updatedStatuses));
-  //   },
-  //   [searchParams]
-  // );
-  // const targetRef = useRef<HTMLDivElement | null>(null);
-
-  // const handleScroll = () => {
-  //   targetRef.current?.scrollIntoView({ behavior: "smooth" });
-  //   console.log("targetRef:", targetRef.current);
-  // };
-
-  // callback function to set game time
-  // const handleSetTime = useCallback(
-  //   (hour: string, minutes: string) => {
-  //     const params = Object.fromEntries(searchParams.entries());
-  //     setSearchParams({ ...params, time: `${hour}:${minutes}` });
-  //   },
-  //   // handleScroll()
-  //   [searchParams, setSearchParams]
-  // );
 
   // !       {/* TEMPORARILY DISABLED UNDER FURTHER UPDATE */}
   // callback function to filter by region
@@ -192,25 +111,9 @@ export default function Sidebar() {
   //   [setSearchParams, searchParams]
   // );
 
-  // timer
 
-    // Handle the button click
-  const handleButtonClick = (rowIndex: number, cellIndex: number) => {
-    setGameStatusArray(prevArray => {
-      const newArray = prevArray.map((row, rIndex) => {
-        if (rIndex === rowIndex) {
-          return row.map((cell, cIndex) => {
-            if (cIndex === cellIndex) {
-              return { ...cell, isSelected: !cell.isSelected }; // Toggle the 'isSelected' value
-            }
-            return cell; // Return the cell as is if it's not the clicked one
-          });
-        }
-        return row; // Return the row as is if it's not the clicked one
-      });
-      return newArray;
-    });
-  };
+
+  
 
   return (
     <aside
@@ -233,24 +136,12 @@ export default function Sidebar() {
       />
 
       {/* time selector */}
-      <TimesField
-      />
+      <TimesField/>
 
-<GameStatusContainer 
-
-
-/>
-
-      {/* game clearLine. filter */}
-      {/* <GameclearLine.Field
-        handleToggleGameStatus={handleToggleGameStatus}
-        gameStatusArray={gameStatusArray}
-      /> */}
-
-  
+<GameStatusContainer />
 
       
-
+   
       {/* region filter */}
       {/* TEMPORARILY DISABLED UNDER FURTHER UPDATE */}
       {/* <RegionField handleSelectRegion={handleSelectRegion} /> */}
