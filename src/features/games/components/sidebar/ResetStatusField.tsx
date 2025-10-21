@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import { getTodaysGamesQuery } from "../../../../utils/dates/date";
 import { useTimeField } from "../../../../store/Sidebar/useTimeFieldStore";
+import useGameStatusStore from "../../store/useGameStatusStore";
 
 export default function ResetStatusField() {
   const { resetTime } = useTimeField();
+  const { resetAllStatuses } = useGameStatusStore();
 
   const handleResetSidebarSettings = () => {
     resetTime();
+    resetAllStatuses();
   };
   return (
     <div className="flex items-center justify-between">

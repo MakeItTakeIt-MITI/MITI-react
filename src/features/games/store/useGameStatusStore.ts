@@ -9,6 +9,7 @@ interface GameStatus {
 interface GameStatusState {
   gameStatusArray: GameStatus[][];
   toggleStatusSelection: (rowIndex: number, cellIndex: number) => void;
+  resetAllStatuses: () => void;
 }
 
 const useGameStatusStore = create<GameStatusState>((set) => ({
@@ -38,6 +39,17 @@ const useGameStatusStore = create<GameStatusState>((set) => ({
       });
       return { gameStatusArray: newArray };
     });
+  },
+
+  resetAllStatuses: () => {
+    set((state: GameStatusState) => ({
+      gameStatusArray: state.gameStatusArray.map((row: GameStatus[]) =>
+        row.map((status: GameStatus) => ({
+          ...status,
+          isSelected: true
+        }))
+      )
+    }));
   },
  
 }));
