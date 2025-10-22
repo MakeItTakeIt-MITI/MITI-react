@@ -1,5 +1,4 @@
 // import time from "../../../../assets/v1.3/time.svg";
-import { useState } from "react";
 import GameAddress from "../../../common/components(renewal)/chips/GameAddress.tsx";
 import GameTime from "../../../common/components(renewal)/chips/GameTime.tsx";
 import GameParticipants from "../../../common/components(renewal)/chips/GameParticipants.tsx";
@@ -16,18 +15,12 @@ interface CardProps {
 }
 
 export default function Card({ game }: CardProps) {
-  const [isHovered, setIsHovered] = useState(false);
-
   const { setCoordinates } = useMapCoordinatesStore();
   const { isSelected } = useSelectedStore();
 
   return (
     <li
-      className={` cursor-pointer w-full sm:h-[128px] md:h-[136px] flex flex-col gap-2.5 justify-center md:p-3 rounded-lg text-white transition-shadow
-${isHovered ? "md:shadow-[8px_8px_56px_0_rgba(26,220,223,0.25)] m-[6px] transition delay-150 border-none" : ""}
-  `}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="cursor-pointer w-full sm:h-[128px] md:h-[136px] flex flex-col gap-2.5 justify-center md:p-3 rounded-lg text-white transition-all duration-500 md:hover:shadow-[8px_8px_56px_0_rgba(26,220,223,0.25)] md:hover:m-[6px] md:hover:border-none"
       onClick={() => setCoordinates(game.court.latitude, game.court.longitude)}
     >
       {isSelected ? (
