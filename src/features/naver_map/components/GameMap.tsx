@@ -4,6 +4,10 @@ import { GameField } from "../../games/interface/games.ts";
 import { useSelectedStore } from "../../../store/NaverMap/useSelectedStore.tsx";
 import { useMapCoordinatesStore } from "../../../store/NaverMap/useMapCoordinatesStore.tsx";
 
+// Current location button
+import findMylocationDeactivated from "../../../assets/v1.3/map/location_deactivated.png";
+import findMylocationActivated from "../../../assets/v1.3/map/location_activated.png";
+
 // Add global type for naver maps
 declare global {
   interface Window {
@@ -49,6 +53,9 @@ export default function GameMap({
         new window.naver.maps.LatLng(coordinates.lat, coordinates.long)
       );
     }
+
+
+
   }, [coordinates]);
 
   // update markers when gamesMapData changes
@@ -56,6 +63,22 @@ export default function GameMap({
     if (!window.naver || !mapRef.current) return;
 
     const map = mapRef.current;
+
+
+       // Find my Location Button UI and event
+    const locationBtnHtml = `
+      <button type="button" id="find-my-location-btn" 
+              style=" cursor: pointer; display: flex; align-items: center; justify-content: center;">
+        <img 
+        style="width:24px height 24px"
+        src="${findMylocationDeactivated}" alt="Find My Location" style="width: 24px; height: 24px;" />
+      </button>
+    `;
+    
+    const customControl = new window.naver.maps.CustomControl(locationBtnHtml, {
+      position: window.naver.maps.Position.TOP_LEFT
+    });
+    customControl.setMap(map);
 
     // clear previous markers
     markersRef.current.forEach((marker) => marker.setMap(null));
@@ -147,6 +170,10 @@ export default function GameMap({
 
       marker.setIcon({ content: iconContent });
 
+
+    
+    
+
       // clicking marker just updates store + map center
       window.naver.maps.Event.addListener(marker, "click", () => {
         if (!isSelected) {
@@ -160,7 +187,16 @@ export default function GameMap({
       });
 
       markersRef.current.push(marker);
+
+    
+
+
     });
+
+   
+
+
+
   }, [
     gamesMapData,
     isSelected,
@@ -168,6 +204,8 @@ export default function GameMap({
     toggleSelected,
     setSelected,
     setCoordinates,
+    
+
   ]);
 
   return (

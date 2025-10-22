@@ -5,11 +5,17 @@ import { useGameUrlParams } from "./useGameUrlParams.ts";
 import { useTimeFormatting } from "./useTimeFormatting.ts";
 import { useGameDataProcessing } from "./useGameDataProcessing.ts";
 import useGameStatusStore from "../store/useGameStatusStore.ts";
+import { useCurrentLocationSetting } from "./useCurrentLocationSetting.tsx";
 
 export const useGamesPage = () => {
   // UI State Management
   const [tab, setTab] = useState("map");
   const [isFilterBoxOpen, setIsFilterBoxOpen] = useState(false);
+ const [geolocation, setGeolocation] = useState<{
+    lat: number;
+    lon: number;
+  } | null>(null);
+
 
   // 1. Get URL params & time format
   const { startdate, regionParam, searchParam } = useGameUrlParams();
@@ -66,6 +72,12 @@ const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(
       fetchNextPage();
     }
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+
+  // Geolocation Button and finder
+  const handleGeolocationClick= () => {
+    useCurrentLocationSetting({ setGeolocation });
+  }
 
   return {
     // UI State
