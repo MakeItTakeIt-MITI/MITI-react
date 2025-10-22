@@ -66,19 +66,19 @@ export default function GameMap({
 
 
        // Find my Location Button UI and event
-    const locationBtnHtml = `
-      <button type="button" id="find-my-location-btn" 
-              style=" cursor: pointer; display: flex; align-items: center; justify-content: center;">
-        <img 
-        style="width:24px height 24px"
-        src="${findMylocationDeactivated}" alt="Find My Location" style="width: 24px; height: 24px;" />
-      </button>
-    `;
+    // const locationBtnHtml = `
+    //   <button type="button" id="find-my-location-btn" 
+    //           style=" cursor: pointer; display: flex; align-items: center; justify-content: center;">
+    //     <img 
+    //     style="width:24px height 24px"
+    //     src="${findMylocationDeactivated}" alt="Find My Location" style="width: 24px; height: 24px;" />
+    //   </button>
+    // `;
     
-    const customControl = new window.naver.maps.CustomControl(locationBtnHtml, {
-      position: window.naver.maps.Position.TOP_LEFT
-    });
-    customControl.setMap(map);
+    // const customControl = new window.naver.maps.CustomControl(locationBtnHtml, {
+    //   position: window.naver.maps.Position.TOP_LEFT
+    // });
+    // customControl.setMap(map);
 
     // clear previous markers
     markersRef.current.forEach((marker) => marker.setMap(null));
