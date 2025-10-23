@@ -31,7 +31,7 @@ export default function GameMap({
 
   // initialize map only once
   useEffect(() => {
-    if (!window.naver) return;
+    if (!window.naver || !window.naver.maps || !window.naver.maps.LatLng) return;
     if (!mapRef.current) {
       mapRef.current = new window.naver.maps.Map("games-list", {
         center: new window.naver.maps.LatLng(coordinates.lat, coordinates.long),
@@ -44,7 +44,7 @@ export default function GameMap({
 
   // move center when coordinates change
   useEffect(() => {
-    if (mapRef.current) {
+    if (mapRef.current && window.naver && window.naver.maps && window.naver.maps.LatLng) {
       mapRef.current.setCenter(
         new window.naver.maps.LatLng(coordinates.lat, coordinates.long)
       );
@@ -53,7 +53,7 @@ export default function GameMap({
 
   // update markers when gamesMapData changes
   useEffect(() => {
-    if (!window.naver || !mapRef.current) return;
+    if (!window.naver || !window.naver.maps || !window.naver.maps.LatLng || !mapRef.current) return;
 
     const map = mapRef.current;
 
