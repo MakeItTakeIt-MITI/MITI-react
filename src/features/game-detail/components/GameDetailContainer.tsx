@@ -165,8 +165,8 @@ const GameDetailContainer = ({ gameDetailData, isLoading = false }: GameDetailCo
 
         <li>
           <GameAddress
-            address="경기 김포시 감정로 86"
-            address_detail="삼성리틀썬더스"
+            address={gameDetailData?.court.address}
+            address_detail={gameDetailData?.court.name}
           />
         </li>
         <li>
