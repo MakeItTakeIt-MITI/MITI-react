@@ -21,9 +21,31 @@ export default function Card({ game }: CardProps) {
   return (
     <li
       className="cursor-pointer w-full sm:h-[128px] md:h-[136px] flex flex-col gap-2.5 justify-center md:p-3 rounded-lg text-white transition-all duration-500 md:hover:shadow-[8px_8px_56px_0_rgba(26,220,223,0.25)] md:hover:m-[6px] md:hover:border-none"
-      onClick={() => setCoordinates(game.court.latitude, game.court.longitude)}
+      // onClick={() => setCoordinates(game.court.latitude, game.court.longitude)}
     >
-      {isSelected ? (
+       <Link to={`/games/${game.id}`} className="flex flex-col gap-2.5">
+          <div className="space-y-2">
+            <GameStatus status={game.game_status} />
+            <GameTitle title={game.title} />
+          </div>
+
+          <div className="space-y-1 ">
+            <GameAddress
+              address={game.court.address}
+              address_detail={game.court.address_detail}
+            />
+            <GameTime starttime={game.starttime} endtime={game.endtime} />
+
+            <div className="flex items-center justify-between">
+              <GameParticipants
+                num_of_participations={game.num_of_participations}
+                max_invitation={game.max_invitation}
+              />
+              <GameFee fee={game.fee} size="md" />
+            </div>
+          </div>
+        </Link>
+      {/* {isSelected ? (
         <Link to={`/games/${game.id}`} className="flex flex-col gap-2.5">
           <div className="space-y-2">
             <GameStatus status={game.game_status} />
@@ -69,7 +91,7 @@ export default function Card({ game }: CardProps) {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </li>
   );
 }
