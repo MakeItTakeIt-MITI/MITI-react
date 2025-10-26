@@ -1,0 +1,13 @@
+.scrollbar-x-wide::-webkit-scrollbar {
+  height: 7px; /* horizontal scrollbar thickness */
+}
+
+.scrollbar-x-wide::-webkit-scrollbar-thumb {
+  background-color: #a3a3a3; /* thumb color */
+  border-radius: 6px;
+  width: 42px;
+}
+
+.scrollbar-x-wide::-webkit-scrollbar-track {
+  background: transparent;
+}

@@ -1,5 +1,7 @@
 import { InitialDateField } from "../../interface/games";
 
+import "./scrollbar-x-axis.css";
+
 interface DatesFieldProps {
   INITIAL_DATES: InitialDateField[];
   yearParam: string | null;
@@ -22,18 +24,13 @@ export default function DatesField({
   return (
     <div className="flex flex-col gap-4">
       <p className="font-bold text-white">날짜</p>
-      <div
-        style={{
-          scrollbarWidth: "none",
-        }}
-        className="px-4 flex gap-4 overflow-x-auto"
-      >
+      <div className="px-4 flex gap-5  ">
         <p className="text-[#7FEEF0] font-bold text-sm w-[37px] flex-shrink-0 flex items-center justify-center">
           {Number(monthParam) <= 12 && Number(monthParam) > 0
             ? `${Number(monthParam)}월`
             : ""}
         </p>
-        <ul className="flex gap-4 text-[#707070] text-xs font-bold">
+        <ul className="pb-2 flex gap-2 text-[#707070] text-xs font-bold overflow-x-scroll scrollbar-x-wide ">
           {INITIAL_DATES.map((date: InitialDateField) => {
             const dateString = `${date.year}-${date.formattedMonth}-${date.formattedDate}`;
             const isSelected = dateString === selectedDate;
