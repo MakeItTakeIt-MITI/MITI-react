@@ -2,7 +2,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useTimeField } from "../../../../../../store/Sidebar/useTimeFieldStore";
 import DatesField from "../../../sidebar/DatesField";
 import GameStatusField from "../../../sidebar/_GameStatusField";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { InitialDateField } from "../../../../interface/games";
 import {
   getTodaysDateKorea,
@@ -113,14 +113,14 @@ const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
   const selectedGameStatuses = useMemo(() => {
     return gameStatusArray
       .flat()
-      .filter(status => status.isSelected)
-      .map(status => ({
+      .filter((status) => status.isSelected)
+      .map((status) => ({
         id: status.status,
-        name: status.tag
+        name: status.tag,
       }));
   }, [gameStatusArray]);
 
-  const game_status = selectedGameStatuses.map(status => status.id);
+  const game_status = selectedGameStatuses.map((status) => status.id);
 
   const { toggleStatusSelection } = useGameStatusStore();
 
@@ -156,14 +156,31 @@ const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
     handleToggleMobileFilterBox();
   };
 
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    document.body.style.overflowX = "hidden";
+    document.body.style.overflowY = "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.overflowX = "";
+      document.body.style.overflowY = "";
+    };
+  }, []);
+
   return (
-    <div className="fixed w-full h-full top-0 right-0 bottom-0 left-0 px-4 py-6 bg-[#141414] z-[99999] overflow-y-hidden">
+    <div
+      style={{
+        scrollbarWidth: "none",
+      }}
+      className="fixed w-full h-full top-0 right-0 bottom-0 left-0 px-4 py-6 bg-[#141414] z-[99999] overflow-hidden"
+    >
       <div className="flex flex-col justify-between h-full">
         {/* status field */}
         <div className="flex flex-col  gap-5">
           <div className="md:hidden w-full overflow-x-auto">
             <ul className="flex items-center gap-1.5 min-w-max">
-              {/* ...other list items... */}
               <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3">
                 {startdate}
               </li>
@@ -180,10 +197,9 @@ const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
                     ))
                   : "경기 상태"}
               </li>
-              {/* repeat as needed */}
             </ul>
           </div>
-          {/* set datesfield */}
+
           <DatesField
             INITIAL_DATES={INITIAL_DATES}
             handleDateClick={handleDateClick}
@@ -192,10 +208,8 @@ const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
             dayParam={dayParam}
           />
 
-          {/* time field mobile */}
           <TimesFieldMobile />
 
-          {/* game status field */}
           <GameStatusField
             gameStatusArray={game_status}
             handleToggleGameStatus={handleToggleGameStatus}

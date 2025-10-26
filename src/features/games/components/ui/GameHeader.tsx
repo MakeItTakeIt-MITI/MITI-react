@@ -1,14 +1,14 @@
 import settings_mobile from "../../../../assets/v1.3/games/settings_icon.png";
-import SettingsContainer from "../filters/game-filter/mobile/SettingsContainer.tsx";
+import MobileSettingsContainer from "../filters/game-filter/mobile/MobileSettingsContainer.tsx";
 
 interface GameHeaderProps {
   gameCount: number;
   handleToggleMobileFilterBox: () => void;
 }
 
-export default function GameHeader({ 
-  gameCount, 
-  handleToggleMobileFilterBox 
+export default function GameHeader({
+  gameCount,
+  handleToggleMobileFilterBox,
 }: GameHeaderProps) {
   return (
     <div className="space-y-3">
@@ -26,7 +26,7 @@ export default function GameHeader({
       </div>
 
       {/* Mobile Game Status */}
-      <SettingsContainer/>
+      <MobileSettingsContainer />
     </div>
   );
 }

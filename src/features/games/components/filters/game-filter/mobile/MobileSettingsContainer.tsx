@@ -1,9 +1,10 @@
-import {  useSearchParams } from "react-router-dom";
-import { useTimeField } from "../../../../../../store/Sidebar/useTimeFieldStore";
-import useGameStatusStore from "../../../../store/useGameStatusStore";
+import { Link, useSearchParams } from "react-router-dom";
+import { useTimeField } from "../../../../../../store/Sidebar/useTimeFieldStore.ts";
+import useGameStatusStore from "../../../../store/useGameStatusStore.ts";
 import { useMemo } from "react";
+import { getTodaysGamesQuery } from "../../../../../../utils/dates/date.ts";
 
-const SettingsContainer = () => {
+const MobileSettingsContainer = () => {
   const [searchParams] = useSearchParams();
 
   const month = searchParams.get("month");
@@ -13,8 +14,8 @@ const SettingsContainer = () => {
   const days = ["일", "월", "화", "수", "목", "금", "토"];
 
   // imported from useTimeField Store
-  const { hour, minutes, resetTime } = useTimeField();
-  const { gameStatusArray, resetAllStatuses } = useGameStatusStore();
+  const { hour, minutes } = useTimeField();
+  const { gameStatusArray } = useGameStatusStore();
   const getKoreanTimeFormat = (
     hour: string | number,
     minutes: string | number
@@ -32,10 +33,10 @@ const SettingsContainer = () => {
   const selectedGameStatuses = useMemo(() => {
     return gameStatusArray
       .flat()
-      .filter(status => status.isSelected)
-      .map(status => ({
+      .filter((status) => status.isSelected)
+      .map((status) => ({
         id: status.status,
-        name: status.tag
+        name: status.tag,
       }));
   }, [gameStatusArray]);
 
@@ -48,23 +49,12 @@ const SettingsContainer = () => {
         })`
       : "";
 
-  // const regionParam = searchParams.get("region") || "";
-  // const searchParam = searchParams.get("search") || "";
-
-  const handleResetSidebarSettings = () => {
-    resetTime();
-    resetAllStatuses();
-  };
-
   return (
     <div className="md:hidden w-full overflow-x-auto">
       <ul className="flex items-center gap-1.5 min-w-max">
         <li className="text-[#474747] text-xs font-[500] border border-[#474747] rounded-[50px] py-2 px-3">
-          <button onClick={handleResetSidebarSettings} type="button">
-            초기화
-          </button>
+          <Link to={`/${getTodaysGamesQuery()}`}> 초기화</Link>
         </li>
-        {/* ...other list items... */}
         <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3">
           {startdate}
         </li>
@@ -81,10 +71,9 @@ const SettingsContainer = () => {
               ))
             : "경기 상태"}
         </li>
-        {/* repeat as needed */}
       </ul>
     </div>
   );
 };
 
-export default SettingsContainer;
+export default MobileSettingsContainer;
