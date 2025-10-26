@@ -1,6 +1,8 @@
+import Button from "../../../features/common/components(renewal)/buttons/Button";
 import { GameDetail } from "../interface/game-detail";
 import GameDetailMap from "./GameDetailMap";
 import HostDetails from "./HostDetails";
+import JoinGameButton from "./JoinGameButton";
 
 interface PanelProps {
   gameDetailData: GameDetail;
@@ -37,7 +39,10 @@ const GameDetailsPanelSkeleton = () => (
   </div>
 );
 
-const GameDetailsPanel = ({ gameDetailData, isLoading = false }: PanelProps) => {
+const GameDetailsPanel = ({
+  gameDetailData,
+  isLoading = false,
+}: PanelProps) => {
   if (isLoading) {
     return <GameDetailsPanelSkeleton />;
   }
@@ -49,7 +54,8 @@ const GameDetailsPanel = ({ gameDetailData, isLoading = false }: PanelProps) => 
         long={gameDetailData?.court.longitude}
       />
       <HostDetails gameDetailData={gameDetailData} />
-      {/* <Button type="button" size="lg" content="참가하기" /> */}
+
+      <JoinGameButton gameTitle={gameDetailData?.title} />
     </div>
   );
 };

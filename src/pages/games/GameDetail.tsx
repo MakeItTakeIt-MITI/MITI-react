@@ -14,11 +14,17 @@ const GameDetail = () => {
       style={{
         backgroundColor: "#141414",
       }}
-      className="mx-auto  sm:w-full md:w-[968px] flex flex-col items-center gap-[30px] py-[30px]"
+      className="mx-auto  sm:w-full md:w-[968px] flex flex-col items-center gap-[30px] py-[30px] "
     >
       <article className="w-full  flex sm:flex-col  md:flex-row justify-between">
-        <GameDetailsPanel gameDetailData={gameDetailData?.data || {}} isLoading={isLoading} />
-        <GameDetailContainer gameDetailData={gameDetailData?.data || {}} isLoading={isLoading} />
+        <GameDetailsPanel
+          gameDetailData={gameDetailData?.data || {}}
+          isLoading={isLoading}
+        />
+        <GameDetailContainer
+          gameDetailData={gameDetailData?.data || {}}
+          isLoading={isLoading}
+        />
       </article>
       <BannerMedium type="dongtan_court" />
     </section>
