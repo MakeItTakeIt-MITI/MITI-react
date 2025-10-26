@@ -5,8 +5,8 @@ import { useSelectedStore } from "../../../store/NaverMap/useSelectedStore.tsx";
 import { useMapCoordinatesStore } from "../../../store/NaverMap/useMapCoordinatesStore.tsx";
 
 // Current location button
-import findMylocationDeactivated from "../../../assets/v1.3/map/location_deactivated.png";
-import findMylocationActivated from "../../../assets/v1.3/map/location_activated.png";
+// import findMylocationDeactivated from "../../../assets/v1.3/map/location_deactivated.png";
+// import findMylocationActivated from "../../../assets/v1.3/map/location_activated.png";
 
 // Add global type for naver maps
 declare global {

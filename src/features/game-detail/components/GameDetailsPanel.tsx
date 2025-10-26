@@ -1,4 +1,3 @@
-import Button from "../../../features/common/components(renewal)/buttons/Button";
 import { GameDetail } from "../interface/game-detail";
 import GameDetailMap from "./GameDetailMap";
 import HostDetails from "./HostDetails";

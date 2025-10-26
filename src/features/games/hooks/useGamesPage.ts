@@ -11,7 +11,7 @@ export const useGamesPage = () => {
   // UI State Management
   const [tab, setTab] = useState("map");
   const [isFilterBoxOpen, setIsFilterBoxOpen] = useState(false);
- const [geolocation, setGeolocation] = useState<{
+  const [_geolocation, setGeolocation] = useState<{
     lat: number;
     lon: number;
   } | null>(null);
@@ -21,27 +21,27 @@ export const useGamesPage = () => {
   const { startdate, regionParam, searchParam } = useGameUrlParams();
   const { timeFormat } = useTimeFormatting();
 
-  
-const { gameStatusArray } = useGameStatusStore()
 
-// Extract selected statuses reactively with memoization
-const selectedStatusesArray = useMemo(() => {
-  return gameStatusArray
-    .flat()
-    .filter((status) => status.isSelected)
-    .map((status) => status.status);
-}, [gameStatusArray]);
+  const { gameStatusArray } = useGameStatusStore()
 
-console.log('Selected statuses:', selectedStatusesArray)
+  // Extract selected statuses reactively with memoization
+  const selectedStatusesArray = useMemo(() => {
+    return gameStatusArray
+      .flat()
+      .filter((status) => status.isSelected)
+      .map((status) => status.status);
+  }, [gameStatusArray]);
 
-// 2. Fetch raw data from APIs
-const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(
-  startdate,
-  timeFormat,
-  selectedStatusesArray, // reactive game status filter
-);
+  console.log('Selected statuses:', selectedStatusesArray)
 
-    // 3. Process & filter the data ← HERE'S WHERE useGameDataProcessing IS USED
+  // 2. Fetch raw data from APIs
+  const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(
+    startdate,
+    timeFormat,
+    selectedStatusesArray, // reactive game status filter
+  );
+
+  // 3. Process & filter the data ← HERE'S WHERE useGameDataProcessing IS USED
 
   const {
     data: gamesData,
@@ -75,7 +75,7 @@ const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(
 
 
   // Geolocation Button and finder
-  const handleGeolocationClick= () => {
+  const handleGeolocationClick = () => {
     useCurrentLocationSetting({ setGeolocation });
   }
 
@@ -83,15 +83,15 @@ const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(
     // UI State
     tab,
     isFilterBoxOpen,
-    
+
     // Event Handlers
     handleToggleTab,
     handleToggleMobileFilterBox,
-    
+
     // Loading States
     isMapGameListLoading,
     isGamesListLoading,
-    
+
     // Processed Data
     ...gameDataProcessing,
   };
