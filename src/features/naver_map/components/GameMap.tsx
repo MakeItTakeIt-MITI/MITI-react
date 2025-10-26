@@ -1,12 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { renderToString } from "react-dom/server";
 import { GameField } from "../../games/interface/games.ts";
 import { useSelectedStore } from "../../../store/NaverMap/useSelectedStore.tsx";
 import { useMapCoordinatesStore } from "../../../store/NaverMap/useMapCoordinatesStore.tsx";
 
-// Current location button
-// import findMylocationDeactivated from "../../../assets/v1.3/map/location_deactivated.png";
-// import findMylocationActivated from "../../../assets/v1.3/map/location_activated.png";
+// Current location button images
+import findMylocationDeactivated from "../../../assets/v1.3/map/location_deactivated.png";
+import findMylocationActivated from "../../../assets/v1.3/map/location_activated.png";
+import findMylocationLoading from "../../../assets/v1.3/map/marker-loading.gif";
 
 // Add global type for naver maps
 declare global {
@@ -29,11 +30,14 @@ export default function GameMap({
   } = useSelectedStore();
   const { coordinates, setCoordinates } = useMapCoordinatesStore();
 
-  // keep the map instance and markers in refs
+  const [isLocating, setIsLocating] = useState(false);
+  const [isLocationActive, setIsLocationActive] = useState(false);
+
   const mapRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
+  const customControlRef = useRef<any>(null);
 
-  // initialize map only once
+  // Initialize map once
   useEffect(() => {
     if (!window.naver || !window.naver.maps || !window.naver.maps.LatLng)
       return;
@@ -47,68 +51,104 @@ export default function GameMap({
     }
   }, []);
 
-  // move center when coordinates change
+  // Move center when coordinates change
   useEffect(() => {
-    if (
-      mapRef.current &&
-      window.naver &&
-      window.naver.maps &&
-      window.naver.maps.LatLng
-    ) {
-      mapRef.current.setCenter(
-        new window.naver.maps.LatLng(coordinates.lat, coordinates.long)
-      );
-    }
+    if (!mapRef.current) return;
+    const map = mapRef.current;
+    map.setCenter(
+      new window.naver.maps.LatLng(coordinates.lat, coordinates.long)
+    );
   }, [coordinates]);
 
-  // update markers when gamesMapData changes
+  // Custom location button
   useEffect(() => {
-    if (
-      !window.naver ||
-      !window.naver.maps ||
-      !window.naver.maps.LatLng ||
-      !mapRef.current
-    )
-      return;
-
+    if (!mapRef.current) return;
     const map = mapRef.current;
 
-    // Find my Location Button UI and event
-    // const locationBtnHtml = `
-    //   <button type="button" id="find-my-location-btn"
-    //           style=" cursor: pointer; display: flex; align-items: center; justify-content: center;">
-    //     <img
-    //     style="width:24px height 24px"
-    //     src="${findMylocationDeactivated}" alt="Find My Location" style="width: 24px; height: 24px;" />
-    //   </button>
-    // `;
+    // Remove old control if exists
+    if (customControlRef.current) {
+      customControlRef.current.setMap(null);
+    }
 
-    // const customControl = new window.naver.maps.CustomControl(locationBtnHtml, {
-    //   position: window.naver.maps.Position.TOP_LEFT
-    // });
-    // customControl.setMap(map);
+    const getButtonHTML = () => {
+      if (isLocating) {
+        return `<button class='h-[44px] w-[44px]  flex items-center justify-center ml-1 mt-1'>
+                  <img src="${findMylocationLoading}" alt="Loading" class="h-[28px] w-[28px]" />
+                </button>`;
+      }
+      if (isLocationActive) {
+        return `<button class='h-[44px] w-[44px]  flex items-center justify-center ml-1 mt-1 '>
+                  <img src="${findMylocationActivated}" alt="Active" class="" />
+                </button>`;
+      }
+      return `<button class='h-[44px] w-[44px]  flex items-center justify-center ml-1 mt-1 '>
+                <img src="${findMylocationDeactivated}" alt="Location" class="" />
+              </button>`;
+    };
 
-    // clear previous markers
-    markersRef.current.forEach((marker) => marker.setMap(null));
+    const newControl = new window.naver.maps.CustomControl(getButtonHTML(), {
+      position: window.naver.maps.Position.TOP_LEFT,
+    });
+
+    newControl.setMap(map);
+
+    window.naver.maps.Event.addDOMListener(
+      newControl.getElement(),
+      "click",
+      () => {
+        if (isLocating) return;
+        setIsLocating(true);
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (pos) => {
+              const { latitude, longitude } = pos.coords;
+              setCoordinates(latitude, longitude);
+
+              setTimeout(() => {
+                setIsLocating(false);
+                setIsLocationActive(true);
+                map.panTo(new window.naver.maps.LatLng(latitude, longitude));
+                setTimeout(() => setIsLocationActive(false), 1800);
+              }, 700);
+            },
+            (err) => {
+              console.error("Geolocation error:", err.message);
+              setIsLocating(false);
+            },
+            { enableHighAccuracy: true }
+          );
+        }
+      }
+    );
+
+    customControlRef.current = newControl;
+  }, [isLocating, isLocationActive, setCoordinates]);
+
+  // Update markers when gamesMapData changes
+  useEffect(() => {
+    if (!mapRef.current) return;
+    const map = mapRef.current;
+
+    // Clear previous markers
+    markersRef.current.forEach((m) => m.setMap(null));
     markersRef.current = [];
 
-    // compute address overlaps
+    // Compute address overlaps
     const addressOverlapCount: Record<string, number> = {};
-    gamesMapData?.forEach((game: GameField) => {
+    gamesMapData.forEach((game: GameField) => {
       const addr = game.court.address;
       addressOverlapCount[addr] = (addressOverlapCount[addr] || 0) + 1;
     });
 
-    gamesMapData?.forEach((game: GameField) => {
+    gamesMapData.forEach((game: GameField) => {
       const address = game.court.address;
-
       const marker = new window.naver.maps.Marker({
         position: new window.naver.maps.LatLng(
           game.court.latitude,
           game.court.longitude
         ),
-        zoom: 16,
-        map: map,
+        map,
         title: game.title,
       });
 
@@ -128,7 +168,7 @@ export default function GameMap({
                     ? "1px solid black"
                     : "#d4d4d4",
               }}
-              className="relative text-[10px] font-bold  w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center"
+              className="relative text-[10px] font-bold w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center"
             >
               <span className="flex items-center gap-1">
                 {game.fee !== 0
@@ -149,9 +189,7 @@ export default function GameMap({
                       ? "1px solid black"
                       : "#999",
                 }}
-                className="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] 
-                     text-[#5C5C5C]  flex items-center 
-                     justify-center text-[10px] font-bold "
+                className="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] flex items-center justify-center text-[10px] font-bold"
               >
                 {addressOverlapCount[address]}
               </div>
@@ -159,7 +197,6 @@ export default function GameMap({
           )
         : renderToString(
             <button
-              // href={`/games/${game.id}`}
               style={{
                 backgroundColor:
                   selectedAddress === game.court.address
@@ -185,20 +222,19 @@ export default function GameMap({
 
       marker.setIcon({ content: iconContent });
 
-      if (map) {
-        window.naver.maps.Event.addListener(map, "click", () => {
-          setSelected(false);
-          setSelectedAddress("");
-        });
-      }
+      // Map click clears selection
+      window.naver.maps.Event.addListener(map, "click", () => {
+        setSelected(false);
+        setSelectedAddress("");
+      });
 
-      // clicking marker just updates store + map center
+      // Marker click toggles selection
       window.naver.maps.Event.addListener(marker, "click", () => {
         if (!isSelected) {
           toggleSelected();
           setCoordinates(game.court.latitude, game.court.longitude);
           setSelectedAddress(game.court.address);
-          map.zoom(16, true);
+          map.setZoom(18, true);
           map.setCenter(
             new window.naver.maps.LatLng(
               game.court.latitude,

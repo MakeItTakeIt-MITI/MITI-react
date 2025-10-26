@@ -1,13 +1,13 @@
 import { create } from "zustand";
 
 interface Coordinates {
-  lat: string;
-  long: string;
+  lat: string | number;
+  long: string | number;
 }
 
 interface MapCoordinatesState {
   coordinates: Coordinates;
-  setCoordinates: (lat: string, long: string) => void;
+  setCoordinates: (lat: string | number, long: string | number) => void;
 }
 
 export const useMapCoordinatesStore = create<MapCoordinatesState>((set) => ({
