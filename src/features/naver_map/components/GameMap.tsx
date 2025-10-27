@@ -37,10 +37,12 @@ export default function GameMap({
   const markersRef = useRef<any[]>([]);
   const customControlRef = useRef<any>(null);
 
-  // Initialize map once
+  // Create map & custom control robustly (create control once, update HTML on state changes)
   useEffect(() => {
-    if (!window.naver || !window.naver.maps || !window.naver.maps.LatLng)
+    if (!window?.naver || !window.naver.maps || !window.naver.maps.LatLng)
       return;
+
+    // create map once
     if (!mapRef.current) {
       mapRef.current = new window.naver.maps.Map("games-list", {
         center: new window.naver.maps.LatLng(coordinates.lat, coordinates.long),
@@ -49,92 +51,122 @@ export default function GameMap({
         disableKineticPan: false,
       });
     }
-  }, []);
-
-  // Move center when coordinates change
-  useEffect(() => {
-    if (!mapRef.current) return;
     const map = mapRef.current;
-    map.setCenter(
-      new window.naver.maps.LatLng(coordinates.lat, coordinates.long)
-    );
-  }, [coordinates]);
-
-  // Custom location button
-  useEffect(() => {
-    if (!mapRef.current) return;
-    const map = mapRef.current;
-
-    // Remove old control if exists
-    if (customControlRef.current) {
-      customControlRef.current.setMap(null);
-    }
 
     const getButtonHTML = () => {
       if (isLocating) {
-        return `<button class='h-[44px] w-[44px]  flex items-center justify-center ml-1 mt-1'>
+        return `<button class='h-[44px] w-[44px] flex items-center justify-center'>
                   <img src="${findMylocationLoading}" alt="Loading" class="h-[28px] w-[28px]" />
                 </button>`;
       }
       if (isLocationActive) {
-        return `<button class='h-[44px] w-[44px]  flex items-center justify-center ml-1 mt-1 '>
+        return `<button class='h-[44px] w-[44px] flex items-center justify-center'>
                   <img src="${findMylocationActivated}" alt="Active" class="" />
                 </button>`;
       }
-      return `<button class='h-[44px] w-[44px]  flex items-center justify-center ml-1 mt-1 '>
+      return `<button class='h-[44px] w-[44px] flex items-center justify-center'>
                 <img src="${findMylocationDeactivated}" alt="Location" class="" />
               </button>`;
     };
 
-    const newControl = new window.naver.maps.CustomControl(getButtonHTML(), {
-      position: window.naver.maps.Position.TOP_LEFT,
-    });
+    // create control only once
+    if (!customControlRef.current) {
+      const control = new window.naver.maps.CustomControl(getButtonHTML(), {
+        position: window.naver.maps.Position.TOP_LEFT,
+      });
+      control.setMap(map);
 
-    newControl.setMap(map);
-
-    window.naver.maps.Event.addDOMListener(
-      newControl.getElement(),
-      "click",
-      () => {
-        if (isLocating) return;
-        setIsLocating(true);
-
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            (pos) => {
-              const { latitude, longitude } = pos.coords;
-              setCoordinates(latitude, longitude);
-
-              setTimeout(() => {
-                setIsLocating(false);
-                setIsLocationActive(true);
-                map.panTo(new window.naver.maps.LatLng(latitude, longitude));
-                setTimeout(() => setIsLocationActive(false), 1800);
-              }, 700);
-            },
-            (err) => {
-              console.error("Geolocation error:", err.message);
+      // attach click handler once
+      try {
+        window.naver.maps.Event.addDOMListener(
+          control.getElement(),
+          "click",
+          () => {
+            if (isLocating) return;
+            setIsLocating(true);
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                  const { latitude, longitude } = pos.coords;
+                  setCoordinates(latitude, longitude);
+                  setTimeout(() => {
+                    setIsLocating(false);
+                    setIsLocationActive(true);
+                    map.panTo(
+                      new window.naver.maps.LatLng(latitude, longitude)
+                    );
+                    // set zoom to 14 when the control is clicked
+                    try {
+                      map.setZoom(14, true);
+                    } catch {}
+                    setTimeout(() => setIsLocationActive(false), 1800);
+                  }, 700);
+                },
+                () => {
+                  setIsLocating(false);
+                },
+                { enableHighAccuracy: true }
+              );
+            } else {
               setIsLocating(false);
-            },
-            { enableHighAccuracy: true }
-          );
-        }
+            }
+          }
+        );
+      } catch {
+        /* ignore DOM listener attach failures */
       }
-    );
 
-    customControlRef.current = newControl;
-  }, [isLocating, isLocationActive, setCoordinates]);
+      // nudge wrapper to flush-left if needed
+      try {
+        const el = control.getElement?.();
+        if (el?.parentElement) {
+          el.parentElement.style.left = "0px";
+          el.parentElement.style.marginLeft = "0px";
+        }
+      } catch {}
+
+      customControlRef.current = control;
+    } else {
+      // update control HTML instead of recreating
+      try {
+        const el = customControlRef.current.getElement?.();
+        if (el) el.innerHTML = getButtonHTML();
+      } catch {
+        /* ignore update errors */
+      }
+    }
+
+    // keep center in sync
+    try {
+      map.setCenter(
+        new window.naver.maps.LatLng(coordinates.lat, coordinates.long)
+      );
+    } catch {}
+
+    return () => {
+      if (customControlRef.current) {
+        try {
+          customControlRef.current.setMap(null);
+        } catch {}
+        customControlRef.current = null;
+      }
+    };
+  }, [
+    coordinates.lat,
+    coordinates.long,
+    isLocating,
+    isLocationActive,
+    setCoordinates,
+  ]);
 
   // Update markers when gamesMapData changes
   useEffect(() => {
     if (!mapRef.current) return;
     const map = mapRef.current;
 
-    // Clear previous markers
     markersRef.current.forEach((m) => m.setMap(null));
     markersRef.current = [];
 
-    // Compute address overlaps
     const addressOverlapCount: Record<string, number> = {};
     gamesMapData.forEach((game: GameField) => {
       const addr = game.court.address;
