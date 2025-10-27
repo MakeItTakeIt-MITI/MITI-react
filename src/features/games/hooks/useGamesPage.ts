@@ -5,16 +5,12 @@ import { useGameUrlParams } from "./useGameUrlParams.ts";
 import { useTimeFormatting } from "./useTimeFormatting.ts";
 import { useGameDataProcessing } from "./useGameDataProcessing.ts";
 import useGameStatusStore from "../store/useGameStatusStore.ts";
-import { useCurrentLocationSetting } from "./useCurrentLocationSetting.tsx";
 
 export const useGamesPage = () => {
   // UI State Management
   const [tab, setTab] = useState("map");
   const [isFilterBoxOpen, setIsFilterBoxOpen] = useState(false);
-  const [_geolocation, setGeolocation] = useState<{
-    lat: number;
-    lon: number;
-  } | null>(null);
+
 
 
   // 1. Get URL params & time format
@@ -32,7 +28,6 @@ export const useGamesPage = () => {
       .map((status) => status.status);
   }, [gameStatusArray]);
 
-  console.log('Selected statuses:', selectedStatusesArray)
 
   // 2. Fetch raw data from APIs
   const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(
@@ -74,10 +69,10 @@ export const useGamesPage = () => {
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
 
-  // Geolocation Button and finder
-  const handleGeolocationClick = () => {
-    useCurrentLocationSetting({ setGeolocation });
-  }
+  // // Geolocation Button and finder
+  // const handleGeolocationClick = () => {
+  //   useCurrentLocationSetting({ setGeolocation });
+  // }
 
   return {
     // UI State

@@ -1,13 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { renderToString } from "react-dom/server";
 import { GameField } from "../../games/interface/games.ts";
 import { useSelectedStore } from "../../../store/NaverMap/useSelectedStore.tsx";
 import { useMapCoordinatesStore } from "../../../store/NaverMap/useMapCoordinatesStore.tsx";
 
 // Current location button images
-import findMylocationDeactivated from "../../../assets/v1.3/map/location_deactivated.png";
-import findMylocationActivated from "../../../assets/v1.3/map/location_activated.png";
-import findMylocationLoading from "../../../assets/v1.3/map/marker-loading.gif";
+// import findMylocationDeactivated from "../../../assets/v1.3/map/location_deactivated.png";
+// import findMylocationActivated from "../../../assets/v1.3/map/location_activated.png";
+// import findMylocationLoading from "../../../assets/v1.3/map/marker-loading.gif";
 
 // Add global type for naver maps
 declare global {
@@ -30,8 +30,8 @@ export default function GameMap({
   } = useSelectedStore();
   const { coordinates, setCoordinates } = useMapCoordinatesStore();
 
-  const [isLocating, setIsLocating] = useState(false);
-  const [isLocationActive, setIsLocationActive] = useState(false);
+  // const [isLocating, setIsLocating] = useState(false);
+  // const [isLocationActive, setIsLocationActive] = useState(false);
 
   const mapRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
@@ -53,88 +53,88 @@ export default function GameMap({
     }
     const map = mapRef.current;
 
-    const getButtonHTML = () => {
-      if (isLocating) {
-        return `<button class='h-[44px] w-[44px] flex items-center justify-center'>
-                  <img src="${findMylocationLoading}" alt="Loading" class="h-[28px] w-[28px]" />
-                </button>`;
-      }
-      if (isLocationActive) {
-        return `<button class='h-[44px] w-[44px] flex items-center justify-center'>
-                  <img src="${findMylocationActivated}" alt="Active" class="" />
-                </button>`;
-      }
-      return `<button class='h-[44px] w-[44px] flex items-center justify-center'>
-                <img src="${findMylocationDeactivated}" alt="Location" class="" />
-              </button>`;
-    };
+    // const getButtonHTML = () => {
+    //   if (isLocating) {
+    //     return `<button class='h-[44px] w-[44px] flex items-center justify-center'>
+    //               <img src="${findMylocationLoading}" alt="Loading" class="h-[28px] w-[28px]" />
+    //             </button>`;
+    //   }
+    //   if (isLocationActive) {
+    //     return `<button class='h-[44px] w-[44px] flex items-center justify-center'>
+    //               <img src="${findMylocationActivated}" alt="Active" class="" />
+    //             </button>`;
+    //   }
+    //   return `<button class='h-[44px] w-[44px] flex items-center justify-center'>
+    //             <img src="${findMylocationDeactivated}" alt="Location" class="" />
+    //           </button>`;
+    // };
 
     // create control only once
-    if (!customControlRef.current) {
-      const control = new window.naver.maps.CustomControl(getButtonHTML(), {
-        position: window.naver.maps.Position.TOP_LEFT,
-      });
-      control.setMap(map);
+    // if (!customControlRef.current) {
+    //   const control = new window.naver.maps.CustomControl(getButtonHTML(), {
+    //     position: window.naver.maps.Position.TOP_LEFT,
+    //   });
+    //   control.setMap(map);
 
-      // attach click handler once
-      try {
-        window.naver.maps.Event.addDOMListener(
-          control.getElement(),
-          "click",
-          () => {
-            if (isLocating) return;
-            setIsLocating(true);
-            if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(
-                (pos) => {
-                  const { latitude, longitude } = pos.coords;
-                  setCoordinates(latitude, longitude);
-                  setTimeout(() => {
-                    setIsLocating(false);
-                    setIsLocationActive(true);
-                    map.panTo(
-                      new window.naver.maps.LatLng(latitude, longitude)
-                    );
-                    // set zoom to 14 when the control is clicked
-                    try {
-                      map.setZoom(14, true);
-                    } catch {}
-                    setTimeout(() => setIsLocationActive(false), 1800);
-                  }, 700);
-                },
-                () => {
-                  setIsLocating(false);
-                },
-                { enableHighAccuracy: true }
-              );
-            } else {
-              setIsLocating(false);
-            }
-          }
-        );
-      } catch {
-        /* ignore DOM listener attach failures */
-      }
+    //   // attach click handler once
+    //   try {
+    //     window.naver.maps.Event.addDOMListener(
+    //       control.getElement(),
+    //       "click",
+    //       () => {
+    //         if (isLocating) return;
+    //         setIsLocating(true);
+    //         if (navigator.geolocation) {
+    //           navigator.geolocation.getCurrentPosition(
+    //             (pos) => {
+    //               const { latitude, longitude } = pos.coords;
+    //               setCoordinates(latitude, longitude);
+    //               setTimeout(() => {
+    //                 setIsLocating(false);
+    //                 setIsLocationActive(true);
+    //                 map.panTo(
+    //                   new window.naver.maps.LatLng(latitude, longitude)
+    //                 );
+    //                 // set zoom to 14 when the control is clicked
+    //                 try {
+    //                   map.setZoom(14, true);
+    //                 } catch {}
+    //                 setTimeout(() => setIsLocationActive(false), 1800);
+    //               }, 700);
+    //             },
+    //             () => {
+    //               setIsLocating(false);
+    //             },
+    //             { enableHighAccuracy: true }
+    //           );
+    //         } else {
+    //           setIsLocating(false);
+    //         }
+    //       }
+    //     );
+    //   } catch {
+    //     /* ignore DOM listener attach failures */
+    //   }
 
-      // nudge wrapper to flush-left if needed
-      try {
-        const el = control.getElement?.();
-        if (el?.parentElement) {
-          el.parentElement.style.left = "0px";
-          el.parentElement.style.marginLeft = "0px";
-        }
-      } catch {}
+    //   // nudge wrapper to flush-left if needed
+    //   try {
+    //     const el = control.getElement?.();
+    //     if (el?.parentElement) {
+    //       el.parentElement.style.left = "0px";
+    //       el.parentElement.style.marginLeft = "0px";
+    //     }
+    //   } catch {}
 
-      customControlRef.current = control;
-    } else {
-      // update control HTML instead of recreating
-      try {
-        const el = customControlRef.current.getElement?.();
-        if (el) el.innerHTML = getButtonHTML();
-      } catch {
-        /* ignore update errors */
-      }
-    }
+    //   customControlRef.current = control;
+    // } else {
+    //   // update control HTML instead of recreating
+    //   try {
+    //     const el = customControlRef.current.getElement?.();
+    //     if (el) el.innerHTML = getButtonHTML();
+    //   } catch {
+    //     /* ignore update errors */
+    //   }
+    // }
 
     // keep center in sync
     try {
@@ -154,8 +154,8 @@ export default function GameMap({
   }, [
     coordinates.lat,
     coordinates.long,
-    isLocating,
-    isLocationActive,
+    // isLocating,
+    // isLocationActive,
     setCoordinates,
   ]);
 
