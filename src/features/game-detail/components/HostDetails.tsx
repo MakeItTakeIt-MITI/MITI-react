@@ -48,7 +48,7 @@ const HostDetails = ({ gameDetailData }: HostDetailsProps) => {
               src={getStarRating(
                 gameDetailData?.host.host_rating.num_of_reviews
               )}
-              alt="five_stars"
+              alt="review ratings"
             />
             <span>{gameDetailData?.host.host_rating.num_of_reviews}</span>
             <span>리뷰</span>

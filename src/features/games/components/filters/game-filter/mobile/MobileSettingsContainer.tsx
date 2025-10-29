@@ -4,7 +4,13 @@ import useGameStatusStore from "../../../../store/useGameStatusStore.ts";
 import { useMemo } from "react";
 import { getTodaysGamesQuery } from "../../../../../../utils/dates/date.ts";
 
-const MobileSettingsContainer = () => {
+interface MobileSettingsContainerProps {
+  handleToggleMobileFilterBox: () => void;
+}
+
+const MobileSettingsContainer = ({
+  handleToggleMobileFilterBox,
+}: MobileSettingsContainerProps) => {
   const [searchParams] = useSearchParams();
 
   const month = searchParams.get("month");
@@ -55,21 +61,39 @@ const MobileSettingsContainer = () => {
         <li className="text-[#474747] text-xs font-[500] border border-[#474747] rounded-[50px] py-2 px-3">
           <Link to={`/${getTodaysGamesQuery()}`}> 초기화</Link>
         </li>
-        <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3">
-          {startdate}
+        <li>
+          <button
+            type="button"
+            onClick={handleToggleMobileFilterBox}
+            className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3"
+          >
+            {startdate}
+          </button>
         </li>
-        <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3">
-          {timeFormat}
+        <li>
+          <button
+            type="button"
+            onClick={handleToggleMobileFilterBox}
+            className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3"
+          >
+            {timeFormat}
+          </button>
         </li>{" "}
-        <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3">
-          {selectedGameStatuses.length > 0
-            ? selectedGameStatuses.map((status, idx) => (
-                <span key={status.id}>
-                  {status.name}
-                  {idx < selectedGameStatuses.length - 1 && ", "}
-                </span>
-              ))
-            : "경기 상태"}
+        <li>
+          <button
+            type="button"
+            onClick={handleToggleMobileFilterBox}
+            className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3"
+          >
+            {selectedGameStatuses.length > 0
+              ? selectedGameStatuses.map((status, idx) => (
+                  <span key={status.id}>
+                    {status.name}
+                    {idx < selectedGameStatuses.length - 1 && ", "}
+                  </span>
+                ))
+              : "경기 상태"}
+          </button>
         </li>
       </ul>
     </div>

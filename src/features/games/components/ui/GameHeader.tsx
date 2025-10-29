@@ -26,7 +26,9 @@ export default function GameHeader({
       </div>
 
       {/* Mobile Game Status */}
-      <MobileSettingsContainer />
+      <MobileSettingsContainer
+        handleToggleMobileFilterBox={handleToggleMobileFilterBox}
+      />
     </div>
   );
 }
