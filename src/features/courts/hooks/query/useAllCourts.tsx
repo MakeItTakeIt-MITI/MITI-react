@@ -7,15 +7,18 @@ export const useAllCourts = (
 ) => {
   return useInfiniteQuery({
     queryKey: ["all courts data", search, district],
-    queryFn: ({ pageParam = 1 }) => getAllCourts(pageParam, search, district),
+    queryFn: ({ pageParam = 1 }) =>
+      getAllCourts(pageParam, 10, search, district),
     initialPageParam: 1,
-    getNextPageParam: (page) => {
-      const { current_index, end_index } = page.data;
+    getNextPageParam: (lastPage) => {
+      const { page_last_cursor, has_more } = lastPage.data;
 
-      const nextPage = current_index + 1;
-      const hasNextPage = nextPage <= end_index;
+      return has_more ? page_last_cursor : undefined;
 
-      return hasNextPage ? nextPage : undefined;
+      // const nextPage = current_index + 1;
+      // const hasNextPage = nextPage <= end_index;
+
+      // return hasNextPage ? nextPage : undefined;
     },
   });
 };

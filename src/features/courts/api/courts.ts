@@ -3,9 +3,9 @@ import axiosUrl from "../../../utils/axios.ts"
 
 
 
-export const getAllCourts = async (pageParam: number | null, search: string | null | undefined, district: string | null | undefined) => {
+export const getAllCourts = async (cursor: number | null, limit: number | null, search: string | null | undefined, district: string | null | undefined) => {
     try {
-        const response = await axiosUrl.get(`/courts?page=${pageParam}`, { params: { search, district } })
+        const response = await axiosUrl.get(`/courts?cursor=${cursor}&limit=${limit}`, { params: { search, district } })
         return response.data
     } catch {
         throw new Error

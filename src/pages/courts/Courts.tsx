@@ -37,12 +37,14 @@ export default function Courts() {
     data: courtsData,
     hasNextPage,
     fetchNextPage,
-    isLoading
+    isLoading,
   } = useAllCourts(inputContent.get("search"), regionParams.get("region"));
 
   const courtsDataPage = courtsData?.pages?.flatMap(
-    (page) => page?.data?.page_content
+    (page) => page?.data?.items
   );
+
+  // console.log(courtsDataPage);
 
   const { ref: courtsListRef, inView } = useInView({
     threshold: 0.2,
