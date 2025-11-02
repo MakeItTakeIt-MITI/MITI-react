@@ -26,23 +26,23 @@ const useCourtsDataPage = () => {
     }
   }, []);
 
-  // get the URL params for region filtering
-  const [regionParams, setRegionParams] = useSearchParams();
+  // get the URL params for province filtering
+  const [provinceParams, setProvinceParams] = useSearchParams();
 
-  const handleSelectRegion = useCallback(
-    (region: string) => {
-      const params = Object.fromEntries(regionParams.entries());
+  const handleSelectProvince = useCallback(
+    (province: string) => {
+      const params = Object.fromEntries(provinceParams.entries());
 
       // toggle
-      if (regionParams.get("region") === region) {
+      if (provinceParams.get("province") === province) {
         const { ...rest } = params;
-        setRegionParams({ ...rest, region: "" });
+        setProvinceParams({ ...rest, province: "" });
       } else {
-        setRegionParams({ ...params, region });
+        setProvinceParams({ ...params, province });
       }
     },
 
-    [setRegionParams]
+    [setProvinceParams]
   );
 
   // get the URL params for search filtering
@@ -54,7 +54,9 @@ const useCourtsDataPage = () => {
     hasNextPage,
     fetchNextPage,
     isLoading,
-  } = useAllCourts(inputContent.get("search"), regionParams.get("region"));
+  } = useAllCourts(
+    provinceParams.get("province") || inputContent.get("search") || null
+  );
 
   // flatten the paginated data
   const courtsDataPage = courtsData?.pages?.flatMap(
@@ -75,8 +77,8 @@ const useCourtsDataPage = () => {
 
   return {
     geolocation,
-    regionParams,
-    handleSelectRegion,
+    provinceParams,
+    handleSelectProvince,
     courtsData,
     hasNextPage,
     fetchNextPage,

@@ -8,7 +8,7 @@ export default function Courts() {
   const {
     geolocation,
     courtsDataPage,
-    handleSelectRegion,
+    handleSelectProvince,
     hasNextPage,
     courtsListRef,
     isLoading,
@@ -22,7 +22,7 @@ export default function Courts() {
       className="mx-auto sm:w-full md:w-[968px] flex flex-col sm:px-4 md:px-0  md:items-center gap-[30px] py-[30px]"
     >
       <article className="flex  gap-[30px]">
-        <Sidebar handleSelectRegion={handleSelectRegion} />
+        <Sidebar handleSelectProvince={handleSelectProvince} />
 
         <div className="sm:w-full md:w-[880px] flex flex-col  gap-[20px]">
           <div className="sm:w-full md:w-[800px] mx-auto ">

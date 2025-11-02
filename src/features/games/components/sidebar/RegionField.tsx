@@ -2,13 +2,15 @@ import RegionCheck from "../../../common/components(renewal)/chips/RegionCheck.t
 import { useSearchParams } from "react-router-dom";
 
 interface RegionFieldProps {
-  handleSelectRegion: (arg: string) => void;
+  handleSelectProvince: (arg: string) => void;
 }
 
-export default function RegionField({ handleSelectRegion }: RegionFieldProps) {
+export default function RegionField({
+  handleSelectProvince,
+}: RegionFieldProps) {
   const [searchParams] = useSearchParams();
 
-  const currentRegion = searchParams.get("region");
+  const currentRegion = searchParams.get("province");
 
   const REGIONS = [
     "서울",
@@ -39,7 +41,7 @@ export default function RegionField({ handleSelectRegion }: RegionFieldProps) {
               key={region}
               content={region}
               isSelected={currentRegion === region}
-              onClick={() => handleSelectRegion(region)}
+              onClick={() => handleSelectProvince(region)}
             />
           </li>
         ))}
