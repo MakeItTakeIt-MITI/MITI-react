@@ -1,38 +1,18 @@
 import CommunityContentContainer from "../../features/community/components/CommunityContentContainer.tsx";
 import CommunityPanel from "../../features/community/components/CommunityPanel.tsx";
-import { useSearchParams } from "react-router-dom";
-import { useGetPosts } from "../../features/community/hooks/query/useGetPosts.tsx";
-import { useGetPopularTopics } from "../../features/community/hooks/query/useGetPopularTopics.tsx";
-import { useGetPopularPosts } from "../../features/community/hooks/query/useGetPopularPosts.tsx";
-import { useCallback } from "react";
+import useCommunityPageData from "@/features/community/hooks/useCommunityPageData.tsx";
 
 export default function Community() {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const getSearchParam = searchParams.get("search") || "";
-  const getCategoryParamRaw = searchParams.get("category") || "";
-  const getCategoryParam =
-    getCategoryParamRaw === "all" ? "" : getCategoryParamRaw;
-
-  const { data: postsData, isLoading } = useGetPosts(
-    getSearchParam,
-    getCategoryParam
-  );
-  const { data: popularTopicsData } = useGetPopularTopics();
-  const { data: popularPostsData } = useGetPopularPosts();
-
-  const handleSetToSearchParams = useCallback(
-    (selected: string) => {
-      const params = Object.fromEntries(searchParams.entries());
-      if (searchParams.get("search") === selected) {
-        const { search, ...rest } = params;
-        setSearchParams(rest);
-      } else {
-        setSearchParams({ ...params, search: selected });
-      }
-    },
-    [searchParams, setSearchParams]
-  );
+  const {
+    popularTopicsData,
+    popularPostsData,
+    postsData,
+    isLoading,
+    handleSetToSearchParams,
+    handleCategoryClick,
+    topicCategories,
+    searchParams,
+  } = useCommunityPageData();
 
   return (
     <section
@@ -44,6 +24,9 @@ export default function Community() {
       <CommunityPanel
         popularTopicsData={popularTopicsData?.data}
         handleSetToSearchParams={handleSetToSearchParams}
+        handleCategoryClick={handleCategoryClick}
+        topicCategories={topicCategories}
+        searchParams={searchParams}
       />
       <CommunityContentContainer
         postsData={postsData?.data}
