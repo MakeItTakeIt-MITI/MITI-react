@@ -9,7 +9,7 @@ interface CourtDetailsGameCardProps {
 
 const CourtDetailsGameCard = ({ game }: CourtDetailsGameCardProps) => {
   return (
-    <li className=" w-full h-full">
+    <li key={game.id} className=" w-full h-full">
       <Link className="flex flex-col gap-2.5" to={`/games/${game?.id}`}>
         <div className="space-y-2">
           <GameStatus status={game?.game_status} />

@@ -7,16 +7,21 @@ import Map from "../../features/courts/components/map/Map.tsx";
 import useCourtsGameList from "../../features/courts/hooks/query/useCourtsGameList.tsx";
 import CourtInfoContainer from "../../features/courts/components/court-details/CourtInfoContainer.tsx";
 import useCourtsDataPage from "@/features/courts/hooks/useCourtsDataPage.tsx";
+import CourtsListContainer from "@/features/courts/components/v1.3/CourtsListContainer.tsx";
 
 export default function CourtDetails() {
   const {
     geolocation,
     handleSelectProvince,
     courtDetailData,
-    courtGamesList,
+    courtsGamesPageContent,
     hasCourtsDetailNextPage,
     fetchCourtsDetailNextPage,
   } = useCourtsDataPage();
+
+  console.log("courts game list", courtsGamesPageContent);
+
+  console.log(courtsGamesPageContent);
 
   // const [geolocation, setGeolocation] = useState<{
   //   lat: number;
@@ -88,7 +93,7 @@ export default function CourtDetails() {
             />
             <CourtInfoContainer
               courtDetailData={courtDetailData}
-              courtGamesList={courtGamesList ?? []}
+              courtsGamesPageContent={courtsGamesPageContent?.items}
               fetchNextPage={fetchCourtsDetailNextPage}
               hasNextPage={hasCourtsDetailNextPage}
               geoLatitude={geolocation?.lat}

@@ -91,9 +91,7 @@ const useCourtsDataPage = () => {
     fetchNextPage: fetchCourtsDetailNextPage,
   } = useCourtsGameList(courtId);
 
-  const courtGamesList = courtsGamesListData?.pages.flatMap(
-    (page) => page.data.page_content
-  );
+  const courtsGamesPageContent = courtsGamesListData?.pages[0].data;
 
   return {
     geolocation,
@@ -107,7 +105,7 @@ const useCourtsDataPage = () => {
     courtsListRef,
 
     courtDetailData,
-    courtGamesList,
+    courtsGamesPageContent,
     hasCourtsDetailNextPage,
     fetchCourtsDetailNextPage,
   };

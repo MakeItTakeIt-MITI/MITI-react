@@ -1,10 +1,10 @@
-import { CourtsDetailGameListField, CourtsField } from "../../interface/courts";
+import { CourtsField, CourtGamesDetailsField } from "../../interface/courts";
 import CourtDetailGamesList from "./CourtDetailGamesList";
 import { CourtDetailsCard } from "./CourtDetailsCard";
 
 interface CourtInfoContainerProps {
   courtDetailData: CourtsField;
-  courtGamesList: CourtsDetailGameListField[];
+  courtsGamesPageContent: CourtGamesDetailsField[];
   fetchNextPage: () => void;
   hasNextPage: boolean;
   geoLatitude: number | undefined;
@@ -13,7 +13,7 @@ interface CourtInfoContainerProps {
 
 const CourtInfoContainer = ({
   courtDetailData,
-  courtGamesList,
+  courtsGamesPageContent,
   fetchNextPage,
   hasNextPage,
   geoLatitude,
@@ -30,7 +30,7 @@ const CourtInfoContainer = ({
       {/* games list */}
 
       <CourtDetailGamesList
-        courtGamesList={courtGamesList}
+        courtsGamesPageContent={courtsGamesPageContent}
         fetchNextPage={fetchNextPage}
         hasNextPage={hasNextPage}
       />
