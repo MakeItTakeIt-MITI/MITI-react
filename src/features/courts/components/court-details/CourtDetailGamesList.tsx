@@ -7,13 +7,13 @@ import {
 } from "../../interface/courts.ts";
 
 interface CourtDetailGamesListProps {
-  courtsGamesPageContent: CourtsDetailGameListField[];
+  courtGamesList: CourtsDetailGameListField[];
   fetchNextPage: () => void;
   hasNextPage: boolean;
 }
 
 const CourtDetailGamesList = ({
-  courtsGamesPageContent,
+  courtGamesList,
   fetchNextPage,
   hasNextPage,
 }: CourtDetailGamesListProps) => {
@@ -28,17 +28,19 @@ const CourtDetailGamesList = ({
     }
   }, [fetchNextPage, hasNextPage, inView]);
 
+  console.log(courtGamesList);
+
   return (
     <div className="custom-scrollbar flex flex-col gap-3 w-full overflow-y-auto max-h-[540px]">
       <h2 className="text-sm font-bold text-white">경기장 정보</h2>
 
       {/* {page} */}
-      {courtsGamesPageContent?.map((page: CourtsDetailGameListField) => (
+      {courtGamesList?.map((page: CourtsDetailGameListField) => (
         <>
           <h3 className="text-[#999] text-sm font-[400]">
             {/* {`${2}년 ${5}월 ${2}일 ${2}요일`} fix*/}
-            {page.startdate.slice(0, 4)}년 {page.startdate.slice(5, 7)}월{" "}
-            {page.startdate.slice(8, 10)}일
+            {/* {page.startdate.slice(0, 4)}년 {page.startdate.slice(5, 7)}월{" "}
+            {page.startdate.slice(8, 10)}일 */}
           </h3>
 
           <ul
@@ -47,15 +49,14 @@ const CourtDetailGamesList = ({
             }}
             className="space-y-6 "
           >
-            {page.games.map((game: CourtGamesDetailsField) => (
+            {/* {page.games.map((game: CourtGamesDetailsField) => (
               <div key={game.id}>
                 <CourtDetailsGameCard game={game} />
-                {/* Attach ref only to the last game of the last page for infinite scroll */}
                 {hasNextPage && (
                   <div ref={ref} className="h-1 w-full opacity-0" />
                 )}
               </div>
-            ))}
+            ))} */}
           </ul>
         </>
       ))}
