@@ -4,10 +4,11 @@ import { mapGamesList } from "../../api/games.ts";
 export const useMapGamesList = (
   startdate: string,
   starttime: string,
-  game_status: string[]
+  game_status: string[],
+  province: string | null
 ) => {
   return useQuery({
-    queryKey: ["Map Games List ", startdate, starttime, game_status],
-    queryFn: () => mapGamesList(startdate, starttime, game_status),
+    queryKey: ["Map Games List ", startdate, starttime, game_status, province],
+    queryFn: () => mapGamesList(startdate, starttime, game_status, province),
   });
 };

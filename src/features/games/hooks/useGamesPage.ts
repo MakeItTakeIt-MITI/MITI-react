@@ -34,6 +34,7 @@ export const useGamesPage = () => {
     startdate,
     timeFormat,
     selectedStatusesArray, // reactive game status filter
+    ""
   );
 
   // 3. Process & filter the data ← HERE'S WHERE useGameDataProcessing IS USED

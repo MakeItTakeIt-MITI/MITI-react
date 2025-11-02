@@ -20,6 +20,7 @@ export const mapGamesList = async (
     startdate: string,
     starttime: string,
     game_status: string[],
+    province: string | null
 ) => {
     try {
         const response = await axiosUrl.get("/games/map", {
@@ -27,6 +28,7 @@ export const mapGamesList = async (
                 startdate,
                 starttime,
                 game_status,
+                province
             },
             paramsSerializer: (params) => {
                 const usp = new URLSearchParams();
