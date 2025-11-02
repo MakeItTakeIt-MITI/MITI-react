@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useAllCourts } from "./query/useAllCourts";
 import { useInView } from "react-intersection-observer";
+import useCourtDetails from "./query/useCourtDetails";
+import useCourtsGameList from "./query/useCourtsGameList";
 
 const useCourtsDataPage = () => {
   // store distance info for geolocation
@@ -75,6 +77,24 @@ const useCourtsDataPage = () => {
     }
   }, [fetchNextPage, hasNextPage, inView]);
 
+  //  ========   Courts Detail Page Logic  =========
+
+  const { id } = useParams();
+  const courtId = Number(id);
+
+  const { data } = useCourtDetails(courtId);
+  const courtDetailData = data?.data;
+
+  const {
+    data: courtsGamesListData,
+    hasNextPage: hasCourtsDetailNextPage,
+    fetchNextPage: fetchCourtsDetailNextPage,
+  } = useCourtsGameList(courtId);
+
+  const courtGamesList = courtsGamesListData?.pages.flatMap(
+    (page) => page.data.page_content
+  );
+
   return {
     geolocation,
     provinceParams,
@@ -85,6 +105,11 @@ const useCourtsDataPage = () => {
     isLoading,
     courtsDataPage,
     courtsListRef,
+
+    courtDetailData,
+    courtGamesList,
+    hasCourtsDetailNextPage,
+    fetchCourtsDetailNextPage,
   };
 };
 

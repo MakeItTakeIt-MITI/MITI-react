@@ -4,7 +4,7 @@ import { CourtDetailsCard } from "./CourtDetailsCard";
 
 interface CourtInfoContainerProps {
   courtDetailData: CourtsField;
-  courtsGamesPageContent: CourtsDetailGameListField[];
+  courtGamesList: CourtsDetailGameListField[];
   fetchNextPage: () => void;
   hasNextPage: boolean;
   geoLatitude: number | undefined;
@@ -13,7 +13,7 @@ interface CourtInfoContainerProps {
 
 const CourtInfoContainer = ({
   courtDetailData,
-  courtsGamesPageContent,
+  courtGamesList,
   fetchNextPage,
   hasNextPage,
   geoLatitude,
@@ -30,7 +30,7 @@ const CourtInfoContainer = ({
       {/* games list */}
 
       <CourtDetailGamesList
-        courtsGamesPageContent={courtsGamesPageContent}
+        courtGamesList={courtGamesList}
         fetchNextPage={fetchNextPage}
         hasNextPage={hasNextPage}
       />

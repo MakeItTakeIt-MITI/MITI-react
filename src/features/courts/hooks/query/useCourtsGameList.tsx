@@ -7,13 +7,12 @@ const useCourtsGameList = (courtId: number) => {
     queryFn: ({ pageParam = 1 }) => getCourtsGamesList(courtId, pageParam),
 
     initialPageParam: 1,
-    getNextPageParam: (page) => {
-      const currentPage = page.data.current_index + 1;
-      const lastPage = page.data.end_index;
-      const hasNextPage = currentPage <= lastPage;
+    getNextPageParam: (lastPage) => {
+      const { page_last_cursor, has_more } = lastPage.data;
 
-      return hasNextPage ? currentPage : null;
+      return has_more ? page_last_cursor : undefined;
     },
+    staleTime: 0,
   });
 };
 

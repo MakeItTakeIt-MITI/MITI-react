@@ -6,64 +6,66 @@ import useCourtDetails from "../../features/courts/hooks/query/useCourtDetails.t
 import Map from "../../features/courts/components/map/Map.tsx";
 import useCourtsGameList from "../../features/courts/hooks/query/useCourtsGameList.tsx";
 import CourtInfoContainer from "../../features/courts/components/court-details/CourtInfoContainer.tsx";
+import useCourtsDataPage from "@/features/courts/hooks/useCourtsDataPage.tsx";
 
 export default function CourtDetails() {
-  const [geolocation, setGeolocation] = useState<{
-    lat: number;
-    lon: number;
-  } | null>(null);
+  const {
+    geolocation,
+    handleSelectProvince,
+    courtDetailData,
+    courtGamesList,
+    hasCourtsDetailNextPage,
+    fetchCourtsDetailNextPage,
+  } = useCourtsDataPage();
 
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const { id } = useParams();
+  // const [geolocation, setGeolocation] = useState<{
+  //   lat: number;
+  //   lon: number;
+  // } | null>(null);
 
   // callback function to filter by region
-  const handleSelectRegion = useCallback(
-    (region: string) => {
-      const params = Object.fromEntries(searchParams.entries());
+  // const handleSelectRegion = useCallback(
+  //   (region: string) => {
+  //     const params = Object.fromEntries(searchParams.entries());
 
-      // toggle
-      if (searchParams.get("region") === region) {
-        const { ...rest } = params;
-        setSearchParams({ ...rest, region: "" });
-      } else {
-        setSearchParams({ ...params, region });
-      }
-    },
+  //     // toggle
+  //     if (searchParams.get("region") === region) {
+  //       const { ...rest } = params;
+  //       setSearchParams({ ...rest, region: "" });
+  //     } else {
+  //       setSearchParams({ ...params, region });
+  //     }
+  //   },
 
-    [setSearchParams, searchParams]
-  );
+  //   [setSearchParams, searchParams]
+  // );
 
-  const { data } = useCourtDetails(Number(id));
+  // const {
+  //   data: courtsGamesListData,
+  //   hasNextPage,
+  //   fetchNextPage,
+  // } = useCourtsGameList(Number(id));
 
-  const courtDetailData = data?.data;
-  const {
-    data: courtsGamesListData,
-    hasNextPage,
-    fetchNextPage,
-  } = useCourtsGameList(Number(id));
-  console.log("useCourtsGameList data:", courtsGamesListData);
+  // const courtsGamesPageContent = courtsGamesListData?.pages.flatMap(
+  //   (page) => page.data.page_content
+  // );
 
-  const courtsGamesPageContent = courtsGamesListData?.pages.flatMap(
-    (page) => page.data.page_content
-  );
+  // console.log(courtsGamesPageContent);
 
-  console.log(courtsGamesPageContent);
-
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setGeolocation({
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          });
-        },
-        (err) => console.log(err.message),
-        { enableHighAccuracy: true }
-      );
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         setGeolocation({
+  //           lat: position.coords.latitude,
+  //           lon: position.coords.longitude,
+  //         });
+  //       },
+  //       (err) => console.log(err.message),
+  //       { enableHighAccuracy: true }
+  //     );
+  //   }
+  // }, []);
 
   return (
     <section
@@ -73,11 +75,11 @@ export default function CourtDetails() {
       className="mx-auto  sm:w-full md:w-[968px] sm:h-full md:min-h-[840px] flex flex-col  gap-[30px] sm:pb-[30px] md:py-[30px]"
     >
       <article className="flex gap-6">
-        <Sidebar handleSelectRegion={handleSelectRegion} />
+        {/* <Sidebar handleSelectProvince={handleSelectRegion} /> */}
         <div className="sm:w-full md:w-[800px] min-h-[1px] flex flex-col gap-[20px]">
-          <div className="sm:hidden md:block">
+          {/* <div className="sm:hidden md:block">
             <SearchBar paramKey="search" title="경기장" />
-          </div>
+          </div> */}
           {/* <CourtsListContainer /> */}
           <div className="flex md:flex-row sm:flex-col sm:gap-3 md:gap-[30px]">
             <Map
@@ -86,9 +88,9 @@ export default function CourtDetails() {
             />
             <CourtInfoContainer
               courtDetailData={courtDetailData}
-              courtsGamesPageContent={courtsGamesPageContent ?? []}
-              fetchNextPage={fetchNextPage}
-              hasNextPage={hasNextPage}
+              courtGamesList={courtGamesList ?? []}
+              fetchNextPage={fetchCourtsDetailNextPage}
+              hasNextPage={hasCourtsDetailNextPage}
               geoLatitude={geolocation?.lat}
               geoLongitude={geolocation?.lon}
             />
