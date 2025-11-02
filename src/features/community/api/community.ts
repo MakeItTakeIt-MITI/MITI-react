@@ -2,7 +2,9 @@ import axiosUrl from "../../../utils/axios"
 
 export const getPosts = async (search: string, category: string) => {
     try {
-        const response = await axiosUrl.get(`posts?search=${search}&category=${category}`)
+        const response = await axiosUrl.get(`posts`, {
+            params: { search, category }
+        })
         return response.data
     } catch (error) {
         console.error("Error fetching games:", error);

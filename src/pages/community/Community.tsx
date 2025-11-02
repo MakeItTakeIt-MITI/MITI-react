@@ -14,6 +14,7 @@ export default function Community() {
     searchParams,
   } = useCommunityPageData();
 
+  console.log(postsData);
   return (
     <section
       style={{
@@ -29,7 +30,7 @@ export default function Community() {
         searchParams={searchParams}
       />
       <CommunityContentContainer
-        postsData={postsData?.data}
+        postsData={postsData ? postsData.data : []}
         popularPostsData={popularPostsData?.data}
         isLoading={isLoading}
       />
