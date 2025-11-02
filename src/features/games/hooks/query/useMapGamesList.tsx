@@ -10,5 +10,6 @@ export const useMapGamesList = (
   return useQuery({
     queryKey: ["Map Games List ", startdate, starttime, game_status, province],
     queryFn: () => mapGamesList(startdate, starttime, game_status, province),
+    staleTime: 0,
   });
 };

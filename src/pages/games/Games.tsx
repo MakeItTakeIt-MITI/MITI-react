@@ -4,9 +4,7 @@ import GameMapListContainer from "../../features/games/components/layouts/GameMa
 import { useGamesPage } from "../../features/games/hooks/useGamesPage.ts";
 
 export const Games = () => {
-
-
-// Custom Hook to manages games data, state and interactions
+  // Custom Hook to manages games data, state and interactions
   const {
     tab,
     isFilterBoxOpen,
@@ -14,7 +12,7 @@ export const Games = () => {
     handleToggleMobileFilterBox,
     isMapGameListLoading,
     isGamesListLoading,
-    gamesMapData,   // imported from useGameDataProcessing
+    gamesMapData, // imported from useGameDataProcessing
     gamesListData, // imported from useGameDataProcessing
     displayedGames, // imported from useGameDataProcessing
   } = useGamesPage();
@@ -26,7 +24,6 @@ export const Games = () => {
       }}
       className="mx-auto  sm:w-full flex flex-col md:items-center gap-[30px] pb-[30px] "
     >
-
       <BannerMedium type="manners" />
       <article className="flex gap-[30px] ">
         {tab === "map" && <Sidebar />}
@@ -35,7 +32,7 @@ export const Games = () => {
           handleToggleMobileFilterBox={handleToggleMobileFilterBox}
           gamesMapData={gamesMapData} // Raw map data for map markers
           gamesListData={gamesListData} //  Games list data without scrolling/pagination
-          displayedGames={displayedGames}  // Filtered data for cards display
+          displayedGames={displayedGames} // Filtered data for cards display
           isMapGameListLoading={isMapGameListLoading}
           isGamesListLoading={isGamesListLoading}
           isFilterBoxOpen={isFilterBoxOpen}
