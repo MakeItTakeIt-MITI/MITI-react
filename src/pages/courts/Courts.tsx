@@ -1,75 +1,18 @@
-import { useSearchParams } from "react-router-dom";
 import Sidebar from "../../features/courts/components/v1.3/Sidebar.tsx";
-import { useCallback, useEffect, useState } from "react";
 import SearchBar from "../../features/common/components(renewal)/search/SearchBar.tsx";
 import CourtsListContainer from "../../features/courts/components/v1.3/CourtsListContainer.tsx";
-import { useAllCourts } from "../../features/courts/hooks/query/useAllCourts.tsx";
-import { useInView } from "react-intersection-observer";
 import MobileFilterBox from "../../features/courts/components/v1.3/MobileFilterBox.tsx";
+import useCourtsDataPage from "@/features/courts/hooks/useCourtsDataPage.tsx";
 
 export default function Courts() {
-  const [geolocation, setGeolocation] = useState<{
-    lat: number;
-    lon: number;
-  } | null>(null);
-
-  const [regionParams, setRegionParams] = useSearchParams();
-  const [inputContent] = useSearchParams();
-
-  // callback function to filter by region
-  const handleSelectRegion = useCallback(
-    (region: string) => {
-      const params = Object.fromEntries(regionParams.entries());
-
-      // toggle
-      if (regionParams.get("region") === region) {
-        const { ...rest } = params;
-        setRegionParams({ ...rest, region: "" });
-      } else {
-        setRegionParams({ ...params, region });
-      }
-    },
-
-    [setRegionParams, regionParams]
-  );
-
   const {
-    data: courtsData,
+    geolocation,
+    courtsDataPage,
+    handleSelectRegion,
     hasNextPage,
-    fetchNextPage,
+    courtsListRef,
     isLoading,
-  } = useAllCourts(inputContent.get("search"), regionParams.get("region"));
-
-  const courtsDataPage = courtsData?.pages?.flatMap(
-    (page) => page?.data?.items
-  );
-
-  // console.log(courtsDataPage);
-
-  const { ref: courtsListRef, inView } = useInView({
-    threshold: 0.2,
-  });
-
-  useEffect(() => {
-    if (inView && hasNextPage) {
-      fetchNextPage();
-    }
-  }, [fetchNextPage, hasNextPage, inView]);
-
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setGeolocation({
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          });
-        },
-        (err) => console.log(err.message),
-        { enableHighAccuracy: true }
-      );
-    }
-  }, []);
+  } = useCourtsDataPage();
 
   return (
     <section
