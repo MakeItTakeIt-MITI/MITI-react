@@ -12,9 +12,10 @@ export const getAllCourts = async (cursor: number | null, limit: number | null, 
     }
 }
 
-export const getCourtsGamesList = async (courtId: number | null, cursor: number) => {
+export const getCourtsGamesList = async (courtId: number | null, cursor: number | null, limit: number | null) => {
     try {
-        const response = await axiosUrl.get(`/courts/${courtId}/games?cursor=${cursor}`, { params: { cursor, limit: 20 } })
+        const response = await axiosUrl.get(`/courts/${courtId}/games`,
+            { params: { cursor, limit } })
         return response.data
     } catch {
         throw new Error

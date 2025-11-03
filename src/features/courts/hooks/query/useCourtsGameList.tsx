@@ -3,16 +3,19 @@ import { getCourtsGamesList } from "../../api/courts";
 
 const useCourtsGameList = (courtId: number) => {
   return useInfiniteQuery({
-    queryKey: ["Courts Games List", courtId],
-    queryFn: ({ pageParam }) => getCourtsGamesList(courtId, pageParam),
+    queryKey: ["Available Games in for court ID", courtId],
+    queryFn: ({ pageParam }) => getCourtsGamesList(courtId, pageParam, 20),
 
     getNextPageParam: (lastPage) => {
-      const { page_last_cursor, has_more } = lastPage.data;
-
-      return has_more ? page_last_cursor : undefined;
+      const data = lastPage?.data;
+      if (!data) return undefined;
+      return data.has_more ? data.page_last_cursor : undefined;
     },
     initialPageParam: null,
     staleTime: 0,
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
   });
 };
 
