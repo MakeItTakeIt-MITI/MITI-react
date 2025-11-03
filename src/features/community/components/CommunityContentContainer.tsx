@@ -1,6 +1,6 @@
 import SearchBar from "../../common/components(renewal)/search/SearchBar.tsx";
 import { PostCard } from "./PostCard.tsx";
-import { PostDataField, PostField } from "../interface/community.ts";
+import { PostField } from "../interface/community.ts";
 import CategoryFilterContainer from "./mobile/CategoryFilterContainer.tsx";
 import HotTopicBanner from "./mobile/HotTopicBanner.tsx";
 
@@ -8,6 +8,7 @@ interface CommunityContentContainerProps {
   allPosts?: PostField[];
   popularPostsData?: any;
   isLoading?: boolean;
+  communityPostRef: React.Ref<HTMLDivElement>;
 }
 
 const SkeletonPost = () => (
@@ -26,6 +27,7 @@ const CommunityContentContainer = ({
   allPosts,
   popularPostsData,
   isLoading = false,
+  communityPostRef,
 }: CommunityContentContainerProps) => {
   // const items = allPosts ?? [];
 
@@ -58,6 +60,7 @@ const CommunityContentContainer = ({
             post={post}
           />
         ))}
+        <h1 ref={communityPostRef} className="h-1" />
       </ul>
     </article>
   );

@@ -12,6 +12,7 @@ export default function Community() {
     handleCategoryClick,
     topicCategories,
     searchParams,
+    communityPostRef,
   } = useCommunityPageData();
 
   return (
@@ -32,6 +33,7 @@ export default function Community() {
         allPosts={allPosts ? allPosts : []}
         popularPostsData={popularPostsData?.data}
         isLoading={isLoading}
+        communityPostRef={communityPostRef}
       />
     </section>
   );

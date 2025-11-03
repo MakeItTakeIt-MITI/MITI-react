@@ -11,10 +11,11 @@ import guestReviewImg from "../../../assets/v1.3/community_icons/guest_review.pn
 import injuryImg from "../../../assets/v1.3/community_icons/injury.png";
 import gearImg from "../../../assets/v1.3/community_icons/gear.png";
 import { useSearchParams } from "react-router-dom";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useGetPopularTopics } from "./query/useGetPopularTopics";
 import { useGetPopularPosts } from "./query/useGetPopularPosts";
 import { useGetPosts } from "./query/useGetPosts";
+import { useInView } from "react-intersection-observer";
 
 const useCommunityPageData = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -27,10 +28,12 @@ const useCommunityPageData = () => {
   const { data: popularTopicsData } = useGetPopularTopics();
   const { data: popularPostsData } = useGetPopularPosts();
 
-  const { data: postsData, isLoading } = useGetPosts(
-    getSearchParam,
-    getCategoryParam
-  );
+  const {
+    data: postsData,
+    isLoading,
+    hasNextPage,
+    fetchNextPage,
+  } = useGetPosts(getSearchParam, getCategoryParam);
 
   const allPosts = postsData?.pages.flatMap((page) => page.data.items) || [];
 
@@ -88,6 +91,17 @@ const useCommunityPageData = () => {
     ],
   ];
 
+  const { ref: communityPostRef, inView } = useInView({
+    threshold: 0.2,
+  });
+
+  // fetch next page when in view (react-intersection-observer)
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, hasNextPage, inView]);
+
   return {
     getSearchParam,
     getCategoryParamRaw,
@@ -99,6 +113,7 @@ const useCommunityPageData = () => {
     popularPostsData,
     allPosts,
     isLoading,
+    communityPostRef,
   };
 };
 
