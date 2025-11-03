@@ -32,6 +32,8 @@ const useCommunityPageData = () => {
     getCategoryParam
   );
 
+  const allPosts = postsData?.pages.flatMap((page) => page.data.items) || [];
+
   const handleCategoryClick = (categoryKey: string) => {
     const params = Object.fromEntries(searchParams.entries());
     // If already selected, set param to 'all' instead of removing
@@ -95,7 +97,7 @@ const useCommunityPageData = () => {
     searchParams,
     popularTopicsData,
     popularPostsData,
-    postsData,
+    allPosts,
     isLoading,
   };
 };

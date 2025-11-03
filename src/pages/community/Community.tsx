@@ -6,7 +6,7 @@ export default function Community() {
   const {
     popularTopicsData,
     popularPostsData,
-    postsData,
+    allPosts,
     isLoading,
     handleSetToSearchParams,
     handleCategoryClick,
@@ -14,7 +14,6 @@ export default function Community() {
     searchParams,
   } = useCommunityPageData();
 
-  console.log(postsData);
   return (
     <section
       style={{
@@ -30,7 +29,7 @@ export default function Community() {
         searchParams={searchParams}
       />
       <CommunityContentContainer
-        postsData={postsData ? postsData.data : []}
+        allPosts={allPosts ? allPosts : []}
         popularPostsData={popularPostsData?.data}
         isLoading={isLoading}
       />

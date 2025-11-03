@@ -1,9 +1,9 @@
 import axiosUrl from "../../../utils/axios"
 
-export const getPosts = async (search: string, category: string) => {
+export const getPosts = async (search: string, category: string, cursor: number | null, limit: number | null) => {
     try {
         const response = await axiosUrl.get(`posts`, {
-            params: { search, category }
+            params: { search, category, cursor, limit }
         })
         return response.data
     } catch (error) {

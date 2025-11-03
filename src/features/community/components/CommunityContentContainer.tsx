@@ -5,7 +5,7 @@ import CategoryFilterContainer from "./mobile/CategoryFilterContainer.tsx";
 import HotTopicBanner from "./mobile/HotTopicBanner.tsx";
 
 interface CommunityContentContainerProps {
-  postsData?: PostDataField | null;
+  allPosts?: PostField[];
   popularPostsData?: any;
   isLoading?: boolean;
 }
@@ -23,11 +23,11 @@ const SkeletonPost = () => (
 );
 
 const CommunityContentContainer = ({
-  postsData,
+  allPosts,
   popularPostsData,
   isLoading = false,
 }: CommunityContentContainerProps) => {
-  const items = postsData?.items ?? [];
+  // const items = allPosts ?? [];
 
   // early return for loading state (keeps render logic clean)
   if (isLoading) {
@@ -52,7 +52,7 @@ const CommunityContentContainer = ({
       <HotTopicBanner popularTopicsData={popularPostsData} />
       {/* Post component */}
       <ul className="custom-scrollbar flex flex-col gap-4 h-[750px] overflow-y-auto">
-        {items.map((post: PostField) => (
+        {allPosts?.map((post: PostField) => (
           <PostCard
             key={post.id ?? `${post.title}-${Math.random()}`}
             post={post}
