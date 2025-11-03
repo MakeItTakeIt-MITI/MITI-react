@@ -1,4 +1,3 @@
-
 import { GameField } from "../../interface/games.ts";
 import "../../../../index.css";
 import FilterBox from "../filters/game-filter/mobile/FilterBox.tsx";
@@ -10,12 +9,13 @@ interface GameMapListContainerProps {
   handleToggleTab: (arg: string) => void;
   handleToggleMobileFilterBox: () => void;
   gamesMapData: GameField[];
-  gamesListData: GameField[];
+  allGames: GameField[];
   displayedGames: GameField[];
   isMapGameListLoading: boolean;
   isGamesListLoading: boolean;
   isFilterBoxOpen: boolean;
   tab: string;
+  inViewGameListRef: React.Ref<HTMLDivElement>;
 }
 
 export default function GameMapListContainer({
@@ -23,14 +23,13 @@ export default function GameMapListContainer({
   handleToggleMobileFilterBox,
   tab,
   gamesMapData = [],
-  gamesListData = [],
+  allGames = [],
   displayedGames = [],
   isMapGameListLoading,
   isGamesListLoading,
   isFilterBoxOpen,
+  inViewGameListRef,
 }: GameMapListContainerProps) {
-
-
   return (
     <div className="md:w-[720px] w-full min-h-[1px] flex flex-col gap-[20px]">
       {/* Mobile Filter Modal */}
@@ -51,8 +50,9 @@ export default function GameMapListContainer({
         />
       ) : (
         <ListView
-          gamesListData={gamesListData}
+          allGames={allGames}
           isGamesListLoading={isGamesListLoading}
+          inViewGameListRef={inViewGameListRef}
         />
       )}
     </div>

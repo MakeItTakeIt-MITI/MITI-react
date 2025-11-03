@@ -5,17 +5,24 @@ import { useGamesPage } from "../../features/games/hooks/useGamesPage.ts";
 
 export const Games = () => {
   // Custom Hook to manages games data, state and interactions
+
   const {
     tab,
     isFilterBoxOpen,
     handleToggleTab,
     handleToggleMobileFilterBox,
-    isMapGameListLoading,
-    isGamesListLoading,
+    // isGamesListLoading,
     gamesMapData, // imported from useGameDataProcessing
-    gamesListData, // imported from useGameDataProcessing
+    // gamesListData, // imported from useGameDataProcessing
     displayedGames, // imported from useGameDataProcessing
+
+    allGames,
+    isFetchingNextPage,
+    isGamesListLoading,
+    inViewGameListRef,
   } = useGamesPage();
+
+  // * Logic for Games Map List API and Infinite Scrolling* //
 
   return (
     <section
@@ -31,12 +38,13 @@ export const Games = () => {
           handleToggleTab={handleToggleTab}
           handleToggleMobileFilterBox={handleToggleMobileFilterBox}
           gamesMapData={gamesMapData} // Raw map data for map markers
-          gamesListData={gamesListData} //  Games list data without scrolling/pagination
+          allGames={allGames} //  Games list data without scrolling/pagination
           displayedGames={displayedGames} // Filtered data for cards display
-          isMapGameListLoading={isMapGameListLoading}
+          isMapGameListLoading={isFetchingNextPage}
           isGamesListLoading={isGamesListLoading}
           isFilterBoxOpen={isFilterBoxOpen}
           tab={tab}
+          inViewGameListRef={inViewGameListRef}
         />
       </article>
     </section>

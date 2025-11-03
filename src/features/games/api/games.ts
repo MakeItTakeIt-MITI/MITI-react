@@ -1,13 +1,20 @@
 import axiosUrl from "../../../utils/axios.ts";
 
 export const gamesListOnly = async (
-    district: string,
-    title: string,
-    pageParam: number | null,
+    province?: string,
+    title?: string,
+    cursor?: number | null,
+    limit?: number
 ) => {
     try {
-
-        const response = await axiosUrl.get(`/games/list?district=${district}&title=${title}&page=${pageParam}`);
+        const response = await axiosUrl.get(`/games/list`, {
+            params: {
+                province,
+                title,
+                cursor,
+                limit
+            }
+        });
         return response.data;
     } catch (error) {
         console.error("Error fetching games:", error);

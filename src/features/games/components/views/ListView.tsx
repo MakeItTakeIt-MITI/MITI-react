@@ -3,20 +3,23 @@ import { GameField } from "../../interface/games.ts";
 import GamesList from "../lists/GamesList.tsx";
 
 interface ListViewProps {
-  gamesListData: GameField[];
+  allGames: GameField[];
   isGamesListLoading: boolean;
+  inViewGameListRef: React.Ref<HTMLDivElement>;
 }
 
 export default function ListView({
-  gamesListData,
+  allGames,
   isGamesListLoading,
+  inViewGameListRef,
 }: ListViewProps) {
   return (
     <div className="flex flex-col gap-5 w-full md:px-0 sm:px-4">
       <SearchBar paramKey="search" title="경기" />
       <GamesList
-        gamesListData={gamesListData}
+        allGames={allGames}
         isGamesListLoading={isGamesListLoading}
+        inViewGameListRef={inViewGameListRef}
       />
     </div>
   );

@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useState, useMemo } from "react";
+import { useCallback, useState, useMemo, useEffect } from "react";
 import { useMapGamesList } from "./query/useMapGamesList.tsx";
-import { useGamesListOnly } from "./query/useGamesList.tsx";
 import { useGameUrlParams } from "./useGameUrlParams.ts";
 import { useTimeFormatting } from "./useTimeFormatting.ts";
-import { useGameDataProcessing } from "./useGameDataProcessing.ts";
 import useGameStatusStore from "../store/useGameStatusStore.ts";
+import { useGamesListData } from "./query/useGamesListData.tsx";
+import { useInView } from "react-intersection-observer";
 
 export const useGamesPage = () => {
   // UI State Management
@@ -14,7 +14,7 @@ export const useGamesPage = () => {
 
 
   // 1. Get URL params & time format
-  const { startdate, regionParam, searchParam } = useGameUrlParams();
+  const { startdate, } = useGameUrlParams();
   const { timeFormat } = useTimeFormatting();
 
 
@@ -29,7 +29,6 @@ export const useGamesPage = () => {
   }, [gameStatusArray]);
 
 
-  // 2. Fetch raw data from APIs
   const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(
     startdate,
     timeFormat,
@@ -37,18 +36,6 @@ export const useGamesPage = () => {
     ""
   );
 
-  // 3. Process & filter the data ← HERE'S WHERE useGameDataProcessing IS USED
-
-  const {
-    data: gamesData,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    isLoading: isGamesListLoading,
-  } = useGamesListOnly(regionParam, searchParam);
-
-  // Data Processing
-  const gameDataProcessing = useGameDataProcessing({ mapData, gamesData });
 
   // Event Handlers
   const handleToggleTab = useCallback(
@@ -62,33 +49,53 @@ export const useGamesPage = () => {
     setIsFilterBoxOpen((prev) => !prev);
   }, []);
 
-  // Infinite Scroll Effect
+
+
+
+
+  // * Logic for Games List Only API and Infinite Scrolling* //
+  const { ref: inViewGameListRef, inView } = useInView({
+    threshold: 0.2,
+  });
+
+
+  const {
+    data: gamesData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading: isGamesListLoading,
+  } = useGamesListData();
+
+  const allGames = gamesData?.pages.flatMap((page) => page.data.items) || [];
+
   useEffect(() => {
-    if (hasNextPage && !isFetchingNextPage) {
+    if (inView && hasNextPage) {
       fetchNextPage();
+      console.log("Fetching next page");
     }
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
-
-
-  // // Geolocation Button and finder
-  // const handleGeolocationClick = () => {
-  //   useCurrentLocationSetting({ setGeolocation });
-  // }
+  }, [
+    inView,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    inViewGameListRef,
+  ]);
 
   return {
-    // UI State
     tab,
     isFilterBoxOpen,
-
-    // Event Handlers
     handleToggleTab,
     handleToggleMobileFilterBox,
-
-    // Loading States
     isMapGameListLoading,
-    isGamesListLoading,
 
-    // Processed Data
-    ...gameDataProcessing,
+    //* Games Map List Logic /
+
+
+    //*Games List Logic */
+    allGames,
+    isFetchingNextPage,
+    isGamesListLoading,
+    inViewGameListRef,
   };
 };

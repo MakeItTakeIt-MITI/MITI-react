@@ -14,17 +14,17 @@ interface UseGameDataProcessingReturn {
   selectedAddress: string | null;
 }
 
-export const useGameDataProcessing = ({ 
-  mapData, 
-  gamesData 
+export const useGameDataProcessing = ({
+  mapData,
+  gamesData
 }: UseGameDataProcessingProps): UseGameDataProcessingReturn => {
-   // Gets map selection state from Zustand store
+  // Gets map selection state from Zustand store
   const { isSelected, selectedAddress } = useSelectedStore();
 
   // Transform API data (raw) from BE into usable format
   const gamesMapData = mapData?.data || [];
-  const gamesListData: GameField[] =
-    gamesData?.pages.flatMap((page: any) => page.data.page_content) ?? [];
+  // const gamesListData: GameField[] =
+  //   gamesData?.pages.flatMap((page: any) => page.data.page_content) ?? [];
 
   // Filter games based on map selection
   const displayedGames = isSelected
