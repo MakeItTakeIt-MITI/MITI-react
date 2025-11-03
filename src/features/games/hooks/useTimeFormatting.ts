@@ -12,8 +12,9 @@ export const useTimeFormatting = (): UseTimeFormattingReturn => {
   const { hour, minutes, resetTime } = useTimeField();
 
   // API time format (HH:MM)
-  const timeFormat = `${hour}:${minutes}`;
-
+  const timeFormat = `${hour.toString().padStart(2, "0")}:${minutes
+    .toString()
+    .padStart(2, "0")}`;
   // Korean readable format (오전/오후 H시 M분)
   const getKoreanTimeFormat = () => {
     const h = Number(hour);

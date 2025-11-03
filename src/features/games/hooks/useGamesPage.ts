@@ -13,14 +13,10 @@ export const useGamesPage = () => {
 
 
 
-  // 1. Get URL params & time format
-  const { startdate, } = useGameUrlParams();
+  // * Logic for Games Map List Hook/API/Parameter * //
+  const { startdate, provinceParam } = useGameUrlParams();
   const { timeFormat } = useTimeFormatting();
-
-
   const { gameStatusArray } = useGameStatusStore()
-
-  // Extract selected statuses reactively with memoization
   const selectedStatusesArray = useMemo(() => {
     return gameStatusArray
       .flat()
@@ -29,27 +25,16 @@ export const useGamesPage = () => {
   }, [gameStatusArray]);
 
 
-  const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(
-    startdate,
-    timeFormat,
-    selectedStatusesArray, // reactive game status filter
-    ""
-  );
+  const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(startdate, timeFormat, selectedStatusesArray, provinceParam);
+  const mapDataList = mapData?.data || [];
 
-
-  // Event Handlers
+  // *Logic for Switching Tabs Between Map/list * //
   const handleToggleTab = useCallback(
     (selected: string) => {
       setTab(selected);
     },
     [tab]
   );
-
-  const handleToggleMobileFilterBox = useCallback(() => {
-    setIsFilterBoxOpen((prev) => !prev);
-  }, []);
-
-
 
 
 
@@ -82,6 +67,13 @@ export const useGamesPage = () => {
     inViewGameListRef,
   ]);
 
+
+  //* Handler to display filter box for Mobile View * //
+  const handleToggleMobileFilterBox = useCallback(() => {
+    setIsFilterBoxOpen((prev) => !prev);
+  }, []);
+
+
   return {
     tab,
     isFilterBoxOpen,
@@ -90,7 +82,7 @@ export const useGamesPage = () => {
     isMapGameListLoading,
 
     //* Games Map List Logic /
-
+    mapDataList,
 
     //*Games List Logic */
     allGames,

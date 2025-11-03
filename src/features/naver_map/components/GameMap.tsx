@@ -16,11 +16,7 @@ declare global {
   }
 }
 
-export default function GameMap({
-  gamesMapData,
-}: {
-  gamesMapData: GameField[];
-}) {
+export default function GameMap({ mapDataList }: { mapDataList: GameField[] }) {
   const {
     toggleSelected,
     setSelected,
@@ -159,7 +155,7 @@ export default function GameMap({
     setCoordinates,
   ]);
 
-  // Update markers when gamesMapData changes
+  // Update markers when mapDataList changes
   useEffect(() => {
     if (!mapRef.current) return;
     const map = mapRef.current;
@@ -168,12 +164,12 @@ export default function GameMap({
     markersRef.current = [];
 
     const addressOverlapCount: Record<string, number> = {};
-    gamesMapData.forEach((game: GameField) => {
+    mapDataList.forEach((game: GameField) => {
       const addr = game.court.address;
       addressOverlapCount[addr] = (addressOverlapCount[addr] || 0) + 1;
     });
 
-    gamesMapData.forEach((game: GameField) => {
+    mapDataList.forEach((game: GameField) => {
       const address = game.court.address;
       const marker = new window.naver.maps.Marker({
         position: new window.naver.maps.LatLng(
@@ -282,7 +278,7 @@ export default function GameMap({
       markersRef.current.push(marker);
     });
   }, [
-    gamesMapData,
+    mapDataList,
     isSelected,
     selectedAddress,
     toggleSelected,

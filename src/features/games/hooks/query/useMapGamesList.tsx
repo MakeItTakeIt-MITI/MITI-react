@@ -8,8 +8,12 @@ export const useMapGamesList = (
   province: string | null
 ) => {
   return useQuery({
-    queryKey: ["Map Games List ", startdate, starttime, game_status, province],
-    queryFn: () => mapGamesList(startdate, starttime, game_status, province),
+    queryKey: ["Map Games List", startdate, starttime, game_status, province],
+    queryFn: () =>
+      mapGamesList(startdate, starttime, game_status, province || null),
     staleTime: 0,
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
   });
 };

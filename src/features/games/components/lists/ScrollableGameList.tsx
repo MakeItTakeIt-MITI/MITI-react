@@ -4,13 +4,13 @@ import MapGameListCardSkeleton from "../card/MapGameListCardSkeleton.tsx";
 import Card from "../card/Card.tsx";
 
 interface ScrollableGameListProps {
-  displayedGames: GameField[];
+  mapDataList: GameField[];
   isLoading: boolean;
 }
 
-export default function ScrollableGameList({ 
-  displayedGames, 
-  isLoading 
+export default function ScrollableGameList({
+  mapDataList,
+  isLoading,
 }: ScrollableGameListProps) {
   if (isLoading) {
     return (
@@ -22,7 +22,7 @@ export default function ScrollableGameList({
     );
   }
 
-  if (displayedGames?.length === 0) {
+  if (mapDataList?.length === 0) {
     return (
       <ul className="flex flex-col gap-2.5 h-[500px] sm:h-[512px] overflow-y-auto">
         <EmptyGameState />
@@ -32,7 +32,7 @@ export default function ScrollableGameList({
 
   return (
     <ul className="flex flex-col gap-2.5 h-[500px] sm:h-[512px] p-2 overflow-y-auto overflow-x-hidden">
-      {displayedGames.map((game) => (
+      {mapDataList?.map((game) => (
         <Card key={game.id} game={game} />
       ))}
     </ul>

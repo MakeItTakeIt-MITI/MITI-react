@@ -10,7 +10,7 @@ interface GameMapListContainerProps {
   handleToggleMobileFilterBox: () => void;
   gamesMapData: GameField[];
   allGames: GameField[];
-  displayedGames: GameField[];
+  mapDataList: GameField[];
   isMapGameListLoading: boolean;
   isGamesListLoading: boolean;
   isFilterBoxOpen: boolean;
@@ -22,9 +22,8 @@ export default function GameMapListContainer({
   handleToggleTab,
   handleToggleMobileFilterBox,
   tab,
-  gamesMapData = [],
   allGames = [],
-  displayedGames = [],
+  mapDataList = [],
   isMapGameListLoading,
   isGamesListLoading,
   isFilterBoxOpen,
@@ -43,8 +42,8 @@ export default function GameMapListContainer({
       {/* Main Content - Map or List View */}
       {tab === "map" ? (
         <MapView
-          gamesMapData={gamesMapData}
-          displayedGames={displayedGames}
+          gamesMapData={mapDataList}
+          mapDataList={mapDataList}
           isMapGameListLoading={isMapGameListLoading}
           handleToggleMobileFilterBox={handleToggleMobileFilterBox}
         />

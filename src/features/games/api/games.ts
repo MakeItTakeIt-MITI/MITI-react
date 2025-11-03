@@ -35,7 +35,7 @@ export const mapGamesList = async (
                 startdate,
                 starttime,
                 game_status,
-                province
+                province,
             },
             paramsSerializer: (params) => {
                 const usp = new URLSearchParams();

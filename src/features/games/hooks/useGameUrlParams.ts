@@ -9,9 +9,9 @@ interface UseGameUrlParamsReturn {
   startdate: string;
   displayDate: string;
   isValidDate: boolean;
-  
+
   // Filter parameters
-  regionParam: string;
+  provinceParam: string;
   searchParam: string;
 }
 
@@ -22,9 +22,9 @@ export const useGameUrlParams = (): UseGameUrlParamsReturn => {
   const month = searchParams.get("month");
   const day = searchParams.get("day");
   const year = searchParams.get("year");
-  
+
   // Extract filter parameters
-  const regionParam = searchParams.get("region") || "";
+  const provinceParam = searchParams.get("province") || "";
   const searchParam = searchParams.get("search") || "";
 
   // Process date using utilities
@@ -40,8 +40,7 @@ export const useGameUrlParams = (): UseGameUrlParamsReturn => {
     startdate,
     displayDate,
     isValidDate,
-   
-    regionParam,
+    provinceParam,
     searchParam,
   };
 };

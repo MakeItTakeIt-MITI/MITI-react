@@ -11,11 +11,12 @@ export const Games = () => {
     isFilterBoxOpen,
     handleToggleTab,
     handleToggleMobileFilterBox,
-    // isGamesListLoading,
-    gamesMapData, // imported from useGameDataProcessing
-    // gamesListData, // imported from useGameDataProcessing
-    displayedGames, // imported from useGameDataProcessing
 
+    // * Games Map List Logic *
+    mapDataList,
+    isMapGameListLoading,
+
+    // * Games List Logic *
     allGames,
     isFetchingNextPage,
     isGamesListLoading,
@@ -37,11 +38,11 @@ export const Games = () => {
         <GameMapListContainer
           handleToggleTab={handleToggleTab}
           handleToggleMobileFilterBox={handleToggleMobileFilterBox}
-          gamesMapData={gamesMapData} // Raw map data for map markers
+          gamesMapData={mapDataList} // Raw map data for map markers
           allGames={allGames} //  Games list data without scrolling/pagination
-          displayedGames={displayedGames} // Filtered data for cards display
-          isMapGameListLoading={isFetchingNextPage}
-          isGamesListLoading={isGamesListLoading}
+          mapDataList={mapDataList} // Filtered data for cards display
+          isMapGameListLoading={isMapGameListLoading}
+          isGamesListLoading={isFetchingNextPage}
           isFilterBoxOpen={isFilterBoxOpen}
           tab={tab}
           inViewGameListRef={inViewGameListRef}
