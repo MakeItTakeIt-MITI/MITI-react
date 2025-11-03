@@ -14,7 +14,7 @@ export const useGamesPage = () => {
 
 
   // * Logic for Games Map List Hook/API/Parameter * //
-  const { startdate, provinceParam } = useGameUrlParams();
+  const { startdate, provinceParam, searchParam } = useGameUrlParams();
   const { timeFormat } = useTimeFormatting();
   const { gameStatusArray } = useGameStatusStore()
   const selectedStatusesArray = useMemo(() => {
@@ -50,7 +50,7 @@ export const useGamesPage = () => {
     hasNextPage,
     isFetchingNextPage,
     isLoading: isGamesListLoading,
-  } = useGamesListData();
+  } = useGamesListData(undefined, searchParam);
 
   const allGames = gamesData?.pages.flatMap((page) => page.data.items) || [];
 

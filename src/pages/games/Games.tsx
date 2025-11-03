@@ -19,7 +19,7 @@ export const Games = () => {
     // * Games List Logic *
     allGames,
     isFetchingNextPage,
-    isGamesListLoading,
+
     inViewGameListRef,
   } = useGamesPage();
 

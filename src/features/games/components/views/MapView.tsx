@@ -6,7 +6,6 @@ import GameHeader from "../ui/GameHeader.tsx";
 import "../../scrollbar.css";
 
 interface MapViewProps {
-  gamesMapData: GameField[];
   mapDataList: GameField[];
   isMapGameListLoading: boolean;
   handleToggleMobileFilterBox: () => void;

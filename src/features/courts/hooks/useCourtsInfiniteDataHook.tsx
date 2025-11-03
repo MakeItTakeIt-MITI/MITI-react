@@ -7,7 +7,8 @@ export const useCourtsInfiniteDataHook = (
 ) => {
   return useInfiniteQuery({
     queryKey: ["all courts data", search, district],
-    queryFn: ({ pageParam = 1 }) => getAllCourts(pageParam, search, district),
+    queryFn: ({ pageParam = 1 }) =>
+      getAllCourts(pageParam, 20, search, district),
     initialPageParam: 1,
     getNextPageParam: (page) => {
       const { current_index, end_index } = page.data;

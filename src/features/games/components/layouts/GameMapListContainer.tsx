@@ -42,7 +42,6 @@ export default function GameMapListContainer({
       {/* Main Content - Map or List View */}
       {tab === "map" ? (
         <MapView
-          gamesMapData={mapDataList}
           mapDataList={mapDataList}
           isMapGameListLoading={isMapGameListLoading}
           handleToggleMobileFilterBox={handleToggleMobileFilterBox}
