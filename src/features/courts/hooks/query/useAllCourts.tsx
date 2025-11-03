@@ -3,19 +3,20 @@ import { getAllCourts } from "../../api/courts";
 
 export const useAllCourts = (
   search?: string | null | undefined,
-  district?: string | null | undefined
+  province?: string | null | undefined
 ) => {
   return useInfiniteQuery({
-    queryKey: ["all courts data", search, district],
-    queryFn: ({ pageParam = 1 }) => getAllCourts(pageParam, search, district),
-    initialPageParam: 1,
-    getNextPageParam: (page) => {
-      const { current_index, end_index } = page.data;
-
-      const nextPage = current_index + 1;
-      const hasNextPage = nextPage <= end_index;
-
-      return hasNextPage ? nextPage : undefined;
+    queryKey: ["All Courts Data", search, province],
+    queryFn: ({ pageParam }) => getAllCourts(pageParam, 20, province, search),
+    initialPageParam: null,
+    getNextPageParam: (lastPage) => {
+      const data = lastPage?.data;
+      if (!data) return undefined;
+      return data.has_more ? data.page_last_cursor : undefined;
     },
+    staleTime: 0,
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
   });
 };

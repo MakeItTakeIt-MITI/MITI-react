@@ -4,14 +4,14 @@ import { getCourtsGamesList } from "../../api/courts";
 const useCourtsGameList = (courtId: number) => {
   return useInfiniteQuery({
     queryKey: ["Courts Games List", courtId],
-    queryFn: ({ pageParam = 1 }) => getCourtsGamesList(courtId, pageParam),
+    queryFn: ({ pageParam }) => getCourtsGamesList(courtId, pageParam),
 
-    initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       const { page_last_cursor, has_more } = lastPage.data;
 
       return has_more ? page_last_cursor : undefined;
     },
+    initialPageParam: null,
     staleTime: 0,
   });
 };
