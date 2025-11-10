@@ -1,4 +1,4 @@
-import { useDatesLogic } from './../components/sidebar/hooks/useDatesLogic';
+// import { useDatesLogic } from './../components/sidebar/hooks/useDatesLogic';
 import { useCallback, useState, useMemo, useEffect } from "react";
 import { useMapGamesList } from "./query/useMapGamesList.tsx";
 import { useGameUrlParams } from "./useGameUrlParams.ts";
@@ -6,12 +6,19 @@ import { useTimeFormatting } from "./useTimeFormatting.ts";
 import useGameStatusStore from "../store/useGameStatusStore.ts";
 import { useGamesListData } from "./query/useGamesListData.tsx";
 import { useInView } from "react-intersection-observer";
+import { useDatesLogic } from "../components/sidebar/hooks/useDatesLogic.ts";
 
 export const useGamesPage = () => {
+
+
+
+  const { dateFormat } = useDatesLogic()
+
   // UI State Management
   const [tab, setTab] = useState("map");
   const [isFilterBoxOpen, setIsFilterBoxOpen] = useState(false);
-  const { dateFormat } = useDatesLogic();
+  // const { dateFormat } = useDatesLogic();
+
 
 
 
@@ -28,6 +35,9 @@ export const useGamesPage = () => {
 
 
   const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(dateFormat, timeFormat, selectedStatusesArray, provinceParam);
+
+
+
   const mapDataList = mapData?.data || [];
 
   // *Logic for Switching Tabs Between Map/list * //
@@ -61,12 +71,15 @@ export const useGamesPage = () => {
       fetchNextPage();
       console.log("Fetching next page");
     }
+
+    return () => { inView }
   }, [
     inView,
     hasNextPage,
     isFetchingNextPage,
     fetchNextPage,
     inViewGameListRef,
+    dateFormat
   ]);
 
 
@@ -91,5 +104,9 @@ export const useGamesPage = () => {
     isFetchingNextPage,
     isGamesListLoading,
     inViewGameListRef,
+
+
+
+
   };
 };

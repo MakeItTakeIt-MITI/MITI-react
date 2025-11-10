@@ -2,6 +2,7 @@ import BannerMedium from "../../features/common/components(renewal)/banners/Bann
 import Sidebar from "../../features/games/components/sidebar/Sidebar.tsx";
 import GameMapListContainer from "../../features/games/components/layouts/GameMapListContainer.tsx";
 import { useGamesPage } from "../../features/games/hooks/useGamesPage.ts";
+import { useDatesLogic } from "../../features/games/components/sidebar/hooks/useDatesLogic.ts";
 
 export const Games = () => {
   // Custom Hook to manages games data, state and interactions
@@ -23,6 +24,9 @@ export const Games = () => {
     inViewGameListRef,
   } = useGamesPage();
 
+  const { INITIAL_DATES, handleSetYearMonthDay, dateFormat, selectedMonth } =
+    useDatesLogic();
+
   // * Logic for Games Map List API and Infinite Scrolling* //
 
   return (
@@ -34,7 +38,14 @@ export const Games = () => {
     >
       <BannerMedium type="manners" />
       <article className="flex gap-[30px] ">
-        {tab === "map" && <Sidebar />}
+        {tab === "map" && (
+          <Sidebar
+            INITIAL_DATES={INITIAL_DATES}
+            handleSetYearMonthDay={handleSetYearMonthDay}
+            dateFormat={dateFormat}
+            todayMonth={selectedMonth}
+          />
+        )}
         <GameMapListContainer
           handleToggleTab={handleToggleTab}
           handleToggleMobileFilterBox={handleToggleMobileFilterBox}

@@ -5,7 +5,21 @@ import TimesField from "./TimesField.tsx";
 import { useCallback } from "react";
 import GameStatusContainer from "./GameStatusContainer.tsx";
 import RegionField from "./RegionField.tsx";
-export default function Sidebar() {
+import { InitialDateField } from "../../interface/games.ts";
+
+interface SidebarProps {
+  INITIAL_DATES: InitialDateField[];
+  handleSetYearMonthDay: (year: number, month: number, day: number) => void;
+  dateFormat: string;
+  todayMonth: number;
+}
+
+export default function Sidebar({
+  INITIAL_DATES,
+  handleSetYearMonthDay,
+  dateFormat,
+  todayMonth,
+}: SidebarProps) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   // !       {/* TEMPORARILY DISABLED UNDER FURTHER UPDATE */}
@@ -51,9 +65,13 @@ export default function Sidebar() {
     >
       {/* reset all filters */}
       <ResetStatusField />
-
       {/* date selector (updates year, month, day in URL) */}
-      <DatesField />
+      <DatesField
+        INITIAL_DATES={INITIAL_DATES}
+        handleSetYearMonthDay={handleSetYearMonthDay}
+        dateFormat={dateFormat}
+        todayMonth={todayMonth}
+      />
 
       {/* time selector */}
       <TimesField />

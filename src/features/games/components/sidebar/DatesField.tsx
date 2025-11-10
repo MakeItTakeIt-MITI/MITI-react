@@ -1,12 +1,20 @@
 import { InitialDateField } from "../../interface/games";
-import { useDatesLogic } from "./hooks/useDatesLogic";
 
 import "./scrollbar-x-axis.css";
 
-export default function DatesField() {
-  const { INITIAL_DATES, handleSetYearMonthDay, dateFormat, todayMonth } =
-    useDatesLogic();
+interface DatesFieldProps {
+  INITIAL_DATES: InitialDateField[] | [];
+  handleSetYearMonthDay: (year: number, month: number, day: number) => void;
+  dateFormat: string;
+  todayMonth: number;
+}
 
+export default function DatesField({
+  INITIAL_DATES,
+  handleSetYearMonthDay,
+  dateFormat,
+  todayMonth,
+}: DatesFieldProps) {
   return (
     <div className="flex flex-col gap-4">
       <p className="font-bold text-white">날짜</p>
@@ -24,7 +32,8 @@ export default function DatesField() {
               2,
               "0"
             )}-${String(date.date).padStart(2, "0")}`;
-            const isSelected = dateString === dateFormat;
+
+            const isSelected = dateString.toString() === dateFormat.toString();
 
             const prevMonth =
               index > 0 ? INITIAL_DATES[index - 1].month : Number(todayMonth);
@@ -32,7 +41,6 @@ export default function DatesField() {
 
             return (
               <>
-                {/* 월이 바뀔 때만 표시 */}
                 {isNewMonth && (
                   <li className="text-[#7FEEF0] font-bold text-sm w-[37px] flex-shrink-0 flex items-center justify-center">
                     {`${date.month}월`}
@@ -40,7 +48,6 @@ export default function DatesField() {
                 )}
 
                 <li
-                  key={dateString}
                   className={`flex flex-col items-center justify-center gap-2 px-1 w-[32px] cursor-pointer`}
                   onClick={() =>
                     handleSetYearMonthDay(date.year, date.month, date.date)
@@ -53,6 +60,7 @@ export default function DatesField() {
                   >
                     {date.dayKorean}
                   </span>
+
                   <span
                     className={`rounded-full px-4 py-2 w-full flex items-center justify-center transition duration-500
                       ${
