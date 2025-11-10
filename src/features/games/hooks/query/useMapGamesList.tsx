@@ -5,7 +5,7 @@ export const useMapGamesList = (
   startdate: string,
   starttime: string,
   game_status: string[],
-  province: string | null
+  province: string | ""
 ) => {
   return useQuery({
     queryKey: ["Map Games List", startdate, starttime, game_status, province],

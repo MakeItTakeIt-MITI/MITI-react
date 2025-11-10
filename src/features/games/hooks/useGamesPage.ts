@@ -1,3 +1,4 @@
+import { useDatesLogic } from './../components/sidebar/hooks/useDatesLogic';
 import { useCallback, useState, useMemo, useEffect } from "react";
 import { useMapGamesList } from "./query/useMapGamesList.tsx";
 import { useGameUrlParams } from "./useGameUrlParams.ts";
@@ -10,11 +11,12 @@ export const useGamesPage = () => {
   // UI State Management
   const [tab, setTab] = useState("map");
   const [isFilterBoxOpen, setIsFilterBoxOpen] = useState(false);
+  const { dateFormat } = useDatesLogic();
 
 
 
   // * Logic for Games Map List Hook/API/Parameter * //
-  const { startdate, provinceParam, searchParam } = useGameUrlParams();
+  const { provinceParam, searchParam } = useGameUrlParams();
   const { timeFormat } = useTimeFormatting();
   const { gameStatusArray } = useGameStatusStore()
   const selectedStatusesArray = useMemo(() => {
@@ -25,7 +27,7 @@ export const useGamesPage = () => {
   }, [gameStatusArray]);
 
 
-  const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(startdate, timeFormat, selectedStatusesArray, provinceParam);
+  const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(dateFormat, timeFormat, selectedStatusesArray, provinceParam);
   const mapDataList = mapData?.data || [];
 
   // *Logic for Switching Tabs Between Map/list * //

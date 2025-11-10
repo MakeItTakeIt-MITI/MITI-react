@@ -3,79 +3,10 @@ import DatesField from "./DatesField.tsx";
 import ResetStatusField from "./ResetStatusField.tsx";
 import TimesField from "./TimesField.tsx";
 import { useCallback } from "react";
-import { InitialDateField } from "../../interface/games.ts";
-import { getTodaysDateKorea } from "../../../../utils/dates/date.ts";
 import GameStatusContainer from "./GameStatusContainer.tsx";
 import RegionField from "./RegionField.tsx";
 export default function Sidebar() {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  /**
-   * Date click handler
-   * - Memoized with useCallback to prevent unnecessary re-renders
-   * - Updates the URL search params with selected year, month, and day
-   * - Changing search params will automatically update rendered games
-   */
-
-  const handleDateClick = useCallback(
-    (date: InitialDateField) => {
-      const params = new URLSearchParams(searchParams);
-
-      // Update date params
-      params.set("year", date.year.toString());
-      params.set("month", date.formattedMonth);
-      params.set("day", date.formattedDate);
-
-      setSearchParams(params);
-    },
-    [searchParams, setSearchParams]
-  );
-
-  // Extract current date params from the URL
-  const yearParam = searchParams.get("year");
-  const monthParam = searchParams.get("month");
-  const dayParam = searchParams.get("day");
-
-  /**
-   * Generates 30 consecutive dates
-   * - Starts from a given date (default = today) = URL params or today
-   * - Each date object includes formatted values and Korean day labels
-   */
-  const DATES = () => {
-    const koreanDays = ["일", "월", "화", "수", "목", "금", "토"];
-    const availableDates: Date[] = [];
-
-    // Get today's date in KST
-    const { year, month, day } = getTodaysDateKorea();
-    const todayKST = new Date(`${year}-${month}-${day}`);
-
-    // Generate 30 days from today
-    for (let i = 0; i < 30; i++) {
-      const newDate = new Date(todayKST);
-      newDate.setDate(todayKST.getDate() + i);
-      availableDates.push(newDate);
-    }
-
-    // Map to your expected structure
-    return availableDates.map((date) => ({
-      year: date.getFullYear(),
-      month: date.getMonth() + 1,
-      formattedMonth: (date.getMonth() + 1).toString().padStart(2, "0"),
-      day: date.getDay(),
-      date: date.getDate(),
-      formattedDate: date.getDate().toString().padStart(2, "0"),
-      dayKorean: koreanDays[date.getDay()],
-    }));
-  };
-
-  /**
-   * Determine the initial date range
-   * - If year/month/day are present in the URL, use that as the start date
-   * - Otherwise, fall back to today
-   */
-
-  // Generate the list of 30 available dates starting from initialDate
-  const INITIAL_DATES = DATES();
 
   // !       {/* TEMPORARILY DISABLED UNDER FURTHER UPDATE */}
   // callback function to filter by province
@@ -122,13 +53,7 @@ export default function Sidebar() {
       <ResetStatusField />
 
       {/* date selector (updates year, month, day in URL) */}
-      <DatesField
-        INITIAL_DATES={INITIAL_DATES}
-        yearParam={yearParam}
-        monthParam={monthParam}
-        dayParam={dayParam}
-        handleDateClick={handleDateClick}
-      />
+      <DatesField />
 
       {/* time selector */}
       <TimesField />

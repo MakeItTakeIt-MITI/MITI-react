@@ -29,7 +29,7 @@ export default function DesktopNavbar() {
               color: isActivePath(pathname, "/games") ? "#1ADCDF" : "white",
             }}
           >
-            <Link to={getTodaysGamesQuery()}>경기 목록</Link>
+            <Link to={`games`}>경기 목록</Link>
           </li>
           <li
             style={{
