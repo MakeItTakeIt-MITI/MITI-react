@@ -69,7 +69,7 @@ export const useGamesPage = () => {
     hasNextPage,
     isFetchingNextPage,
     isLoading: isGamesListLoading,
-  } = useGamesListData(undefined, searchParam);
+  } = useGamesListData();
 
   const allGames = gamesData?.pages.flatMap((page) => page.data.items) || [];
 

@@ -38,14 +38,14 @@ export const Games = () => {
     >
       <BannerMedium type="manners" />
       <article className="flex gap-[30px] ">
-        {tab === "map" && (
-          <Sidebar
-            INITIAL_DATES={INITIAL_DATES}
-            handleSetYearMonthDay={handleSetYearMonthDay}
-            dateFormat={dateFormat}
-            todayMonth={selectedMonth}
-          />
-        )}
+        {/* {tab === "map" && ( */}
+        <Sidebar
+          INITIAL_DATES={INITIAL_DATES}
+          handleSetYearMonthDay={handleSetYearMonthDay}
+          dateFormat={dateFormat}
+          todayMonth={selectedMonth}
+        />
+        {/* // )} */}
         <GameMapListContainer
           handleToggleTab={handleToggleTab}
           handleToggleMobileFilterBox={handleToggleMobileFilterBox}

@@ -9,6 +9,7 @@ export const gamesListOnly = async (
     try {
         const response = await axiosUrl.get(`/games/list`, {
             params: {
+
                 province,
                 title,
                 cursor,
