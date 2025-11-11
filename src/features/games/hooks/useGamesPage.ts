@@ -13,17 +13,25 @@ export const useGamesPage = () => {
 
 
   const { dateFormat } = useDatesLogic()
+  // const { selectedProvince } = useProvinceStore()
 
   // UI State Management
   const [tab, setTab] = useState("map");
   const [isFilterBoxOpen, setIsFilterBoxOpen] = useState(false);
   // const { dateFormat } = useDatesLogic();
 
+  // ** PROVINCE LOGIC
+  const [selectedProvince, setSelectedProvince] = useState("");
+
+  const handleSetProvinceState = (province: string) => {
+    setSelectedProvince(province);
+  }
+
 
 
 
   // * Logic for Games Map List Hook/API/Parameter * //
-  const { provinceParam, searchParam } = useGameUrlParams();
+  const { searchParam } = useGameUrlParams();
   const { timeFormat } = useTimeFormatting();
   const { gameStatusArray } = useGameStatusStore()
   const selectedStatusesArray = useMemo(() => {
@@ -33,10 +41,9 @@ export const useGamesPage = () => {
       .map((status) => status.status);
   }, [gameStatusArray]);
 
+  // const province = encodeURIComponent(selectedProvince);
 
-  const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(dateFormat, timeFormat, selectedStatusesArray, provinceParam);
-
-
+  const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(dateFormat, timeFormat, selectedStatusesArray, selectedProvince);
 
   const mapDataList = mapData?.data || [];
 
@@ -79,7 +86,10 @@ export const useGamesPage = () => {
     isFetchingNextPage,
     fetchNextPage,
     inViewGameListRef,
-    dateFormat
+    dateFormat,
+    selectedProvince
+
+
   ]);
 
 
@@ -106,6 +116,8 @@ export const useGamesPage = () => {
     inViewGameListRef,
 
 
+    selectedProvince,
+    handleSetProvinceState,
 
 
   };

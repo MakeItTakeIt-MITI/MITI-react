@@ -27,7 +27,7 @@ export const mapGamesList = async (
     startdate: string,
     starttime: string,
     game_status: string[],
-    province: string | null
+    province: string
 ) => {
     try {
         const response = await axiosUrl.get("/games/map", {

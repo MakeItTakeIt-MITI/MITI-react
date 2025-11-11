@@ -5,21 +5,10 @@ export const useMapGamesList = (
   startdate: string,
   starttime: string,
   game_status: string[],
-  province: string | ""
+  province: string
 ) => {
   return useQuery({
-    queryKey: [
-      "mapGames list",
-      startdate,
-      starttime,
-      game_status,
-      province ?? "",
-    ],
-    queryFn: () =>
-      mapGamesList(startdate, starttime, game_status, province || null),
-    staleTime: 0,
-    refetchOnMount: "always",
-    refetchOnWindowFocus: true,
-    refetchOnReconnect: true,
+    queryKey: ["mapGames list", startdate, starttime, game_status, province],
+    queryFn: () => mapGamesList(startdate, starttime, game_status, province),
   });
 };
