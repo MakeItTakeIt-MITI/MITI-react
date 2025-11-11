@@ -4,12 +4,11 @@ import DatesField from "../../../sidebar/DatesField";
 import GameStatusField from "../../../sidebar/_GameStatusField";
 import { useCallback, useEffect, useMemo } from "react";
 import { InitialDateField } from "../../../../interface/games";
-import {
-  getTodaysDateKorea,
-  getTodaysGamesQuery,
-} from "../../../../../../utils/dates/date";
+import { getTodaysGamesQuery } from "../../../../../../utils/dates/date";
 import TimesFieldMobile from "./TimesFieldMobile";
 import useGameStatusStore from "../../../../store/useGameStatusStore";
+import { useGamesPage } from "@/features/games/hooks/useGamesPage";
+import { useDatesLogic } from "../../../sidebar/hooks/useDatesLogic";
 
 interface FilterBoxProps {
   handleToggleMobileFilterBox: () => void;
@@ -17,6 +16,10 @@ interface FilterBoxProps {
 
 const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const {} = useGamesPage();
+  const { INITIAL_DATES, handleSetYearMonthDay, dateFormat, selectedMonth } =
+    useDatesLogic();
 
   const month = searchParams.get("month");
   const day = searchParams.get("day");
@@ -27,6 +30,7 @@ const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
   // imported from useTimeField Store
   const { hour, minutes, resetTime } = useTimeField();
   const { gameStatusArray, resetAllStatuses } = useGameStatusStore();
+
   const getKoreanTimeFormat = (
     hour: string | number,
     minutes: string | number
@@ -48,66 +52,6 @@ const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
           days[new Date(Number(year), Number(month) - 1, Number(day)).getDay()]
         })`
       : "";
-
-  const handleDateClick = useCallback(
-    (date: InitialDateField) => {
-      const params = new URLSearchParams(searchParams);
-
-      // Update date params
-      params.set("year", date.year.toString());
-      params.set("month", date.formattedMonth);
-      params.set("day", date.formattedDate);
-
-      setSearchParams(params);
-    },
-    [searchParams, setSearchParams]
-  );
-
-  // Extract current date params from the URL
-  const yearParam = searchParams.get("year");
-  const monthParam = searchParams.get("month");
-  const dayParam = searchParams.get("day");
-
-  /**
-   * Generates 30 consecutive dates
-   * - Starts from a given date (default = today) = URL params or today
-   * - Each date object includes formatted values and Korean day labels
-   */
-  const DATES = () => {
-    const koreanDays = ["일", "월", "화", "수", "목", "금", "토"];
-    const availableDates: Date[] = [];
-
-    // Get today's date in KST
-    const { year, month, day } = getTodaysDateKorea();
-    const todayKST = new Date(`${year}-${month}-${day}`);
-
-    // Generate 30 days from today
-    for (let i = 0; i < 30; i++) {
-      const newDate = new Date(todayKST);
-      newDate.setDate(todayKST.getDate() + i);
-      availableDates.push(newDate);
-    }
-
-    // Map to your expected structure
-    return availableDates.map((date) => ({
-      year: date.getFullYear(),
-      month: date.getMonth() + 1,
-      formattedMonth: (date.getMonth() + 1).toString().padStart(2, "0"),
-      day: date.getDay(),
-      date: date.getDate(),
-      formattedDate: date.getDate().toString().padStart(2, "0"),
-      dayKorean: koreanDays[date.getDay()],
-    }));
-  };
-
-  /**
-   * Determine the initial date range
-   * - If year/month/day are present in the URL, use that as the start date
-   * - Otherwise, fall back to today
-   */
-
-  // Generate the list of 30 available dates starting from initialDate
-  const INITIAL_DATES = DATES();
 
   // Get selected game statuses from store
   const selectedGameStatuses = useMemo(() => {
@@ -200,12 +144,16 @@ const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
             </ul>
           </div>
 
+          {/* INITIAL_DATES: InitialDateField[] | [];
+  handleSetYearMonthDay: (year: number, month: number, day: number) => void;
+  dateFormat: string;
+  todayMonth: number; */}
+
           <DatesField
             INITIAL_DATES={INITIAL_DATES}
-            handleDateClick={handleDateClick}
-            yearParam={yearParam}
-            monthParam={monthParam}
-            dayParam={dayParam}
+            handleSetYearMonthDay={handleSetYearMonthDay}
+            dateFormat={dateFormat}
+            todayMonth={selectedMonth}
           />
 
           <TimesFieldMobile />

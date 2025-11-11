@@ -3,6 +3,7 @@ import { useTimeField } from "../../../../../../store/Sidebar/useTimeFieldStore.
 import useGameStatusStore from "../../../../store/useGameStatusStore.ts";
 import { useMemo } from "react";
 import { getTodaysGamesQuery } from "../../../../../../utils/dates/date.ts";
+import { useDateStore } from "../../../sidebar/store/useDateStore.ts";
 
 interface MobileSettingsContainerProps {
   handleToggleMobileFilterBox: () => void;
@@ -11,17 +12,10 @@ interface MobileSettingsContainerProps {
 const MobileSettingsContainer = ({
   handleToggleMobileFilterBox,
 }: MobileSettingsContainerProps) => {
-  const [searchParams] = useSearchParams();
-
-  const month = searchParams.get("month");
-  const day = searchParams.get("day");
-  const year = searchParams.get("year");
-
-  const days = ["일", "월", "화", "수", "목", "금", "토"];
-
-  // imported from useTimeField Store
+  const { selectedDay, selectedMonth } = useDateStore();
   const { hour, minutes } = useTimeField();
   const { gameStatusArray } = useGameStatusStore();
+
   const getKoreanTimeFormat = (
     hour: string | number,
     minutes: string | number
@@ -48,13 +42,6 @@ const MobileSettingsContainer = ({
 
   //   const startdate = `${month}.${day}`;
 
-  const startdate =
-    month && day
-      ? `${month}.${day}(${
-          days[new Date(Number(year), Number(month) - 1, Number(day)).getDay()]
-        })`
-      : "";
-
   return (
     <div className="md:hidden w-full overflow-x-auto">
       <ul className="flex items-center gap-1.5 min-w-max">
@@ -67,7 +54,8 @@ const MobileSettingsContainer = ({
             onClick={handleToggleMobileFilterBox}
             className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3"
           >
-            {startdate}
+            {/* {startdate} */}
+            {`${selectedMonth}.${selectedDay}일`}
           </button>
         </li>
         <li>
