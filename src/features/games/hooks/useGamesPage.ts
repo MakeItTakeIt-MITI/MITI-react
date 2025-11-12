@@ -21,17 +21,22 @@ export const useGamesPage = () => {
   // const { dateFormat } = useDatesLogic();
 
   // ** PROVINCE LOGIC
-  const [selectedProvince, setSelectedProvince] = useState("");
+  const [selectedProvince, setSelectedProvince] = useState<string[]>([]);
 
   const handleSetProvinceState = (province: string) => {
-    setSelectedProvince(province);
-  }
+    setSelectedProvince((prev) => {
+      if (prev.includes(province)) {
+        return prev.filter((p) => p !== province);
+      } else {
+        return [...prev, province];
+      }
+    });
+  };
 
 
 
 
   // * Logic for Games Map List Hook/API/Parameter * //
-  const { searchParam } = useGameUrlParams();
   const { timeFormat } = useTimeFormatting();
   const { gameStatusArray } = useGameStatusStore()
   const selectedStatusesArray = useMemo(() => {
@@ -41,7 +46,6 @@ export const useGamesPage = () => {
       .map((status) => status.status);
   }, [gameStatusArray]);
 
-  // const province = encodeURIComponent(selectedProvince);
 
   const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(dateFormat, timeFormat, selectedStatusesArray, selectedProvince);
 

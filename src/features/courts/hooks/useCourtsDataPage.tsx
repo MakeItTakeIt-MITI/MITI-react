@@ -1,11 +1,14 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useAllCourts } from "./query/useAllCourts";
 import { useInView } from "react-intersection-observer";
 import useCourtDetails from "./query/useCourtDetails";
 import useCourtsGameList from "./query/useCourtsGameList";
+import { useGamesPage } from "@/features/games/hooks/useGamesPage";
 
 const useCourtsDataPage = () => {
+  const { selectedProvince } = useGamesPage();
+
   // store distance info for geolocation
   const [geolocation, setGeolocation] = useState<{
     lat: number;
@@ -29,23 +32,6 @@ const useCourtsDataPage = () => {
   }, []);
 
   // get the URL params for province filtering
-  const [provinceParams, setProvinceParams] = useSearchParams();
-
-  const handleSelectProvince = useCallback(
-    (province: string) => {
-      const params = Object.fromEntries(provinceParams.entries());
-
-      // toggle
-      if (provinceParams.get("province") === province) {
-        const { ...rest } = params;
-        setProvinceParams({ ...rest, province: "" });
-      } else {
-        setProvinceParams({ ...params, province });
-      }
-    },
-
-    [setProvinceParams]
-  );
 
   // get the URL params for search filtering
   const [inputContent] = useSearchParams();
@@ -56,9 +42,7 @@ const useCourtsDataPage = () => {
     hasNextPage,
     fetchNextPage,
     isLoading,
-  } = useAllCourts(
-    provinceParams.get("province") || inputContent.get("search") || null
-  );
+  } = useAllCourts(0, 20, inputContent.get("search"), selectedProvince);
 
   // flatten the paginated data
   const courtsDataPage = courtsData?.pages?.flatMap(
@@ -95,8 +79,7 @@ const useCourtsDataPage = () => {
 
   return {
     geolocation,
-    provinceParams,
-    handleSelectProvince,
+
     courtsData,
     hasNextPage,
     fetchNextPage,

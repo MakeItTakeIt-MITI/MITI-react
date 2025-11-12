@@ -15,7 +15,11 @@ export default function ProvinceField() {
             <RegionCheck
               key={region}
               content={region}
-              isSelected={selectedProvince === region}
+              isSelected={
+                Array.isArray(selectedProvince)
+                  ? selectedProvince.includes(region)
+                  : selectedProvince === region
+              }
               onClick={() => handleSetProvinceState(region)}
             />
           </li>

@@ -1,18 +1,12 @@
-import Sidebar from "../../features/courts/components/v1.3/Sidebar.tsx";
+import CourtsSidebar from "../../features/courts/components/v1.3/CourtsSidebar.tsx";
 import SearchBar from "../../features/common/components(renewal)/search/SearchBar.tsx";
 import CourtsListContainer from "../../features/courts/components/v1.3/CourtsListContainer.tsx";
 import MobileFilterBox from "../../features/courts/components/v1.3/MobileFilterBox.tsx";
 import useCourtsDataPage from "@/features/courts/hooks/useCourtsDataPage.tsx";
 
 export default function Courts() {
-  const {
-    geolocation,
-    courtsDataPage,
-    handleSelectProvince,
-    hasNextPage,
-    courtsListRef,
-    isLoading,
-  } = useCourtsDataPage();
+  const { geolocation, courtsDataPage, hasNextPage, courtsListRef, isLoading } =
+    useCourtsDataPage();
 
   return (
     <section
@@ -22,7 +16,7 @@ export default function Courts() {
       className="mx-auto sm:w-full md:w-[968px] flex flex-col sm:px-4 md:px-0  md:items-center gap-[30px] py-[30px]"
     >
       <article className="flex  gap-[30px]">
-        <Sidebar handleSelectProvince={handleSelectProvince} />
+        <CourtsSidebar />
 
         <div className="sm:w-full md:w-[880px] flex flex-col  gap-[20px]">
           <div className="sm:w-full md:w-[800px] mx-auto ">

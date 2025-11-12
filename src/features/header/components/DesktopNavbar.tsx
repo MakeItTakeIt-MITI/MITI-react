@@ -36,7 +36,7 @@ export default function DesktopNavbar() {
               color: isActivePath(pathname, "/courts") ? "#1ADCDF" : "white",
             }}
           >
-            <Link to={`courts?province=&search=`}>경기장 목록</Link>
+            <Link to={`courts?search=`}>경기장 목록</Link>
           </li>
           <li
             style={{
