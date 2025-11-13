@@ -10,6 +10,7 @@ interface SidebarProps {
   handleSetYearMonthDay: (year: number, month: number, day: number) => void;
   dateFormat: string;
   todayMonth: number;
+  tab: string;
 }
 
 export default function Sidebar({
@@ -17,6 +18,7 @@ export default function Sidebar({
   handleSetYearMonthDay,
   dateFormat,
   todayMonth,
+  tab,
 }: SidebarProps) {
   return (
     <aside
@@ -26,16 +28,28 @@ export default function Sidebar({
       }}
       className="p-4 sm:hidden md:flex flex-col gap-5 "
     >
-      <ResetStatusField />
-      <DatesField
-        INITIAL_DATES={INITIAL_DATES}
-        handleSetYearMonthDay={handleSetYearMonthDay}
-        dateFormat={dateFormat}
-        todayMonth={todayMonth}
-      />
-      <TimesField />
-      <GameStatusContainer />
-      <ProvinceField />
+      {tab === "map" && (
+        <>
+          <ResetStatusField />
+          <DatesField
+            INITIAL_DATES={INITIAL_DATES}
+            handleSetYearMonthDay={handleSetYearMonthDay}
+            dateFormat={dateFormat}
+            todayMonth={todayMonth}
+          />
+          <TimesField />
+          <GameStatusContainer />
+          <ProvinceField />
+        </>
+      )}
+
+      {tab === "list" && (
+        <>
+          <ResetStatusField />
+          <GameStatusContainer />
+          <ProvinceField />
+        </>
+      )}
     </aside>
   );
 }

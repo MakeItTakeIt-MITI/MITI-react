@@ -46,7 +46,7 @@ const useGameStatusStore = create<GameStatusState>((set) => ({
       gameStatusArray: state.gameStatusArray.map((row: GameStatus[]) =>
         row.map((status: GameStatus) => ({
           ...status,
-          isSelected: true
+          isSelected: status.status === "canceled" ? false : true,
         }))
       )
     }));

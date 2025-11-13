@@ -47,7 +47,7 @@ export const useGamesPage = () => {
   }, [gameStatusArray]);
 
 
-  const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(dateFormat, timeFormat, selectedStatusesArray, selectedProvince);
+  const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(dateFormat, timeFormat, selectedStatusesArray);
 
   const mapDataList = mapData?.data || [];
 
@@ -73,7 +73,15 @@ export const useGamesPage = () => {
     hasNextPage,
     isFetchingNextPage,
     isLoading: isGamesListLoading,
-  } = useGamesListData();
+  } = useGamesListData(
+    selectedStatusesArray,
+    // dateFormat,
+    // timeFormat,
+    // selectedProvince,
+    // "",
+
+
+  );
 
   const allGames = gamesData?.pages.flatMap((page) => page.data.items) || [];
 

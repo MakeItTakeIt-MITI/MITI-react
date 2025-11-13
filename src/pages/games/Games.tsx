@@ -44,6 +44,7 @@ export const Games = () => {
           handleSetYearMonthDay={handleSetYearMonthDay}
           dateFormat={dateFormat}
           todayMonth={selectedMonth}
+          tab={tab}
         />
         {/* // )} */}
         <GameMapListContainer
