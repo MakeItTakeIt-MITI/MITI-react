@@ -1,32 +1,29 @@
+import qs from 'qs';
 import axiosUrl from "../../../utils/axios.ts";
 
 export const gamesListOnly = async (
     game_status: string[],
-    // province: string[],
+    province: string[],
     cursor: number | null,
     limit: number
 ) => {
     try {
+        const params = { cursor, limit, game_status, province };
+
+        const cleanParams = Object.fromEntries(
+            Object.entries(params).filter(([_, v]) => {
+                if (v == null) return false;
+                if (Array.isArray(v) && v.length === 0) return false;
+                return true;
+            })
+        );
+
+
         const response = await axiosUrl.get(`/games/list`, {
-            params: {
-                game_status,
-                // province,
-                cursor,
-                limit
-            },
-            paramsSerializer: (params) => {
-                const usp = new URLSearchParams();
+            params: cleanParams,
+            paramsSerializer: (params) =>
+                qs.stringify(params, { arrayFormat: "repeat", encode: true }),
 
-                Object.entries(params).forEach(([key, value]) => {
-                    if (Array.isArray(value) && value.length > 0) {
-                        value.forEach((v) => usp.append(key, v));
-                    } else if (value !== undefined && value !== null && value !== "") {
-                        usp.append(key, String(value));
-                    }
-                });
-
-                return usp.toString();
-            },
         });
         return response.data;
     } catch (error) {

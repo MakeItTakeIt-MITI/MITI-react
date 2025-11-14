@@ -1,7 +1,6 @@
 // import { useDatesLogic } from './../components/sidebar/hooks/useDatesLogic';
 import { useCallback, useState, useMemo, useEffect } from "react";
 import { useMapGamesList } from "./query/useMapGamesList.tsx";
-import { useGameUrlParams } from "./useGameUrlParams.ts";
 import { useTimeFormatting } from "./useTimeFormatting.ts";
 import useGameStatusStore from "../store/useGameStatusStore.ts";
 import { useGamesListData } from "./query/useGamesListData.tsx";
@@ -31,7 +30,6 @@ export const useGamesPage = () => {
     );
   };
 
-  console.log(selectedProvince)
 
 
 
@@ -74,10 +72,8 @@ export const useGamesPage = () => {
     isLoading: isGamesListLoading,
   } = useGamesListData(
     selectedStatusesArray,
-    // dateFormat,
-    // timeFormat,
-    // selectedProvince,
-    // "",
+    selectedProvince,
+
 
 
   );

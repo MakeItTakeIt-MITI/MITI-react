@@ -11,6 +11,8 @@ interface SidebarProps {
   dateFormat: string;
   todayMonth: number;
   tab: string;
+  selectedProvince: string[];
+  handleSetProvinceState: (province: string) => void;
 }
 
 export default function Sidebar({
@@ -19,6 +21,8 @@ export default function Sidebar({
   dateFormat,
   todayMonth,
   tab,
+  selectedProvince,
+  handleSetProvinceState,
 }: SidebarProps) {
   const isMap = tab === "map";
 
@@ -42,7 +46,10 @@ export default function Sidebar({
       )}
 
       <GameStatusContainer />
-      <ProvinceField />
+      <ProvinceField
+        selectedProvince={selectedProvince}
+        toggleProvince={handleSetProvinceState}
+      />
     </aside>
   );
 }

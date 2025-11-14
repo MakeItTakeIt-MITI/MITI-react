@@ -22,6 +22,9 @@ export const Games = () => {
     isFetchingNextPage,
 
     inViewGameListRef,
+
+    selectedProvince,
+    handleSetProvinceState,
   } = useGamesPage();
 
   const { INITIAL_DATES, handleSetYearMonthDay, dateFormat, selectedMonth } =
@@ -45,6 +48,8 @@ export const Games = () => {
           dateFormat={dateFormat}
           todayMonth={selectedMonth}
           tab={tab}
+          selectedProvince={selectedProvince}
+          handleSetProvinceState={handleSetProvinceState}
         />
         {/* // )} */}
         <GameMapListContainer
