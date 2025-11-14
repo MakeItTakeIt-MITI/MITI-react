@@ -32,7 +32,10 @@ export default function Courts() {
           <div className="sm:w-full md:w-[800px] mx-auto ">
             <SearchBar title="경기장" paramKey="search" />
           </div>{" "}
-          <MobileFilterBox />
+          <MobileFilterBox
+            toggleProvince={toggleProvince}
+            selectedProvince={selectedProvince}
+          />
           <CourtsListContainer
             courstDataPage={courtsDataPage}
             hasNextPage={hasNextPage}

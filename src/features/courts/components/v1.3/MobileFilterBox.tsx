@@ -1,15 +1,18 @@
-import { useSearchParams } from "react-router-dom";
 import filters from "../../../../assets/v1.3/games/settings_icon.png";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import RegionChipMobile from "./RegionChipMobile";
 import MobileFilterPopup from "./MobileFilterPopup";
 
-const MobileFilterBox = ({}) => {
+interface MobileFilterBoxProps {
+  toggleProvince: (region: string) => void;
+  selectedProvince: string[];
+}
+
+const MobileFilterBox = ({
+  toggleProvince,
+  selectedProvince,
+}: MobileFilterBoxProps) => {
   const [showPopup, setShowPopup] = useState(false);
-
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const currentRegion = searchParams.get("region");
 
   const REGIONS = [
     "전체",
@@ -32,32 +35,28 @@ const MobileFilterBox = ({}) => {
     "제주",
   ];
 
-  const handleSelectRegion = useCallback(
-    (region: string) => {
-      const params = Object.fromEntries(searchParams.entries());
-
-      // "전체" sets region to ""
-      if (region === "전체") {
-        setSearchParams({ ...params, region: "" });
-      } else {
-        setSearchParams({ ...params, region });
+  const handleRegionClick = (region: string) => {
+    if (region === "전체") {
+      if (selectedProvince.length) {
+        selectedProvince.forEach((p) => toggleProvince(p));
       }
-    },
-    [setSearchParams, searchParams]
-  );
-
+      return;
+    }
+    toggleProvince(region);
+  };
   return (
     <aside className="md:hidden sm:flex items-center justify-between gap-4">
       <ul className="flex items-center gap-2 overflow-x-auto">
         {REGIONS.map((region) => {
           const isSelected =
-            (currentRegion === "" && region === "전체") ||
-            currentRegion === region;
+            selectedProvince.includes(region) ||
+            (region === "전체" && selectedProvince.length === 0);
           return (
             <RegionChipMobile
               key={region}
               region={region}
               isSelected={isSelected}
+              toggleProvince={handleRegionClick}
             />
           );
         })}
@@ -73,7 +72,8 @@ const MobileFilterBox = ({}) => {
 
       {showPopup && (
         <MobileFilterPopup
-          handleSelectRegion={handleSelectRegion}
+          toggleProvince={toggleProvince}
+          selectedProvince={selectedProvince}
           onClick={() => setShowPopup(!showPopup)}
         />
       )}
