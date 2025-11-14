@@ -7,7 +7,7 @@ export const getAllCourts = async (
     cursor: number | null,
     limit: number | null,
     province: string[] | null,
-    search: string | null
+    search: string | null | undefined
 ) => {
     try {
         const params = { cursor, limit, search, province };

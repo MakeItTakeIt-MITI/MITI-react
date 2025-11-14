@@ -26,6 +26,6 @@ export const useAllCourts = (province: string[] | null, search: string | null) =
     },
     initialPageParam: null,
     enabled: true,
-    keepPreviousData: true,
+
   });
 };

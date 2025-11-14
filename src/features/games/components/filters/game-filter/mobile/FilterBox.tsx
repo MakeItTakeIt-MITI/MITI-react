@@ -3,7 +3,6 @@ import { useTimeField } from "../../../../../../store/Sidebar/useTimeFieldStore"
 import DatesField from "../../../sidebar/DatesField";
 import GameStatusField from "../../../sidebar/_GameStatusField";
 import { useCallback, useEffect, useMemo } from "react";
-import { InitialDateField } from "../../../../interface/games";
 import { getTodaysGamesQuery } from "../../../../../../utils/dates/date";
 import TimesFieldMobile from "./TimesFieldMobile";
 import useGameStatusStore from "../../../../store/useGameStatusStore";
@@ -15,7 +14,7 @@ interface FilterBoxProps {
 }
 
 const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const {} = useGamesPage();
   const { INITIAL_DATES, handleSetYearMonthDay, dateFormat, selectedMonth } =
