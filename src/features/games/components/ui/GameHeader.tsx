@@ -4,11 +4,13 @@ import MobileSettingsContainer from "../filters/game-filter/mobile/MobileSetting
 interface GameHeaderProps {
   gameCount: number;
   handleToggleMobileFilterBox: () => void;
+  selectedProvince: string[];
 }
 
 export default function GameHeader({
   gameCount,
   handleToggleMobileFilterBox,
+  selectedProvince,
 }: GameHeaderProps) {
   return (
     <div className="space-y-3">
@@ -28,6 +30,7 @@ export default function GameHeader({
       {/* Mobile Game Status */}
       <MobileSettingsContainer
         handleToggleMobileFilterBox={handleToggleMobileFilterBox}
+        selectedProvince={selectedProvince}
       />
     </div>
   );

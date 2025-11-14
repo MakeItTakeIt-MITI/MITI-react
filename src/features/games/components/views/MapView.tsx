@@ -10,12 +10,14 @@ interface MapViewProps {
   mapDataList: GameField[];
   isMapGameListLoading: boolean;
   handleToggleMobileFilterBox: () => void;
+  selectedProvince: string[];
 }
 
 export default function MapView({
   mapDataList,
   isMapGameListLoading,
   handleToggleMobileFilterBox,
+  selectedProvince,
 }: MapViewProps) {
   return (
     <div className="flex flex-col gap-5 w-full h-full">
@@ -25,6 +27,7 @@ export default function MapView({
         <GameHeader
           gameCount={mapDataList?.length ?? 0}
           handleToggleMobileFilterBox={handleToggleMobileFilterBox}
+          selectedProvince={selectedProvince}
         />
 
         <ScrollableGameList

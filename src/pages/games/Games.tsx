@@ -63,6 +63,7 @@ export const Games = () => {
           isFilterBoxOpen={isFilterBoxOpen}
           tab={tab}
           inViewGameListRef={inViewGameListRef}
+          selectedProvince={selectedProvince}
         />
       </article>
     </section>

@@ -8,23 +8,23 @@ import TimesFieldMobile from "./TimesFieldMobile";
 import useGameStatusStore from "../../../../store/useGameStatusStore";
 import { useGamesPage } from "@/features/games/hooks/useGamesPage";
 import { useDatesLogic } from "../../../sidebar/hooks/useDatesLogic";
+import MobileProvinceField from "./MobileProvinceField";
+import close_icon from "../../../../../../assets/v1.3/games/filter_close_icon.svg";
+import { useDateStore } from "../../../sidebar/store/useDateStore";
 
 interface FilterBoxProps {
   handleToggleMobileFilterBox: () => void;
+  selectedProvince: string[];
 }
 
-const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
-  const [searchParams] = useSearchParams();
-
+const FilterBox = ({
+  handleToggleMobileFilterBox,
+  selectedProvince,
+}: FilterBoxProps) => {
   const {} = useGamesPage();
-  const { INITIAL_DATES, handleSetYearMonthDay, dateFormat, selectedMonth } =
-    useDatesLogic();
+  const { INITIAL_DATES, handleSetYearMonthDay, dateFormat } = useDatesLogic();
 
-  const month = searchParams.get("month");
-  const day = searchParams.get("day");
-  const year = searchParams.get("year");
-
-  const days = ["일", "월", "화", "수", "목", "금", "토"];
+  const { selectedDay, selectedMonth, selectedYear } = useDateStore();
 
   // imported from useTimeField Store
   const { hour, minutes, resetTime } = useTimeField();
@@ -44,13 +44,6 @@ const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
   const timeFormat = getKoreanTimeFormat(hour, minutes);
 
   //   const startdate = `${month}.${day}`;
-
-  const startdate =
-    month && day
-      ? `${month}.${day}(${
-          days[new Date(Number(year), Number(month) - 1, Number(day)).getDay()]
-        })`
-      : "";
 
   // Get selected game statuses from store
   const selectedGameStatuses = useMemo(() => {
@@ -124,13 +117,17 @@ const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
         <div className="flex flex-col  gap-5">
           <div className="md:hidden w-full overflow-x-auto">
             <ul className="flex items-center gap-1.5 min-w-max">
-              <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3">
-                {startdate}
+              <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3 flex items-center gap-1">
+                <span>
+                  {selectedMonth}.{selectedDay}일
+                </span>
+                <img src={close_icon} alt="close icon" />
               </li>
-              <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3">
-                {timeFormat}
+              <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3  flex items-center gap-1">
+                <span> {timeFormat}</span>
+                <img src={close_icon} alt="close icon" />
               </li>{" "}
-              <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3">
+              <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3  flex items-center gap-1">
                 {selectedGameStatuses.length > 0
                   ? selectedGameStatuses.map((status, idx) => (
                       <span key={status.id}>
@@ -139,14 +136,22 @@ const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
                       </span>
                     ))
                   : "경기 상태"}
+
+                <img src={close_icon} alt="close icon" />
+              </li>
+              <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3  flex items-center gap-1">
+                {selectedProvince.length > 0
+                  ? selectedProvince.map((province, idx) => (
+                      <span key={idx}>
+                        {province}
+                        {idx < selectedProvince.length - 1 && ", "}
+                      </span>
+                    ))
+                  : "전체 지역"}
+                <img src={close_icon} alt="close icon" />
               </li>
             </ul>
           </div>
-
-          {/* INITIAL_DATES: InitialDateField[] | [];
-  handleSetYearMonthDay: (year: number, month: number, day: number) => void;
-  dateFormat: string;
-  todayMonth: number; */}
 
           <DatesField
             INITIAL_DATES={INITIAL_DATES}
@@ -161,11 +166,7 @@ const FilterBox = ({ handleToggleMobileFilterBox }: FilterBoxProps) => {
             gameStatusArray={game_status}
             handleToggleGameStatus={handleToggleGameStatus}
           />
-
-          {/* <GameStatusFieldMobile
-            gameStatusArray={gameStatusArray}
-            handleToggleGameStatus={handleToggleGameStatus}
-          /> */}
+          <MobileProvinceField />
         </div>
 
         {/* filter buttons */}

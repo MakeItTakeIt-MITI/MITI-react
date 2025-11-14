@@ -16,6 +16,7 @@ interface GameMapListContainerProps {
   isFilterBoxOpen: boolean;
   tab: string;
   inViewGameListRef: React.Ref<HTMLDivElement>;
+  selectedProvince: string[];
 }
 
 export default function GameMapListContainer({
@@ -28,16 +29,20 @@ export default function GameMapListContainer({
   isGamesListLoading,
   isFilterBoxOpen,
   inViewGameListRef,
+  selectedProvince,
 }: GameMapListContainerProps) {
   return (
     <div className="md:w-[720px] w-full min-h-[1px] flex flex-col gap-[20px]">
-      {/* Mobile Filter Modal */}
-      {isFilterBoxOpen && (
-        <FilterBox handleToggleMobileFilterBox={handleToggleMobileFilterBox} />
-      )}
-
       {/* Tab Navigation */}
       <TabNavigation tab={tab} handleToggleTab={handleToggleTab} />
+
+      {/* Mobile Filter Modal */}
+      {isFilterBoxOpen && (
+        <FilterBox
+          handleToggleMobileFilterBox={handleToggleMobileFilterBox}
+          selectedProvince={selectedProvince}
+        />
+      )}
 
       {/* Main Content - Map or List View */}
       {tab === "map" ? (
@@ -45,12 +50,15 @@ export default function GameMapListContainer({
           mapDataList={mapDataList}
           isMapGameListLoading={isMapGameListLoading}
           handleToggleMobileFilterBox={handleToggleMobileFilterBox}
+          selectedProvince={selectedProvince}
         />
       ) : (
         <ListView
           allGames={allGames}
           isGamesListLoading={isGamesListLoading}
           inViewGameListRef={inViewGameListRef}
+          handleToggleMobileFilterBox={handleToggleMobileFilterBox}
+          selectedProvince={selectedProvince}
         />
       )}
     </div>

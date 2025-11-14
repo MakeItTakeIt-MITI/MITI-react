@@ -4,13 +4,16 @@ import useGameStatusStore from "../../../../store/useGameStatusStore.ts";
 import { useMemo } from "react";
 import { getTodaysGamesQuery } from "../../../../../../utils/dates/date.ts";
 import { useDateStore } from "../../../sidebar/store/useDateStore.ts";
+import close_icon from "../../../../../../assets/v1.3/games/filter_close_icon.svg";
 
 interface MobileSettingsContainerProps {
   handleToggleMobileFilterBox: () => void;
+  selectedProvince: string[];
 }
 
 const MobileSettingsContainer = ({
   handleToggleMobileFilterBox,
+  selectedProvince,
 }: MobileSettingsContainerProps) => {
   const { selectedDay, selectedMonth } = useDateStore();
   const { hour, minutes } = useTimeField();
@@ -52,26 +55,28 @@ const MobileSettingsContainer = ({
           <button
             type="button"
             onClick={handleToggleMobileFilterBox}
-            className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3"
+            className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3 flex items-center gap-1"
           >
-            {/* {startdate} */}
-            {`${selectedMonth}.${selectedDay}일`}
+            <span> {`${selectedMonth}.${selectedDay}일`}</span>
+
+            <img src={close_icon} alt="Close" />
           </button>
         </li>
         <li>
           <button
             type="button"
             onClick={handleToggleMobileFilterBox}
-            className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3"
+            className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3 flex items-center gap-1"
           >
-            {timeFormat}
+            <span> {timeFormat}</span>
+            <img src={close_icon} alt="Close" />
           </button>
         </li>{" "}
         <li>
           <button
             type="button"
             onClick={handleToggleMobileFilterBox}
-            className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3"
+            className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3 flex items-center gap-1"
           >
             {selectedGameStatuses.length > 0
               ? selectedGameStatuses.map((status, idx) => (
@@ -81,6 +86,24 @@ const MobileSettingsContainer = ({
                   </span>
                 ))
               : "경기 상태"}
+            <img src={close_icon} alt="Close" />
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            onClick={handleToggleMobileFilterBox}
+            className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3 flex items-center gap-1"
+          >
+            {selectedProvince.length > 0
+              ? selectedProvince.map((province, idx) => (
+                  <span key={idx}>
+                    {province}
+                    {idx < selectedProvince.length - 1 && ", "}
+                  </span>
+                ))
+              : "전체 지역"}
+            <img src={close_icon} alt="Close" />
           </button>
         </li>
       </ul>
