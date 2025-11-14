@@ -18,6 +18,7 @@ interface GameMapListContainerProps {
   inViewGameListRef: React.Ref<HTMLDivElement>;
   selectedProvince: string[];
   handleResetProvince: () => void;
+  handleSetProvinceState: (province: string) => void;
 }
 
 export default function GameMapListContainer({
@@ -32,6 +33,7 @@ export default function GameMapListContainer({
   inViewGameListRef,
   selectedProvince,
   handleResetProvince,
+  handleSetProvinceState,
 }: GameMapListContainerProps) {
   return (
     <div className="md:w-[720px] w-full min-h-[1px] flex flex-col gap-[20px]">
@@ -44,6 +46,7 @@ export default function GameMapListContainer({
           handleToggleMobileFilterBox={handleToggleMobileFilterBox}
           selectedProvince={selectedProvince}
           handleResetProvince={handleResetProvince}
+          handleSetProvinceState={handleSetProvinceState}
         />
       )}
 

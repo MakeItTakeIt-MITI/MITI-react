@@ -66,6 +66,7 @@ export const Games = () => {
           inViewGameListRef={inViewGameListRef}
           selectedProvince={selectedProvince}
           handleResetProvince={handleResetProvince}
+          handleSetProvinceState={handleSetProvinceState}
         />
       </article>
     </section>

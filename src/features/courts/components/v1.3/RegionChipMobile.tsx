@@ -1,16 +1,16 @@
 interface RegionChipMobileProps {
   region: string;
   isSelected: boolean;
-  toggleProvince: (region: string) => void;
+  handleSetProvinceState: (province: string) => void;
 }
 
 const RegionChipMobile = ({
   region,
   isSelected,
-  toggleProvince,
+  handleSetProvinceState,
 }: RegionChipMobileProps) => (
   <li
-    onClick={() => toggleProvince(region)}
+    onClick={() => handleSetProvinceState(region)}
     className={`
        whitespace-nowrap py-2 px-2.5 text-xs rounded-[50px] border cursor-pointer flex items-center justify-center
       ${

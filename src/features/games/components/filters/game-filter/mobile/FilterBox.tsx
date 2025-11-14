@@ -16,12 +16,14 @@ interface FilterBoxProps {
   handleToggleMobileFilterBox: () => void;
   selectedProvince: string[];
   handleResetProvince: () => void;
+  handleSetProvinceState: (province: string) => void;
 }
 
 const FilterBox = ({
   handleToggleMobileFilterBox,
   selectedProvince,
   handleResetProvince,
+  handleSetProvinceState,
 }: FilterBoxProps) => {
   const {} = useGamesPage();
   const { INITIAL_DATES, handleSetYearMonthDay, dateFormat } = useDatesLogic();
@@ -170,7 +172,10 @@ const FilterBox = ({
             gameStatusArray={game_status}
             handleToggleGameStatus={handleToggleGameStatus}
           />
-          <MobileProvinceField />
+          <MobileProvinceField
+            selectedProvince={selectedProvince}
+            handleSetProvinceState={handleSetProvinceState}
+          />
         </div>
 
         {/* filter buttons */}

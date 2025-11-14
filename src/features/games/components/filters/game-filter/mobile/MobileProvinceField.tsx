@@ -1,7 +1,15 @@
 import RegionChipMobile from "@/features/courts/components/v1.3/RegionChipMobile";
 import { useProvinceLogic } from "../../../sidebar/hooks/useProvinceLogic";
 
-const MobileProvinceField = () => {
+interface MobileProvinceFieldProps {
+  selectedProvince: string[];
+  handleSetProvinceState: (province: string) => void;
+}
+
+const MobileProvinceField = ({
+  selectedProvince,
+  handleSetProvinceState,
+}: MobileProvinceFieldProps) => {
   const { REGIONS } = useProvinceLogic();
   return (
     <div className="flex flex-col gap-4">
@@ -11,8 +19,8 @@ const MobileProvinceField = () => {
           <RegionChipMobile
             key={region}
             region={region}
-            isSelected={false}
-            toggleProvince={() => {}}
+            isSelected={selectedProvince.includes(region)}
+            handleSetProvinceState={handleSetProvinceState}
           />
         ))}
       </ul>
