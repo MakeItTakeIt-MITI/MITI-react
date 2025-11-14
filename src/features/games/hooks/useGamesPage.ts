@@ -30,6 +30,10 @@ export const useGamesPage = () => {
     );
   };
 
+  const handleResetProvince = useCallback(() => {
+    setSelectedProvince([]);
+  }, []);
+
 
 
 
@@ -94,7 +98,8 @@ export const useGamesPage = () => {
     fetchNextPage,
     inViewGameListRef,
     dateFormat,
-    selectedProvince
+    selectedProvince,
+
 
 
   ]);
@@ -125,7 +130,7 @@ export const useGamesPage = () => {
 
     selectedProvince,
     handleSetProvinceState,
-
+    handleResetProvince
 
   };
 };

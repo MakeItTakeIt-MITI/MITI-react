@@ -1,23 +1,23 @@
-import { Link } from "react-router-dom";
 import { useTimeField } from "../../../../../../store/Sidebar/useTimeFieldStore.ts";
 import useGameStatusStore from "../../../../store/useGameStatusStore.ts";
 import { useMemo } from "react";
-import { getTodaysGamesQuery } from "../../../../../../utils/dates/date.ts";
 import { useDateStore } from "../../../sidebar/store/useDateStore.ts";
 import close_icon from "../../../../../../assets/v1.3/games/filter_close_icon.svg";
 
 interface MobileSettingsContainerProps {
   handleToggleMobileFilterBox: () => void;
   selectedProvince: string[];
+  handleResetProvince: () => void;
 }
 
 const MobileSettingsContainer = ({
   handleToggleMobileFilterBox,
   selectedProvince,
+  handleResetProvince,
 }: MobileSettingsContainerProps) => {
-  const { selectedDay, selectedMonth } = useDateStore();
-  const { hour, minutes } = useTimeField();
-  const { gameStatusArray } = useGameStatusStore();
+  const { selectedDay, selectedMonth, resetToToday } = useDateStore();
+  const { hour, minutes, resetTime } = useTimeField();
+  const { gameStatusArray, resetAllStatuses } = useGameStatusStore();
 
   const getKoreanTimeFormat = (
     hour: string | number,
@@ -45,11 +45,21 @@ const MobileSettingsContainer = ({
 
   //   const startdate = `${month}.${day}`;
 
+  const handleResetFilters = () => {
+    resetToToday();
+    resetTime();
+    resetAllStatuses();
+    handleResetProvince();
+  };
+
   return (
     <div className="md:hidden w-full overflow-x-auto">
       <ul className="flex items-center gap-1.5 min-w-max">
         <li className="text-[#474747] text-xs font-[500] border border-[#474747] rounded-[50px] py-2 px-3">
-          <Link to={`/${getTodaysGamesQuery()}`}> 초기화</Link>
+          <button type="button" onClick={handleResetFilters}>
+            {" "}
+            초기화
+          </button>
         </li>
         <li>
           <button

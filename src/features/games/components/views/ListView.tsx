@@ -9,6 +9,7 @@ interface ListViewProps {
   inViewGameListRef: React.Ref<HTMLDivElement>;
   handleToggleMobileFilterBox: () => void;
   selectedProvince: string[];
+  handleResetProvince: () => void;
 }
 
 export default function ListView({
@@ -17,6 +18,7 @@ export default function ListView({
   inViewGameListRef,
   handleToggleMobileFilterBox,
   selectedProvince,
+  handleResetProvince,
 }: ListViewProps) {
   return (
     <div className="flex flex-col gap-5 w-full md:px-0 sm:px-4">
@@ -25,6 +27,7 @@ export default function ListView({
         gameCount={allGames.length}
         handleToggleMobileFilterBox={handleToggleMobileFilterBox}
         selectedProvince={selectedProvince}
+        handleResetProvince={handleResetProvince}
       />
       <GamesList
         allGames={allGames}

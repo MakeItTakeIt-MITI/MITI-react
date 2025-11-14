@@ -25,6 +25,7 @@ export const Games = () => {
 
     selectedProvince,
     handleSetProvinceState,
+    handleResetProvince,
   } = useGamesPage();
 
   const { INITIAL_DATES, handleSetYearMonthDay, dateFormat, selectedMonth } =
@@ -64,6 +65,7 @@ export const Games = () => {
           tab={tab}
           inViewGameListRef={inViewGameListRef}
           selectedProvince={selectedProvince}
+          handleResetProvince={handleResetProvince}
         />
       </article>
     </section>

@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTimeField } from "../../../../../../store/Sidebar/useTimeFieldStore";
 import DatesField from "../../../sidebar/DatesField";
 import GameStatusField from "../../../sidebar/_GameStatusField";
@@ -15,16 +15,18 @@ import { useDateStore } from "../../../sidebar/store/useDateStore";
 interface FilterBoxProps {
   handleToggleMobileFilterBox: () => void;
   selectedProvince: string[];
+  handleResetProvince: () => void;
 }
 
 const FilterBox = ({
   handleToggleMobileFilterBox,
   selectedProvince,
+  handleResetProvince,
 }: FilterBoxProps) => {
   const {} = useGamesPage();
   const { INITIAL_DATES, handleSetYearMonthDay, dateFormat } = useDatesLogic();
 
-  const { selectedDay, selectedMonth, selectedYear } = useDateStore();
+  const { selectedDay, selectedMonth, resetToToday } = useDateStore();
 
   // imported from useTimeField Store
   const { hour, minutes, resetTime } = useTimeField();
@@ -83,8 +85,10 @@ const FilterBox = ({
   );
 
   const handleResetFilters = () => {
+    resetToToday();
     resetTime();
     resetAllStatuses();
+    handleResetProvince();
     handleToggleMobileFilterBox();
   };
 
