@@ -16,7 +16,17 @@ declare global {
   }
 }
 
-export default function GameMap({ mapDataList }: { mapDataList: GameField[] }) {
+interface GameMapProps {
+  mapDataList: GameField[];
+  geolocation: { lat: number; lon: number } | null;
+  handleCurrentGeoLocation: () => void;
+}
+
+export default function GameMap({
+  mapDataList,
+  geolocation,
+  handleCurrentGeoLocation,
+}: GameMapProps) {
   const {
     toggleSelected,
     setSelected,
@@ -41,10 +51,17 @@ export default function GameMap({ mapDataList }: { mapDataList: GameField[] }) {
     // create map once
     if (!mapRef.current) {
       mapRef.current = new window.naver.maps.Map("games-list", {
-        center: new window.naver.maps.LatLng(coordinates.lat, coordinates.long),
-        zoom: 13,
+        center: new window.naver.maps.LatLng(
+          geolocation?.lat || coordinates.lat,
+          geolocation?.lon || coordinates.long
+        ),
+        zoom: 12,
         scrollWheel: true,
         disableKineticPan: false,
+        zoomControl: true,
+        zoomControlOptions: {
+          position: window.naver.maps.Position.TOP_RIGHT,
+        },
       });
     }
     const map = mapRef.current;
@@ -97,6 +114,8 @@ export default function GameMap({ mapDataList }: { mapDataList: GameField[] }) {
       });
 
       const overlapped = addressOverlapCount[address] > 1;
+
+      `<button click=${handleCurrentGeoLocation}></button>`;
 
       const iconContent = overlapped
         ? renderToString(

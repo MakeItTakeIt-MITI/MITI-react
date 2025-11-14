@@ -9,8 +9,6 @@ import { useDatesLogic } from "../components/sidebar/hooks/useDatesLogic.ts";
 
 export const useGamesPage = () => {
 
-
-
   const { dateFormat } = useDatesLogic()
   // const { selectedProvince } = useProvinceStore()
 
@@ -77,9 +75,6 @@ export const useGamesPage = () => {
   } = useGamesListData(
     selectedStatusesArray,
     selectedProvince,
-
-
-
   );
 
   const allGames = gamesData?.pages.flatMap((page) => page.data.items) || [];
@@ -99,15 +94,50 @@ export const useGamesPage = () => {
     inViewGameListRef,
     dateFormat,
     selectedProvince,
-
-
-
   ]);
 
 
   //* Handler to display filter box for Mobile View * //
   const handleToggleMobileFilterBox = useCallback(() => {
     setIsFilterBoxOpen((prev) => !prev);
+  }, []);
+
+
+  // store distance info for geolocation
+  const [geolocation, setGeolocation] = useState<{
+    lat: number;
+    lon: number;
+  } | null>(null);
+
+  const handleCurrentGeoLocation = useCallback(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setGeolocation({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          });
+        },
+        (err) => console.log(err.message),
+        { enableHighAccuracy: true }
+      );
+    }
+  }, []);
+
+  // on page load, get user's geolocation
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setGeolocation({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          });
+        },
+        (err) => console.log(err.message),
+        { enableHighAccuracy: true }
+      );
+    }
   }, []);
 
 
@@ -130,7 +160,12 @@ export const useGamesPage = () => {
 
     selectedProvince,
     handleSetProvinceState,
-    handleResetProvince
+    handleResetProvince,
+
+    geolocation,
+    handleCurrentGeoLocation
+
+
 
   };
 };

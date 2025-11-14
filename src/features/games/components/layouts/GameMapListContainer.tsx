@@ -19,6 +19,8 @@ interface GameMapListContainerProps {
   selectedProvince: string[];
   handleResetProvince: () => void;
   handleSetProvinceState: (province: string) => void;
+  geolocation: { lat: number; lon: number } | null;
+  handleCurrentGeoLocation: () => void;
 }
 
 export default function GameMapListContainer({
@@ -34,6 +36,8 @@ export default function GameMapListContainer({
   selectedProvince,
   handleResetProvince,
   handleSetProvinceState,
+  geolocation,
+  handleCurrentGeoLocation,
 }: GameMapListContainerProps) {
   return (
     <div className="md:w-[720px] w-full min-h-[1px] flex flex-col gap-[20px]">
@@ -58,6 +62,8 @@ export default function GameMapListContainer({
           handleToggleMobileFilterBox={handleToggleMobileFilterBox}
           selectedProvince={selectedProvince}
           handleResetProvince={handleResetProvince}
+          geolocation={geolocation}
+          handleCurrentGeoLocation={handleCurrentGeoLocation}
         />
       ) : (
         <ListView

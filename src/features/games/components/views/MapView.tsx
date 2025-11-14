@@ -12,6 +12,8 @@ interface MapViewProps {
   handleToggleMobileFilterBox: () => void;
   selectedProvince: string[];
   handleResetProvince: () => void;
+  geolocation: { lat: number; lon: number } | null;
+  handleCurrentGeoLocation: () => void;
 }
 
 export default function MapView({
@@ -20,10 +22,16 @@ export default function MapView({
   handleToggleMobileFilterBox,
   selectedProvince,
   handleResetProvince,
+  geolocation,
+  handleCurrentGeoLocation,
 }: MapViewProps) {
   return (
     <div className="flex flex-col gap-5 w-full h-full">
-      <GameMap mapDataList={mapDataList} />
+      <GameMap
+        mapDataList={mapDataList}
+        geolocation={geolocation}
+        handleCurrentGeoLocation={handleCurrentGeoLocation}
+      />
       {/* <GamesMap /> */}
       <div className="flex flex-col gap-4 sm:h-[528px] md:h-[528px] overflow-y-auto custom-scrollbar px-4">
         <GameHeader

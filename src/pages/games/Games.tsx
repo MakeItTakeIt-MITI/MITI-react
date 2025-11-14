@@ -29,6 +29,9 @@ export const Games = () => {
     selectedProvince,
     handleSetProvinceState,
     handleResetProvince,
+
+    geolocation,
+    handleCurrentGeoLocation,
   } = useGamesPage();
 
   const { INITIAL_DATES, handleSetYearMonthDay, dateFormat, selectedMonth } =
@@ -82,6 +85,8 @@ export const Games = () => {
           selectedProvince={selectedProvince}
           handleResetProvince={handleResetProvince}
           handleSetProvinceState={handleSetProvinceState}
+          geolocation={geolocation}
+          handleCurrentGeoLocation={handleCurrentGeoLocation}
         />
       </article>
     </section>
