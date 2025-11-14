@@ -4,6 +4,7 @@ import { GameField } from "../../interface/games.ts";
 import ScrollableGameList from "../lists/ScrollableGameList.tsx";
 import GameHeader from "../ui/GameHeader.tsx";
 import "../../scrollbar.css";
+// import { GamesMap } from "../GamesMap.tsx";
 
 interface MapViewProps {
   mapDataList: GameField[];
@@ -19,7 +20,7 @@ export default function MapView({
   return (
     <div className="flex flex-col gap-5 w-full h-full">
       <GameMap mapDataList={mapDataList} />
-
+      {/* <GamesMap /> */}
       <div className="flex flex-col gap-4 sm:h-[528px] md:h-[528px] overflow-y-auto custom-scrollbar px-4">
         <GameHeader
           gameCount={mapDataList?.length ?? 0}
