@@ -13,6 +13,7 @@ interface SidebarProps {
   tab: string;
   selectedProvince: string[];
   handleSetProvinceState: (province: string) => void;
+  handleResetSidebarSettings: () => void;
 }
 
 export default function Sidebar({
@@ -23,6 +24,7 @@ export default function Sidebar({
   tab,
   selectedProvince,
   handleSetProvinceState,
+  handleResetSidebarSettings,
 }: SidebarProps) {
   const isMap = tab === "map";
 
@@ -31,7 +33,9 @@ export default function Sidebar({
       style={{ width: "238px", height: "" }}
       className="p-4 sm:hidden md:flex flex-col gap-5 "
     >
-      <ResetStatusField />
+      <ResetStatusField
+        handleResetSidebarSettings={handleResetSidebarSettings}
+      />
 
       {isMap && (
         <>

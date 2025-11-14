@@ -3,6 +3,9 @@ import Sidebar from "../../features/games/components/sidebar/Sidebar.tsx";
 import GameMapListContainer from "../../features/games/components/layouts/GameMapListContainer.tsx";
 import { useGamesPage } from "../../features/games/hooks/useGamesPage.ts";
 import { useDatesLogic } from "../../features/games/components/sidebar/hooks/useDatesLogic.ts";
+import { useTimeField } from "@/store/Sidebar/useTimeFieldStore.ts";
+import useGameStatusStore from "@/features/games/store/useGameStatusStore.ts";
+import { useDateStore } from "@/features/games/components/sidebar/store/useDateStore.ts";
 
 export const Games = () => {
   // Custom Hook to manages games data, state and interactions
@@ -33,6 +36,17 @@ export const Games = () => {
 
   // * Logic for Games Map List API and Infinite Scrolling* //
 
+  const { resetTime } = useTimeField();
+  const { resetAllStatuses } = useGameStatusStore();
+  const { resetToToday } = useDateStore();
+
+  const handleResetSidebarSettings = () => {
+    resetTime();
+    resetAllStatuses();
+    resetToToday();
+    handleResetProvince();
+  };
+
   return (
     <section
       style={{
@@ -51,6 +65,7 @@ export const Games = () => {
           tab={tab}
           selectedProvince={selectedProvince}
           handleSetProvinceState={handleSetProvinceState}
+          handleResetSidebarSettings={handleResetSidebarSettings}
         />
         {/* // )} */}
         <GameMapListContainer
