@@ -3,6 +3,7 @@ import GamesListCard from "../card/GamesListCard.tsx";
 import SkeletonCard from "../card/SkeletonCard.tsx";
 
 import "../styles/scrollbar.css";
+import EmptyGameState from "../ui/EmptyGameState.tsx";
 
 interface GamesListProps {
   allGames: GameField[];
@@ -15,6 +16,14 @@ export default function GamesList({
   isGamesListLoading,
   inViewGameListRef,
 }: GamesListProps) {
+  if (allGames?.length === 0) {
+    return (
+      <ul className="flex flex-col gap-2.5 h-[500px] sm:h-[512px] overflow-y-auto">
+        <EmptyGameState />
+      </ul>
+    );
+  }
+
   return (
     <ul className="overflow-y-auto w-full flex flex-col  sm:gap-4 md:gap-[31px] h-[720px]  custom-scrollbar p-2">
       {isGamesListLoading ? (
