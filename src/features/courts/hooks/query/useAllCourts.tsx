@@ -1,15 +1,12 @@
+// hooks/useAllCourts.ts
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getAllCourts } from "../../api/courts";
 
-export const useAllCourts = (
-  limit: number | null,
-  search?: string | null,
-  province?: string[] | null
-) => {
+export const useAllCourts = (province: string[], search: string | null) => {
   return useInfiniteQuery({
-    queryKey: ["all-courts", search, province],
+    queryKey: ["all-courts", search, ...province],
     queryFn: ({ pageParam = null }) =>
-      getAllCourts(pageParam, limit, province, search),
+      getAllCourts(pageParam, 20, province, search),
     initialPageParam: null,
     getNextPageParam: (lastPage) => {
       const data = lastPage?.data;

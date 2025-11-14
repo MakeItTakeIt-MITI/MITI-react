@@ -20,17 +20,17 @@ export default function Sidebar({
   todayMonth,
   tab,
 }: SidebarProps) {
+  const isMap = tab === "map";
+
   return (
     <aside
-      style={{
-        width: "238px",
-        height: "",
-      }}
+      style={{ width: "238px", height: "" }}
       className="p-4 sm:hidden md:flex flex-col gap-5 "
     >
-      {tab === "map" && (
+      <ResetStatusField />
+
+      {isMap && (
         <>
-          <ResetStatusField />
           <DatesField
             INITIAL_DATES={INITIAL_DATES}
             handleSetYearMonthDay={handleSetYearMonthDay}
@@ -38,18 +38,11 @@ export default function Sidebar({
             todayMonth={todayMonth}
           />
           <TimesField />
-          <GameStatusContainer />
-          <ProvinceField />
         </>
       )}
 
-      {tab === "list" && (
-        <>
-          <ResetStatusField />
-          <GameStatusContainer />
-          <ProvinceField />
-        </>
-      )}
+      <GameStatusContainer />
+      <ProvinceField />
     </aside>
   );
 }

@@ -4,34 +4,9 @@ import { useAllCourts } from "./query/useAllCourts";
 import { useInView } from "react-intersection-observer";
 import useCourtDetails from "./query/useCourtDetails";
 import useCourtsGameList from "./query/useCourtsGameList";
-import { useGamesPage } from "@/features/games/hooks/useGamesPage";
 
 const useCourtsDataPage = () => {
-  const { selectedProvince } = useGamesPage();
-
-  // store distance info for geolocation
-  const [geolocation, setGeolocation] = useState<{
-    lat: number;
-    lon: number;
-  } | null>(null);
-
-  // on page load, get user's geolocation
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setGeolocation({
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          });
-        },
-        (err) => console.log(err.message),
-        { enableHighAccuracy: true }
-      );
-    }
-  }, []);
-
-  // get the URL params for province filtering
+  const [selectedProvince, setSelectedProvince] = useState<string[]>([]);
 
   // get the URL params for search filtering
   const [inputContent] = useSearchParams();
@@ -42,7 +17,17 @@ const useCourtsDataPage = () => {
     hasNextPage,
     fetchNextPage,
     isLoading,
-  } = useAllCourts(0, 20, inputContent.get("search"), selectedProvince);
+    refetch,
+  } = useAllCourts(selectedProvince, inputContent.get("search"));
+
+  const toggleProvince = (region: string) => {
+    refetch();
+    setSelectedProvince((prev) =>
+      prev.includes(region)
+        ? prev.filter((r) => r !== region)
+        : [...prev, region]
+    );
+  };
 
   // flatten the paginated data
   const courtsDataPage = courtsData?.pages?.flatMap(
@@ -77,6 +62,28 @@ const useCourtsDataPage = () => {
 
   const courtsGamesPageContent = courtsGamesListData?.pages[0].data;
 
+  // store distance info for geolocation
+  const [geolocation, setGeolocation] = useState<{
+    lat: number;
+    lon: number;
+  } | null>(null);
+
+  // on page load, get user's geolocation
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setGeolocation({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          });
+        },
+        (err) => console.log(err.message),
+        { enableHighAccuracy: true }
+      );
+    }
+  }, []);
+
   return {
     geolocation,
 
@@ -91,6 +98,9 @@ const useCourtsDataPage = () => {
     courtsGamesPageContent,
     hasCourtsDetailNextPage,
     fetchCourtsDetailNextPage,
+
+    selectedProvince,
+    toggleProvince,
   };
 };
 

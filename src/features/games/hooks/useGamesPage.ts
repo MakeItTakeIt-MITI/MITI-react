@@ -24,15 +24,14 @@ export const useGamesPage = () => {
   const [selectedProvince, setSelectedProvince] = useState<string[]>([]);
 
   const handleSetProvinceState = (province: string) => {
-    setSelectedProvince((prev) => {
-      if (prev.includes(province)) {
-        return prev.filter((p) => p !== province);
-      } else {
-        return [...prev, province];
-      }
-    });
+    setSelectedProvince((prev) =>
+      prev.includes(province)
+        ? prev.filter((p) => p !== province)
+        : [...prev, province]
+    );
   };
 
+  console.log(selectedProvince)
 
 
 

@@ -1,6 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
 import navbar_logo from "../../../assets/v1.3/navbar-logo.svg";
-import { getTodaysGamesQuery } from "../../../utils/dates/date";
 import AppDownloadBtn from "./AppDownloadBtn";
 import { isActivePath } from "../utils/isActivePath";
 

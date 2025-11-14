@@ -1,3 +1,4 @@
+import qs from "qs";
 
 import axiosUrl from "../../../utils/axios.ts"
 
@@ -9,16 +10,21 @@ export const getAllCourts = async (
     search: string | null
 ) => {
     try {
-        const response = await axiosUrl.get(`/courts`, {
-            params: { cursor, limit, search, province: province },
-            paramsSerializer: (params) => {
-                const usp = new URLSearchParams();
-                if (params.province && Array.isArray(params.province)) {
-                    params.province.forEach((p: string) => usp.append("province", p));
-                }
+        const params = { cursor, limit, search, province };
 
-                return usp.toString();
-            },
+        const cleanParams = Object.fromEntries(
+            Object.entries(params).filter(([_, v]) => {
+                if (v == null) return false;
+                if (Array.isArray(v) && v.length === 0) return false;
+                if (typeof v === "string" && v.trim() === "") return false;
+                return true;
+            })
+        );
+
+        const response = await axiosUrl.get("/courts", {
+            params: cleanParams,
+            paramsSerializer: (params) =>
+                qs.stringify(params, { arrayFormat: "repeat", encode: true }),
         });
 
         return response.data;
