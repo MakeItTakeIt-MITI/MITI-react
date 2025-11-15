@@ -1,6 +1,6 @@
 import { GameField } from "../../interface/games.ts";
 import "../../../../index.css";
-import FilterBox from "../filters/game-filter/mobile/FilterBox.tsx";
+import MobileFilterModal from "../filters/game-filter/mobile/MobileFilterModal.tsx";
 import TabNavigation from "../navigation/TabNavigation.tsx";
 import MapView from "../views/MapView.tsx";
 import ListView from "../views/ListView.tsx";
@@ -46,7 +46,7 @@ export default function GameMapListContainer({
 
       {/* Mobile Filter Modal */}
       {isFilterBoxOpen && (
-        <FilterBox
+        <MobileFilterModal
           handleToggleMobileFilterBox={handleToggleMobileFilterBox}
           selectedProvince={selectedProvince}
           handleResetProvince={handleResetProvince}

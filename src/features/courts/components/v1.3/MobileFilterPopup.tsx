@@ -88,7 +88,7 @@ const MobileFilterPopup = ({
                   key={region}
                   region={region}
                   isSelected={isSelected}
-                  toggleProvince={handleRegionClick}
+                  handleSetProvinceState={handleRegionClick}
                 />
               );
             })}

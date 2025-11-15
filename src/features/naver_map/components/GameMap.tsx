@@ -4,11 +4,6 @@ import { GameField } from "../../games/interface/games.ts";
 import { useSelectedStore } from "../../../store/NaverMap/useSelectedStore.tsx";
 import { useMapCoordinatesStore } from "../../../store/NaverMap/useMapCoordinatesStore.tsx";
 
-// Current location button images
-// import findMylocationDeactivated from "../../../assets/v1.3/map/location_deactivated.png";
-// import findMylocationActivated from "../../../assets/v1.3/map/location_activated.png";
-// import findMylocationLoading from "../../../assets/v1.3/map/marker-loading.gif";
-
 // Add global type for naver maps
 declare global {
   interface Window {

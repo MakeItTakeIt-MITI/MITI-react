@@ -1,9 +1,7 @@
-import { Link } from "react-router-dom";
 import { useTimeField } from "../../../../../../store/Sidebar/useTimeFieldStore";
 import DatesField from "../../../sidebar/DatesField";
 import GameStatusField from "../../../sidebar/_GameStatusField";
 import { useCallback, useEffect, useMemo } from "react";
-import { getTodaysGamesQuery } from "../../../../../../utils/dates/date";
 import TimesFieldMobile from "./TimesFieldMobile";
 import useGameStatusStore from "../../../../store/useGameStatusStore";
 import { useGamesPage } from "@/features/games/hooks/useGamesPage";
@@ -12,19 +10,19 @@ import MobileProvinceField from "./MobileProvinceField";
 import close_icon from "../../../../../../assets/v1.3/games/filter_close_icon.svg";
 import { useDateStore } from "../../../sidebar/store/useDateStore";
 
-interface FilterBoxProps {
+interface MobileFilterModalProps {
   handleToggleMobileFilterBox: () => void;
   selectedProvince: string[];
   handleResetProvince: () => void;
   handleSetProvinceState: (province: string) => void;
 }
 
-const FilterBox = ({
+const MobileFilterModal = ({
   handleToggleMobileFilterBox,
   selectedProvince,
   handleResetProvince,
   handleSetProvinceState,
-}: FilterBoxProps) => {
+}: MobileFilterModalProps) => {
   const {} = useGamesPage();
   const { INITIAL_DATES, handleSetYearMonthDay, dateFormat } = useDatesLogic();
 
@@ -185,7 +183,7 @@ const FilterBox = ({
             onClick={handleResetFilters}
             className="w-[96px] h-[44px] bg-[#999] text-white font-bold rounded-lg"
           >
-            <Link to={`/${getTodaysGamesQuery()}`}> 초기화</Link>
+            초기화
           </button>
           <button
             type="button"
@@ -200,4 +198,4 @@ const FilterBox = ({
   );
 };
 
-export default FilterBox;
+export default MobileFilterModal;

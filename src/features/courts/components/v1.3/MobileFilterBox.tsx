@@ -56,7 +56,7 @@ const MobileFilterBox = ({
               key={region}
               region={region}
               isSelected={isSelected}
-              toggleProvince={handleRegionClick}
+              handleSetProvinceState={handleRegionClick}
             />
           );
         })}

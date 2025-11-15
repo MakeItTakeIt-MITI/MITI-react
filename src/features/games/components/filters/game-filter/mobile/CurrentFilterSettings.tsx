@@ -4,17 +4,17 @@ import { useMemo } from "react";
 import { useDateStore } from "../../../sidebar/store/useDateStore.ts";
 import close_icon from "../../../../../../assets/v1.3/games/filter_close_icon.svg";
 
-interface MobileSettingsContainerProps {
+interface CurrentFilterSettingsProps {
   handleToggleMobileFilterBox: () => void;
   selectedProvince: string[];
   handleResetProvince: () => void;
 }
 
-const MobileSettingsContainer = ({
+const CurrentFilterSettings = ({
   handleToggleMobileFilterBox,
   selectedProvince,
   handleResetProvince,
-}: MobileSettingsContainerProps) => {
+}: CurrentFilterSettingsProps) => {
   const { selectedDay, selectedMonth, resetToToday } = useDateStore();
   const { hour, minutes, resetTime } = useTimeField();
   const { gameStatusArray, resetAllStatuses } = useGameStatusStore();
@@ -121,4 +121,4 @@ const MobileSettingsContainer = ({
   );
 };
 
-export default MobileSettingsContainer;
+export default CurrentFilterSettings;

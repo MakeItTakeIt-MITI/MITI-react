@@ -26,10 +26,12 @@ export const Games = () => {
 
     inViewGameListRef,
 
+    // * Province Filtering Logic *
     selectedProvince,
     handleSetProvinceState,
     handleResetProvince,
 
+    // * Province Filtering Logic *
     geolocation,
     handleCurrentGeoLocation,
   } = useGamesPage();
@@ -59,7 +61,6 @@ export const Games = () => {
     >
       <BannerMedium type="manners" />
       <article className="flex gap-[30px] ">
-        {/* {tab === "map" && ( */}
         <Sidebar
           INITIAL_DATES={INITIAL_DATES}
           handleSetYearMonthDay={handleSetYearMonthDay}
@@ -70,7 +71,6 @@ export const Games = () => {
           handleSetProvinceState={handleSetProvinceState}
           handleResetSidebarSettings={handleResetSidebarSettings}
         />
-        {/* // )} */}
         <GameMapListContainer
           handleToggleTab={handleToggleTab}
           handleToggleMobileFilterBox={handleToggleMobileFilterBox}

@@ -1,5 +1,5 @@
 import settings_mobile from "../../../../assets/v1.3/games/settings_icon.png";
-import MobileSettingsContainer from "../filters/game-filter/mobile/MobileSettingsContainer.tsx";
+import CurrentFilterSettings from "../filters/game-filter/mobile/CurrentFilterSettings.tsx";
 
 interface GameHeaderProps {
   gameCount: number;
@@ -30,7 +30,7 @@ export default function GameHeader({
       </div>
 
       {/* Mobile Game Status */}
-      <MobileSettingsContainer
+      <CurrentFilterSettings
         handleToggleMobileFilterBox={handleToggleMobileFilterBox}
         selectedProvince={selectedProvince}
         handleResetProvince={handleResetProvince}
