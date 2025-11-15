@@ -36,7 +36,6 @@ export default function GameMap({
 
   const mapRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
-  const customControlRef = useRef<any>(null);
 
   // Create map & custom control robustly (create control once, update HTML on state changes)
   useEffect(() => {
@@ -61,20 +60,14 @@ export default function GameMap({
     }
     const map = mapRef.current;
 
+    // update map center
     try {
       map.setCenter(
         new window.naver.maps.LatLng(coordinates.lat, coordinates.long)
       );
     } catch {}
 
-    return () => {
-      if (customControlRef.current) {
-        try {
-          customControlRef.current.setMap(null);
-        } catch {}
-        customControlRef.current = null;
-      }
-    };
+    return () => {};
   }, [
     coordinates.lat,
     coordinates.long,

@@ -21,6 +21,8 @@ interface GameMapListContainerProps {
   handleSetProvinceState: (province: string) => void;
   geolocation: { lat: number; lon: number } | null;
   handleCurrentGeoLocation: () => void;
+  selectedAddress: string | null;
+  isSelected: boolean;
 }
 
 export default function GameMapListContainer({
@@ -38,6 +40,8 @@ export default function GameMapListContainer({
   handleSetProvinceState,
   geolocation,
   handleCurrentGeoLocation,
+  selectedAddress,
+  isSelected,
 }: GameMapListContainerProps) {
   return (
     <div className="md:w-[720px] w-full min-h-[1px] flex flex-col gap-[20px]">
@@ -64,6 +68,8 @@ export default function GameMapListContainer({
           handleResetProvince={handleResetProvince}
           geolocation={geolocation}
           handleCurrentGeoLocation={handleCurrentGeoLocation}
+          selectedAddress={selectedAddress}
+          isSelected={isSelected}
         />
       ) : (
         <ListView

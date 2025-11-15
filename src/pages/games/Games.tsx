@@ -6,6 +6,7 @@ import { useDatesLogic } from "../../features/games/components/sidebar/hooks/use
 import { useTimeField } from "@/store/Sidebar/useTimeFieldStore.ts";
 import useGameStatusStore from "@/features/games/store/useGameStatusStore.ts";
 import { useDateStore } from "@/features/games/components/sidebar/store/useDateStore.ts";
+import { useSelectedStore } from "@/store/NaverMap/useSelectedStore.tsx";
 
 export const Games = () => {
   // Custom Hook to manages games data, state and interactions
@@ -44,6 +45,8 @@ export const Games = () => {
   const { resetTime } = useTimeField();
   const { resetAllStatuses } = useGameStatusStore();
   const { resetToToday } = useDateStore();
+
+  const { selectedAddress, isSelected } = useSelectedStore();
 
   const handleResetSidebarSettings = () => {
     resetTime();
@@ -87,6 +90,8 @@ export const Games = () => {
           handleSetProvinceState={handleSetProvinceState}
           geolocation={geolocation}
           handleCurrentGeoLocation={handleCurrentGeoLocation}
+          selectedAddress={selectedAddress}
+          isSelected={isSelected}
         />
       </article>
     </section>

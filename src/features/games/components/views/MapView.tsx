@@ -4,9 +4,6 @@ import { GameField } from "../../interface/games.ts";
 import ScrollableGameList from "../lists/ScrollableGameList.tsx";
 import GameHeader from "../ui/GameHeader.tsx";
 import "../../scrollbar.css";
-import { Games } from "@/pages/games/Games.tsx";
-import { GamesMap } from "../GamesMap.tsx";
-// import { GamesMap } from "../GamesMap.tsx";
 
 interface MapViewProps {
   mapDataList: GameField[];
@@ -16,6 +13,8 @@ interface MapViewProps {
   handleResetProvince: () => void;
   geolocation: { lat: number; lon: number } | null;
   handleCurrentGeoLocation: () => void;
+  selectedAddress: string | null;
+  isSelected: boolean;
 }
 
 export default function MapView({
@@ -26,6 +25,8 @@ export default function MapView({
   handleResetProvince,
   geolocation,
   handleCurrentGeoLocation,
+  selectedAddress,
+  isSelected,
 }: MapViewProps) {
   return (
     <div className="flex flex-col gap-5 w-full h-full">
@@ -47,6 +48,8 @@ export default function MapView({
         <ScrollableGameList
           mapDataList={mapDataList}
           isLoading={isMapGameListLoading}
+          selectedAddress={selectedAddress}
+          isSelected={isSelected}
         />
       </div>
     </div>
