@@ -46,7 +46,7 @@ export const useGamesPage = () => {
   }, [gameStatusArray]);
 
 
-  const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(dateFormat, timeFormat, selectedStatusesArray);
+  const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(dateFormat, timeFormat, selectedStatusesArray, selectedProvince);
 
   const mapDataList = mapData?.data || [];
 

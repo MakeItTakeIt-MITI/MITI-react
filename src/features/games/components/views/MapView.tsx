@@ -4,6 +4,8 @@ import { GameField } from "../../interface/games.ts";
 import ScrollableGameList from "../lists/ScrollableGameList.tsx";
 import GameHeader from "../ui/GameHeader.tsx";
 import "../../scrollbar.css";
+import { Games } from "@/pages/games/Games.tsx";
+import { GamesMap } from "../GamesMap.tsx";
 // import { GamesMap } from "../GamesMap.tsx";
 
 interface MapViewProps {
@@ -32,6 +34,7 @@ export default function MapView({
         geolocation={geolocation}
         handleCurrentGeoLocation={handleCurrentGeoLocation}
       />
+      {/* <GamesMap mapDataList={mapDataList} geolocation={geolocation} /> */}
       {/* <GamesMap /> */}
       <div className="flex flex-col gap-4 sm:h-[528px] md:h-[528px] overflow-y-auto custom-scrollbar px-4">
         <GameHeader
