@@ -73,6 +73,8 @@ export const useGamesPage = () => {
     isFetchingNextPage,
     isLoading: isGamesListLoading,
   } = useGamesListData(
+    dateFormat,
+    timeFormat,
     selectedStatusesArray,
     selectedProvince,
   );

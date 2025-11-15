@@ -1,5 +1,5 @@
 import BannerMedium from "../../features/common/components(renewal)/banners/BannerMedium.tsx";
-import Sidebar from "../../features/games/components/sidebar/Sidebar.tsx";
+import GameSideBar from "../../features/games/components/sidebar/GameSideBar.tsx";
 import GameMapListContainer from "../../features/games/components/layouts/GameMapListContainer.tsx";
 import { useGamesPage } from "../../features/games/hooks/useGamesPage.ts";
 import { useDatesLogic } from "../../features/games/components/sidebar/hooks/useDatesLogic.ts";
@@ -64,7 +64,7 @@ export const Games = () => {
     >
       <BannerMedium type="manners" />
       <article className="flex gap-[30px] ">
-        <Sidebar
+        <GameSideBar
           INITIAL_DATES={INITIAL_DATES}
           handleSetYearMonthDay={handleSetYearMonthDay}
           dateFormat={dateFormat}

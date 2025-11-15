@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import Sidebar from "./Sidebar.tsx";
+import Sidebar from "./GameSideBar.tsx";
 import { MemoryRouter } from "react-router-dom";
 
 const meta: Meta<typeof Sidebar> = {

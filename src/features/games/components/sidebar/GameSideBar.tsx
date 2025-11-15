@@ -5,7 +5,7 @@ import GameStatusContainer from "./GameStatusContainer.tsx";
 import ProvinceField from "./ProvinceField.tsx";
 import { InitialDateField } from "../../interface/games.ts";
 
-interface SidebarProps {
+interface GameSideBarProps {
   INITIAL_DATES: InitialDateField[];
   handleSetYearMonthDay: (year: number, month: number, day: number) => void;
   dateFormat: string;
@@ -16,7 +16,7 @@ interface SidebarProps {
   handleResetSidebarSettings: () => void;
 }
 
-export default function Sidebar({
+export default function GameSideBar({
   INITIAL_DATES,
   handleSetYearMonthDay,
   dateFormat,
@@ -25,7 +25,7 @@ export default function Sidebar({
   selectedProvince,
   handleSetProvinceState,
   handleResetSidebarSettings,
-}: SidebarProps) {
+}: GameSideBarProps) {
   const isMap = tab === "map";
 
   return (
@@ -37,18 +37,13 @@ export default function Sidebar({
         handleResetSidebarSettings={handleResetSidebarSettings}
       />
 
-      {isMap && (
-        <>
-          <DatesField
-            INITIAL_DATES={INITIAL_DATES}
-            handleSetYearMonthDay={handleSetYearMonthDay}
-            dateFormat={dateFormat}
-            todayMonth={todayMonth}
-          />
-          <TimesField />
-        </>
-      )}
-
+      <DatesField
+        INITIAL_DATES={INITIAL_DATES}
+        handleSetYearMonthDay={handleSetYearMonthDay}
+        dateFormat={dateFormat}
+        todayMonth={todayMonth}
+      />
+      <TimesField />
       <GameStatusContainer />
       <ProvinceField
         selectedProvince={selectedProvince}

@@ -2,13 +2,28 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { gamesListOnly } from "../../api/games";
 
 export const useGamesListData = (
+  startdate: string,
+  starttime: string,
   game_status: string[],
   selectedProvince: string[]
 ) => {
   return useInfiniteQuery({
-    queryKey: ["All Games List", ...game_status, ...selectedProvince],
+    queryKey: [
+      "All Games List",
+      startdate,
+      starttime,
+      ...game_status,
+      ...selectedProvince,
+    ],
     queryFn: ({ pageParam }) =>
-      gamesListOnly(game_status, selectedProvince, pageParam, 20),
+      gamesListOnly(
+        startdate,
+        starttime,
+        game_status,
+        selectedProvince,
+        pageParam,
+        20
+      ),
     getNextPageParam: (lastPage) => {
       const data = lastPage?.data;
       if (!data) return undefined;

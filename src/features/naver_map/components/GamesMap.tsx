@@ -11,7 +11,7 @@ declare global {
   }
 }
 
-const { naver } = window;
+// const { naver } = window;
 
 interface GamesMapProps {
   mapDataList: GameField[];
