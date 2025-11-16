@@ -4,9 +4,16 @@ import { PrivateInquiryField } from "../../../../interfaces/support";
 interface FormTitleInputProps {
   register: UseFormRegister<PrivateInquiryField>;
   erase_input: string;
+  title: string;
+  handleClear: (value: "title") => void;
 }
 
-const FormTitleInput = ({ register, erase_input }: FormTitleInputProps) => {
+const FormTitleInput = ({
+  register,
+  erase_input,
+  title,
+  handleClear,
+}: FormTitleInputProps) => {
   return (
     <div className="space-y-1">
       <h4 className="text-sm text-[#fff]"> 문의 제목</h4>
@@ -18,9 +25,12 @@ const FormTitleInput = ({ register, erase_input }: FormTitleInputProps) => {
           type="text"
           className="w-full bg-[#141414] border-none outline-none text-white"
         />
-        <button type="button">
-          <img src={erase_input} alt="erase_input" />
-        </button>
+
+        {title?.length >= 1 && (
+          <button onClick={() => handleClear("title")} type="button">
+            <img src={erase_input} alt="erase_input" />
+          </button>
+        )}
       </div>
     </div>
   );

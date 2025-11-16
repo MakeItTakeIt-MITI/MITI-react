@@ -14,7 +14,7 @@ import FormSubmitButton from "./FormSubmitButton";
 const InquiryForm = () => {
   const [displayPassword, setDisplayPassword] = useState(false);
 
-  const { register, handleSubmit, watch, reset } =
+  const { register, handleSubmit, watch, reset, setValue } =
     useForm<PrivateInquiryField>();
   const { mutate } = usePrivateInquiryHook(reset);
 
@@ -36,13 +36,25 @@ const InquiryForm = () => {
     setDisplayPassword((prev) => !prev);
   }, [setDisplayPassword]);
 
+  const handleClear = (value: "title" | "nickname") => setValue(value, "");
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-      <FormTitleInput register={register} erase_input={erase_input} />
+      <FormTitleInput
+        register={register}
+        erase_input={erase_input}
+        title={title}
+        handleClear={handleClear}
+      />
 
       <FormContentInput register={register} />
       <div className="flex md:flex-row sm:flex-col items-center justify-center md:gap-[32px] sm:gap-5 w-full ">
-        <FormNicknameInput register={register} erase_input={erase_input} />
+        <FormNicknameInput
+          register={register}
+          erase_input={erase_input}
+          nickname={nickname}
+          handleClear={handleClear}
+        />
         <FormPasswordInput
           register={register}
           displayPassword={displayPassword}

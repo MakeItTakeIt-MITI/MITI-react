@@ -4,10 +4,14 @@ import { PrivateInquiryField } from "../../../../interfaces/support";
 interface FormNicknameInputProps {
   register: UseFormRegister<PrivateInquiryField>;
   erase_input: string;
+  nickname: string;
+  handleClear: (value: "nickname") => void;
 }
 const FormNicknameInput = ({
   register,
   erase_input,
+  nickname,
+  handleClear,
 }: FormNicknameInputProps) => {
   return (
     <div className="space-y-1 w-full">
@@ -20,9 +24,11 @@ const FormNicknameInput = ({
           type="text"
           className="w-full bg-[#141414] border-none outline-none text-white"
         />
-        <button type="button">
-          <img src={erase_input} alt="erase_input" />
-        </button>
+        {nickname?.length >= 1 && (
+          <button onClick={() => handleClear("nickname")} type="button">
+            <img src={erase_input} alt="erase_input" />
+          </button>
+        )}
       </div>
     </div>
   );
