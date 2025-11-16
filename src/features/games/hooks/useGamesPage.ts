@@ -32,8 +32,8 @@ export const useGamesPage = () => {
     setSelectedProvince([]);
   }, []);
 
-
-
+  const searchParams = new URLSearchParams();
+  const searchValue = searchParams.get("search");
 
   // * Logic for Games Map List Hook/API/Parameter * //
   const { timeFormat } = useTimeFormatting();
@@ -46,7 +46,7 @@ export const useGamesPage = () => {
   }, [gameStatusArray]);
 
 
-  const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(dateFormat, timeFormat, selectedStatusesArray, selectedProvince);
+  const { data: mapData, isLoading: isMapGameListLoading } = useMapGamesList(dateFormat, timeFormat, selectedStatusesArray, selectedProvince,);
 
   const mapDataList = mapData?.data || [];
 
@@ -77,6 +77,7 @@ export const useGamesPage = () => {
     timeFormat,
     selectedStatusesArray,
     selectedProvince,
+    searchValue
   );
 
   const allGames = gamesData?.pages.flatMap((page) => page.data.items) || [];

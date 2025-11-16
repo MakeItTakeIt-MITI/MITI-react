@@ -6,11 +6,12 @@ export const gamesListOnly = async (
     starttime: string,
     game_status: string[],
     province: string[],
+    search: string | null,
     cursor: number | null,
     limit: number
 ) => {
     try {
-        const params = { startdate, starttime, game_status, province, cursor, limit };
+        const params = { startdate, starttime, game_status, province, search, cursor, limit };
 
         const cleanParams = Object.fromEntries(
             Object.entries(params).filter(([_, v]) => {
@@ -42,7 +43,7 @@ export const mapGamesList = async (
     province: string[]
 ) => {
     try {
-        const params = { startdate, starttime, game_status, province };
+        const params = { startdate, starttime, game_status, province, };
 
         const cleanParams = Object.fromEntries(
             Object.entries(params).filter(([_, v]) => {

@@ -5,7 +5,8 @@ export const useGamesListData = (
   startdate: string,
   starttime: string,
   game_status: string[],
-  selectedProvince: string[]
+  selectedProvince: string[],
+  search: string | null
 ) => {
   return useInfiniteQuery({
     queryKey: [
@@ -14,6 +15,7 @@ export const useGamesListData = (
       starttime,
       ...game_status,
       ...selectedProvince,
+      search,
     ],
     queryFn: ({ pageParam }) =>
       gamesListOnly(
@@ -21,6 +23,7 @@ export const useGamesListData = (
         starttime,
         game_status,
         selectedProvince,
+        search,
         pageParam,
         20
       ),
