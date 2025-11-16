@@ -1,6 +1,6 @@
 import { useTimeField } from "../../../../../../store/Sidebar/useTimeFieldStore";
 import DatesField from "../../../sidebar/DatesField";
-import GameStatusField from "../../../sidebar/_GameStatusField";
+import GameStatusField from "../../../sidebar/GameStatusField";
 import { useCallback, useEffect, useMemo } from "react";
 import TimesFieldMobile from "./TimesFieldMobile";
 import useGameStatusStore from "../../../../store/useGameStatusStore";

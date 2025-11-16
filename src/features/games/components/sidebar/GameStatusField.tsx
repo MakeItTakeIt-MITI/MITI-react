@@ -13,7 +13,7 @@ export default function GameStatusField({
 }: GameStatusFieldProps) {
   return (
     <div className="flex flex-col gap-4">
-      <p className="font-bold text-sm text-[#fff]">경기 시작 시간</p>
+      <p className="font-bold text-sm text-[#fff]">경기 상태</p>
       <div className="flex md:flex-col gap-2.5">
         <div className="flex gap-2.5">
           <GameStatus
