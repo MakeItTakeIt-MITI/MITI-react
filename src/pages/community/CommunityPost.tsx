@@ -10,6 +10,17 @@ export default function CommunityPost() {
 
   const { data: postComments } = useGetPostComments(Number(id));
 
+  const handleSharePost = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          url: window.location.href,
+        })
+        .then(() => console.log("share success"))
+        .catch((error) => console.log(error, "share failed"));
+    }
+  };
+
   return (
     <section
       style={{
@@ -21,6 +32,7 @@ export default function CommunityPost() {
       <PostDetailContainer
         postDetails={postDetails}
         postComments={postComments}
+        handleSharePost={handleSharePost}
       />
     </section>
   );

@@ -11,11 +11,13 @@ import PostCategoryChip from "../PostCategoryChip.tsx";
 interface PostDetailContainerProps {
   postDetails: CommunityPostDetail;
   postComments: any;
+  handleSharePost?: () => void;
 }
 
 const PostDetailContainer = ({
   postDetails,
   postComments,
+  handleSharePost,
 }: PostDetailContainerProps) => {
   return (
     <article className="w-full flex flex-col gap-6">
@@ -51,13 +53,24 @@ const PostDetailContainer = ({
           {/* LIKES & SHARE */}
         </div>
         <div className="flex flex-col gap-3">
-          {/* Reply Section */}
-          <LikeCommentFeatures
-            likes_src={like_button_medium}
-            likes_count={postDetails?.liked_users.length}
-            comment_src={share_button}
-            comments_count={postDetails?.num_of_comments}
-          />
+          <div className="flex items-center gap-5 text-base text-[#737373] font-[500]">
+            <div className="flex items-center gap-2">
+              <img src={like_button_medium} alt={like_button_medium} />
+
+              <div className="flex gap-[2px]">
+                <span>좋아요</span>
+                <span>{postDetails?.liked_users.length}</span>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={handleSharePost}
+              className="flex items-center gap-2"
+            >
+              <img src={share_button} alt={share_button} />
+              <span>공유하기</span>
+            </button>
+          </div>
           <h4 className="font-bold text-sm text-white">댓글</h4>
           {/* COMMENTS */}
           {postComments?.data.map((comment: UserCommentsField) => (
