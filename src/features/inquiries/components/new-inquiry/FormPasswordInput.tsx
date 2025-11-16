@@ -21,7 +21,8 @@ const FormPasswordInput = ({
         <input
           {...register("password")}
           autoComplete="new-password"
-          placeholder="비밀번호 4자리 숫자"
+          placeholder="숫자 4자리 비밀번호를 입력해주세요."
+          maxLength={4}
           type={displayPassword ? "text" : "password"}
           className="w-full bg-[#141414] border-none outline-none text-white"
         />

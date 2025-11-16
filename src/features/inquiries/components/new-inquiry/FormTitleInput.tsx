@@ -14,7 +14,7 @@ const FormTitleInput = ({ register, erase_input }: FormTitleInputProps) => {
         <input
           {...register("title")}
           autoComplete="off"
-          placeholder="제목을 임력해주세요"
+          placeholder="제목을 입력해주세요."
           type="text"
           className="w-full bg-[#141414] border-none outline-none text-white"
         />
