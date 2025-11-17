@@ -69,10 +69,10 @@ export const Games = () => {
           handleSetYearMonthDay={handleSetYearMonthDay}
           dateFormat={dateFormat}
           todayMonth={selectedMonth}
-          tab={tab}
           selectedProvince={selectedProvince}
           handleSetProvinceState={handleSetProvinceState}
           handleResetSidebarSettings={handleResetSidebarSettings}
+          tab={tab}
         />
         <GameMapListContainer
           handleToggleTab={handleToggleTab}

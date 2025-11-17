@@ -26,16 +26,11 @@ export default function GamesList({
 
   return (
     <ul className="overflow-y-auto w-full flex flex-col  sm:gap-4 md:gap-[31px] h-[720px]  custom-scrollbar p-2">
-      {isGamesListLoading ? (
-        <>
-          <SkeletonCard /> <SkeletonCard /> <SkeletonCard /> <SkeletonCard />{" "}
-          <SkeletonCard /> <SkeletonCard />
-        </>
-      ) : (
-        allGames?.map((game: GameField) => (
-          <GamesListCard key={game.id} game={game} />
-        ))
-      )}
+      {isGamesListLoading
+        ? Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)
+        : allGames?.map((game: GameField) => (
+            <GamesListCard key={game.id} game={game} />
+          ))}
       <div ref={inViewGameListRef} style={{ height: "1px" }} />
     </ul>
   );

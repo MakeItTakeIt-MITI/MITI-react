@@ -3,7 +3,7 @@ import like_button_medium from "../../../../assets/v1.3/icon/like-icon-md.svg";
 
 import share_button from "../../../../assets/v1.3/icon/share-icon-md.svg";
 import { CategoryType, CommunityPostDetail } from "../../interface/post.ts";
-import LikeCommentFeatures from "./LikeCommentFeatures.tsx";
+// import LikeCommentFeatures from "./LikeCommentFeatures.tsx";
 import CommentsContainer from "./CommentsContainer.tsx";
 import { UserCommentsField } from "../../interface/comments.ts";
 import PostCategoryChip from "../PostCategoryChip.tsx";

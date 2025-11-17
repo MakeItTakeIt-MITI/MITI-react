@@ -2,8 +2,7 @@ import qs from 'qs';
 import axiosUrl from "../../../utils/axios.ts";
 
 export const gamesListOnly = async (
-    startdate: string,
-    starttime: string,
+
     game_status: string[],
     province: string[],
     search: string | null,
@@ -11,7 +10,7 @@ export const gamesListOnly = async (
     limit: number
 ) => {
     try {
-        const params = { startdate, starttime, game_status, province, search, cursor, limit };
+        const params = { game_status, province, search, cursor, limit };
 
         const cleanParams = Object.fromEntries(
             Object.entries(params).filter(([_, v]) => {

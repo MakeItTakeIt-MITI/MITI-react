@@ -10,10 +10,10 @@ interface GameSideBarProps {
   handleSetYearMonthDay: (year: number, month: number, day: number) => void;
   dateFormat: string;
   todayMonth: number;
-  tab: string;
   selectedProvince: string[];
   handleSetProvinceState: (province: string) => void;
   handleResetSidebarSettings: () => void;
+  tab: string;
 }
 
 export default function GameSideBar({
@@ -21,13 +21,11 @@ export default function GameSideBar({
   handleSetYearMonthDay,
   dateFormat,
   todayMonth,
-  tab,
   selectedProvince,
   handleSetProvinceState,
   handleResetSidebarSettings,
+  tab,
 }: GameSideBarProps) {
-  const isMap = tab === "map";
-
   return (
     <aside
       style={{ width: "238px", height: "" }}
@@ -36,14 +34,18 @@ export default function GameSideBar({
       <ResetStatusField
         handleResetSidebarSettings={handleResetSidebarSettings}
       />
+      {tab === "map" && (
+        <>
+          <DatesField
+            INITIAL_DATES={INITIAL_DATES}
+            handleSetYearMonthDay={handleSetYearMonthDay}
+            dateFormat={dateFormat}
+            todayMonth={todayMonth}
+          />
+          <TimesField />
+        </>
+      )}
 
-      <DatesField
-        INITIAL_DATES={INITIAL_DATES}
-        handleSetYearMonthDay={handleSetYearMonthDay}
-        dateFormat={dateFormat}
-        todayMonth={todayMonth}
-      />
-      <TimesField />
       <GameStatusContainer />
       <ProvinceField
         selectedProvince={selectedProvince}

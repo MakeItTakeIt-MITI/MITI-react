@@ -12,7 +12,7 @@ interface GamesListCardProps {
 }
 
 export default function GamesListCard({ game }: GamesListCardProps) {
-  // const [isHovered, setIsHovered] = useState(false);
+  if (!game) return null;
 
   return (
     <li className="w-full  p-1  hover:custom-card-shadow  hover:transition-all ease-in-out">
