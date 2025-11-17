@@ -23,6 +23,11 @@ const FormPasswordInput = ({
           autoComplete="new-password"
           placeholder="숫자 4자리 비밀번호를 입력해주세요."
           maxLength={4}
+          inputMode="numeric"
+          pattern="(?:0|[1-9]\d*)"
+          onChange={(e) => {
+            e.target.value = e.target.value.replace(/\D/g, "");
+          }}
           type={displayPassword ? "text" : "password"}
           className="w-full bg-[#141414] border-none outline-none text-white"
         />

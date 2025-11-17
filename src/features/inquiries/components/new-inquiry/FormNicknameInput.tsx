@@ -20,7 +20,7 @@ const FormNicknameInput = ({
         <input
           {...register("nickname")}
           autoComplete="new-nickname"
-          placeholder="닉네임을 임력해주세요"
+          placeholder="닉네임을 입력해주세요."
           type="text"
           className="w-full bg-[#141414] border-none outline-none text-white"
         />
