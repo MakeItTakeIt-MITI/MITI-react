@@ -30,7 +30,7 @@ const InquiryForm = () => {
   // const passwordRegex = /^[0-9]{4}$/;
 
   // validations per spec
-  const passwordRegex = /^.{4,20}$/;
+  const passwordRegex = /^[A-Za-z0-9!@#$%^&*()]{4,20}$/;
   const nicknameRegex = /^[A-Za-z0-9가-힣]{2,15}$/; // 2~15 chars: Korean/English/numbers
 
   const titleTrim = (title ?? "").trim();
