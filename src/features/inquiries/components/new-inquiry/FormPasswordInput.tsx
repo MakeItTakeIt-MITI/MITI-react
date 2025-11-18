@@ -19,7 +19,7 @@ const FormPasswordInput = ({
       <h4 className="text-sm text-[#fff]">비밀번호</h4>
       <div className="flex h-[44px] gap-3 items-center w-full p-3 border border-[#737373]  rounded-[10px] ">
         <input
-          {...register("password", { maxLength: 4 })}
+          {...register("password", { minLength: 4, maxLength: 20 })}
           autoComplete="new-password"
           placeholder="4~20자 비밀번호를 입력해주세요."
           maxLength={4}
