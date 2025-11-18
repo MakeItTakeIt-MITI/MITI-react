@@ -33,11 +33,11 @@ export default function GameStatusField({
             onClick={() => handleToggleGameStatus("completed")}
             gameStatusArray={gameStatusArray}
           />
-          <GameStatus
+          {/* <GameStatus
             status="경기 취소"
             onClick={() => handleToggleGameStatus("canceled")}
             gameStatusArray={gameStatusArray}
-          />
+          /> */}
         </div>
       </div>
     </div>

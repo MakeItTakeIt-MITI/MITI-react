@@ -15,6 +15,7 @@ interface MobileFilterModalProps {
   selectedProvince: string[];
   handleResetProvince: () => void;
   handleSetProvinceState: (province: string) => void;
+  tab: string;
 }
 
 const MobileFilterModal = ({
@@ -22,6 +23,7 @@ const MobileFilterModal = ({
   selectedProvince,
   handleResetProvince,
   handleSetProvinceState,
+  tab,
 }: MobileFilterModalProps) => {
   const {} = useGamesPage();
   const { INITIAL_DATES, handleSetYearMonthDay, dateFormat } = useDatesLogic();
@@ -157,14 +159,18 @@ const MobileFilterModal = ({
             </ul>
           </div>
 
-          <DatesField
-            INITIAL_DATES={INITIAL_DATES}
-            handleSetYearMonthDay={handleSetYearMonthDay}
-            dateFormat={dateFormat}
-            todayMonth={selectedMonth}
-          />
+          {tab === "map" && (
+            <>
+              <DatesField
+                INITIAL_DATES={INITIAL_DATES}
+                handleSetYearMonthDay={handleSetYearMonthDay}
+                dateFormat={dateFormat}
+                todayMonth={selectedMonth}
+              />
 
-          <TimesFieldMobile />
+              <TimesFieldMobile />
+            </>
+          )}
 
           <GameStatusField
             gameStatusArray={game_status}

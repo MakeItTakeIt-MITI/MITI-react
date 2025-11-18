@@ -55,6 +55,7 @@ export default function GameMapListContainer({
           selectedProvince={selectedProvince}
           handleResetProvince={handleResetProvince}
           handleSetProvinceState={handleSetProvinceState}
+          tab={tab}
         />
       )}
 

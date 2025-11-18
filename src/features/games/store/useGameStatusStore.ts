@@ -19,7 +19,7 @@ const useGameStatusStore = create<GameStatusState>((set) => ({
       { status: "closed", tag: '모집 마감', isSelected: true },
     ],
     [
-      { status: "canceled", tag: '경기 취소', isSelected: false },
+      // { status: "canceled", tag: '경기 취소', isSelected: false },
       { status: "completed", tag: '경기 완료', isSelected: true },
     ],
   ],
