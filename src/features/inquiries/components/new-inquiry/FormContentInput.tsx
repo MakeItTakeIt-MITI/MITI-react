@@ -8,7 +8,7 @@ interface FormContentInputProps {
 const FormContentInput = ({ register }: FormContentInputProps) => {
   return (
     <div className="space-y-1">
-      <h4 className="text-sm text-[#fff]"> 문의 제목</h4>
+      <h4 className="text-sm text-[#fff]"> 문의 내용</h4>
       <textarea
         {...register("content")}
         style={{

@@ -19,15 +19,10 @@ const FormPasswordInput = ({
       <h4 className="text-sm text-[#fff]">비밀번호</h4>
       <div className="flex h-[44px] gap-3 items-center w-full p-3 border border-[#737373]  rounded-[10px] ">
         <input
-          {...register("password")}
+          {...register("password", { maxLength: 4 })}
           autoComplete="new-password"
-          placeholder="숫자 4자리 비밀번호를 입력해주세요."
+          placeholder="4~20자 비밀번호를 입력해주세요."
           maxLength={4}
-          inputMode="numeric"
-          pattern="(?:0|[1-9]\d*)"
-          onChange={(e) => {
-            e.target.value = e.target.value.replace(/\D/g, "");
-          }}
           type={displayPassword ? "text" : "password"}
           className="w-full bg-[#141414] border-none outline-none text-white"
         />

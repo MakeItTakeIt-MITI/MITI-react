@@ -27,10 +27,23 @@ const InquiryForm = () => {
   const content = watch("content");
   const nickname = watch("nickname");
 
-  const passwordRegex = /^[0-9]{4}$/;
+  // const passwordRegex = /^[0-9]{4}$/;
 
-  const isFormFilled =
-    title && password && content && nickname && passwordRegex.test(password);
+  // validations per spec
+  const passwordRegex = /^.{4,20}$/;
+  const nicknameRegex = /^[A-Za-z0-9가-힣]{2,15}$/; // 2~15 chars: Korean/English/numbers
+
+  const titleTrim = (title ?? "").trim();
+  const contentTrim = (content ?? "").trim();
+  const nicknameTrim = (nickname ?? "").trim();
+  const passwordStr = password ?? "";
+
+  const titleOk = titleTrim.length > 0 && titleTrim.length <= 32;
+  const contentOk = contentTrim.length > 0; // no max length, just required
+  const passwordOk = passwordRegex.test(passwordStr);
+  const nicknameOk = nicknameRegex.test(nicknameTrim);
+
+  const isFormFilled = titleOk && contentOk && passwordOk && nicknameOk;
 
   const handleTogglePassword = useCallback(() => {
     setDisplayPassword((prev) => !prev);
