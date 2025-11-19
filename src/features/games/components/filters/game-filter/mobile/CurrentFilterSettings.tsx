@@ -8,16 +8,31 @@ interface CurrentFilterSettingsProps {
   handleToggleMobileFilterBox: () => void;
   selectedProvince: string[];
   handleResetProvince: () => void;
+  tab: string;
 }
 
 const CurrentFilterSettings = ({
   handleToggleMobileFilterBox,
   selectedProvince,
   handleResetProvince,
+  tab,
 }: CurrentFilterSettingsProps) => {
-  const { resetToToday } = useDateStore();
-  const { resetTime } = useTimeField();
+  const { selectedDay, selectedMonth, resetToToday } = useDateStore();
+  const { hour, minutes, resetTime } = useTimeField();
   const { gameStatusArray, resetAllStatuses } = useGameStatusStore();
+
+  const getKoreanTimeFormat = (
+    hour: string | number,
+    minutes: string | number
+  ) => {
+    const h = Number(hour);
+    const m = Number(minutes);
+    const period = h < 12 ? "오전" : "오후";
+    const displayHour = h === 0 ? 12 : h > 12 ? h - 12 : h;
+    return `${period} ${displayHour}시 ${m}분`;
+  };
+
+  const timeFormat = getKoreanTimeFormat(hour, minutes);
 
   // Get selected game statuses from store
   const selectedGameStatuses = useMemo(() => {
@@ -48,6 +63,31 @@ const CurrentFilterSettings = ({
             초기화
           </button>
         </li>
+        {tab === "map" && (
+          <>
+            <li>
+              <button
+                type="button"
+                onClick={handleToggleMobileFilterBox}
+                className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3 flex items-center gap-1"
+              >
+                <span> {`${selectedMonth}.${selectedDay}일`}</span>
+
+                <img src={close_icon} alt="Close" />
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={handleToggleMobileFilterBox}
+                className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3 flex items-center gap-1"
+              >
+                <span> {timeFormat}</span>
+                <img src={close_icon} alt="Close" />
+              </button>
+            </li>{" "}
+          </>
+        )}
 
         <li>
           <button

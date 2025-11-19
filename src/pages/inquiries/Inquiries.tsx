@@ -7,19 +7,19 @@ import InquiriesListContainer from "../../features/inquiries/components/inquiry-
 import useInquiryPage from "@/features/inquiries/hooks/useInquiryPage.ts";
 // import Pagination from "@/features/inquiries/components/Pagination.tsx";
 
-import left from "../../assets/v11/pagination-left.svg";
-import right from "../../assets/v11/pagination-right.svg";
+// import left from "../../assets/v11/pagination-left.svg";
+// import right from "../../assets/v11/pagination-right.svg";
 
 const InquiriesList = () => {
   const {
     isLoading,
     anonymousInquiriesList,
-    hasNextPage,
-    hasPreviousPage,
-    fetchNextPage,
-    fetchPreviousPage,
-    isFetching,
-    currentPage,
+    // hasNextPage,
+    // hasPreviousPage,
+    // fetchNextPage,
+    // fetchPreviousPage,
+    // isFetching,
+    // currentPage,
   } = useInquiryPage();
 
   return (

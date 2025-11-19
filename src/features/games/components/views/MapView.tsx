@@ -15,6 +15,7 @@ interface MapViewProps {
   handleCurrentGeoLocation: () => void;
   selectedAddress: string | null;
   isSelected: boolean;
+  tab: string;
 }
 
 export default function MapView({
@@ -27,6 +28,7 @@ export default function MapView({
   handleCurrentGeoLocation,
   selectedAddress,
   isSelected,
+  tab,
 }: MapViewProps) {
   return (
     <div className="flex flex-col gap-5 w-full h-full">
@@ -43,6 +45,7 @@ export default function MapView({
           handleToggleMobileFilterBox={handleToggleMobileFilterBox}
           selectedProvince={selectedProvince}
           handleResetProvince={handleResetProvince}
+          tab={tab}
         />
 
         <ScrollableGameList

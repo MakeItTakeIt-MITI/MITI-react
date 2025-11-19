@@ -71,6 +71,7 @@ export default function GameMapListContainer({
           handleCurrentGeoLocation={handleCurrentGeoLocation}
           selectedAddress={selectedAddress}
           isSelected={isSelected}
+          tab={tab}
         />
       ) : (
         <ListView

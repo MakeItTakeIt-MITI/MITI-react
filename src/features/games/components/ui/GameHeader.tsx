@@ -6,6 +6,7 @@ interface GameHeaderProps {
   handleToggleMobileFilterBox: () => void;
   selectedProvince: string[];
   handleResetProvince: () => void;
+  tab: string;
 }
 
 export default function GameHeader({
@@ -13,6 +14,7 @@ export default function GameHeader({
   handleToggleMobileFilterBox,
   selectedProvince,
   handleResetProvince,
+  tab,
 }: GameHeaderProps) {
   return (
     <div className="space-y-3">
@@ -34,6 +36,7 @@ export default function GameHeader({
         handleToggleMobileFilterBox={handleToggleMobileFilterBox}
         selectedProvince={selectedProvince}
         handleResetProvince={handleResetProvince}
+        tab={tab}
       />
     </div>
   );
