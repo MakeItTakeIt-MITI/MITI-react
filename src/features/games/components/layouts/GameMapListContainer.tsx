@@ -81,6 +81,7 @@ export default function GameMapListContainer({
           handleToggleMobileFilterBox={handleToggleMobileFilterBox}
           selectedProvince={selectedProvince}
           handleResetProvince={handleResetProvince}
+          tab={tab}
         />
       )}
     </div>

@@ -10,6 +10,7 @@ interface ListViewProps {
   handleToggleMobileFilterBox: () => void;
   selectedProvince: string[];
   handleResetProvince: () => void;
+  tab: string;
 }
 
 export default function ListView({
@@ -19,6 +20,7 @@ export default function ListView({
   handleToggleMobileFilterBox,
   selectedProvince,
   handleResetProvince,
+  tab,
 }: ListViewProps) {
   return (
     <div className="flex flex-col gap-5 w-full md:px-0 sm:px-4">
@@ -28,6 +30,7 @@ export default function ListView({
         handleToggleMobileFilterBox={handleToggleMobileFilterBox}
         selectedProvince={selectedProvince}
         handleResetProvince={handleResetProvince}
+        tab={tab}
       />
       <GamesList
         allGames={allGames}
