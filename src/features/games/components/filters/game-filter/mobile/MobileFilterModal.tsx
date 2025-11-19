@@ -123,16 +123,20 @@ const MobileFilterModal = ({
         <div className="flex flex-col  gap-5">
           <div className="md:hidden w-full overflow-x-auto">
             <ul className="flex items-center gap-1.5 min-w-max">
-              <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3 flex items-center gap-1">
-                <span>
-                  {selectedMonth}.{selectedDay}일
-                </span>
-                <img src={close_icon} alt="close icon" />
-              </li>
-              <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3  flex items-center gap-1">
-                <span> {timeFormat}</span>
-                <img src={close_icon} alt="close icon" />
-              </li>{" "}
+              {tab === "map" && (
+                <>
+                  <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3 flex items-center gap-1">
+                    <span>
+                      {selectedMonth}.{selectedDay}일
+                    </span>
+                    <img src={close_icon} alt="close icon" />
+                  </li>
+                  <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3  flex items-center gap-1">
+                    <span> {timeFormat}</span>
+                    <img src={close_icon} alt="close icon" />
+                  </li>{" "}
+                </>
+              )}
               <li className="text-[#1ADCDF] text-xs font-[500] border border-[#292929] rounded-[50px] py-2 px-3  flex items-center gap-1">
                 {selectedGameStatuses.length > 0
                   ? selectedGameStatuses.map((status, idx) => (
