@@ -1,37 +1,26 @@
-import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
-import Pagination from "../../features/inquiries/components/Pagination.tsx";
 import Header from "../../features/inquiries/components/Header.tsx";
 import SearchBar from "../../features/common/components(renewal)/search/SearchBar.tsx";
 import SubmitInquiryButton from "../../features/inquiries/components/SubmitInquiryButton.tsx";
-import InquiriesListContainer from "../../features/inquiries/components/InquiriesListContainer.tsx";
-import { useAnonymousInquriesList } from "../../features/inquiries/hooks/useAnonymousInquriesList.tsx";
+import InquiriesListContainer from "../../features/inquiries/components/inquiry-list/InquiriesListContainer.tsx";
+import useInquiryPage from "@/features/inquiries/hooks/useInquiryPage.ts";
+// import Pagination from "@/features/inquiries/components/Pagination.tsx";
+
+import left from "../../assets/v11/pagination-left.svg";
+import right from "../../assets/v11/pagination-right.svg";
 
 const InquiriesList = () => {
-  const [_, setPageNumber] = useState<number>(1);
-
-  const { data: anonymousInquiresData, isLoading } = useAnonymousInquriesList();
-
-  // derive pagination / content safely
-  const currentPage =
-    anonymousInquiresData?.pages?.[0]?.data?.current_index ?? 1;
-  const pageLength =
-    anonymousInquiresData?.pages?.[0]?.data?.page_content?.length ?? 0;
-
-  const inquiriesPageContentData = useMemo(
-    () =>
-      anonymousInquiresData?.pages?.flatMap(
-        (page) => page?.data?.page_content ?? []
-      ) ?? [],
-    [anonymousInquiresData]
-  );
-
-  // build pages array if API exposes total pages, otherwise fallback to single page
-  const pagesArray = useMemo(() => {
-    const total = anonymousInquiresData?.pages?.[0]?.data?.total_pages ?? 1;
-    return Array.from({ length: Math.max(1, total) }, (_, i) => i + 1);
-  }, [anonymousInquiresData]);
+  const {
+    isLoading,
+    anonymousInquiriesList,
+    hasNextPage,
+    hasPreviousPage,
+    fetchNextPage,
+    fetchPreviousPage,
+    isFetching,
+    currentPage,
+  } = useInquiryPage();
 
   return (
     <section
@@ -47,16 +36,38 @@ const InquiriesList = () => {
         </div>
 
         <InquiriesListContainer
-          inquriesPageContentData={inquiriesPageContentData}
+          anonymousInquiriesList={anonymousInquiriesList}
           isLoading={isLoading}
         />
 
-        <Pagination
-          setPageNumber={setPageNumber}
-          currentPage={currentPage}
-          pages={pagesArray}
-          pageLength={pageLength}
-        />
+        {/* Pagination */}
+        {/* <div className="flex items-center justify-center gap-2">
+          <button
+            type="button"
+            disabled={!hasPreviousPage || isFetching}
+            onClick={() => fetchPreviousPage()}
+          >
+            <img src={left} alt="left" />
+          </button>
+
+          {Array.from({ length: currentPage }).map((_, i) => (
+            <button
+              key={i}
+              className={`px-3 py-1 rounded ${
+                i + 1 === currentPage ? "bg-blue-500 text-white" : "bg-gray-200"
+              }`}
+            >
+              {i + 1}
+            </button>
+          ))}
+          <button
+            type="button"
+            disabled={!hasNextPage || isFetching}
+            onClick={() => fetchNextPage()}
+          >
+            <img src={right} alt="right" />
+          </button>
+        </div> */}
 
         <Link
           to="new"

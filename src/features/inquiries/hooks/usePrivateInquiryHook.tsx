@@ -1,16 +1,17 @@
 import { useMutation } from "@tanstack/react-query";
 import { addPrivateInquiry } from "../api/inquiry";
+import { useNavigate } from "react-router-dom";
 
 export const usePrivateInquiryHook = (reset: () => void) => {
+  const navigate = useNavigate();
+
   return useMutation({
     mutationFn: addPrivateInquiry,
     onSuccess: (data) => {
       const statusCode = data?.status_code;
-      if (statusCode == 201) {
-        alert(" 문의가 성공적으로 제출되었습니다!");
+      if (statusCode === 201) {
         reset();
-      } else {
-        alert(" 문의가 제출을 실패하셨습니다!");
+        navigate(`/inquiries/${data?.data.id}`);
       }
     },
   });

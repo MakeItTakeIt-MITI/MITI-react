@@ -1,9 +1,9 @@
 import React from "react";
-import InquiryCard from "./InquiryCard.tsx";
-import { InquiriesField } from "../interface/inquries.ts";
+import InquiryCard from "../InquiryCard.tsx";
+import { InquiriesField } from "../../interface/inquries.ts";
 
 interface InquiriesListContainerProps {
-  inquriesPageContentData?: InquiriesField[];
+  anonymousInquiriesList?: InquiriesField[];
   isLoading?: boolean;
 }
 
@@ -22,7 +22,7 @@ const SkeletonItem = () => (
 
 // main container component for inquiries list
 const InquiriesListContainer: React.FC<InquiriesListContainerProps> = ({
-  inquriesPageContentData = [],
+  anonymousInquiriesList = [],
   isLoading = false,
 }) => {
   if (isLoading) {
@@ -36,7 +36,7 @@ const InquiriesListContainer: React.FC<InquiriesListContainerProps> = ({
   }
 
   // handle empty state
-  if (!inquriesPageContentData.length) {
+  if (!anonymousInquiriesList.length) {
     return (
       <div className="text-[#999] text-center py-8">
         등록된 문의가 없습니다.
@@ -47,7 +47,7 @@ const InquiriesListContainer: React.FC<InquiriesListContainerProps> = ({
   // render actual inquiries list
   return (
     <ul className="sm:h-full md:min-h-[520px]">
-      {inquriesPageContentData.map((inquiry) => {
+      {anonymousInquiriesList.map((inquiry) => {
         const [year, month, day] = inquiry.created_at
           ?.split?.("T")?.[0]
           ?.split?.("-") ?? ["", "", ""];
