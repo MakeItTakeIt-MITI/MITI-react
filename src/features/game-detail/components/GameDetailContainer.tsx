@@ -242,7 +242,7 @@ const GameDetailContainer = ({
             <div className="space-x-2 font-[400] text-white flex items-center ">
               <img
                 src={getStarRating(
-                  gameDetailData?.host.host_rating.num_of_reviews
+                  gameDetailData?.host.host_rating.average_rating || 0
                 )}
                 alt="review ratings"
               />{" "}
