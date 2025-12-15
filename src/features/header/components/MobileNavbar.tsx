@@ -34,7 +34,13 @@ export default function MobileNavbar() {
       </div>
 
       {displayMenu && (
-        <div className="absolute top-14 left-0 right-0 text-white bg-[#000000E5] z-[99999] p-4">
+        <div
+          className={
+            isLanding
+              ? `absolute top-14 left-0 right-0 text-white bg-[#000000E5] z-[99999] p-4`
+              : `absolute top-14 left-0 right-0 text-white bg-[#141414] z-[99999] p-4`
+          }
+        >
           <ul className="flex flex-col gap-6 items-end text-sm font-bold ">
             <li onClick={() => setDisplayMenu(false)}>
               <Link to={getTodaysGamesQuery()}>경기 목록</Link>
