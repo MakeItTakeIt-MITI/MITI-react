@@ -43,7 +43,7 @@ export default function GameDetailMap({ lat, long }: GameDetailMapProps) {
   }, [lat, long]);
 
   return (
-    <div
+    <article
       id="game-details-map"
       className="w-full h-[241px]  md:size-[360px] md:rounded-[20px]"
     />

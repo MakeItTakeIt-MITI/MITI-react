@@ -56,7 +56,7 @@ export const Games = () => {
   };
 
   return (
-    <section
+    <main
       style={{
         backgroundColor: "#141414",
       }}
@@ -94,6 +94,6 @@ export const Games = () => {
           isSelected={isSelected}
         />
       </article>
-    </section>
+    </main>
   );
 };

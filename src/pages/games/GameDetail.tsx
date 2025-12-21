@@ -10,13 +10,13 @@ const GameDetail = () => {
   const { data: gameDetailData, isLoading } = useGameDetails({ id });
 
   return (
-    <section
+    <main
       style={{
         backgroundColor: "#141414",
       }}
       className="mx-auto  sm:w-full md:w-[968px] flex flex-col items-center gap-[30px] py-[30px] "
     >
-      <article className="w-full  flex sm:flex-col  md:flex-row justify-between">
+      <section className="w-full  flex sm:flex-col  md:flex-row justify-between">
         <GameDetailsPanel
           gameDetailData={gameDetailData?.data || {}}
           isLoading={isLoading}
@@ -25,9 +25,9 @@ const GameDetail = () => {
           gameDetailData={gameDetailData?.data || {}}
           isLoading={isLoading}
         />
-      </article>
+      </section>
       <BannerMedium type="dongtan_court" />
-    </section>
+    </main>
   );
 };
 

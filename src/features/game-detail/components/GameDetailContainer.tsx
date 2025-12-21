@@ -181,7 +181,7 @@ const GameDetailContainer = ({
   };
 
   return (
-    <div className="space-y-[30px] sm:w-full md:w-[578px] md:py-0 sm:py-2 sm:px-4 md:px-0">
+    <article className="space-y-[30px] sm:w-full md:w-[578px] md:py-0 sm:py-2 sm:px-4 md:px-0">
       {/* game details container */}
       <ul className="space-y-3 text-white">
         <li>
@@ -259,7 +259,7 @@ const GameDetailContainer = ({
       >
         {gameDetailData?.info}
       </p>
-    </div>
+    </article>
   );
 };
 
