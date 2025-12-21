@@ -1,0 +1,9 @@
+User-agent: *
+# Allow all pages
+Allow: /
+
+# Block build artifacts or private routes if needed
+# Disallow: /admin/
+# Disallow: /api/
+
+Sitemap: https://www.makeittakeit.kr/sitemap.xml
