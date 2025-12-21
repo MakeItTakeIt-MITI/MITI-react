@@ -63,7 +63,6 @@ export default function GameSideBar({
                 handleSetYearMonthDay={handleSetYearMonthDay}
                 dateFormat={dateFormat}
                 todayMonth={todayMonth}
-                aria-label="날짜 선택 필터 목록"
               />
             </div>
 

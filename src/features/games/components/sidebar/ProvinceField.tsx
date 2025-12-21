@@ -12,7 +12,7 @@ export default function ProvinceField({
 }: ProvinceFieldProps) {
   const { REGIONS } = useProvinceLogic();
   return (
-    <div className="flex flex-col gap-4">
+    <div role="listbox" aria-label="지역 선택" className="flex flex-col gap-4">
       <p className="md:block sm:hidden font-bold text-sm text-[#fff]">지역</p>
       <ul>
         {REGIONS.map((region) => (

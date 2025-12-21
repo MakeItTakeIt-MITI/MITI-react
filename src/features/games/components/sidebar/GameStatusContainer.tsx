@@ -4,7 +4,11 @@ const GameStatusContainer = () => {
   const { gameStatusArray, toggleStatusSelection } = useGameStatusStore();
 
   return (
-    <div className="flex flex-col gap-4">
+    <div
+      role="group"
+      aria-label="게임 상태 선택"
+      className="flex flex-col gap-4"
+    >
       <p className="font-bold text-sm text-[#fff]">경기 상태</p>
       <div className="flex md:flex-col gap-2.5">
         <div className="flex gap-2.5">

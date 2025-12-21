@@ -16,7 +16,12 @@ export default function DatesField({
   todayMonth,
 }: DatesFieldProps) {
   return (
-    <div className="flex flex-col gap-4">
+    <div
+      role="listbox"
+      aria-label="날짜 선택 필터 목록"
+      aria-describedby="date-filter-title"
+      className="flex flex-col gap-4"
+    >
       <p className="font-bold text-white">날짜</p>
       <div>
         <ul className="pb-2 flex gap-2 text-[#707070] text-xs font-bold overflow-x-scroll scrollbar-x-wide">
@@ -54,6 +59,8 @@ export default function DatesField({
                   }
                 >
                   <span
+                    role="option"
+                    aria-selected={isSelected}
                     style={{
                       color: date.dayKorean === "일" ? "#E83E3B" : "",
                     }}
