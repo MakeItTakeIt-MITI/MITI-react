@@ -63,6 +63,7 @@ export default function GameSideBar({
                 handleSetYearMonthDay={handleSetYearMonthDay}
                 dateFormat={dateFormat}
                 todayMonth={todayMonth}
+                aria-label="날짜 선택 필터 목록"
               />
             </div>
 
@@ -70,7 +71,7 @@ export default function GameSideBar({
               <h4 id="time-filter-title" className="sr-only">
                 시간 선택
               </h4>
-              <TimesField />
+              <TimesField aria-label="시간 선택 필터 목록" />
             </div>
           </section>
         </>
@@ -80,7 +81,7 @@ export default function GameSideBar({
         <h3 id="status-filter-title" className="sr-only">
           게임 상태 필터
         </h3>
-        <GameStatusContainer />
+        <GameStatusContainer aria-label="게임 상태 필터 목록" />
       </section>
 
       <section role="group" aria-labelledby="province-filter-title">
@@ -90,6 +91,7 @@ export default function GameSideBar({
         <ProvinceField
           selectedProvince={selectedProvince}
           toggleProvince={handleSetProvinceState}
+          aria-label="지역 선택 필터 목록"
         />
       </section>
     </aside>
