@@ -16,17 +16,22 @@ export default function DatesField({
   todayMonth,
 }: DatesFieldProps) {
   return (
-    <div
-      role="listbox"
-      aria-label="날짜 선택 필터 목록"
-      aria-describedby="date-filter-title"
-      className="flex flex-col gap-4"
-    >
-      <p className="font-bold text-white">날짜</p>
+    <div aria-labelledby="date-filter-title" className="flex flex-col gap-4">
+      <p id="date-filter-title" className="font-bold text-white">
+        날짜
+      </p>
       <div>
-        <ul className="pb-2 flex gap-2 text-[#707070] text-xs font-bold overflow-x-scroll scrollbar-x-wide">
+        <ul
+          role="listbox"
+          aria-label="날짜 선택"
+          aria-describedby="date-filter-title"
+          className="pb-2 flex gap-2 text-[#707070] text-xs font-bold overflow-x-scroll scrollbar-x-wide"
+        >
           {/* 첫 번째 월 표시 (시작 월) */}
-          <li className="text-[#7FEEF0] font-bold text-sm w-[37px] flex-shrink-0 flex items-center justify-center">
+          <li
+            className="text-[#7FEEF0] font-bold text-sm w-[37px] flex-shrink-0 flex items-center justify-center"
+            aria-label={`${Number(todayMonth)}월`}
+          >
             {Number(todayMonth) <= 12 && Number(todayMonth) > 0
               ? `${Number(todayMonth)}월`
               : ""}
@@ -37,7 +42,6 @@ export default function DatesField({
               2,
               "0"
             )}-${String(date.date).padStart(2, "0")}`;
-
             const isSelected = dateString.toString() === dateFormat.toString();
 
             const prevMonth =
@@ -47,23 +51,32 @@ export default function DatesField({
             return (
               <>
                 {isNewMonth && (
-                  <li className="text-[#7FEEF0] font-bold text-sm w-[37px] flex-shrink-0 flex items-center justify-center">
+                  <li
+                    className="text-[#7FEEF0] font-bold text-sm w-[37px] flex-shrink-0 flex items-center justify-center"
+                    aria-label={`${date.month}월`}
+                  >
                     {`${date.month}월`}
                   </li>
                 )}
 
                 <li
-                  className={`flex flex-col items-center justify-center gap-2 px-1 w-[32px] cursor-pointer`}
+                  role="option"
+                  aria-selected={isSelected}
+                  aria-label={`${date.year}년 ${date.month}월 ${date.date}일 (${date.dayKorean})`}
+                  tabIndex={0}
+                  className="flex flex-col items-center justify-center gap-2 px-1 w-[32px] cursor-pointer"
                   onClick={() =>
                     handleSetYearMonthDay(date.year, date.month, date.date)
                   }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      handleSetYearMonthDay(date.year, date.month, date.date);
+                    }
+                  }}
                 >
                   <span
-                    role="option"
-                    aria-selected={isSelected}
-                    style={{
-                      color: date.dayKorean === "일" ? "#E83E3B" : "",
-                    }}
+                    style={{ color: date.dayKorean === "일" ? "#E83E3B" : "" }}
                   >
                     {date.dayKorean}
                   </span>
