@@ -22,8 +22,8 @@ export default function Card({ game }: CardProps) {
 
         <div className="space-y-1 ">
           <GameAddress
-            address={game.court.address}
-            address_detail={game.court.address_detail}
+            address={game.address}
+            address_detail={game.address_detail}
           />
           <GameTime starttime={game.starttime} endtime={game.endtime} />
 
@@ -36,53 +36,6 @@ export default function Card({ game }: CardProps) {
           </div>
         </div>
       </Link>
-      {/* {isSelected ? (
-        <Link to={`/games/${game.id}`} className="flex flex-col gap-2.5">
-          <div className="space-y-2">
-            <GameStatus status={game.game_status} />
-            <GameTitle title={game.title} />
-          </div>
-
-          <div className="space-y-1 ">
-            <GameAddress
-              address={game.court.address}
-              address_detail={game.court.address_detail}
-            />
-            <GameTime starttime={game.starttime} endtime={game.endtime} />
-
-            <div className="flex items-center justify-between">
-              <GameParticipants
-                num_of_participations={game.num_of_participations}
-                max_invitation={game.max_invitation}
-              />
-              <GameFee fee={game.fee} size="md" />
-            </div>
-          </div>
-        </Link>
-      ) : (
-        <div className="flex flex-col gap-2.5">
-          <div className="space-y-2">
-            <GameStatus status={game.game_status} />
-            <GameTitle title={game.title} />
-          </div>
-
-          <div className="space-y-1 ">
-            <GameAddress
-              address={game.court.address}
-              address_detail={game.court.address_detail}
-            />
-            <GameTime starttime={game.starttime} endtime={game.endtime} />
-
-            <div className="flex items-center justify-between">
-              <GameParticipants
-                num_of_participations={game.num_of_participations}
-                max_invitation={game.max_invitation}
-              />
-              <GameFee fee={game.fee} size="md" />
-            </div>
-          </div>
-        </div>
-      )} */}
     </li>
   );
 }

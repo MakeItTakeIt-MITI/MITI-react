@@ -22,14 +22,14 @@ export interface GameDetail {
             num_of_reviews: number;
         };
     };
-    court: {
-        id: number;
-        name: string;
-        address: string;
-        address_detail: string | null;
-        latitude: string;
-        longitude: string;
-    };
+    // court: {
+    //     id: number;
+    court_name: string;
+    address: string;
+    address_detail: string | null;
+    latitude: string;
+    longitude: string;
+    // };
     participations: string[];
     is_host: boolean;
     user_participation_id: number | null;

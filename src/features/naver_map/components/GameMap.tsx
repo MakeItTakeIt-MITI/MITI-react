@@ -31,16 +31,14 @@ export default function GameMap({
   } = useSelectedStore();
   const { coordinates, setCoordinates } = useMapCoordinatesStore();
 
-  // const [isLocating, setIsLocating] = useState(false);
-  // const [isLocationActive, setIsLocationActive] = useState(false);
-
   const mapRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
 
-  // Create map & custom control robustly (create control once, update HTML on state changes)
   useEffect(() => {
     if (!window?.naver || !window.naver.maps || !window.naver.maps.LatLng)
       return;
+
+    console.log(geolocation?.lat, geolocation?.lon);
 
     // create map once
     if (!mapRef.current) {
@@ -49,7 +47,7 @@ export default function GameMap({
           geolocation?.lat || coordinates.lat,
           geolocation?.lon || coordinates.long
         ),
-        zoom: 12,
+        zoom: 14,
         scrollWheel: true,
         disableKineticPan: false,
         zoomControl: true,
@@ -68,13 +66,7 @@ export default function GameMap({
     } catch {}
 
     return () => {};
-  }, [
-    coordinates.lat,
-    coordinates.long,
-    // isLocating,
-    // isLocationActive,
-    setCoordinates,
-  ]);
+  }, [coordinates.lat, coordinates.long, setCoordinates]);
 
   // Update markers when mapDataList changes
   useEffect(() => {
@@ -86,17 +78,14 @@ export default function GameMap({
 
     const addressOverlapCount: Record<string, number> = {};
     mapDataList.forEach((game: GameField) => {
-      const addr = game.court.address;
+      const addr = game.address;
       addressOverlapCount[addr] = (addressOverlapCount[addr] || 0) + 1;
     });
 
     mapDataList.forEach((game: GameField) => {
-      const address = game.court.address;
+      const address = game.address;
       const marker = new window.naver.maps.Marker({
-        position: new window.naver.maps.LatLng(
-          game.court.latitude,
-          game.court.longitude
-        ),
+        position: new window.naver.maps.LatLng(game.latitude, game.longitude),
         map,
         title: game.title,
       });
@@ -111,11 +100,9 @@ export default function GameMap({
               type="button"
               style={{
                 backgroundColor:
-                  selectedAddress === game.court.address
-                    ? "#A3F1F2"
-                    : "#EBEBEB",
+                  selectedAddress === game.address ? "#A3F1F2" : "#EBEBEB",
                 border:
-                  selectedAddress === game.court.address
+                  selectedAddress === game.address
                     ? "1px solid black"
                     : "#d4d4d4",
               }}
@@ -132,11 +119,9 @@ export default function GameMap({
               <div
                 style={{
                   backgroundColor:
-                    selectedAddress === game.court.address
-                      ? "#A3F1F2"
-                      : "#EBEBEB",
+                    selectedAddress === game.address ? "#A3F1F2" : "#EBEBEB",
                   border:
-                    selectedAddress === game.court.address
+                    selectedAddress === game.address
                       ? "1px solid black"
                       : "#999",
                 }}
@@ -150,11 +135,9 @@ export default function GameMap({
             <button
               style={{
                 backgroundColor:
-                  selectedAddress === game.court.address
-                    ? "#A3F1F2"
-                    : "#EBEBEB",
+                  selectedAddress === game.address ? "#A3F1F2" : "#EBEBEB",
                 border:
-                  selectedAddress === game.court.address
+                  selectedAddress === game.address
                     ? "1px solid black"
                     : "#d4d4d4",
               }}
@@ -183,14 +166,11 @@ export default function GameMap({
       window.naver.maps.Event.addListener(marker, "click", () => {
         if (!isSelected) {
           toggleSelected();
-          setCoordinates(game.court.latitude, game.court.longitude);
-          setSelectedAddress(game.court.address);
+          setCoordinates(game.latitude, game.longitude);
+          setSelectedAddress(game.address);
           map.setZoom(18, true);
           map.setCenter(
-            new window.naver.maps.LatLng(
-              game.court.latitude,
-              game.court.longitude
-            )
+            new window.naver.maps.LatLng(game.latitude, game.longitude)
           );
         } else {
           setSelected(false);

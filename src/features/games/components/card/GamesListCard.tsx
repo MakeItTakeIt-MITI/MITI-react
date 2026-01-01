@@ -42,8 +42,8 @@ export default function GamesListCard({ game }: GamesListCardProps) {
           {/* Court Info / time / participants */}
           <div className="space-y-1">
             <GameAddress
-              address={game.court.address}
-              address_detail={game.court.address_detail}
+              address={game.address}
+              address_detail={game.address_detail}
             />
             <GameTime starttime={game.starttime} endtime={game.endtime} />
 

@@ -11,7 +11,7 @@ const FilteredGameListContainer = ({
   selectedAddress,
 }: FilteredContainerProps) => {
   const filteredAddress = allGamesData?.filter(
-    (game) => selectedAddress === game.court.address
+    (game) => selectedAddress === game.address
   );
 
   return (

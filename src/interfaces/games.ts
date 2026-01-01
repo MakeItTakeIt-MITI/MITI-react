@@ -15,7 +15,11 @@ export type Game = {
     starttime: string;
     enddate: string;
     endtime: string;
-    court: Court;
+    address: string;
+    address_detail: string;
+    latitude: string;
+    longitude: string;
+    court_name: string;
     fee: number;
     num_of_participations: number;
     min_invitation: number;

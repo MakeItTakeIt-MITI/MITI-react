@@ -204,8 +204,8 @@ const GameDetailContainer = ({
 
         <li>
           <GameAddress
-            address={gameDetailData?.court.address}
-            address_detail={gameDetailData?.court.name}
+            address={gameDetailData?.address}
+            address_detail={gameDetailData?.court_name}
           />
         </li>
         <li>

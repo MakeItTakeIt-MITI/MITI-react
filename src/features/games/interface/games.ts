@@ -31,5 +31,10 @@ export interface GameField {
     num_of_participations: number;
     fee: number;
     info?: string;
-    court: CourtField;
+    court_name: string;
+    address: string;
+    address_detail: string;
+    latitude: string;
+    longitude: string;
+    // court: CourtField;
 }
