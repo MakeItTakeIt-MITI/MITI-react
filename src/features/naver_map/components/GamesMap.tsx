@@ -52,18 +52,15 @@ GamesMapProps) {
     // * Count Address Overlaps *
     const addressOverlapCount: Record<string, number> = {};
     mapDataList.forEach((game: GameField) => {
-      const addr = game.court.address;
+      const addr = game.address;
       addressOverlapCount[addr] = (addressOverlapCount[addr] || 0) + 1;
     });
 
     // * Create Markers for Each Game */
     mapDataList.forEach((game: GameField) => {
-      const address = game.court.address;
+      const address = game.address;
       const marker = new window.naver.maps.Marker({
-        position: new window.naver.maps.LatLng(
-          game.court.latitude,
-          game.court.longitude
-        ),
+        position: new window.naver.maps.LatLng(game.latitude, game.longitude),
         map,
         title: game.title,
       });
@@ -75,11 +72,9 @@ GamesMapProps) {
               type="button"
               style={{
                 backgroundColor:
-                  selectedAddress === game.court.address
-                    ? "#A3F1F2"
-                    : "#EBEBEB",
+                  selectedAddress === game.address ? "#A3F1F2" : "#EBEBEB",
                 border:
-                  selectedAddress === game.court.address
+                  selectedAddress === game.address
                     ? "1px solid black"
                     : "#d4d4d4",
               }}
@@ -96,11 +91,9 @@ GamesMapProps) {
               <div
                 style={{
                   backgroundColor:
-                    selectedAddress === game.court.address
-                      ? "#A3F1F2"
-                      : "#EBEBEB",
+                    selectedAddress === game.address ? "#A3F1F2" : "#EBEBEB",
                   border:
-                    selectedAddress === game.court.address
+                    selectedAddress === game.address
                       ? "1px solid black"
                       : "#999",
                 }}
@@ -114,11 +107,9 @@ GamesMapProps) {
             <button
               style={{
                 backgroundColor:
-                  selectedAddress === game.court.address
-                    ? "#A3F1F2"
-                    : "#EBEBEB",
+                  selectedAddress === game.address ? "#A3F1F2" : "#EBEBEB",
                 border:
-                  selectedAddress === game.court.address
+                  selectedAddress === game.address
                     ? "1px solid black"
                     : "#d4d4d4",
               }}
@@ -147,14 +138,11 @@ GamesMapProps) {
       window.naver.maps.Event.addListener(marker, "click", () => {
         if (!isSelected) {
           toggleSelected();
-          setCoordinates(game.court.latitude, game.court.longitude);
-          setSelectedAddress(game.court.address);
+          setCoordinates(game.latitude, game.longitude);
+          setSelectedAddress(game.address);
           map.setZoom(18, true);
           map.setCenter(
-            new window.naver.maps.LatLng(
-              game.court.latitude,
-              game.court.longitude
-            )
+            new window.naver.maps.LatLng(game.latitude, game.longitude)
           );
         } else {
           setSelected(false);

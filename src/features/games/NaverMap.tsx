@@ -45,7 +45,7 @@ const NaverMap = ({
   const addressesList: string[] = [];
   if (allGamesData && Array.isArray(allGamesData)) {
     allGamesData?.forEach((game) => {
-      addressesList.push(game.court.address);
+      addressesList.push(game.address);
     });
   }
 
@@ -71,7 +71,7 @@ const NaverMap = ({
       const game = allGamesData[index];
 
       const filteredAddresses = addressesList.filter(
-        (address) => address === game.court.address
+        (address) => address === game.address
       );
 
       const markerCount = filteredAddresses.length;
@@ -138,10 +138,7 @@ const NaverMap = ({
   </a>`;
 
       const marker = new naver.maps.Marker({
-        position: new naver.maps.LatLng(
-          game.court.latitude,
-          game.court.longitude
-        ),
+        position: new naver.maps.LatLng(game.latitude, game.longitude),
         zoom: 12,
         map: naverMap,
         gameId: game.id,
@@ -186,7 +183,7 @@ const NaverMap = ({
         }
 
         setIsAddressSelected(selectedMarker !== null);
-        setSelectedAddress(game.court.address);
+        setSelectedAddress(game.address);
       });
     }
 
