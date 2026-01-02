@@ -1,6 +1,6 @@
 
+// import { GameStatus } from '../types/gameStatus';
 import { create } from 'zustand';
-import { GAMESTATUS } from '../constants/status.ts';
 
 
 
@@ -10,7 +10,7 @@ type StatusSelectionStore = {
     resetStatuses: () => void;
 };
 
-const INITIAL_STATUSES = GAMESTATUS
+const INITIAL_STATUSES = ['open', 'canceled', 'closed', 'completed'];
 
 const useStatusSelectionStore = create<StatusSelectionStore>((set) => ({
     selectedStatuses: INITIAL_STATUSES,

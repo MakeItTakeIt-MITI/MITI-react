@@ -18,7 +18,7 @@ export const GameCardStatic = ({
   return (
     <div
       onClick={() => {
-        handleSetCoords(game.court.latitude, game.court.longitude, game.id);
+        handleSetCoords(game.latitude, game.longitude, game.id);
         if (isClicked) {
           isClicked(true);
         }
