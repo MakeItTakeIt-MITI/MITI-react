@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Footer from "../../features/common/components/Footer.tsx";
+import Footer from "../../features/common/components(renewal)/common/Footer.tsx";
 import check from "../../assets/v11.2/auth/check.svg";
 import { useLoginStore } from "../../features/auth/state/useLoginStore.tsx";
 import { useNavigate } from "react-router-dom";

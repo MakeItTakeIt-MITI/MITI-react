@@ -1,4 +1,4 @@
-import { APPLE_STORE, PLAYSTORE } from "../../../utils/app.ts";
+import { APPLE_STORE, PLAYSTORE } from "../../../../utils/app.ts";
 
 const MoveToAppBanner = () => {
   const userAgent = navigator.userAgent;

@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/extensions
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";

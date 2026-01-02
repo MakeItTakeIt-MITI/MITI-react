@@ -11,13 +11,23 @@ module.exports = {
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
-  plugins: ["react-refresh", "import"],
+  plugins: ["react-refresh", "import", "unused-imports"],
   rules: {
+    "no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        vars: "all",
+        varsIgnorePattern: "^_",
+        args: "after-used",
+        argsIgnorePattern: "^_",
+      },
+    ],
     "import/no-unused-modules": [
       1,
       { unusedExports: true, missingExports: true },
     ],
-
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },
@@ -25,20 +35,12 @@ module.exports = {
     "import/extensions": [
       "error",
       "always",
-      {
-        ts: "always", // Require .ts extension for TypeScript files
-        tsx: "always", // Require .tsx extension for TypeScript JSX files
-        js: "always", // Require .js extension for JavaScript files
-        jsx: "always", // Require .jsx extension for JavaScript JSX files
-      },
+      { ts: "always", tsx: "always", js: "always", jsx: "always" },
     ],
   },
   settings: {
     "import/resolver": {
-      node: {
-        extensions: [".js", ".jsx", ".ts", ".tsx"], // Resolve TS and TSX extensions
-        node,
-      },
+      node: { extensions: [".js", ".jsx", ".ts", ".tsx"] },
     },
   },
 };

@@ -39,7 +39,7 @@ export default function StoreButton({ size, type, status }: StoreButtonProps) {
         flex items-center justify-center
         rounded-lg
         ${size === "md" ? "gap-2" : "gap-1"}
-        ${status === "inactive" ? "bg-[#444444]" : "bg-[#1ADCDF]"} 
+        ${status === "inactive" ? "bg-[#444444]" : "bg-miti-brand"} 
     ${size === "md" ? "w-[120px] h-[36px]" : "w-[100px] h-[28px]"}
    
     `}

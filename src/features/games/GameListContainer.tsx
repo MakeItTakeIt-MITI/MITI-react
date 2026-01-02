@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { AllGamesProps } from "../../interfaces/games.ts";
 import { GameCardSkeleton } from "../../features/games/components/GameCardSkeleton.tsx";
-// import GameListCard from "./GameListCard.tsx";
 
 import "./scrollbar.css";
 import { GameCardLink } from "../../features/games/components/GameCardLink.tsx";
-import { ListContainerLayout } from "../../features/common/components/ListContainerLayout.tsx";
 import { GameCardStatic } from "./components/cards/GameCardStatic.tsx";
 
 interface GameListProps extends AllGamesProps {
@@ -21,7 +19,7 @@ const GameListContainer = ({
 }: GameListProps) => {
   const [clicked, isClicked] = useState(false);
   return (
-    <ListContainerLayout height={500}>
+    <article className="sm:hidden md:block custom-scrollbar bg-light-dark w-full  p-4 rounded-[4px] space-y-3 overflow-y-scroll h-[500px]">
       {isLoading && (
         <>
           {Array.from({ length: 5 }).map((_, index) => (
@@ -65,7 +63,7 @@ const GameListContainer = ({
           // />
         )
       )}
-    </ListContainerLayout>
+    </article>
   );
 };
 

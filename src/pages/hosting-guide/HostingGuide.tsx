@@ -1,4 +1,4 @@
-import Footer from "../../features/common/components/Footer.tsx";
+import Footer from "../../features/common/components(renewal)/common/Footer.tsx";
 
 import FourthArticle from "../../features/hosting-guide/components/FourthArticle.tsx";
 import FirstCarousel from "../../features/hosting-guide/components/FirstCarousel.tsx";

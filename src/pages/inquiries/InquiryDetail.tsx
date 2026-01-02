@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useInquiryDetailsHook } from "../../features/inquiries/hooks/useInquiryDetailsHook";
 import Modal from "../../features/inquiries/components/Modal";
-// import MoveToAppBanner from "../../features/common/components/MoveToAppBanner";
 import chevron_left from "../../assets/v1.3/inquiries/chevron-left.svg";
 import UserInquiryInfo from "../../features/inquiry-details/components/UserInquiryInfo";
 

@@ -1,6 +1,6 @@
 import logo from "../../assets/v11.2/auth/logo.svg";
 import private_pass from "../../assets/v11.2/auth/private.svg";
-import Footer from "../../features/common/components/Footer.tsx";
+import Footer from "../../features/common/components(renewal)/common/Footer.tsx";
 import { useEmailLoginHook } from "../../features/auth/hooks/useEmailLoginHook.tsx";
 import { useForm } from "react-hook-form";
 import { EmailLoginField } from "../../features/auth/interface/auth.ts";

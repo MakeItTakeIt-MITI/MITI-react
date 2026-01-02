@@ -1,4 +1,4 @@
-import MoveToAppBanner from "../../features/common/components/MoveToAppBanner.tsx";
+import MoveToAppBanner from "../../features/common/components(renewal)/common/MoveToAppBanner.tsx";
 
 const NotFound = () => {
   return (

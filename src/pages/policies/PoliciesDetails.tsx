@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
-import Footer from "../../features/common/components/Footer.tsx";
+import Footer from "../../features/common/components(renewal)/common/Footer.tsx";
 import { usePolicyDetailHook } from "../../features/policies/hooks/usePolicyDetailHook.tsx";
 import "../../features/policies/css/policy-detail.css";
-import MoveToAppBanner from "../../features/common/components/MoveToAppBanner.tsx";
+import MoveToAppBanner from "../../features/common/components(renewal)/common/MoveToAppBanner.tsx";
 
 const PoliciesDetails = () => {
   const { id } = useParams();

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import Footer from "../../features/common/components/Footer.tsx";
+import Footer from "../../features/common/components(renewal)/common/Footer.tsx";
 import { useServiceTermsDataHook } from "../../features/policies/hooks/useServiceTermsDataHook.tsx";
 import { PoliciesField } from "../../interfaces/support.ts";
-import MoveToAppBanner from "../../features/common/components/MoveToAppBanner.tsx";
+import MoveToAppBanner from "../../features/common/components(renewal)/common/MoveToAppBanner.tsx";
 
 const Policies = () => {
   const { data } = useServiceTermsDataHook();

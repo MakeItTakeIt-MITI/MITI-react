@@ -19,7 +19,7 @@ export default function Button({
         font-bold
         h-[44px]
         rounded-lg
-        bg-[#1ADCDF]
+        bg-miti-brand
     
          ${widthClass}
       `}

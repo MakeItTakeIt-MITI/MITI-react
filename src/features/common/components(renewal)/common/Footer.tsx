@@ -1,11 +1,11 @@
-import instagram_icon from "../../../assets/v1.3/footer/instagram-link.svg";
-import youtube_icon from "../../../assets/v1.3/footer/youtube.svg";
-import miti_logo from "../../../assets/v1.3/footer/miti_logo.svg";
-import miti_logo_sm from "../../../assets/v1.3/footer/miti_logo_sm.svg";
-import playstore from "../../../assets/v1.3/footer/google-play.svg";
-import applestore from "../../../assets/v1.3/footer/Apple Store.svg";
+import instagram_icon from "../../../../assets/v1.3/footer/instagram-link.svg";
+import youtube_icon from "../../../../assets/v1.3/footer/youtube.svg";
+import miti_logo from "../../../../assets/v1.3/footer/miti_logo.svg";
+import miti_logo_sm from "../../../../assets/v1.3/footer/miti_logo_sm.svg";
+import playstore from "../../../../assets/v1.3/footer/google-play.svg";
+import applestore from "../../../../assets/v1.3/footer/Apple Store.svg";
 import { Link, useLocation } from "react-router-dom";
-import { APPLE_STORE, PLAYSTORE } from "../../../utils/app.ts";
+import { APPLE_STORE, PLAYSTORE } from "../../../../utils/app.ts";
 
 const Footer = () => {
   const { pathname } = useLocation();
