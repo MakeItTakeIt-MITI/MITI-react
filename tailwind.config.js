@@ -8,6 +8,18 @@ export default {
       md: "600px",
     },
     colors: {
+      miti: {
+        bg: "#141414",
+        brand: "#1ADCDF",
+        brandLight: "#7FEEF0",
+        brandAlt: "#A3F1F2",
+        grayDark: "#2A2A2A",
+        grayMid: "#5C5C5C",
+        grayText: "#737373",
+        black: "#000000",
+        white: "#ffffff",
+        danger: "#E83E3B",
+      },
       "primary-black": "#171717",
       "secondary-black": "#262626",
       "light-dark": "#343434",
