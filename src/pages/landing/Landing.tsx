@@ -1,11 +1,16 @@
 import "../../index.css";
 import landing from "../../assets/v1.3/landing-header.png";
 import landing_sm from "../../assets/v1.3/landing/sm_header.png";
+// import Spline from "@splinetool/react-spline";
+// import Spline from "@splinetool/react-spline/next";
 
 import main_bg from "../../assets/v1.3/landing/main_bg_v2.jpg";
 
 const Landing = () => {
   return (
+    // <main>
+    //   <Spline scene="https://prod.spline.design/P5gnQWM2GVC9sGgQ/scene.splinecode" />
+    // </main>
     <section
       style={{
         background: `url(${main_bg})`,
