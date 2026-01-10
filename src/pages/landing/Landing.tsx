@@ -20,7 +20,7 @@ const Landing = () => {
           }}
           className="absolute w-full h-full"
         >
-          {/* <Spline
+          <Spline
             style={{
               width: "100%",
               height: "100%",
@@ -28,7 +28,7 @@ const Landing = () => {
               background: "transparent",
             }}
             scene="https://prod.spline.design/Inkh7fCyycdIyOfT/scene.splinecode"
-          /> */}
+          />
 
           {/* Buttons */}
           <div
