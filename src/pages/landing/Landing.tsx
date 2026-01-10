@@ -1,37 +1,105 @@
-import "../../index.css";
-import landing from "../../assets/v1.3/landing-header.png";
-import landing_sm from "../../assets/v1.3/landing/sm_header.png";
-// import Spline from "@splinetool/react-spline";
-// import Spline from "@splinetool/react-spline/next";
-
-import main_bg from "../../assets/v1.3/landing/main_bg_v2.jpg";
+import Spline from "@splinetool/react-spline";
+import "./spline.css";
+import { Link } from "react-router-dom";
 
 const Landing = () => {
   return (
-    // <main>
-    //   <Spline scene="https://prod.spline.design/P5gnQWM2GVC9sGgQ/scene.splinecode" />
-    // </main>
-    <section
-      style={{
-        background: `url(${main_bg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-      className="relative overflow-hidden min-h-screen  "
-    >
-      <div className="sm:w-full md:w-[1074px] mx-auto py-[176.5px] flex flex-col gap-12 relative z-20 md:px-0 sm:px-4">
-        <div className="flex items-center justify-center">
-          <img src={landing} alt={landing} className="sm:hidden md:block" />
-          <img
-            src={landing_sm}
-            alt={landing_sm}
-            className="md:hidden sm:block"
+    <>
+      {/* Mobile */}
+      <div
+        style={{
+          zIndex: 1,
+          backgroundColor: "#000",
+        }}
+        className="sm:block md:hidden h-screen w-full relative"
+      >
+        <div className="absolute w-full h-full">
+          <Spline
+            style={{
+              width: "100%",
+              height: "100%",
+              // This creates a visible box from top-left (0,0) to bottom-right (100%, 90%)
+              clipPath: "inset(0 0 8% 0)",
+              background: "transparent",
+            }}
+            scene="https://prod.spline.design/Inkh7fCyycdIyOfT/scene.splinecode"
           />
         </div>
-        {/* <CardsContainer /> */}
       </div>
-    </section>
+
+      {/* Destktop */}
+      <main className="bg-[#000] relative sm:hidden md:block">
+        <div
+          id="landing-text"
+          style={{ zIndex: 9999 }}
+          className="absolute bottom-[156px] left-[370px] flex flex-col gap-[28px] z-[8888px] text-white"
+        >
+          <div className="flex flex-col gap-[36px]">
+            <p className=" w-[206px] h-[58px] rounded-full text-2xl text-[#A3F1F2]  border border-[#1ADCDF] bg-[#11AADD33] flex items-center justify-center ">
+              지금 시작하세요!
+            </p>
+            <div className="font-bold ">
+              <h1 className="text-[60px]">오늘 퇴근하고</h1>
+              <h1 className="text-[80px]">
+                <span className="text-miti-brand">농구</span> 어떠세요?
+              </h1>
+            </div>
+            <p className="text-[26px] text-[#ADADAD] font-[500]">
+              번거로움은 그만, 농구만 즐기세요! <br />
+              농구를 즐기는데 필요한 모든 일은 미티가 대신하겠습니다.
+            </p>
+          </div>
+
+          <div className="flex gap-[28px] text-[24px] font-bold">
+            <Link
+              to="/games"
+              aria-label="오늘의 경기 보러가기"
+              className="
+      w-[270px] h-[82px] inline-flex items-center justify-center text-white bg-miti-brand rounded-full font-bold
+      transition-transform transition-shadow duration-200 ease-out
+      hover:shadow-xl hover:-translate-y-1 hover:opacity-95
+      focus:outline-none focus:ring-4 focus:ring-miti-brandLight/30
+    "
+            >
+              오늘의 경기 보러가기
+            </Link>
+
+            <Link
+              to="/host-guide"
+              aria-label="게스트 모집 가이드"
+              className="
+      w-[270px] h-[82px] inline-flex items-center justify-center bg-transparent text-white rounded-full border border-miti-brand font-bold
+      transition-colors transition-transform duration-200
+      hover:bg-miti-brand/10 hover:border-miti-brand hover:shadow-sm hover:-translate-y-0.5
+      focus:outline-none focus:ring-4 focus:ring-miti-brandLight/20
+    "
+            >
+              게스트 모집 가이드
+            </Link>
+          </div>
+        </div>{" "}
+        <div
+          id="spline-container"
+          className="w-[1200px] h-[800px] mx-auto relative "
+        >
+          <div className="relative h-[720px] overflow-hidden">
+            <div className="absolute inset-0 spline-wrapper pointer-events-auto z-1">
+              <Spline
+                scene="https://prod.spline.design/Inkh7fCyycdIyOfT/scene.splinecode"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  position: "absolute",
+                  right: "-200px",
+                  background: "transparent",
+                  zIndex: 1,
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </main>
+    </>
   );
 };
 

@@ -1,0 +1,6 @@
+.spline-wrapper,
+.spline-wrapper .spline-container,
+.spline-wrapper .spline-container canvas,
+.spline-wrapper iframe {
+  background: transparent !important;
+}
