@@ -16,7 +16,7 @@ const Footer = () => {
       <footer
         className={
           isLanding
-            ? "bg-[#000000D9] md:absolute md:bottom-0 md:left-0 md:right-0   z-[9999] w-full md:h-[246px] sm:h-[400px] sm:px-4 md:px-0 py-[30px] flex flex-col items-center justify-center gap-5"
+            ? "bg-[#000000D9]  z-[9999] w-full md:h-[246px] sm:h-[400px] sm:px-4 md:px-0 py-[30px] flex flex-col items-center justify-center gap-5"
             : "bg-[#141414] z-[9999] w-full md:h-[246px] sm:h-[400px] sm:px-4 md:px-0 py-[30px] flex flex-col items-center justify-center gap-5"
         }
       >

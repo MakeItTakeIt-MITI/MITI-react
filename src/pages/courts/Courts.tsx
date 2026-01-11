@@ -20,7 +20,7 @@ export default function Courts() {
       style={{
         backgroundColor: "#141414",
       }}
-      className="mx-auto sm:w-full md:w-[968px] flex flex-col sm:px-4 md:px-0  md:items-center gap-[30px] py-[30px]"
+      className="mx-auto sm:w-full md:w-[968px] min-h-screen flex flex-col sm:px-4 md:px-0  md:items-center gap-[30px] py-[30px]"
     >
       <section className="flex  gap-[30px]">
         <CourtsSidebar

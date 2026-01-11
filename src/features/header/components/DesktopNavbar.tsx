@@ -13,7 +13,7 @@ export default function DesktopNavbar() {
       aria-label="웹페이지 기본 내비게이션"
       className={
         (isLanding
-          ? "sm:hidden md:flex absolute top-0 left-0 right-0 px-[360px] h-[60px] bg-[#000000D9] items-center justify-center z-40"
+          ? "sm:hidden md:flex  px-[360px] h-[60px] bg-[#000000D9] items-center justify-center z-40"
           : "sm:hidden md:flex w-full px-[360px] h-[60px] bg-[#141414] items-center justify-center") +
         " transition-colors"
       }
