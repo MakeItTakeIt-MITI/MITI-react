@@ -120,7 +120,7 @@ const Landing = () => {
         style={{
           backgroundColor: "#000",
         }}
-        className=" relative sm:hidden md:block "
+        className="min-h-screen relative sm:hidden md:block "
       >
         <div id="spline-container" className="w-full h-full mx-auto relative ">
           <div
