@@ -21,9 +21,6 @@ interface VideoCardProps {
 
 const VideoCard = ({ video }: VideoCardProps) => {
   const thumbnailMediumUrl = video?.snippet.thumbnails.medium.url;
-  const thumbnailStandardUrl = video?.snippet.thumbnails.standard.url;
-  const bgImage =
-    window.innerWidth >= 768 ? thumbnailMediumUrl : thumbnailStandardUrl;
 
   const title = video?.snippet.title;
   return (
@@ -34,7 +31,7 @@ const VideoCard = ({ video }: VideoCardProps) => {
     >
       <div
         style={{
-          backgroundImage: `url(${bgImage})`,
+          backgroundImage: `url(${thumbnailMediumUrl})`,
         }}
         className={`h-full w-full bg-cover bg-center bg-no-repeat`}
       ></div>
