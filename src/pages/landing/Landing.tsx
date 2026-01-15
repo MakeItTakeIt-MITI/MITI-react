@@ -1,6 +1,7 @@
 import Spline from "@splinetool/react-spline";
 import "./spline.css";
 import { Link } from "react-router-dom";
+import VideoCard from "@/features/landing/components/VideoCard";
 // import { useState } from "react";
 
 const Landing = () => {
@@ -120,7 +121,7 @@ const Landing = () => {
         style={{
           backgroundColor: "#000",
         }}
-        className="min-h-screen relative sm:hidden md:block "
+        className=" relative sm:hidden md:block "
       >
         <div id="spline-container" className="w-full h-full mx-auto relative ">
           <div
@@ -174,7 +175,7 @@ const Landing = () => {
           </div>{" "}
           <div className="relative h-screen overflow-hidden">
             <div className="absolute inset-0 spline-wrapper pointer-events-auto z-1">
-              <Spline
+              {/* <Spline
                 scene="https://prod.spline.design/Inkh7fCyycdIyOfT/scene.splinecode"
                 style={{
                   width: "100%",
@@ -184,9 +185,31 @@ const Landing = () => {
                   background: "transparent",
                   zIndex: 1,
                 }}
-              />
+              /> */}
             </div>
           </div>
+        </div>
+
+        {/* Video Playlist */}
+        <div className="flex flex-col items-center gap-12 text-white h-[800px] p-4">
+          <div className="flex flex-col gap-[38px] items-center ">
+            <h2 className="text-[48px] font-bold">경기 영상 찾아보기</h2>
+            <p className="text-[24px] font-medium">
+              자신의 플레이를 확인해보세요!
+            </p>
+          </div>
+          <div className="flex items-center gap-10">
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+          </div>
+          <Link
+            to="https://www.youtube.com/@MITI_MakeItTakeIt"
+            className="underline text-[#999] font-[400] text-[18px]"
+          >
+            모든 경기 영상 보러가기
+          </Link>
         </div>
       </main>
     </>
