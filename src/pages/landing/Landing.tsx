@@ -126,13 +126,13 @@ const Landing = () => {
           <div
             id="landing-text"
             style={{ zIndex: 9999 }}
-            className="absolute bottom-[156px] left-[370px] flex flex-col gap-[28px] z-[8888px] text-white"
+            className="absolute bottom-[30%] left-[370px] flex flex-col gap-[28px] z-[8888px] text-white"
           >
             <div className="flex flex-col gap-[36px]">
               <p className=" w-[154px] h-[46px] rounded-full text-base text-[#A3F1F2]  border border-[#1ADCDF] bg-[#11AADD33] flex items-center justify-center ">
                 지금 시작하세요!
               </p>
-              <div className="font-bold  leading-[1.2] ">
+              <div className="font-bold  leading-[1.1] ">
                 <h1 className="text-[60px]">오늘 퇴근하고</h1>
                 <h1 className="text-[80px]">
                   <span className="text-miti-brand">농구</span> 어떠세요?
@@ -172,19 +172,19 @@ const Landing = () => {
               </button> */}
             </div>
           </div>{" "}
-          <div className="relative h-[750px] overflow-hidden">
+          <div className="relative h-screen overflow-hidden">
             <div className="absolute inset-0 spline-wrapper pointer-events-auto z-1">
-              <Spline
+              {/* <Spline
                 scene="https://prod.spline.design/Inkh7fCyycdIyOfT/scene.splinecode"
                 style={{
                   width: "100%",
-                  height: "100%",
+                  height: "80%",
                   position: "absolute",
                   right: "-200px",
                   background: "transparent",
                   zIndex: 1,
                 }}
-              />
+              /> */}
             </div>
           </div>
         </div>
