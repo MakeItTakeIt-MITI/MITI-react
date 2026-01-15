@@ -1,11 +1,17 @@
 import Spline from "@splinetool/react-spline";
 import "./spline.css";
 import { Link } from "react-router-dom";
-import VideoCard from "@/features/landing/components/VideoCard";
 import "../../features/landing/style/landing.css";
+import { useYoutuBePlaylist } from "@/features/landing/hooks/useYoutubePlaylist";
+import VideoPlaylistContainer from "@/features/landing/components/DesktopVideoPlaylist";
 // import { useState } from "react";
 
+const PLAYLIST_ID = "PLOU4W5XbHwpKXmG3HN_vQmarlYhqOJI5L";
+const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
+
 const Landing = () => {
+  const { data: youtTubeData } = useYoutuBePlaylist(PLAYLIST_ID, API_KEY);
+
   // const [openVideo, setOpenVideo] = useState(true);
 
   // const handleVideoOpen = () => {
@@ -116,33 +122,7 @@ const Landing = () => {
           </div>
         </div>
 
-        <div className="flex flex-col items-center gap-12 text-white  ">
-          <div className="flex flex-col gap-[38px] items-center ">
-            <h2 className="text-[24px] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#1ADCDF] via-[#FFFFFF] to-[#87E3E4] gradient-text">
-              경기 영상 찾아보기
-            </h2>
-            <p className="text-[18px] font-medium">
-              자신의 플레이를 확인해보세요!
-            </p>
-          </div>
-          <div
-            className="
-          grid md:grid-cols-4 sm:grid-cols-2
-          gap-[17px]"
-          >
-            <VideoCard />
-            <VideoCard />
-            <VideoCard />
-            <VideoCard />
-          </div>
-          <Link
-            target="_blank"
-            to="https://www.youtube.com/@MITI_MakeItTakeIt"
-            className="underline text-[#999] font-[400] text-[14px]"
-          >
-            모든 경기 영상 보러가기
-          </Link>
-        </div>
+        <VideoPlaylistContainer youtubeData={youtTubeData?.items} />
       </div>
 
       {/* Destktop */}
@@ -220,33 +200,7 @@ const Landing = () => {
         </div>
 
         {/* Video Playlist */}
-        <div className="flex flex-col items-center gap-12 text-white h-[800px] p-4">
-          <div className="flex flex-col gap-[38px] items-center ">
-            <h2 className="text-[48px] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#1ADCDF] via-[#FFFFFF] to-[#87E3E4] gradient-text">
-              경기 영상 찾아보기
-            </h2>{" "}
-            <p className="text-[24px] font-medium">
-              자신의 플레이를 확인해보세요!
-            </p>
-          </div>
-          <div
-            className="
-          grid md:grid-cols-4 sm:grid-cols-2
-          gap-10"
-          >
-            <VideoCard />
-            <VideoCard />
-            <VideoCard />
-            <VideoCard />
-          </div>
-          <Link
-            target="_blank"
-            to="https://www.youtube.com/@MITI_MakeItTakeIt"
-            className="underline text-[#999] font-[400] text-[18px]"
-          >
-            모든 경기 영상 보러가기
-          </Link>
-        </div>
+        <VideoPlaylistContainer youtubeData={youtTubeData?.items} />
       </main>
     </>
   );
