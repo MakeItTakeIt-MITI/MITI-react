@@ -2,6 +2,7 @@ import Spline from "@splinetool/react-spline";
 import "./spline.css";
 import { Link } from "react-router-dom";
 import VideoCard from "@/features/landing/components/VideoCard";
+import "../../features/landing/style/landing.css";
 // import { useState } from "react";
 
 const Landing = () => {
@@ -64,14 +65,14 @@ const Landing = () => {
           zIndex: 1,
           backgroundColor: "#000",
         }}
-        className="sm:block md:hidden h-screen w-full relative"
+        className="sm:block md:hidden min-h-screen w-full "
       >
         {/* SPLINE container */}
         <div
           style={{
             zIndex: 1,
           }}
-          className="absolute w-full h-full"
+          className=" w-full h-full h-screen"
         >
           <Spline
             style={{
@@ -113,6 +114,34 @@ const Landing = () => {
               오늘 참여 가능한 경기
             </Link>
           </div>
+        </div>
+
+        <div className="flex flex-col items-center gap-12 text-white  ">
+          <div className="flex flex-col gap-[38px] items-center ">
+            <h2 className="text-[24px] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#1ADCDF] via-[#FFFFFF] to-[#87E3E4] gradient-text">
+              경기 영상 찾아보기
+            </h2>
+            <p className="text-[18px] font-medium">
+              자신의 플레이를 확인해보세요!
+            </p>
+          </div>
+          <div
+            className="
+          grid md:grid-cols-4 sm:grid-cols-2
+          gap-[17px]"
+          >
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+          </div>
+          <Link
+            target="_blank"
+            to="https://www.youtube.com/@MITI_MakeItTakeIt"
+            className="underline text-[#999] font-[400] text-[14px]"
+          >
+            모든 경기 영상 보러가기
+          </Link>
         </div>
       </div>
 
@@ -193,18 +222,25 @@ const Landing = () => {
         {/* Video Playlist */}
         <div className="flex flex-col items-center gap-12 text-white h-[800px] p-4">
           <div className="flex flex-col gap-[38px] items-center ">
-            <h2 className="text-[48px] font-bold">경기 영상 찾아보기</h2>
+            <h2 className="text-[48px] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#1ADCDF] via-[#FFFFFF] to-[#87E3E4] gradient-text">
+              경기 영상 찾아보기
+            </h2>{" "}
             <p className="text-[24px] font-medium">
               자신의 플레이를 확인해보세요!
             </p>
           </div>
-          <div className="flex items-center gap-10">
+          <div
+            className="
+          grid md:grid-cols-4 sm:grid-cols-2
+          gap-10"
+          >
             <VideoCard />
             <VideoCard />
             <VideoCard />
             <VideoCard />
           </div>
           <Link
+            target="_blank"
             to="https://www.youtube.com/@MITI_MakeItTakeIt"
             className="underline text-[#999] font-[400] text-[18px]"
           >
