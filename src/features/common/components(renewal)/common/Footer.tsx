@@ -59,7 +59,7 @@ const Footer = () => {
             <div className="flex items-center gap-5">
               <div>
                 <a
-                  href="https://www.instagram.com/miti_makeittakeit_official/"
+                  href="https://www.instagram.com/makeittakeit.kr/"
                   target="_blank"
                 >
                   <img src={instagram_icon} alt="instagram_icon" />

@@ -174,7 +174,7 @@ const Landing = () => {
           </div>{" "}
           <div className="relative h-screen overflow-hidden">
             <div className="absolute inset-0 spline-wrapper pointer-events-auto z-1">
-              {/* <Spline
+              <Spline
                 scene="https://prod.spline.design/Inkh7fCyycdIyOfT/scene.splinecode"
                 style={{
                   width: "100%",
@@ -184,7 +184,7 @@ const Landing = () => {
                   background: "transparent",
                   zIndex: 1,
                 }}
-              /> */}
+              />
             </div>
           </div>
         </div>
