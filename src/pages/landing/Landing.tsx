@@ -3,7 +3,7 @@ import "./spline.css";
 import { Link } from "react-router-dom";
 import "../../features/landing/style/landing.css";
 import { useYoutuBePlaylist } from "@/features/landing/hooks/useYoutubePlaylist";
-import VideoPlaylistContainer from "@/features/landing/components/DesktopVideoPlaylist";
+import VideoPlaylistContainer from "@/features/landing/components/VideoPlaylistContainer";
 // import { useState } from "react";
 
 const PLAYLIST_ID = "PLOU4W5XbHwpKXmG3HN_vQmarlYhqOJI5L";
