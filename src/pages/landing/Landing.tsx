@@ -13,7 +13,7 @@ const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 const Landing = () => {
   const { data: youtTubeData } = useYoutuBePlaylist(PLAYLIST_ID, API_KEY);
 
-  const [openVideo, setOpenVideo] = useState(true);
+  const [openVideo, setOpenVideo] = useState(false);
 
   useEffect(() => {
     if (!openVideo) return;
