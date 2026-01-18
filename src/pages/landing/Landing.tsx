@@ -7,7 +7,7 @@ import VideoPlaylistContainer from "@/features/landing/components/VideoPlaylistC
 import { useEffect, useState } from "react";
 // import { useState } from "react";
 
-const PLAYLIST_ID = "PLOU4W5XbHwpKXmG3HN_vQmarlYhqOJI5L";
+const PLAYLIST_ID = "PLOU4W5XbHwpIYTlUMNQfviDnG6_OdVE0n";
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
 const Landing = () => {
