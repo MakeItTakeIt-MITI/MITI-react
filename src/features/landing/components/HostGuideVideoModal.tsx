@@ -11,7 +11,7 @@ const HostGuideVideoModal = ({
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.volume = 0.3; // 50%
+      videoRef.current.volume = 0.3;
     }
   }, []);
   return (
