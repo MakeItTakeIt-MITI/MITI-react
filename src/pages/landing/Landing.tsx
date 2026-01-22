@@ -142,13 +142,13 @@ const Landing = () => {
         style={{
           backgroundColor: "#000",
         }}
-        className=" relative sm:hidden md:block "
+        className=" relative sm:hidden md:block space-y-20"
       >
         <div id="spline-container" className="w-full h-full mx-auto relative ">
           <div
             id="landing-text"
             style={{ zIndex: 9999 }}
-            className="absolute bottom-[30%] left-[370px] flex flex-col gap-[28px] z-[8888px] text-white"
+            className="absolute bottom-[15%] left-[370px] flex flex-col gap-[28px] z-[8888px] text-white"
           >
             <div className="flex flex-col gap-[36px]">
               <p className=" w-[154px] h-[46px] rounded-full text-base text-[#A3F1F2]  border border-[#1ADCDF] bg-[#11AADD33] flex items-center justify-center ">
@@ -172,7 +172,7 @@ const Landing = () => {
                 aria-label="오늘의 경기 보러가기"
                 className="
       w-[196px] h-[52px] inline-flex items-center justify-center text-white bg-miti-brand rounded-full font-bold
-      transition-transform transition-shadow duration-200 ease-out
+       duration-200 ease-out
       hover:shadow-xl hover:-translate-y-1 hover:opacity-95
       focus:outline-none focus:ring-4 focus:ring-miti-brandLight/30
     "
@@ -185,7 +185,7 @@ const Landing = () => {
                 onClick={handleVideoOpen}
                 className="
       w-[196px] h-[52px] inline-flex items-center justify-center bg-transparent text-white rounded-full border border-miti-brand font-bold
-      transition-colors transition-transform duration-200
+       duration-200
       hover:bg-miti-brand/10 hover:border-miti-brand hover:shadow-sm hover:-translate-y-0.5
       focus:outline-none focus:ring-4 focus:ring-miti-brandLight/20
     "
@@ -194,13 +194,13 @@ const Landing = () => {
               </button>
             </div>
           </div>{" "}
-          <div className="relative h-screen overflow-hidden">
+          <div className="relative h-[80vh] overflow-hidden">
             <div className="absolute inset-0 spline-wrapper pointer-events-auto z-1">
               <Spline
                 scene="https://prod.spline.design/Inkh7fCyycdIyOfT/scene.splinecode"
                 style={{
                   width: "100%",
-                  height: "80%",
+                  height: "100%",
                   position: "absolute",
                   right: "-200px",
                   background: "transparent",
@@ -208,6 +208,16 @@ const Landing = () => {
                 }}
               />
             </div>
+
+            {/* BOTTOM SHADOW OVERLAY */}
+            <div
+              className="absolute bottom-0 left-0 w-full h-[80px] z-10"
+              style={{
+                background:
+                  "linear-gradient(to top, rgba(0, 0, 0, 0.953), rgba(0,0,0,0.25), rgba(0,0,0,0))",
+              }}
+              aria-hidden="true"
+            />
           </div>
         </div>
 
