@@ -25,7 +25,7 @@ export default function MobileNavbar() {
       }
     >
       <div className="flex w-full justify-between items-center">
-        <Link to="/">
+        <Link to="/home">
           <img src={miti_logo} alt="miti logo" />
         </Link>
         <button type="button" onClick={handleToggleMenu}>

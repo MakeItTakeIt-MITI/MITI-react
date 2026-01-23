@@ -2,7 +2,11 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { Games } from "./pages/games/Games.tsx";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import GameDetail from "./pages/games/GameDetail.tsx";
@@ -28,6 +32,10 @@ const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
+    path: "/",
+    element: <Navigate to="/home" replace />,
+  },
+  {
     path: "/host-guide",
     children: [{ path: "", element: <HostingGuide /> }],
   },
@@ -35,7 +43,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      { path: "/", element: <Landing /> },
+      { path: "/home", element: <Landing /> },
       { path: "/auth", element: <Auth /> },
       { path: "/kakao/login", element: <KakaoAuthHandler /> },
       {
