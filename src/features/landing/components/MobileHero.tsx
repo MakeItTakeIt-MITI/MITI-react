@@ -11,13 +11,22 @@ const MobileHero = ({ handleVideoOpen }: MobileHeroProps) => {
       style={{
         zIndex: 1,
       }}
-      className=" w-full  h-[80vh] relative"
+      className=" w-full  h-[80vh] relative "
     >
+      <div
+        className="absolute left-0 bottom-0 right-0 w-full h-[160px] z-10 "
+        style={{
+          background:
+            "linear-gradient(to top, rgba(0, 0, 0, 0.953), rgba(0,0,0,0.25), rgba(0,0,0,0))",
+        }}
+        aria-hidden="true"
+      />
+
       <Spline
         style={{
           width: "100%",
           height: "100%",
-          clipPath: "inset(0 0 8% 0)",
+          clipPath: "inset(0 0 9% 0)",
           background: "transparent",
         }}
         scene="https://prod.spline.design/Inkh7fCyycdIyOfT/scene.splinecode"
@@ -26,7 +35,7 @@ const MobileHero = ({ handleVideoOpen }: MobileHeroProps) => {
       {/* Buttons */}
       <div
         style={{ zIndex: 10 }}
-        className="px-4 absolute bottom-[178px] left-0 right-0 flex flex-col gap-[42px]  justify-center"
+        className="  px-4 absolute bottom-[178px] left-0 right-0 flex flex-col gap-[42px]  justify-center"
       >
         <div className="text-white flex flex-col gap-3">
           <h2 className="w-[116px] h-[32px] text-sm bg-[#11AADD33]  text-[#A3F1F2] border border-[#A3F1F2] py-1.5 px-2 flex items-center justify-center rounded-full">

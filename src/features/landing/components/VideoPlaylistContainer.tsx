@@ -59,7 +59,7 @@ const VideoPlaylistContainer = ({
       </div>
 
       {/* Mobile */}
-      <div className="md:hidden sm:h-[602px] sm:flex flex-col items-center gap-12 text-white  ">
+      <div className=" md:hidden sm:min-h-[602px] sm:flex flex-col items-center gap-12 text-white sm:py-[60px] md:py-0 ">
         <div className="flex flex-col gap-[38px] items-center ">
           <h2 className="text-[24px] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#1ADCDF] via-[#FFFFFF] to-[#87E3E4] gradient-text">
             경기 영상 찾아보기
