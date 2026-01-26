@@ -28,6 +28,7 @@ const VideoCard = ({ video }: VideoCardProps) => {
       target="_blank"
       to={`https://www.youtube.com/watch?v=${video?.snippet.resourceId.videoId}`}
       className="md:w-[300px] md:h-[278px] sm:w-[163px] sm:h-[161px] flex flex-col bg-black rounded-lg border border-[#333] bg-[#141414]"
+      data-testid="video-card"
     >
       <div
         style={{

@@ -31,6 +31,7 @@ const DesktopHero = ({ handleVideoOpen }: DesktopHeroProps) => {
 
         <div className="flex gap-[28px] text-[18px] font-bold">
           <Link
+            data-testid="go-to-games-button"
             to="/games"
             aria-label="오늘의 경기 보러가기"
             className="
@@ -44,6 +45,7 @@ const DesktopHero = ({ handleVideoOpen }: DesktopHeroProps) => {
           </Link>
 
           <button
+            data-testid="open-host-guide-video-button"
             aria-label="게스트 모집 가이드"
             onClick={handleVideoOpen}
             className="
