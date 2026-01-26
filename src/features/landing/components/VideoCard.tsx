@@ -27,15 +27,15 @@ const VideoCard = ({ video }: VideoCardProps) => {
     <Link
       target="_blank"
       to={`https://www.youtube.com/watch?v=${video?.snippet.resourceId.videoId}`}
-      className="md:w-[300px] md:h-[278px] sm:w-[163px] sm:h-[170px] flex flex-col bg-black rounded-lg border border-[#333] bg-[#141414]"
+      className="md:w-[300px] md:h-[278px] sm:w-[163px] sm:h-[161px] flex flex-col bg-black rounded-lg border border-[#333] bg-[#141414]"
     >
       <div
         style={{
           backgroundImage: `url(${thumbnailMediumUrl})`,
         }}
-        className={`h-full w-full bg-cover bg-center bg-no-repeat`}
+        className={`md:h-[185px] sm:h-[109px] w-full bg-contain  bg-full bg-no-repeat rounded-lg`}
       ></div>
-      <div className="md:h-[78px] sm:h-[62px] p-3">
+      <div className="md:h-[76px] sm:h-[52px] p-3 ">
         <h1 className="text-white md:font-medium md:text-base sm:text-xs ">
           {title}
         </h1>
