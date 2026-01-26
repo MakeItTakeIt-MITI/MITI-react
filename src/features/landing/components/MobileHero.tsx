@@ -1,7 +1,11 @@
 import Spline from "@splinetool/react-spline";
 import { Link } from "react-router-dom";
 
-const MobileHero = () => {
+interface MobileHeroProps {
+  handleVideoOpen: () => void;
+}
+
+const MobileHero = ({ handleVideoOpen }: MobileHeroProps) => {
   return (
     <div
       style={{
@@ -52,6 +56,7 @@ const MobileHero = () => {
 
           <button
             aria-label="게스트 모집 가이드 영상"
+            onClick={handleVideoOpen}
             className=" 
     w-[144px] h-[36px] inline-flex items-center justify-center backdrop-blur-md text-white rounded-full border border-miti-brand  font-medium
        duration-200

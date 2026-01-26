@@ -34,7 +34,12 @@ const HostGuideVideoModal = ({
         onClick={(e) => e.stopPropagation()}
       >
         <video
-          className="w-full h-full object-cover bg-black"
+          className="
+    w-full h-full
+    bg-black
+    object-contain
+    md:object-cover
+  "
           ref={videoRef}
           controls
           playsInline

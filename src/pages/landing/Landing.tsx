@@ -28,7 +28,7 @@ const Landing = () => {
         }}
         className="sm:block md:hidden min-h-screen w-full "
       >
-        <MobileHero />
+        <MobileHero handleVideoOpen={handleVideoOpen} />
         <VideoPlaylistContainer youtubeData={youtTubeData?.items} />
       </main>
 
