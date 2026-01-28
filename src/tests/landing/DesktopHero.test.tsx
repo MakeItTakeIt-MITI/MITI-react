@@ -1,29 +1,28 @@
-import MobileHero from "../../src/features/landing/components/MobileHero.tsx";
+import DesktopHero from "../../features/landing/components/DesktopHero.tsx";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { describe, it, expect, vi } from "vitest";
 
-// Mock Spline since it's a heavy 3D component and doesn't run in JSDOM
 vi.mock("@splinetool/react-spline", () => ({
   default: (props: Record<string, any>) => (
     <div data-testid="spline-mock" aria-label={props["aria-label"]} />
   ),
 }));
 
-describe("MobileHero Component", () => {
+describe("DesktopHero Component", () => {
   const renderComponent = () =>
     render(
       <BrowserRouter>
-        <MobileHero />
+        <DesktopHero handleVideoOpen={vi.fn()} />
       </BrowserRouter>
     );
 
   it("renders the main headings correctly (by testId)", () => {
     renderComponent();
-    expect(screen.getByTestId("mobile-hero-main-heading")).toHaveTextContent(
+    expect(screen.getByTestId("desktop-hero-main-heading")).toHaveTextContent(
       /오늘 퇴근하고/i
     );
-    expect(screen.getByTestId("mobile-hero-sub-heading")).toHaveTextContent(
+    expect(screen.getByTestId("desktop-hero-sub-heading")).toHaveTextContent(
       /농구 어떠세요\?/i
     );
   });

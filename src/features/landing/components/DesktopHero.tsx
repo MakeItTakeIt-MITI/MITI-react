@@ -18,8 +18,10 @@ const DesktopHero = ({ handleVideoOpen }: DesktopHeroProps) => {
             지금 시작하세요!
           </p>
           <div className="font-bold  leading-[1.1] ">
-            <h1 className="text-[60px]">오늘 퇴근하고</h1>
-            <h1 className="text-[80px]">
+            <h1 data-testid="desktop-hero-main-heading" className="text-[60px]">
+              오늘 퇴근하고
+            </h1>
+            <h1 data-testid="desktop-hero-sub-heading" className="text-[80px]">
               <span className="text-miti-brand">농구</span> 어떠세요?
             </h1>
           </div>
@@ -27,6 +29,15 @@ const DesktopHero = ({ handleVideoOpen }: DesktopHeroProps) => {
             번거로움은 그만, 농구만 즐기세요! <br />
             농구를 즐기는데 필요한 모든 일은 미티가 대신하겠습니다.
           </p>
+
+          {/* Call to action (desktop) */}
+          <Link
+            to="/games"
+            aria-label="오늘 참여 가능한 경기"
+            className="mt-4 inline-flex w-[270px] h-[82px] items-center justify-center text-[24px] font-bold text-white bg-[#1ADCDF] rounded-full"
+          >
+            오늘 참여 가능한 경기
+          </Link>
         </div>
 
         <div className="flex gap-[28px] text-[18px] font-bold">
@@ -61,6 +72,7 @@ const DesktopHero = ({ handleVideoOpen }: DesktopHeroProps) => {
         <div className="absolute inset-0 spline-wrapper pointer-events-auto z-1">
           <Spline
             scene="https://prod.spline.design/Inkh7fCyycdIyOfT/scene.splinecode"
+            aria-label="3D 농구 애니메이션 인터랙티브 장면"
             style={{
               width: "100%",
               height: "100%",
