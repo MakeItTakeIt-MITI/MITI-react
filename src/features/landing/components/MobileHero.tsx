@@ -16,6 +16,7 @@ const MobileHero = () => {
           clipPath: "inset(0 0 8% 0)",
           background: "transparent",
         }}
+        aria-label="3D 농구 애니메이션 인터랙티브 장면"
         scene="https://prod.spline.design/Inkh7fCyycdIyOfT/scene.splinecode"
       />
 
@@ -29,8 +30,10 @@ const MobileHero = () => {
             지금 시작하세요!
           </h2>
           <div className="font-bold ">
-            <h1 className="text-[30px]">오늘 퇴근하고</h1>
-            <h1 className="text-[40px]">
+            <h1 data-testid="mobile-hero-main-heading" className="text-[30px]">
+              오늘 퇴근하고
+            </h1>
+            <h1 data-testid="mobile-hero-sub-heading" className="text-[40px]">
               <span className="text-miti-brand">농구</span> 어떠세요?
             </h1>
           </div>
