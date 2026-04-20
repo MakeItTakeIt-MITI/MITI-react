@@ -1,4 +1,4 @@
-# CLAUDE.md
+c# CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
@@ -20,6 +20,7 @@ npm run check:unused # ts-prune scan for unused exports
 ```
 
 To run a single test file:
+
 ```bash
 npx vitest run src/features/header/tests/Header.test.tsx
 ```
@@ -42,6 +43,7 @@ src/
 ### Feature Module Structure
 
 Each feature under `src/features/<feature>/` follows this pattern:
+
 - `api/` — axios API call functions
 - `interface/` — TypeScript types for the feature
 - `hooks/` — React hooks; server state hooks go in `hooks/query/`
@@ -53,6 +55,7 @@ Each feature under `src/features/<feature>/` follows this pattern:
 ### State Management
 
 Two layers:
+
 1. **TanStack Query v5** — all server state. Query hooks live in `features/*/hooks/query/`. The single `QueryClient` is created in `main.tsx`.
 2. **Zustand** — client UI state only. Global stores in `src/store/` (game filters, lat/long, date/time selection). Feature-local stores live inside the feature's `store/` folder.
 
