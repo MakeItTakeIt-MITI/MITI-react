@@ -27,7 +27,7 @@ const VideoPlaylistContainer = ({
   return (
     <>
       {/* desktop */}
-      <div className="sm:hidden md:flex flex-col items-center gap-12 text-white h-[800px] p-4">
+      <div className="sm:hidden md:flex flex-col items-center gap-12 text-white h-[800px] ">
         <div className="flex flex-col gap-[38px] items-center ">
           <h2 className="text-[48px] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#1ADCDF] via-[#FFFFFF] to-[#87E3E4] gradient-text">
             경기 영상 찾아보기

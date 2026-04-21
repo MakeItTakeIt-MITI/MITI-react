@@ -19,7 +19,7 @@ export default function DesktopNavbar() {
       }
     >
       <div className=" h-[28px] w-[1200px]  flex items-center  justify-between">
-        <Link to="/" aria-label="랜딩 페이지로 이동">
+        <Link to="/home" aria-label="랜딩 페이지로 이동">
           <img src={navbar_logo} alt="미티 로고" />
         </Link>
         <ul

@@ -26,8 +26,8 @@
     "@tanstack/react-query-devtools": "^5.32.0",
     "axios": "^1.6.8",
     "dompurify": "^3.2.6",
-    "npm-check-updates": "^16.14.18",
-    "qs": "^6.14.0",
+    "npm-check-updates": "^19.3.2",
+    "qs": "^6.14.1",
     "react": "^18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-datetime-picker": "^5.6.0",
@@ -39,7 +39,7 @@
     "react-jwt": "^1.2.1",
     "react-modal": "^3.16.1",
     "react-rating-stars-component": "^2.2.0",
-    "react-router-dom": "^6.23.0",
+    "react-router-dom": "^6.30.3",
     "react-slick": "^0.30.2",
     "react-time-picker": "^7.0.0",
     "zustand": "^4.5.2"
@@ -85,7 +85,7 @@
     "ts-node": "^10.9.2",
     "ts-prune": "^0.10.3",
     "typescript": "^5.4.5",
-    "vite": "^5.2.10",
+    "vite": "^5.4.21",
     "vitest": "^1.6.1"
   },
   "msw": {
