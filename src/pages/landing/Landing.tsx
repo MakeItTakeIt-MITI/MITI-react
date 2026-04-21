@@ -1,4 +1,5 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import "./spline.css";
 import { Link } from "react-router-dom";
 import "../../features/landing/style/landing.css";
@@ -13,6 +14,21 @@ const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
 const Landing = () => {
   const { data: youtTubeData } = useYoutuBePlaylist(PLAYLIST_ID, API_KEY);
+
+  const mobileSplineRef = useRef<any>(null);
+  const desktopSplineRef = useRef<any>(null);
+  const { ref: mobileContainerRef, inView: mobileInView } = useInView({ threshold: 0 });
+  const { ref: desktopContainerRef, inView: desktopInView } = useInView({ threshold: 0 });
+
+  useEffect(() => {
+    if (!mobileSplineRef.current) return;
+    mobileInView ? mobileSplineRef.current.play() : mobileSplineRef.current.stop();
+  }, [mobileInView]);
+
+  useEffect(() => {
+    if (!desktopSplineRef.current) return;
+    desktopInView ? desktopSplineRef.current.play() : desktopSplineRef.current.stop();
+  }, [desktopInView]);
 
   const [openVideo, setOpenVideo] = useState(false);
 
@@ -88,6 +104,7 @@ const Landing = () => {
       >
         {/* SPLINE container */}
         <div
+          ref={mobileContainerRef}
           style={{
             zIndex: 1,
           }}
@@ -95,6 +112,7 @@ const Landing = () => {
         >
           <Suspense fallback={<div className="w-full h-full bg-black" />}>
             <Spline
+              onLoad={(app) => { mobileSplineRef.current = app; }}
               style={{
                 width: "100%",
                 height: "100%",
@@ -198,9 +216,10 @@ const Landing = () => {
             </div>
           </div>{" "}
           <div className="relative h-screen overflow-hidden">
-            <div className="absolute inset-0 spline-wrapper pointer-events-auto z-1">
+            <div ref={desktopContainerRef} className="absolute inset-0 spline-wrapper pointer-events-auto z-1">
               <Suspense fallback={<div className="w-full h-full bg-black" />}>
                 <Spline
+                  onLoad={(app) => { desktopSplineRef.current = app; }}
                   scene="https://prod.spline.design/Inkh7fCyycdIyOfT/scene.splinecode"
                   style={{
                     width: "100%",
