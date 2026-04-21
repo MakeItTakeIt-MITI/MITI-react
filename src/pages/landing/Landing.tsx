@@ -1,10 +1,11 @@
-import Spline from "@splinetool/react-spline";
+import { lazy, Suspense, useEffect, useState } from "react";
 import "./spline.css";
 import { Link } from "react-router-dom";
 import "../../features/landing/style/landing.css";
 import { useYoutuBePlaylist } from "@/features/landing/hooks/useYoutubePlaylist";
 import VideoPlaylistContainer from "@/features/landing/components/VideoPlaylistContainer";
-import { useEffect, useState } from "react";
+
+const Spline = lazy(() => import("@splinetool/react-spline"));
 // import { useState } from "react";
 
 const PLAYLIST_ID = "PLOU4W5XbHwpKXmG3HN_vQmarlYhqOJI5L";
@@ -92,15 +93,17 @@ const Landing = () => {
           }}
           className=" w-full  h-screen"
         >
-          <Spline
-            style={{
-              width: "100%",
-              height: "100%",
-              clipPath: "inset(0 0 8% 0)",
-              background: "transparent",
-            }}
-            scene="https://prod.spline.design/Inkh7fCyycdIyOfT/scene.splinecode"
-          />
+          <Suspense fallback={<div className="w-full h-full bg-black" />}>
+            <Spline
+              style={{
+                width: "100%",
+                height: "100%",
+                clipPath: "inset(0 0 8% 0)",
+                background: "transparent",
+              }}
+              scene="https://prod.spline.design/Inkh7fCyycdIyOfT/scene.splinecode"
+            />
+          </Suspense>
 
           {/* Buttons */}
           <div
@@ -196,17 +199,19 @@ const Landing = () => {
           </div>{" "}
           <div className="relative h-screen overflow-hidden">
             <div className="absolute inset-0 spline-wrapper pointer-events-auto z-1">
-              <Spline
-                scene="https://prod.spline.design/Inkh7fCyycdIyOfT/scene.splinecode"
-                style={{
-                  width: "100%",
-                  height: "80%",
-                  position: "absolute",
-                  right: "-200px",
-                  background: "transparent",
-                  zIndex: 1,
-                }}
-              />
+              <Suspense fallback={<div className="w-full h-full bg-black" />}>
+                <Spline
+                  scene="https://prod.spline.design/Inkh7fCyycdIyOfT/scene.splinecode"
+                  style={{
+                    width: "100%",
+                    height: "80%",
+                    position: "absolute",
+                    right: "-200px",
+                    background: "transparent",
+                    zIndex: 1,
+                  }}
+                />
+              </Suspense>
             </div>
           </div>
         </div>
