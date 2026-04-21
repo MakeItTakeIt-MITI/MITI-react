@@ -5,7 +5,7 @@ import { Games } from "./pages/games/Games.tsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import GameDetail from "./pages/games/GameDetail.tsx";
+import GameDetail from "./pages/games/game-detail/GameDetail.tsx";
 import Courts from "./pages/courts/Courts.tsx";
 import React from "react";
 import NotFound from "./pages/other/NotFound.tsx";
@@ -22,7 +22,7 @@ import Faq from "./pages/faq/Faq.tsx";
 import InquiryDetail from "./pages/inquiries/InquiryDetail.tsx";
 import Community from "./pages/community/Community.tsx";
 import CommunityPost from "./pages/community/CommunityPost.tsx";
-import CourtDetails from "./pages/courts/CourtDetails.tsx";
+import CourtDetails from "./pages/courts/court-details/CourtDetails.tsx";
 
 const queryClient = new QueryClient();
 
