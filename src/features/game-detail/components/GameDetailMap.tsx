@@ -10,11 +10,6 @@ declare global {
   }
 }
 
-if (!window.naver) {
-  console.error("Error in loading Naver Maps");
-}
-const { naver } = window;
-
 interface GameDetailMapProps {
   lat: string;
   long: string;
@@ -22,6 +17,8 @@ interface GameDetailMapProps {
 
 export default function GameDetailMap({ lat, long }: GameDetailMapProps) {
   useEffect(() => {
+    if (!window.naver?.maps) return;
+    const { naver } = window;
     const map = new naver.maps.Map("game-details-map", {
       center: new naver.maps.LatLng(lat, long),
       zoom: 17,

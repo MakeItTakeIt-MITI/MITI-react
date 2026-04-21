@@ -1,5 +1,5 @@
-import Map from "../../features/courts/components/map/Map.tsx";
-import CourtInfoContainer from "../../features/courts/components/court-details/CourtInfoContainer.tsx";
+import Map from "../../../features/courts/components/map/Map.tsx";
+import CourtInfoContainer from "../../../features/courts/components/court-details/CourtInfoContainer.tsx";
 import useCourtsDataPage from "@/features/courts/hooks/useCourtsDataPage.tsx";
 
 export default function CourtDetails() {

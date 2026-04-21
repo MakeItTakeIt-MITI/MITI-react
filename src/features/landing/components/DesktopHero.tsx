@@ -1,11 +1,22 @@
-import Spline from "@splinetool/react-spline";
+import { lazy, Suspense, useEffect, useRef } from "react";
+import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
+
+const Spline = lazy(() => import("@splinetool/react-spline"));
 
 interface DesktopHeroProps {
   handleVideoOpen: () => void;
 }
 
 const DesktopHero = ({ handleVideoOpen }: DesktopHeroProps) => {
+  const splineRef = useRef<any>(null);
+  const { ref: containerRef, inView } = useInView({ threshold: 0 });
+
+  useEffect(() => {
+    if (!splineRef.current) return;
+    inView ? splineRef.current.play() : splineRef.current.stop();
+  }, [inView]);
+
   return (
     <div id="spline-container" className="w-full h-full mx-auto relative ">
       <div
@@ -68,20 +79,25 @@ const DesktopHero = ({ handleVideoOpen }: DesktopHeroProps) => {
           </button>
         </div>
       </div>{" "}
-      <div className="relative h-[80vh] overflow-hidden">
+      <div ref={containerRef} className="relative h-[80vh] overflow-hidden">
         <div className="absolute inset-0 spline-wrapper pointer-events-auto z-1">
-          <Spline
-            scene="https://prod.spline.design/Inkh7fCyycdIyOfT/scene.splinecode"
-            aria-label="3D 농구 애니메이션 인터랙티브 장면"
-            style={{
-              width: "100%",
-              height: "100%",
-              position: "absolute",
-              right: "-200px",
-              background: "transparent",
-              zIndex: 1,
-            }}
-          />
+          <Suspense fallback={<div className="w-full h-full bg-black" />}>
+            <Spline
+              onLoad={(app) => {
+                splineRef.current = app;
+              }}
+              scene="https://prod.spline.design/Inkh7fCyycdIyOfT/scene.splinecode"
+              aria-label="3D 농구 애니메이션 인터랙티브 장면"
+              style={{
+                width: "100%",
+                height: "100%",
+                position: "absolute",
+                right: "-200px",
+                background: "transparent",
+                zIndex: 1,
+              }}
+            />
+          </Suspense>
         </div>
 
         {/* BOTTOM SHADOW OVERLAY */}

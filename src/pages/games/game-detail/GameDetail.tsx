@@ -1,8 +1,8 @@
+import BannerMedium from "@/features/common/components(renewal)/banners/BannerMedium";
+import GameDetailContainer from "@/features/game-detail/components/GameDetailContainer";
+import GameDetailsPanel from "@/features/game-detail/components/GameDetailsPanel";
+import { useGameDetails } from "@/features/game-detail/hooks/query/useGameDetails";
 import { useParams } from "react-router-dom";
-import BannerMedium from "../../features/common/components(renewal)/banners/BannerMedium.tsx";
-import GameDetailsPanel from "../../features/game-detail/components/GameDetailsPanel.tsx";
-import GameDetailContainer from "../../features/game-detail/components/GameDetailContainer.tsx";
-import { useGameDetails } from "../../features/game-detail/hooks/query/useGameDetails.tsx";
 
 const GameDetail = () => {
   const { id } = useParams();

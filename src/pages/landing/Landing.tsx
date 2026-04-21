@@ -1,7 +1,6 @@
 import "./spline.css";
 import "../../features/landing/style/landing.css";
 import VideoPlaylistContainer from "@/features/landing/components/VideoPlaylistContainer";
-
 import MobileHero from "@/features/landing/components/MobileHero";
 import HostGuideVideoModal from "@/features/landing/components/HostGuideVideoModal";
 import { useLandingPage } from "@/features/landing/hooks/useLandingPage";
