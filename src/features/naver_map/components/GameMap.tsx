@@ -193,7 +193,6 @@ export default function GameMap({
   useEffect(() => {
     if (!geolocation || !mapRef.current || !window?.naver?.maps) return;
     setIsLocating(false);
-    setCoordinates(geolocation.lat, geolocation.lon);
     mapRef.current.setCenter(
       new window.naver.maps.LatLng(geolocation.lat, geolocation.lon)
     );
@@ -208,8 +207,23 @@ export default function GameMap({
       <button
         type="button"
         onClick={() => {
+          if (!navigator.geolocation || !mapRef.current) return;
           setIsLocating(true);
-          handleCurrentGeoLocation();
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              setIsLocating(false);
+              if (mapRef.current && window?.naver?.maps) {
+                mapRef.current.setCenter(
+                  new window.naver.maps.LatLng(
+                    position.coords.latitude,
+                    position.coords.longitude
+                  )
+                );
+              }
+            },
+            () => setIsLocating(false),
+            { enableHighAccuracy: true, maximumAge: 0 }
+          );
         }}
         className={`absolute bottom-4 right-4 z-10 rounded-full shadow-md p-2.5 flex items-center justify-center transition-colors duration-150 active:scale-90
           ${isLocating ? "bg-[#A3F1F2]" : "bg-white hover:bg-gray-100"}`}
