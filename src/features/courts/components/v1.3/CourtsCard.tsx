@@ -1,3 +1,4 @@
+import court_card_thumbnail from "../../../../assets/v1.3/court/court_card_thumbnail.png";
 import location_pin from "../../../../assets/v1.3/icon/location-pin.svg";
 import { Link } from "react-router-dom";
 import { useCalculateDistance } from "../../hooks/useCalculateDistance";
@@ -11,6 +12,7 @@ interface CourtsCardProps {
   longitude: string;
   geoLatitude: string | number | null | undefined;
   geoLongitude: string | number | null | undefined;
+  images: string[];
 }
 
 const CourtsCard = ({
@@ -22,41 +24,33 @@ const CourtsCard = ({
   longitude,
   geoLatitude,
   geoLongitude,
+  images,
 }: CourtsCardProps) => {
+  const distance = useCalculateDistance(
+    geoLatitude != null ? String(geoLatitude) : "",
+    geoLongitude != null ? String(geoLongitude) : "",
+    latitude,
+    longitude,
+  );
+
   return (
-    <li className=" w-full sm:h-[66px] md:h-[72px]  py-3 flex ">
-      <Link to={id?.toString()} className="flex justify-between  w-full">
-        <div className="space-y-2 max-w-[667px]">
-          <h2 className="text-white font-bold  sm:text-base md:text-[18px] truncate">
+    <li>
+      <Link to={id?.toString()} className="flex flex-col md:gap-3 sm:gap-2">
+        <img
+          src={images.length === 0 ? court_card_thumbnail : images[0]}
+          alt={title}
+          className="md:size-[180px] sm:size-[165px] object-cover rounded-lg"
+        />
+        <div className="md:w-[180px] sm:w-[165px] flex flex-col md:gap-[4px] sm:gap-2">
+          <h2 className="text-white font-bold md:text-base sm:text-sm truncate">
             {title}
           </h2>
-          <div className="space-x-2.5 font-[400] text-[#c2c2c2] text-xs">
-            <span>{address}</span>
-            <span>{address_detail}</span>
-          </div>
-        </div>
-        {/* --- */}
-        <div className="flex items-end gap-2">
-          <img src={location_pin} alt="location_pin" />
-          <div className="font-[400] text-[#c2c2c2] text-xs space-x-[2px]">
-            <span>
-              {!isNaN(
-                useCalculateDistance(
-                  geoLatitude != null ? String(geoLatitude) : "",
-                  geoLongitude != null ? String(geoLongitude) : "",
-                  latitude,
-                  longitude
-                )
-              )
-                ? useCalculateDistance(
-                    geoLatitude != null ? String(geoLatitude) : "",
-                    geoLongitude != null ? String(geoLongitude) : "",
-                    latitude,
-                    longitude
-                  ).toFixed(1)
-                : ""}{" "}
-            </span>
-            <span>km</span>
+          <p className="text-[#c2c2c2] text-xs truncate">
+            {address} {address_detail}
+          </p>
+          <div className="flex align items-end gap-1 text-[#999]  text-[10px]  ">
+            <img src={location_pin} alt="location_pin" className="w-3 h-3" />
+            <span>{!isNaN(distance) ? distance.toFixed(1) : ""} km</span>
           </div>
         </div>
       </Link>
