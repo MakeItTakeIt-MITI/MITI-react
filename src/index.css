@@ -153,3 +153,17 @@ input[type="number"] {
 .custom-dotted-list {
   list-style-type: circle;
 }
+
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.court-card-appear {
+  animation: fadeInCard 0.35s ease-out both;
+}
