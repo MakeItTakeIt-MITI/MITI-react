@@ -48,7 +48,7 @@ const CourtsCard = ({
           <p className="text-[#c2c2c2] text-xs truncate">
             {address} {address_detail}
           </p>
-          <div className="flex align items-end gap-1 text-[#999]  text-[10px]  ">
+          <div className="flex align items-end gap-1 text-[#999]  text-[10px] justify-end ">
             <img src={location_pin} alt="location_pin" className="w-3 h-3" />
             <span>{!isNaN(distance) ? distance.toFixed(1) : ""} km</span>
           </div>
