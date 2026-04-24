@@ -9,11 +9,15 @@ import { Link } from "react-router-dom";
 
 interface CardProps {
   game: GameField;
+  animationIndex?: number;
 }
 
-export default function Card({ game }: CardProps) {
+export default function Card({ game, animationIndex = 0 }: CardProps) {
   return (
-    <li className="cursor-pointer w-full sm:h-[128px] md:h-[136px] flex flex-col gap-2.5 justify-center md:p-3 rounded-lg text-white transition-all duration-500 md:hover:shadow-[8px_8px_56px_0_rgba(26,220,223,0.25)] md:hover:m-[6px] md:hover:border-none">
+    <li
+      className="court-card-appear cursor-pointer w-full sm:h-[128px] md:h-[136px] flex flex-col gap-2.5 justify-center md:p-3 rounded-lg text-white transition-all duration-500 md:hover:shadow-[8px_8px_56px_0_rgba(26,220,223,0.25)] md:hover:m-[6px] md:hover:border-none active:scale-[0.97] transition-transform"
+      style={{ animationDelay: `${animationIndex * 40}ms` }}
+    >
       <Link to={`/games/${game.id}`} className="flex flex-col gap-2.5">
         <div className="space-y-2">
           <GameStatus status={game.game_status} />

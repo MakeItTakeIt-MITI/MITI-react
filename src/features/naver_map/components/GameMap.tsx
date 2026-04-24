@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { renderToString } from "react-dom/server";
+import { MdMyLocation } from "react-icons/md";
 import { GameField } from "../../games/interface/games.ts";
 import { useSelectedStore } from "../../../store/NaverMap/useSelectedStore.tsx";
 import { useMapCoordinatesStore } from "../../../store/NaverMap/useMapCoordinatesStore.tsx";
@@ -30,6 +31,8 @@ export default function GameMap({
     selectedAddress,
   } = useSelectedStore();
   const { coordinates, setCoordinates } = useMapCoordinatesStore();
+
+  const [isLocating, setIsLocating] = useState(false);
 
   const mapRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
@@ -91,8 +94,6 @@ export default function GameMap({
       });
 
       const overlapped = addressOverlapCount[address] > 1;
-
-      `<button click=${handleCurrentGeoLocation}></button>`;
 
       const iconContent = overlapped
         ? renderToString(
@@ -189,10 +190,49 @@ export default function GameMap({
     setCoordinates,
   ]);
 
+  useEffect(() => {
+    if (!geolocation || !mapRef.current || !window?.naver?.maps) return;
+    setIsLocating(false);
+    mapRef.current.setCenter(
+      new window.naver.maps.LatLng(geolocation.lat, geolocation.lon)
+    );
+  }, [geolocation]);
+
   return (
-    <div
-      id="games-list"
-      className="w-full md:w-[700px] sm:h-[241px] md:h-[450px] md:rounded-[20px]"
-    />
+    <div className="relative w-full md:w-[700px]">
+      <div
+        id="games-list"
+        className="w-full sm:h-[241px] md:h-[450px] md:rounded-[20px]"
+      />
+      <button
+        type="button"
+        onClick={() => {
+          if (!navigator.geolocation || !mapRef.current) return;
+          setIsLocating(true);
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              setIsLocating(false);
+              if (mapRef.current && window?.naver?.maps) {
+                mapRef.current.setCenter(
+                  new window.naver.maps.LatLng(
+                    position.coords.latitude,
+                    position.coords.longitude
+                  )
+                );
+              }
+            },
+            () => setIsLocating(false),
+            { enableHighAccuracy: true, maximumAge: 0 }
+          );
+        }}
+        className={`absolute bottom-4 right-4 z-10 rounded-full shadow-md p-2.5 flex items-center justify-center transition-colors duration-150 active:scale-90
+          ${isLocating ? "bg-[#A3F1F2]" : "bg-white hover:bg-gray-100"}`}
+      >
+        <MdMyLocation
+          size={20}
+          className={`transition-colors duration-150 ${isLocating ? "text-black animate-spin" : "text-gray-700"}`}
+        />
+      </button>
+    </div>
   );
 }
