@@ -9,13 +9,17 @@ import "./card.css";
 
 interface GamesListCardProps {
   game: GameField;
+  animationIndex?: number;
 }
 
-export default function GamesListCard({ game }: GamesListCardProps) {
+export default function GamesListCard({ game, animationIndex = 0 }: GamesListCardProps) {
   if (!game) return null;
 
   return (
-    <li className="w-full  p-1  hover:custom-card-shadow  hover:transition-all ease-in-out">
+    <li
+      className="court-card-appear w-full p-1 hover:custom-card-shadow hover:transition-all ease-in-out active:scale-[0.97] transition-transform"
+      style={{ animationDelay: `${animationIndex * 40}ms` }}
+    >
       <Link className="flex items-center   gap-5" to={`/games/${game.id}`}>
         {/* DATE */}
         <div className="w-[34px] h-full text-white flex flex-col items-center justify-center">
