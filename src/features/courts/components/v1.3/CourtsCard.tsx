@@ -13,6 +13,7 @@ interface CourtsCardProps {
   geoLatitude: string | number | null | undefined;
   geoLongitude: string | number | null | undefined;
   images: string[];
+  animationIndex?: number;
 }
 
 const CourtsCard = ({
@@ -25,6 +26,7 @@ const CourtsCard = ({
   geoLatitude,
   geoLongitude,
   images,
+  animationIndex = 0,
 }: CourtsCardProps) => {
   const distance = useCalculateDistance(
     geoLatitude != null ? String(geoLatitude) : "",
@@ -34,7 +36,10 @@ const CourtsCard = ({
   );
 
   return (
-    <li>
+    <li
+      className="court-card-appear transition-transform duration-150 active:scale-[0.96]"
+      style={{ animationDelay: `${animationIndex * 40}ms` }}
+    >
       <Link to={id?.toString()} className="flex flex-col md:gap-3 sm:gap-2">
         <img
           src={images.length === 0 ? court_card_thumbnail : images[0]}

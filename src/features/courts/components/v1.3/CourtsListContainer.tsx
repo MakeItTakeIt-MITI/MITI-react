@@ -45,7 +45,7 @@ const CourtsListContainer = ({
 
   return (
     <ul className="custom-scrollbar sm:p-0 md:p-6 grid grid-cols-2 md:grid-cols-4 md:gap-4 sm:gap-[13px] justify-center sm:h-[600px] md:h-[560px] overflow-y-auto">
-      {courstDataPage?.map((courtData) => {
+      {courstDataPage?.map((courtData, index) => {
         return (
           <CourtsCard
             id={courtData.id}
@@ -58,6 +58,7 @@ const CourtsListContainer = ({
             geoLatitude={geoLatitude}
             geoLongitude={geoLongitude}
             images={courtData.images}
+            animationIndex={index}
           />
         );
       })}
