@@ -4,16 +4,17 @@ import { MemoryRouter } from "react-router-dom";
 import DesktopNavbar from "../components/DesktopNavbar";
 
 describe("DesktopNavbar", () => {
-  const getLinkLi = (label: string) => {
+  /**const getLinkLi = (label: string) => {
     const anchor = screen.getByText(label);
     return anchor.parentElement as HTMLElement;
   };
+  *  */
 
   test("highlights '경기 목록' when path starts with /games", () => {
     render(
       <MemoryRouter initialEntries={["/games"]}>
         <DesktopNavbar />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     // const li = getLinkLi("경기 목록");
@@ -24,7 +25,7 @@ describe("DesktopNavbar", () => {
     render(
       <MemoryRouter initialEntries={["/courts"]}>
         <DesktopNavbar />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     // const li = getLinkLi("경기장 목록");
@@ -35,7 +36,7 @@ describe("DesktopNavbar", () => {
     render(
       <MemoryRouter initialEntries={["/home"]}>
         <DesktopNavbar />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     // find the img by alt and get its parent anchor

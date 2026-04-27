@@ -18,11 +18,7 @@ interface GameMapProps {
   handleCurrentGeoLocation: () => void;
 }
 
-export default function GameMap({
-  mapDataList,
-  geolocation,
-  handleCurrentGeoLocation,
-}: GameMapProps) {
+export default function GameMap({ mapDataList, geolocation }: GameMapProps) {
   const {
     toggleSelected,
     setSelected,
@@ -48,7 +44,7 @@ export default function GameMap({
       mapRef.current = new window.naver.maps.Map("games-list", {
         center: new window.naver.maps.LatLng(
           geolocation?.lat || coordinates.lat,
-          geolocation?.lon || coordinates.long
+          geolocation?.lon || coordinates.long,
         ),
         zoom: 14,
         scrollWheel: true,
@@ -64,7 +60,7 @@ export default function GameMap({
     // update map center
     try {
       map.setCenter(
-        new window.naver.maps.LatLng(coordinates.lat, coordinates.long)
+        new window.naver.maps.LatLng(coordinates.lat, coordinates.long),
       );
     } catch {}
 
@@ -130,7 +126,7 @@ export default function GameMap({
               >
                 {addressOverlapCount[address]}
               </div>
-            </button>
+            </button>,
           )
         : renderToString(
             <button
@@ -152,7 +148,7 @@ export default function GameMap({
               <span className="font-[300] text-[10px] text-[#737373]">
                 / {game.starttime.slice(0, 5)}
               </span>
-            </button>
+            </button>,
           );
 
       marker.setIcon({ content: iconContent });
@@ -171,7 +167,7 @@ export default function GameMap({
           setSelectedAddress(game.address);
           map.setZoom(18, true);
           map.setCenter(
-            new window.naver.maps.LatLng(game.latitude, game.longitude)
+            new window.naver.maps.LatLng(game.latitude, game.longitude),
           );
         } else {
           setSelected(false);
@@ -194,7 +190,7 @@ export default function GameMap({
     if (!geolocation || !mapRef.current || !window?.naver?.maps) return;
     setIsLocating(false);
     mapRef.current.setCenter(
-      new window.naver.maps.LatLng(geolocation.lat, geolocation.lon)
+      new window.naver.maps.LatLng(geolocation.lat, geolocation.lon),
     );
   }, [geolocation]);
 
@@ -216,13 +212,13 @@ export default function GameMap({
                 mapRef.current.setCenter(
                   new window.naver.maps.LatLng(
                     position.coords.latitude,
-                    position.coords.longitude
-                  )
+                    position.coords.longitude,
+                  ),
                 );
               }
             },
             () => setIsLocating(false),
-            { enableHighAccuracy: true, maximumAge: 0 }
+            { enableHighAccuracy: true, maximumAge: 0 },
           );
         }}
         className={`absolute bottom-4 right-4 z-10 rounded-full shadow-md p-2.5 flex items-center justify-center transition-colors duration-150 active:scale-90
