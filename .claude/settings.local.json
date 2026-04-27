@@ -3,7 +3,10 @@
     "allow": [
       "Bash(npm run *)",
       "Bash(cat tsconfig.json)",
-      "Bash(cat tsconfig.app.json)"
+      "Bash(cat tsconfig.app.json)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)"
     ]
   }
 }

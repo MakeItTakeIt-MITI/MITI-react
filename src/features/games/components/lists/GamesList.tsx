@@ -28,8 +28,8 @@ export default function GamesList({
     <ul className="overflow-y-auto w-full flex flex-col  sm:gap-4 md:gap-[31px] h-[720px]  custom-scrollbar p-2">
       {isGamesListLoading
         ? Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)
-        : allGames?.map((game: GameField) => (
-            <GamesListCard key={game.id} game={game} />
+        : allGames?.map((game: GameField, i: number) => (
+            <GamesListCard key={game.id} game={game} animationIndex={i} />
           ))}
       <div ref={inViewGameListRef} style={{ height: "1px" }} />
     </ul>

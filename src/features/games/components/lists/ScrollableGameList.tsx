@@ -39,8 +39,8 @@ export default function ScrollableGameList({
       <ul className="flex flex-col gap-2.5 h-[500px] sm:h-[512px] p-2 overflow-y-auto overflow-x-hidden">
         {mapDataList
           ?.filter((game) => game.address === selectedAddress)
-          .map((game) => (
-            <Card key={game.id} game={game} />
+          .map((game, i) => (
+            <Card key={game.id} game={game} animationIndex={i} />
           ))}
       </ul>
     );
@@ -48,8 +48,8 @@ export default function ScrollableGameList({
 
   return (
     <ul className="flex flex-col gap-2.5 h-[500px] sm:h-[512px] p-2 overflow-y-auto overflow-x-hidden">
-      {mapDataList?.map((game) => (
-        <Card key={game.id} game={game} />
+      {mapDataList?.map((game, i) => (
+        <Card key={game.id} game={game} animationIndex={i} />
       ))}
     </ul>
   );

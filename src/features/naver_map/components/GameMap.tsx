@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { renderToString } from "react-dom/server";
+import { MdMyLocation } from "react-icons/md";
 import { GameField } from "../../games/interface/games.ts";
 import { useSelectedStore } from "../../../store/NaverMap/useSelectedStore.tsx";
 import { useMapCoordinatesStore } from "../../../store/NaverMap/useMapCoordinatesStore.tsx";
@@ -17,11 +18,7 @@ interface GameMapProps {
   handleCurrentGeoLocation: () => void;
 }
 
-export default function GameMap({
-  mapDataList,
-  geolocation,
-  handleCurrentGeoLocation,
-}: GameMapProps) {
+export default function GameMap({ mapDataList, geolocation }: GameMapProps) {
   const {
     toggleSelected,
     setSelected,
@@ -30,6 +27,8 @@ export default function GameMap({
     selectedAddress,
   } = useSelectedStore();
   const { coordinates, setCoordinates } = useMapCoordinatesStore();
+
+  const [isLocating, setIsLocating] = useState(false);
 
   const mapRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
@@ -45,7 +44,7 @@ export default function GameMap({
       mapRef.current = new window.naver.maps.Map("games-list", {
         center: new window.naver.maps.LatLng(
           geolocation?.lat || coordinates.lat,
-          geolocation?.lon || coordinates.long
+          geolocation?.lon || coordinates.long,
         ),
         zoom: 14,
         scrollWheel: true,
@@ -61,7 +60,7 @@ export default function GameMap({
     // update map center
     try {
       map.setCenter(
-        new window.naver.maps.LatLng(coordinates.lat, coordinates.long)
+        new window.naver.maps.LatLng(coordinates.lat, coordinates.long),
       );
     } catch {}
 
@@ -91,8 +90,6 @@ export default function GameMap({
       });
 
       const overlapped = addressOverlapCount[address] > 1;
-
-      `<button click=${handleCurrentGeoLocation}></button>`;
 
       const iconContent = overlapped
         ? renderToString(
@@ -129,7 +126,7 @@ export default function GameMap({
               >
                 {addressOverlapCount[address]}
               </div>
-            </button>
+            </button>,
           )
         : renderToString(
             <button
@@ -151,7 +148,7 @@ export default function GameMap({
               <span className="font-[300] text-[10px] text-[#737373]">
                 / {game.starttime.slice(0, 5)}
               </span>
-            </button>
+            </button>,
           );
 
       marker.setIcon({ content: iconContent });
@@ -170,7 +167,7 @@ export default function GameMap({
           setSelectedAddress(game.address);
           map.setZoom(18, true);
           map.setCenter(
-            new window.naver.maps.LatLng(game.latitude, game.longitude)
+            new window.naver.maps.LatLng(game.latitude, game.longitude),
           );
         } else {
           setSelected(false);
@@ -189,10 +186,49 @@ export default function GameMap({
     setCoordinates,
   ]);
 
+  useEffect(() => {
+    if (!geolocation || !mapRef.current || !window?.naver?.maps) return;
+    setIsLocating(false);
+    mapRef.current.setCenter(
+      new window.naver.maps.LatLng(geolocation.lat, geolocation.lon),
+    );
+  }, [geolocation]);
+
   return (
-    <div
-      id="games-list"
-      className="w-full md:w-[700px] sm:h-[241px] md:h-[450px] md:rounded-[20px]"
-    />
+    <div className="relative w-full md:w-[700px]">
+      <div
+        id="games-list"
+        className="w-full sm:h-[241px] md:h-[450px] md:rounded-[20px]"
+      />
+      <button
+        type="button"
+        onClick={() => {
+          if (!navigator.geolocation || !mapRef.current) return;
+          setIsLocating(true);
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              setIsLocating(false);
+              if (mapRef.current && window?.naver?.maps) {
+                mapRef.current.setCenter(
+                  new window.naver.maps.LatLng(
+                    position.coords.latitude,
+                    position.coords.longitude,
+                  ),
+                );
+              }
+            },
+            () => setIsLocating(false),
+            { enableHighAccuracy: true, maximumAge: 0 },
+          );
+        }}
+        className={`absolute bottom-4 right-4 z-10 rounded-full shadow-md p-2.5 flex items-center justify-center transition-colors duration-150 active:scale-90
+          ${isLocating ? "bg-[#A3F1F2]" : "bg-white hover:bg-gray-100"}`}
+      >
+        <MdMyLocation
+          size={20}
+          className={`transition-colors duration-150 ${isLocating ? "text-black animate-spin" : "text-gray-700"}`}
+        />
+      </button>
+    </div>
   );
 }

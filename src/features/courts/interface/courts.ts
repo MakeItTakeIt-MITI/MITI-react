@@ -6,6 +6,7 @@ export interface CourtsField {
     latitude: string;
     longitude: string;
     info: string
+    images: string[];
 }
 
 export interface CourtsDetailField extends CourtsField {

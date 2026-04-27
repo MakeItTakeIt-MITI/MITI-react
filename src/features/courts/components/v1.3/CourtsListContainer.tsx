@@ -4,28 +4,18 @@ import "../../../../features/common/scrollbar.css";
 import { CourtsField } from "../../interface/courts.ts";
 
 const SkeletonCourtsCard = () => (
-  <li className="w-full sm:h-[66px] md:h-[72px] py-3 flex">
-    <div className="flex justify-between w-full animate-pulse">
-      <div className="space-y-2 max-w-[667px]">
-        <div className="h-5 md:h-6 w-48 bg-[#2A2A2A] rounded" />
-        <div className="flex space-x-2">
-          <div className="h-3 w-32 bg-[#2A2A2A] rounded" />
-          <div className="h-3 w-24 bg-[#2A2A2A] rounded" />
-        </div>
-      </div>
-      <div className="flex items-end gap-2">
-        <div className="w-4 h-4 bg-[#2A2A2A] rounded" />
-        <div className="flex space-x-1">
-          <div className="h-3 w-8 bg-[#2A2A2A] rounded" />
-          <div className="h-3 w-4 bg-[#2A2A2A] rounded" />
-        </div>
-      </div>
+  <li className="flex flex-col gap-3 animate-pulse">
+    <div className="w-[180px] h-[180px] bg-[#2A2A2A] rounded-lg" />
+    <div className="w-[180px] h-[50px] flex flex-col justify-between">
+      <div className="h-4 w-32 bg-[#2A2A2A] rounded" />
+      <div className="h-3 w-28 bg-[#2A2A2A] rounded" />
+      <div className="h-3 w-16 bg-[#2A2A2A] rounded" />
     </div>
   </li>
 );
 
 const CourtsListSkeleton = () => (
-  <ul className="custom-scrollbar sm:p-0 md:p-6 flex flex-col gap-2 sm:h-[600px] md:h-[560px] overflow-y-auto">
+  <ul className="custom-scrollbar sm:p-0 md:p-6 grid grid-cols-2 md:grid-cols-4 gap-4 justify-items-center sm:h-[600px] md:h-[560px] overflow-y-auto">
     {Array.from({ length: 8 }).map((_, i) => (
       <SkeletonCourtsCard key={`skeleton-${i}`} />
     ))}
@@ -49,14 +39,13 @@ const CourtsListContainer = ({
   geoLongitude,
   isLoading = false,
 }: CourtsListContainerProps) => {
-  // Show skeleton when loading
   if (isLoading) {
     return <CourtsListSkeleton />;
   }
 
   return (
-    <ul className="custom-scrollbar sm:p-0 md:p-6 flex flex-col gap-2 sm:h-[600px] md:h-[560px] overflow-y-auto">
-      {courstDataPage?.map((courtData) => {
+    <ul className="custom-scrollbar sm:p-0 md:p-6 grid grid-cols-2 md:grid-cols-4 md:gap-4 sm:gap-[13px] justify-center sm:h-[600px] md:h-[560px] overflow-y-auto">
+      {courstDataPage?.map((courtData, index) => {
         return (
           <CourtsCard
             id={courtData.id}
@@ -68,11 +57,16 @@ const CourtsListContainer = ({
             key={courtData.id}
             geoLatitude={geoLatitude}
             geoLongitude={geoLongitude}
+            images={courtData.images}
+            animationIndex={index}
           />
         );
       })}
       {hasNextPage && (
-        <div ref={courtsListRef} className="h-1 w-full opacity-0" />
+        <div
+          ref={courtsListRef}
+          className="h-1 w-full opacity-0 col-span-2 md:col-span-4"
+        />
       )}
     </ul>
   );
