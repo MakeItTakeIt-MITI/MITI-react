@@ -1,13 +1,17 @@
 import "./spline.css";
 import "../../features/landing/style/landing.css";
-import VideoPlaylistContainer from "@/features/landing/components/VideoPlaylistContainer";
 import MobileHero from "@/features/landing/components/MobileHero";
 import HostGuideVideoModal from "@/features/landing/components/HostGuideVideoModal";
+import SplashLoader from "@/features/landing/components/SplashLoader";
 import { useLandingPage } from "@/features/landing/hooks/useLandingPage";
 import React, { Suspense } from "react";
 
 const DesktopHero = React.lazy(
   () => import("@/features/landing/components/DesktopHero")
+);
+
+const VideoPlaylistContainer = React.lazy(
+  () => import("@/features/landing/components/VideoPlaylistContainer")
 );
 
 const Landing = () => {
@@ -28,7 +32,9 @@ const Landing = () => {
         className="sm:block md:hidden min-h-screen w-full "
       >
         <MobileHero />
-        <VideoPlaylistContainer youtubeData={youtTubeData?.items} />
+        <Suspense fallback={<SplashLoader />}>
+          <VideoPlaylistContainer youtubeData={youtTubeData?.items} />
+        </Suspense>
       </main>
 
       <main
@@ -37,20 +43,12 @@ const Landing = () => {
         }}
         className=" relative sm:hidden md:block space-y-20"
       >
-        <Suspense
-          fallback={
-            <div className="flex h-[80vh] items-center justify-center">
-              <div
-                className="h-12 w-12 animate-spin rounded-full border-4 border-solid border-white border-t-transparent"
-                role="status"
-                aria-label="로딩 중"
-              ></div>
-            </div>
-          }
-        >
+        <Suspense fallback={<SplashLoader />}>
           <DesktopHero handleVideoOpen={handleVideoOpen} />
         </Suspense>
-        <VideoPlaylistContainer youtubeData={youtTubeData?.items} />
+        <Suspense fallback={<SplashLoader />}>
+          <VideoPlaylistContainer youtubeData={youtTubeData?.items} />
+        </Suspense>
       </main>
     </>
   );
