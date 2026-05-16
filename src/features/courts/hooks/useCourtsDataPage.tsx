@@ -17,6 +17,7 @@ const useCourtsDataPage = () => {
     hasNextPage,
     fetchNextPage,
     isLoading,
+    isFetchingNextPage,
     refetch,
   } = useAllCourts(selectedProvince, inputContent.get("search"));
 
@@ -91,6 +92,7 @@ const useCourtsDataPage = () => {
     hasNextPage,
     fetchNextPage,
     isLoading,
+    isFetchingNextPage,
     courtsDataPage,
     courtsListRef,
 

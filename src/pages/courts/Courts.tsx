@@ -11,6 +11,7 @@ export default function Courts() {
     hasNextPage,
     courtsListRef,
     isLoading,
+    isFetchingNextPage,
     toggleProvince,
     selectedProvince,
   } = useCourtsDataPage();
@@ -43,6 +44,7 @@ export default function Courts() {
             geoLatitude={geolocation?.lat}
             geoLongitude={geolocation?.lon}
             isLoading={isLoading}
+            isFetchingNextPage={isFetchingNextPage}
           />
         </div>
       </section>
