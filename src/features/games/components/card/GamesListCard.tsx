@@ -17,7 +17,7 @@ export default function GamesListCard({ game, animationIndex = 0 }: GamesListCar
 
   return (
     <li
-      className="court-card-appear w-full p-1 hover:custom-card-shadow hover:transition-all ease-in-out active:scale-[0.97] transition-transform"
+      className="court-card-appear w-full p-1 rounded-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-neutral-800/70 hover:shadow-[0_8px_32px_0_rgba(26,220,223,0.25)] active:scale-[0.97]"
       style={{ animationDelay: `${animationIndex * 40}ms` }}
     >
       <Link className="flex items-center   gap-5" to={`/games/${game.id}`}>

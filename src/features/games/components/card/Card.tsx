@@ -15,7 +15,7 @@ interface CardProps {
 export default function Card({ game, animationIndex = 0 }: CardProps) {
   return (
     <li
-      className="court-card-appear cursor-pointer w-full sm:h-[128px] md:h-[136px] flex flex-col gap-2.5 justify-center md:p-3 rounded-lg text-white transition-all duration-500 md:hover:shadow-[8px_8px_56px_0_rgba(26,220,223,0.25)] md:hover:m-[6px] md:hover:border-none active:scale-[0.97] transition-transform"
+      className="court-card-appear cursor-pointer w-full sm:h-[128px] md:h-[136px] flex flex-col gap-2.5 justify-center md:p-3 rounded-lg text-white transition-all duration-300 md:hover:-translate-y-0.5 md:hover:bg-neutral-800/70 md:hover:shadow-[0_8px_32px_0_rgba(26,220,223,0.25)] active:scale-[0.97]"
       style={{ animationDelay: `${animationIndex * 40}ms` }}
     >
       <Link to={`/games/${game.id}`} className="flex flex-col gap-2.5">
