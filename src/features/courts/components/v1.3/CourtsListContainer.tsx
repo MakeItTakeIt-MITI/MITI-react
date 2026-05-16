@@ -4,18 +4,18 @@ import "../../../../features/common/scrollbar.css";
 import { CourtsField } from "../../interface/courts.ts";
 
 const SkeletonCourtsCard = () => (
-  <li className="flex flex-col gap-3 animate-pulse">
-    <div className="w-[180px] h-[180px] bg-[#2A2A2A] rounded-lg" />
-    <div className="w-[180px] h-[50px] flex flex-col justify-between">
-      <div className="h-4 w-32 bg-[#2A2A2A] rounded" />
-      <div className="h-3 w-28 bg-[#2A2A2A] rounded" />
-      <div className="h-3 w-16 bg-[#2A2A2A] rounded" />
+  <li className="flex flex-col md:gap-3 sm:gap-2 animate-pulse">
+    <div className="md:size-[180px] sm:size-[165px] bg-neutral-800 rounded-lg" />
+    <div className="md:w-[180px] sm:w-[165px] flex flex-col md:gap-[4px] sm:gap-2">
+      <div className="h-4 w-3/4 bg-neutral-800 rounded" />
+      <div className="h-3 w-full bg-neutral-800 rounded" />
+      <div className="h-[10px] w-12 bg-neutral-800 rounded self-end" />
     </div>
   </li>
 );
 
 const CourtsListSkeleton = () => (
-  <ul className="custom-scrollbar sm:p-0 md:p-6 grid grid-cols-2 md:grid-cols-4 gap-4 justify-items-center sm:h-[600px] md:h-[560px] overflow-y-auto">
+  <ul className="custom-scrollbar sm:p-0 md:p-6 grid grid-cols-2 md:grid-cols-4 md:gap-4 sm:gap-[13px] justify-center sm:h-[600px] md:h-[560px] overflow-y-auto">
     {Array.from({ length: 8 }).map((_, i) => (
       <SkeletonCourtsCard key={`skeleton-${i}`} />
     ))}
@@ -29,6 +29,7 @@ interface CourtsListContainerProps {
   geoLatitude: string | number | null | undefined;
   geoLongitude: string | number | null | undefined;
   isLoading?: boolean;
+  isFetchingNextPage?: boolean;
 }
 
 const CourtsListContainer = ({
@@ -38,6 +39,7 @@ const CourtsListContainer = ({
   geoLatitude,
   geoLongitude,
   isLoading = false,
+  isFetchingNextPage = false,
 }: CourtsListContainerProps) => {
   if (isLoading) {
     return <CourtsListSkeleton />;
@@ -68,6 +70,10 @@ const CourtsListContainer = ({
           className="h-1 w-full opacity-0 col-span-2 md:col-span-4"
         />
       )}
+      {isFetchingNextPage &&
+        Array.from({ length: 4 }).map((_, i) => (
+          <SkeletonCourtsCard key={`fetch-skeleton-${i}`} />
+        ))}
     </ul>
   );
 };
