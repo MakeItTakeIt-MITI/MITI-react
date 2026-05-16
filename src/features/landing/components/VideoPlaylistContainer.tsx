@@ -56,7 +56,7 @@ const VideoPlaylistContainer = ({
       </div>
 
       {/* Mobile */}
-      <div className="md:hidden sm:flex flex-col items-center gap-12 text-white  ">
+      <div className="md:hidden sm:flex flex-col items-center gap-12 text-white pb-16">
         <div className="flex flex-col gap-[38px] items-center ">
           <h2 className="text-[24px] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#1ADCDF] via-[#FFFFFF] to-[#87E3E4] gradient-text">
             경기 영상 찾아보기
@@ -78,7 +78,7 @@ const VideoPlaylistContainer = ({
         <Link
           target="_blank"
           to="https://www.youtube.com/@MITI_MakeItTakeIt"
-          className="underline text-[#999] font-[400] text-[14px]"
+          className="underline text-[#999] font-[400] text-[14px] whitespace-nowrap"
         >
           모든 경기 영상 보러가기
         </Link>
