@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TeamListItem } from '../../../interfaces/team';
 
 import eliteSvg from "../../../assets/images/level=elite.svg";
@@ -23,11 +24,15 @@ const LEVEL_SVGS: Record<string, string> = {
 };
 
 export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
+  const navigate = useNavigate();
   const levelSvg = LEVEL_SVGS[team.level] || rookieSvg;
   const defaultImage = "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=500&auto=format&fit=crop&q=60";
 
   return (
-    <div className="group relative flex flex-col overflow-hidden rounded-xl border border-white/5 bg-[#1a1a1a] transition-all duration-300 hover:-translate-y-1 md:hover:-translate-y-2 hover:border-orange-500/30 hover:shadow-[0_10px_20px_rgba(249,115,22,0.15)] cursor-pointer">
+    <div
+      onClick={() => navigate(`/teams/${team.id}`)}
+      className="group relative flex flex-col overflow-hidden rounded-xl border border-white/5 bg-[#1a1a1a] transition-all duration-300 hover:-translate-y-1 md:hover:-translate-y-2 hover:border-orange-500/30 hover:shadow-[0_10px_20px_rgba(249,115,22,0.15)] cursor-pointer"
+    >
       
       {/* 썸네일 이미지 및 배지 */}
       <div className="relative w-full aspect-square overflow-hidden flex-shrink-0">
@@ -69,9 +74,6 @@ export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
           <span className="flex items-center gap-1">
             <img src={peopleSvg} alt="members" className="w-3 h-3 md:w-3.5 md:h-3.5 shrink-0 opacity-80" />
             멤버 <strong className="text-white">{team.num_of_members}명</strong>
-          </span>
-          <span className="text-orange-500 font-semibold group-hover:underline text-[10px] md:text-xs shrink-0">
-            팀 구경 →
           </span>
         </div>
       </div>

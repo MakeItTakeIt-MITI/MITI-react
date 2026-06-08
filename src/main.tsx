@@ -29,6 +29,7 @@ import Community from "./pages/community/Community.tsx";
 import CommunityPost from "./pages/community/CommunityPost.tsx";
 import CourtDetails from "./pages/courts/court-details/CourtDetails.tsx";
 import { Teams } from "./pages/teams/Teams.tsx";
+import TeamDetail from "./pages/teams/TeamDetail.tsx";
 
 const queryClient = new QueryClient();
 
@@ -68,7 +69,10 @@ const router = createBrowserRouter([
       },
       {
         path: "teams",
-        element: <Teams />,
+        children: [
+          { path: "", element: <Teams /> },
+          { path: ":id", element: <TeamDetail /> },
+        ],
       },
       {
         path: "courts",
