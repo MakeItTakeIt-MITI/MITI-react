@@ -46,7 +46,10 @@ export const TeamDetailHero: React.FC<TeamDetailHeroProps> = ({ team, hideTextOv
       {/* Immersive Rounded Hero Box (Clickable to view image) */}
       <div 
         onClick={() => setIsModalOpen(true)}
-        style={{ transform: "translate3d(0, 0, 0)" }} // Fix: Force GPU layer to preserve border-radius mask on child scale zoom
+        style={{ 
+          transform: "translate3d(0, 0, 0)",
+          WebkitMaskImage: "-webkit-radial-gradient(white, black)"
+        }} // Fix: Force GPU layer and WebKit masking to preserve border-radius mask on child scale zoom
         className={`w-full h-[280px] sm:h-[340px] md:h-[400px] relative overflow-hidden rounded-none md:rounded-2xl border border-white/5 md:border-white/10 shadow-2xl flex flex-col justify-end p-6 md:p-10 cursor-pointer group isolate ${
           hideTextOverlay ? "border-b-0" : "border-b-4 border-b-[#00E5FF]"
         }`}
@@ -124,26 +127,31 @@ export const TeamDetailHero: React.FC<TeamDetailHeroProps> = ({ team, hideTextOv
       {isModalOpen && (
         <div 
           onClick={() => setIsModalOpen(false)}
-          className="fixed inset-0 bg-black z-50 flex items-center justify-center p-4 cursor-zoom-out animate-fade-in"
+          className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 cursor-zoom-out animate-fade-in"
         >
-          {/* Close button */}
-          <button 
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsModalOpen(false);
-            }}
-            className="absolute top-6 right-6 text-white/70 hover:text-white text-3xl font-light transition-colors z-50 w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10"
-            aria-label="모달 닫기"
+          {/* Relative container wrapping the image and its close button */}
+          <div 
+            className="relative max-w-full max-h-[90vh] flex items-center justify-center cursor-default"
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image or container
           >
-            &times;
-          </button>
-          
-          <img
-            src={activeImage}
-            alt={`${team.name} 대표 이미지 원본`}
-            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl border border-white/10 cursor-default"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image itself
-          />
+            <img
+              src={activeImage}
+              alt={`${team.name} 대표 이미지 원본`}
+              className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl border border-white/10"
+            />
+            
+            {/* Close button positioned at the top-right corner inside the image wrapper */}
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsModalOpen(false);
+              }}
+              className="absolute top-4 right-4 text-white/80 hover:text-white text-2xl font-bold transition-all z-50 w-9 h-9 flex items-center justify-center rounded-full bg-black/60 hover:bg-black/80 border border-white/15 shadow-lg active:scale-95"
+              aria-label="모달 닫기"
+            >
+              &times;
+            </button>
+          </div>
         </div>
       )}
     </div>
