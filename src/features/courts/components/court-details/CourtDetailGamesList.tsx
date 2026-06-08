@@ -44,8 +44,8 @@ const CourtDetailGamesList = ({
           {courtsGamesPageContent?.map((game: CourtGamesDetailsField) => (
             <div>
               <h3 className="text-[#999] text-sm font-[400]">
-                {game.startdate.slice(0, 4)}년 {game.startdate.slice(5, 7)}월{" "}
-                {game.startdate.slice(8, 10)}일
+                {game.startdate.slice(0, 4)}년 {Number(game.startdate.slice(5, 7))}월{" "}
+                {Number(game.startdate.slice(8, 10))}일
               </h3>
               <CourtDetailsGameCard game={game} />
               {hasNextPage && (

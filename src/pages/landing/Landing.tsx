@@ -25,9 +25,9 @@ const Landing = () => {
           zIndex: 1,
           backgroundColor: "#000",
         }}
-        className="sm:block md:hidden min-h-screen w-full "
+        className="block min-[600px]:hidden min-h-screen w-full "
       >
-        <MobileHero />
+        <MobileHero handleVideoOpen={handleVideoOpen} />
         <VideoPlaylistContainer youtubeData={youtTubeData?.items} />
       </main>
 
@@ -35,7 +35,7 @@ const Landing = () => {
         style={{
           backgroundColor: "#000",
         }}
-        className=" relative sm:hidden md:block space-y-20"
+        className=" relative hidden min-[600px]:block space-y-20 w-full overflow-hidden"
       >
         <Suspense
           fallback={
@@ -50,7 +50,9 @@ const Landing = () => {
         >
           <DesktopHero handleVideoOpen={handleVideoOpen} />
         </Suspense>
-        <VideoPlaylistContainer youtubeData={youtTubeData?.items} />
+        <div className="w-full max-w-[1200px] mx-auto">
+          <VideoPlaylistContainer youtubeData={youtTubeData?.items} />
+        </div>
       </main>
     </>
   );

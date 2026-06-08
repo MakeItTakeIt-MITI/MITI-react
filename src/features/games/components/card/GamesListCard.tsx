@@ -28,10 +28,10 @@ export default function GamesListCard({ game, animationIndex = 0 }: GamesListCar
         {/* DATE */}
         <div className="w-[34px] h-full text-white flex flex-col items-center justify-center">
           <span className="text-[10px] font-[500]">
-            {game.startdate.slice(5, 7)}월
+            {Number(game.startdate.slice(5, 7))}월
           </span>
           <span className="text-sm font-bold">
-            {game.startdate.slice(8, 10)}
+            {Number(game.startdate.slice(8, 10))}
           </span>
         </div>
         {/* GAME INFO */}

@@ -6,14 +6,14 @@ import { isActivePath } from "../utils/isActivePath";
 export default function DesktopNavbar() {
   const { pathname } = useLocation();
 
-  const isLanding = pathname === "/";
+  const isLanding = pathname === "/" || pathname === "/home";
 
   return (
     <nav
       aria-label="웹페이지 기본 내비게이션"
       className={
         (isLanding
-          ? "sm:hidden md:flex w-full px-4 md:px-8 h-[60px] bg-[#000000D9] items-center justify-center z-40"
+          ? "sm:hidden md:flex w-full px-4 md:px-8 h-[60px] bg-[#000000] items-center justify-center z-40"
           : "sm:hidden md:flex w-full px-4 md:px-8 h-[60px] bg-[#141414] items-center justify-center") +
         " transition-colors"
       }
@@ -39,6 +39,20 @@ export default function DesktopNavbar() {
               }}
             >
               경기 목록
+            </Link>
+          </li>
+          <li role="none">
+            <Link
+              role="menuitem"
+              aria-current={
+                isActivePath(pathname, "/teams") ? "page" : undefined
+              }
+              to={`teams`}
+              style={{
+                color: isActivePath(pathname, "/teams") ? "#1ADCDF" : "white",
+              }}
+            >
+              팀 목록
             </Link>
           </li>
           <li role="none">

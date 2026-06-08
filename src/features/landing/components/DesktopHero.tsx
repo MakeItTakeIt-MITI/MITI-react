@@ -18,59 +18,9 @@ const DesktopHero = ({ handleVideoOpen }: DesktopHeroProps) => {
   }, [inView]);
 
   return (
-    <div id="spline-container" className="w-full h-full mx-auto relative ">
-      <div
-        id="landing-text"
-        style={{ zIndex: 9999 }}
-        className="absolute bottom-[15%] left-[370px] flex flex-col gap-[28px] z-[8888px] text-white"
-      >
-        <div className="flex flex-col gap-[36px]">
-          <p className=" w-[154px] h-[46px] rounded-full text-base text-[#A3F1F2]  border border-[#1ADCDF] bg-[#11AADD33] flex items-center justify-center ">
-            지금 시작하세요!
-          </p>
-          <div className="font-bold  leading-[1.1] ">
-            <h1 data-testid="desktop-hero-main-heading" className="text-[60px]">
-              오늘 퇴근하고
-            </h1>
-            <h1 data-testid="desktop-hero-sub-heading" className="text-[80px]">
-              <span className="text-miti-brand">농구</span> 어떠세요?
-            </h1>
-          </div>
-          <p className="text-[18px] text-[#ADADAD] font-[500]">
-            번거로움은 그만, 농구만 즐기세요! <br />
-            농구를 즐기는데 필요한 모든 일은 미티가 대신하겠습니다.
-          </p>
-        </div>
-
-        <div className="flex gap-[28px] text-[18px] font-bold">
-          <Link
-            to="/games"
-            aria-label="오늘의 경기 보러가기"
-            className="
-      w-[196px] h-[52px] inline-flex items-center justify-center text-white bg-miti-brand rounded-full font-bold
-       duration-200 ease-out
-      hover:shadow-xl hover:-translate-y-1 hover:opacity-95
-      focus:outline-none focus:ring-4 focus:ring-miti-brandLight/30
-    "
-          >
-            오늘의 경기 보러가기
-          </Link>
-
-          <button
-            aria-label="게스트 모집 가이드"
-            onClick={handleVideoOpen}
-            className="
-      w-[196px] h-[52px] inline-flex items-center justify-center bg-transparent text-white rounded-full border border-miti-brand font-bold
-       duration-200
-      hover:bg-miti-brand/10 hover:border-miti-brand hover:shadow-sm hover:-translate-y-0.5
-      focus:outline-none focus:ring-4 focus:ring-miti-brandLight/20
-    "
-          >
-            게스트 모집 가이드
-          </button>
-        </div>
-      </div>{" "}
-      <div ref={containerRef} className="relative h-[80vh] overflow-hidden">
+    <div id="spline-container" className="w-full h-full relative">
+      {/* 3D 배경화면 영역 (100% 전체 너비) */}
+      <div ref={containerRef} className="relative h-[80vh] overflow-hidden w-full">
         <div className="absolute inset-0 spline-wrapper pointer-events-auto z-1">
           <Suspense fallback={<div className="w-full h-full bg-black" />}>
             <Spline
@@ -100,6 +50,49 @@ const DesktopHero = ({ handleVideoOpen }: DesktopHeroProps) => {
           }}
           aria-hidden="true"
         />
+      </div>
+
+      {/* 텍스트 & 버튼 콘텐츠 영역 (최대 1200px) */}
+      <div className="absolute inset-0 z-20 pointer-events-none flex items-center">
+        <div className="w-full max-w-[1200px] h-full mx-auto px-6 md:px-10 relative">
+          <div
+            id="landing-text"
+            className="absolute bottom-[15%] left-6 md:left-10 flex flex-col gap-[28px] text-white pointer-events-auto"
+          >
+            <div className="flex flex-col gap-[36px]">
+              <div className="font-bold leading-[1.1]">
+                <h1 data-testid="desktop-hero-main-heading" className="text-[60px]">
+                  오늘 퇴근하고
+                </h1>
+                <h1 data-testid="desktop-hero-sub-heading" className="text-[80px]">
+                  <span className="text-miti-brand">농구</span> 어떠세요?
+                </h1>
+              </div>
+              <p className="text-[18px] text-[#ebebeb] font-[500]">
+                번거로움은 그만, 농구만 즐기세요! <br />
+                농구를 즐기는데 필요한 모든 일은 미티가 대신하겠습니다.
+              </p>
+            </div>
+
+            <div className="flex gap-[28px] text-[18px] font-bold">
+              <Link
+                to="/games"
+                aria-label="오늘의 경기 보러가기"
+                className="w-[196px] h-[52px] inline-flex items-center justify-center text-white bg-miti-brand rounded-full font-bold duration-200 ease-out hover:shadow-xl hover:-translate-y-1 hover:opacity-95 focus:outline-none focus:ring-4 focus:ring-miti-brandLight/30"
+              >
+                오늘의 경기 보러가기
+              </Link>
+
+              <button
+                aria-label="게스트 모집 가이드"
+                onClick={handleVideoOpen}
+                className="w-[196px] h-[52px] inline-flex items-center justify-center bg-transparent text-white rounded-full border border-miti-brand font-bold duration-200 hover:bg-miti-brand/10 hover:border-miti-brand hover:shadow-sm hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-miti-brandLight/20"
+              >
+                게스트 모집 가이드
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

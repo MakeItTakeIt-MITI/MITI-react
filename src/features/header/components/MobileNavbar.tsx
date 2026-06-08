@@ -1,6 +1,6 @@
 import miti_logo from "../../../assets/v1.3/navbar-logo.svg";
-import hamburger from "../../../assets/v1.3/hamburger.svg";
-import toggle_close from "../../../assets/v1.3/navigation/toggle_close.png";
+import bars from "../../../assets/images/bars.svg";
+import close from "../../../assets/images/close.svg";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { getTodaysGamesQuery } from "../../../utils/dates/date";
@@ -10,7 +10,7 @@ export default function MobileNavbar() {
   const [displayMenu, setDisplayMenu] = useState(false);
 
   const { pathname } = useLocation();
-  const isLanding = pathname === "/";
+  const isLanding = pathname === "/" || pathname === "/home";
 
   const handleToggleMenu = () => {
     setDisplayMenu(!displayMenu);
@@ -34,14 +34,32 @@ export default function MobileNavbar() {
 
       <div
         className={`flex w-full justify-between items-center relative z-50 p-4 ${
-          isLanding ? "bg-[#000000D9]" : "bg-[#141414]"
+          isLanding ? "bg-[#000000]" : "bg-[#141414]"
         }`}
       >
         <Link to="/home">
           <img src={miti_logo} alt="miti logo" />
         </Link>
-        <button type="button" onClick={handleToggleMenu}>
-          <img src={displayMenu ? toggle_close : hamburger} alt="menu" />
+        <button 
+          type="button" 
+          onClick={handleToggleMenu}
+          className="w-6 h-6 overflow-hidden relative flex items-center justify-start"
+          aria-label="Toggle menu"
+        >
+          {displayMenu ? (
+            <img 
+              src={close} 
+              alt="close" 
+              className="w-[54px] max-w-none h-6"
+              style={{ transform: 'translateX(0px)' }}
+            />
+          ) : (
+            <img 
+              src={bars} 
+              alt="menu" 
+              className="w-6 h-6"
+            />
+          )}
         </button>
       </div>
 
@@ -50,11 +68,14 @@ export default function MobileNavbar() {
           displayMenu
             ? "translate-y-0 opacity-100 pointer-events-auto"
             : "-translate-y-full opacity-0 pointer-events-none"
-        } ${isLanding ? "bg-[#000000E5]" : "bg-[#141414]"}`}
+        } ${isLanding ? "bg-[#000000]" : "bg-[#141414]"}`}
       >
         <ul className="flex flex-col gap-6 items-end text-sm font-bold">
           <li onClick={() => setDisplayMenu(false)}>
             <Link to={getTodaysGamesQuery()}>경기 목록</Link>
+          </li>
+          <li onClick={() => setDisplayMenu(false)}>
+            <Link to="teams">팀 목록</Link>
           </li>
           <li onClick={() => setDisplayMenu(false)}>
             <Link to={`courts?region=&isSearched=false&search=`}>

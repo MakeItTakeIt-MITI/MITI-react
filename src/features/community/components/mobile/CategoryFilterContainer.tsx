@@ -50,7 +50,7 @@ const CategoryFilterContainer = () => {
   const isAllSelected = searchParams.get("category") === "all";
 
   return (
-    <div className="md:hidden sm:flex items-center gap-3 overflow-x-auto">
+    <div className="md:hidden sm:flex items-center gap-3 overflow-x-auto no-scrollbar">
       <button
         type="button"
         className={`py-2.5 px-[14px] flex items-center justify-center rounded-[100px] text-xs whitespace-nowrap border

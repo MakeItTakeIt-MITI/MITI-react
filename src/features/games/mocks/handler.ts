@@ -166,5 +166,6 @@ export const handlers = [
                 }
             ]
         });
-    }),
+    })
 ];
+
