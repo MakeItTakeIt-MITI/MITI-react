@@ -44,29 +44,6 @@ export const TeamDetailPC: React.FC<TeamDetailPCProps> = ({
     return specs.join(" · ");
   };
 
-  const getRoleBadge = (role: string) => {
-    switch (role) {
-      case "owner":
-        return (
-          <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30 flex items-center gap-1 shadow-sm">
-            👑 구단주
-          </span>
-        );
-      case "manager":
-        return (
-          <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/30 flex items-center gap-1 shadow-sm">
-            🛡️ 매니저
-          </span>
-        );
-      default:
-        return (
-          <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-white/5 text-gray-300 border border-white/10 flex items-center gap-1">
-            🏃 멤버
-          </span>
-        );
-    }
-  };
-
   return (
     <div className="w-full max-w-[960px] flex flex-col bg-[#141414] relative py-8 px-4 md:px-0">
       {/* Hero section */}

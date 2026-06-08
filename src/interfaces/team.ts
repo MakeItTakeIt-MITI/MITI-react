@@ -108,3 +108,42 @@ export interface TeamMembersResponse {
   };
 }
 
+export interface TeamInvitationInviter {
+  id: number;
+  nickname: string;
+  profile_image_url: string | null;
+}
+
+export interface TeamInvitationTeam {
+  id: number;
+  name: string;
+  city: TeamCity;
+  introduction: string;
+  images: string[];
+  status: string;
+  level: 'rookie' | 'division6' | 'division5' | 'division4' | 'division3' | 'elite';
+}
+
+export interface TeamInvitationData {
+  token: string;
+  team: TeamInvitationTeam;
+  inviter: TeamInvitationInviter;
+  left_uses: number | null;
+  expires_at: string;
+  is_active: boolean;
+  created_at: string;
+  has_membership: boolean;
+}
+
+export interface TeamInvitationResponse {
+  status_code: number;
+  message: string;
+  data: TeamInvitationData;
+}
+
+export interface AcceptInvitationResponse {
+  status_code: number;
+  message: string;
+  data: TeamMembership;
+}
+

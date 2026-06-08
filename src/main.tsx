@@ -30,6 +30,7 @@ import CommunityPost from "./pages/community/CommunityPost.tsx";
 import CourtDetails from "./pages/courts/court-details/CourtDetails.tsx";
 import { Teams } from "./pages/teams/Teams.tsx";
 import TeamDetail from "./pages/teams/TeamDetail.tsx";
+import TeamInvitation from "./pages/teams/TeamInvitation.tsx";
 
 const queryClient = new QueryClient();
 
@@ -72,6 +73,7 @@ const router = createBrowserRouter([
         children: [
           { path: "", element: <Teams /> },
           { path: ":id", element: <TeamDetail /> },
+          { path: "invitations/:token", element: <TeamInvitation /> },
         ],
       },
       {

@@ -167,7 +167,7 @@ const TeamGameDetailContainer = ({
         <li>
           <GameParticipants
             num_of_participations={totalParticipations}
-            max_invitation={gameDetailData.max_invitation}
+            max_invitation={String(gameDetailData.max_invitation)}
           />
         </li>
         <li className="flex flex-col gap-2">

@@ -16,7 +16,6 @@ type Story = StoryObj<typeof GameAddress>;
 
 export const GameAddressChip: Story = {
   args: {
-    address: "서울 특별지",
-    address_detail: "수유동 101호",
+    court_address: "서울 특별시 수유동 101호",
   },
 };

@@ -1,5 +1,11 @@
 import axiosUrl from "../../../utils/axios.ts";
-import { TeamListResponse, TeamDetailResponse, TeamMembersResponse } from "../../../interfaces/team.ts";
+import {
+  TeamListResponse,
+  TeamDetailResponse,
+  TeamMembersResponse,
+  TeamInvitationResponse,
+  AcceptInvitationResponse,
+} from "../../../interfaces/team.ts";
 
 export const getTeamsList = async (
   cursor: string | null,
@@ -46,4 +52,40 @@ export const getTeamMembers = async (
     throw error;
   }
 };
+
+export const getTeamInvitationDetail = async (
+  token: string
+): Promise<TeamInvitationResponse["data"]> => {
+  try {
+    const response = await axiosUrl.get<TeamInvitationResponse>(
+      `/teams/invitations/${token}`
+    );
+    return response.data.data;
+  } catch (error) {
+    console.error(`Error fetching team invitation detail (Token: ${token}):`, error);
+    throw error;
+  }
+};
+
+export const acceptTeamInvitation = async (
+  token: string
+): Promise<AcceptInvitationResponse["data"]> => {
+  try {
+    const accessToken = localStorage.getItem("accessToken");
+    const response = await axiosUrl.post<AcceptInvitationResponse>(
+      `/teams/invitations/${token}/accept`,
+      {},
+      {
+        headers: {
+          ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
+        },
+      }
+    );
+    return response.data.data;
+  } catch (error) {
+    console.error(`Error accepting team invitation (Token: ${token}):`, error);
+    throw error;
+  }
+};
+
 

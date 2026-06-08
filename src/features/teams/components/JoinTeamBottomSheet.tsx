@@ -1,4 +1,3 @@
-import React from "react";
 import share_icon from "../../../assets/v1.3/game-detail/share_icon.svg";
 import { PLAYSTORE, APPLE_STORE } from "../../../utils/app.ts";
 
