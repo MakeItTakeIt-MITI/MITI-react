@@ -203,10 +203,13 @@ const GameDetailContainer = ({
         </li>
 
         <li>
-          <GameAddress
-            address={gameDetailData?.court.address}
-            address_detail={gameDetailData?.court.address_detail || ""}
-          />
+          {gameDetailData?.court ? (
+            <GameAddress
+              court_address={`${gameDetailData.court.address} ${gameDetailData.court.court_name}`}
+            />
+          ) : (
+            <span className="text-[#D6D6D6] text-sm">장소 미정</span>
+          )}
         </li>
         <li>
           <GameTime

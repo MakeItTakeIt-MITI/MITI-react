@@ -13,12 +13,12 @@ export default function DesktopNavbar() {
       aria-label="웹페이지 기본 내비게이션"
       className={
         (isLanding
-          ? "sm:hidden md:flex  px-[360px] h-[60px] bg-[#000000D9] items-center justify-center z-40"
-          : "sm:hidden md:flex w-full px-[360px] h-[60px] bg-[#141414] items-center justify-center") +
+          ? "sm:hidden md:flex w-full px-4 md:px-8 h-[60px] bg-[#000000D9] items-center justify-center z-40"
+          : "sm:hidden md:flex w-full px-4 md:px-8 h-[60px] bg-[#141414] items-center justify-center") +
         " transition-colors"
       }
     >
-      <div className=" h-[28px] w-[1200px]  flex items-center  justify-between">
+      <div className=" h-[28px] w-full max-w-[1200px]  flex items-center  justify-between">
         <Link to="/home" aria-label="랜딩 페이지로 이동">
           <img src={navbar_logo} alt="미티 로고" />
         </Link>

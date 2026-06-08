@@ -3,14 +3,14 @@ import axiosUrl from "../../../utils/axios.ts";
 
 export const gamesListOnly = async (
 
-    game_status: string[],
+    status: string[],
     province: string[],
     search: string | null,
     cursor: number | null,
     limit: number
 ) => {
     try {
-        const params = { game_status, province, search, cursor, limit };
+        const params = { status, province, search, cursor, limit };
 
         const cleanParams = Object.fromEntries(
             Object.entries(params).filter(([_, v]) => {
@@ -21,7 +21,7 @@ export const gamesListOnly = async (
         );
 
 
-        const response = await axiosUrl.get(`/games/list`, {
+        const response = await axiosUrl.get(`/matches/list`, {
             params: cleanParams,
             paramsSerializer: (params) =>
                 qs.stringify(params, { arrayFormat: "repeat", encode: true }),
@@ -38,11 +38,11 @@ export const gamesListOnly = async (
 export const mapGamesList = async (
     startdate: string,
     starttime: string,
-    game_status: string[],
+    status: string[],
     province: string[]
 ) => {
     try {
-        const params = { startdate, starttime, game_status, province, };
+        const params = { startdate, starttime, status, province, };
 
         const cleanParams = Object.fromEntries(
             Object.entries(params).filter(([_, v]) => {
@@ -52,7 +52,7 @@ export const mapGamesList = async (
             })
         );
 
-        const response = await axiosUrl.get(`/games/map`, {
+        const response = await axiosUrl.get(`/matches/map`, {
             params: cleanParams,
             paramsSerializer: (params) =>
                 qs.stringify(params, { arrayFormat: "repeat", encode: true }),

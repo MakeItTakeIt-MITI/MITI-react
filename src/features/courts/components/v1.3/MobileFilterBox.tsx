@@ -1,4 +1,4 @@
-import filters from "../../../../assets/v1.3/games/settings_icon.png";
+import filters from "../../../../assets/images/slider.svg";
 import { useState } from "react";
 import RegionChipMobile from "./RegionChipMobile";
 import MobileFilterPopup from "./MobileFilterPopup";
@@ -46,7 +46,7 @@ const MobileFilterBox = ({
   };
   return (
     <aside className="md:hidden sm:flex items-center justify-between gap-4">
-      <ul className="flex items-center gap-2 overflow-x-auto">
+      <ul className="flex items-center gap-2 overflow-x-auto no-scrollbar">
         {REGIONS.map((region) => {
           const isSelected =
             selectedProvince.includes(region) ||

@@ -10,6 +10,7 @@ import {
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import GameDetail from "./pages/games/game-detail/GameDetail.tsx";
+import TeamGameDetail from "./pages/team-games/team-game-detail/TeamGameDetail.tsx";
 import Courts from "./pages/courts/Courts.tsx";
 import React from "react";
 import NotFound from "./pages/other/NotFound.tsx";
@@ -56,6 +57,12 @@ const router = createBrowserRouter([
         children: [
           { path: "", element: <Games /> },
           { path: ":id", element: <GameDetail /> },
+        ],
+      },
+      {
+        path: "team-games",
+        children: [
+          { path: ":id", element: <TeamGameDetail /> },
         ],
       },
       {

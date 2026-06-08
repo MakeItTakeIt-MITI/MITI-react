@@ -121,7 +121,7 @@ const MobileFilterModal = ({
       <div className="flex flex-col justify-between h-full">
         {/* status field */}
         <div className="flex flex-col  gap-5">
-          <div className="md:hidden w-full overflow-x-auto">
+          <div className="md:hidden w-full overflow-x-auto no-scrollbar">
             <ul className="flex items-center gap-1.5 min-w-max">
               {tab === "map" && (
                 <>

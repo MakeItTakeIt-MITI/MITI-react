@@ -1,13 +1,8 @@
 .scrollbar-x-wide::-webkit-scrollbar {
-  height: 7px; /* horizontal scrollbar thickness */
+  display: none;
 }
 
-.scrollbar-x-wide::-webkit-scrollbar-thumb {
-  background-color: #a3a3a3; /* thumb color */
-  border-radius: 4px;
-  width: 42px;
-}
-
-.scrollbar-x-wide::-webkit-scrollbar-track {
-  background: #000000b3;
+.scrollbar-x-wide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

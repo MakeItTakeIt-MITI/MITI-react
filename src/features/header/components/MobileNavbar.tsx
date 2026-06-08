@@ -20,11 +20,23 @@ export default function MobileNavbar() {
     <nav
       className={
         isLanding
-          ? "sm:flex md:hidden absolute top-0 left-0 right-0 z-40 flex-col gap-4 w-full bg-[#000000D9] p-4"
-          : "sm:flex md:hidden relative flex-col gap-4 w-full bg-[#141414] p-4"
+          ? "sm:flex md:hidden absolute top-0 left-0 right-0 z-40 flex-col w-full"
+          : "sm:flex md:hidden relative flex-col w-full"
       }
     >
-      <div className="flex w-full justify-between items-center">
+      {/* Backdrop overlay */}
+      <div
+        className={`fixed inset-0 bg-[#00000099] z-30 transition-opacity duration-300 ease-in-out ${
+          displayMenu ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setDisplayMenu(false)}
+      />
+
+      <div
+        className={`flex w-full justify-between items-center relative z-50 p-4 ${
+          isLanding ? "bg-[#000000D9]" : "bg-[#141414]"
+        }`}
+      >
         <Link to="/home">
           <img src={miti_logo} alt="miti logo" />
         </Link>
@@ -33,38 +45,37 @@ export default function MobileNavbar() {
         </button>
       </div>
 
-      {displayMenu && (
-        <div
-          className={
-            isLanding
-              ? `absolute top-14 left-0 right-0 text-white bg-[#000000E5] z-[99999] p-4`
-              : `absolute top-14 left-0 right-0 text-white bg-[#141414] z-[99999] p-4`
-          }
-        >
-          <ul className="flex flex-col gap-6 items-end text-sm font-bold ">
-            <li onClick={() => setDisplayMenu(false)}>
-              <Link to={getTodaysGamesQuery()}>경기 목록</Link>
-            </li>
-            <li onClick={() => setDisplayMenu(false)}>
-              <Link to={`courts?region=&isSearched=false&search=`}>
-                경기장 목록
-              </Link>
-            </li>
-            <li onClick={() => setDisplayMenu(false)}>
-              <Link to="community?search=&category=all">게시판</Link>
-            </li>
-            <li onClick={() => setDisplayMenu(false)}>
-              <Link to={`faq?tab=&search=`}>자주 묻는 질문</Link>
-            </li>
-            <li onClick={() => setDisplayMenu(false)}>
-              <Link to={`inquiries?page=1`}>사용자의 문의</Link>
-            </li>
-            <li>
-              <AppDownloadBtn />
-            </li>
-          </ul>
-        </div>
-      )}
+      <div
+        className={`absolute top-full left-0 right-0 text-white z-40 p-4 transition-all duration-300 ease-in-out transform ${
+          displayMenu
+            ? "translate-y-0 opacity-100 pointer-events-auto"
+            : "-translate-y-full opacity-0 pointer-events-none"
+        } ${isLanding ? "bg-[#000000E5]" : "bg-[#141414]"}`}
+      >
+        <ul className="flex flex-col gap-6 items-end text-sm font-bold">
+          <li onClick={() => setDisplayMenu(false)}>
+            <Link to={getTodaysGamesQuery()}>경기 목록</Link>
+          </li>
+          <li onClick={() => setDisplayMenu(false)}>
+            <Link to={`courts?region=&isSearched=false&search=`}>
+              경기장 목록
+            </Link>
+          </li>
+          <li onClick={() => setDisplayMenu(false)}>
+            <Link to="community?search=&category=all">게시판</Link>
+          </li>
+          <li onClick={() => setDisplayMenu(false)}>
+            <Link to={`faq?tab=&search=`}>자주 묻는 질문</Link>
+          </li>
+          <li onClick={() => setDisplayMenu(false)}>
+            <Link to={`inquiries?page=1`}>사용자의 문의</Link>
+          </li>
+          <li>
+            <AppDownloadBtn />
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 }
+
