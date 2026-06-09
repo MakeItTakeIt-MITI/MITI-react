@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import BannerMedium from "../../features/common/components(renewal)/banners/BannerMedium.tsx";
 import { useTeamsPage } from "./hooks/useTeamsPage.ts";
 import { TeamListContainer } from "../../features/teams/components/TeamListContainer.tsx";
@@ -33,7 +33,7 @@ export const Teams: React.FC = () => {
 
           {/* 데스크톱 화면용 타이틀 */}
           <h1 className="hidden md:block text-xl md:text-2xl font-bold text-white tracking-tight">
-            🏀 농구 팀 찾기
+            농구 팀 찾기
           </h1>
           <p className="hidden md:block text-xs md:text-sm text-[#ebebeb]">
             주변에 함께 운동할 매너 있고 열정 가득한 농구 팀들을 탐색해 보세요.
