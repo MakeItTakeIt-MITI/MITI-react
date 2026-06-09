@@ -1,7 +1,7 @@
 import React from 'react';
-import { TeamListItem } from '../../../interfaces/team';
-import { TeamCard } from './TeamCard';
-import { TeamCardSkeleton } from './TeamCardSkeleton';
+import { TeamListItem } from '../../../interfaces/team.ts';
+import { TeamCard } from './TeamCard.tsx';
+import { TeamCardSkeleton } from './TeamCardSkeleton.tsx';
 
 interface TeamListContainerProps {
   teams: TeamListItem[];

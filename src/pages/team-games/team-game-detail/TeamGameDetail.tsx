@@ -1,7 +1,7 @@
-import BannerMedium from "@/features/common/components(renewal)/banners/BannerMedium";
-import TeamGameDetailContainer from "@/features/team-game-detail/components/TeamGameDetailContainer";
-import TeamGameDetailsPanel from "@/features/team-game-detail/components/TeamGameDetailsPanel";
-import { useTeamGameDetails } from "@/features/team-game-detail/hooks/query/useTeamGameDetails";
+import BannerMedium from "../../../features/common/components(renewal)/banners/BannerMedium.tsx";
+import TeamGameDetailContainer from "../../../features/team-game-detail/components/TeamGameDetailContainer.tsx";
+import TeamGameDetailsPanel from "../../../features/team-game-detail/components/TeamGameDetailsPanel.tsx";
+import { useTeamGameDetails } from "../../../features/team-game-detail/hooks/query/useTeamGameDetails.ts";
 import { useParams } from "react-router-dom";
 
 const TeamGameDetail = () => {

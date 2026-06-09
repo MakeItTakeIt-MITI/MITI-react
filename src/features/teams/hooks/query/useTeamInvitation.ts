@@ -1,5 +1,5 @@
 import { useQuery, useMutation } from '@tanstack/react-query';
-import { getTeamInvitationDetail, acceptTeamInvitation } from '../../api/teams';
+import { getTeamInvitationDetail, acceptTeamInvitation } from '../../api/teams.ts';
 
 export const useTeamInvitationDetail = (token: string) => {
   return useQuery({

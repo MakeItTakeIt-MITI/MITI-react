@@ -1,10 +1,10 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useTeamDetail } from "../../features/teams/hooks/query/useTeamDetail";
-import { useTeamMembers } from "../../features/teams/hooks/query/useTeamMembers";
-import { TeamDetailPC } from "../../features/teams/components/TeamDetailPC";
-import { TeamDetailMobile } from "../../features/teams/components/TeamDetailMobile";
-import { TeamDetailSkeleton } from "../../features/teams/components/TeamDetailSkeleton";
+import { useTeamDetail } from "../../features/teams/hooks/query/useTeamDetail.ts";
+import { useTeamMembers } from "../../features/teams/hooks/query/useTeamMembers.ts";
+import { TeamDetailPC } from "../../features/teams/components/TeamDetailPC.tsx";
+import { TeamDetailMobile } from "../../features/teams/components/TeamDetailMobile.tsx";
+import { TeamDetailSkeleton } from "../../features/teams/components/TeamDetailSkeleton.tsx";
 
 const TeamDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();

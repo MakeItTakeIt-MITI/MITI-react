@@ -1,6 +1,6 @@
-import GameDetailMap from "../../game-detail/components/GameDetailMap";
-import JoinGameButton from "../../game-detail/components/JoinGameButton";
-import { TeamGameDetailResponse } from "../interface/team-game-detail";
+import GameDetailMap from "../../game-detail/components/GameDetailMap.tsx";
+import JoinGameButton from "../../game-detail/components/JoinGameButton.tsx";
+import { TeamGameDetailResponse } from "../interface/team-game-detail.ts";
 
 import eliteSvg from "../../../assets/images/level=elite.svg";
 import division3Svg from "../../../assets/images/level=division 3.svg";

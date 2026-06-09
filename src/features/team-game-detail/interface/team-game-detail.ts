@@ -1,3 +1,5 @@
+import { PlayerProfile, TeamMembership } from "../../../interfaces/team.ts";
+
 export interface TeamGameDetailResponse {
     id: number;
     schedule_type: "game" | "event";
@@ -67,7 +69,7 @@ export interface TeamGameDetailResponse {
             profile_image_url: string;
             phone?: string;
             birthday?: string;
-            player_profile?: any;
+            player_profile?: PlayerProfile | null;
         };
         is_external?: boolean;
     }[];
@@ -78,8 +80,8 @@ export interface TeamGameDetailResponse {
             id?: number;
             nickname: string;
             profile_image_url?: string;
-            player_profile?: any;
+            player_profile?: PlayerProfile | null;
         };
     }[];
-    request_user_membership: any | null;
+    request_user_membership: TeamMembership | null;
 }

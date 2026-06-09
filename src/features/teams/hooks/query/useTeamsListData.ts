@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { getTeamsList } from "../../api/teams";
+import { getTeamsList } from "../../api/teams.ts";
 
 export const useTeamsListData = (
   isGeoSorted: boolean,

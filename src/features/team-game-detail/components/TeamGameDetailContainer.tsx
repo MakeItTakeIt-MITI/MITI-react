@@ -112,7 +112,7 @@ const TeamGameDetailContainer = ({
     if (!start || !end) return 0;
     const [startHour, startMinute] = start.split(":").map(Number);
     const [endHour, endMinute] = end.split(":").map(Number);
-    let startTotal = startHour * 60 + startMinute;
+    const startTotal = startHour * 60 + startMinute;
     let endTotal = endHour * 60 + endMinute;
     if (endTotal <= startTotal) {
       endTotal += 24 * 60;

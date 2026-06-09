@@ -1,7 +1,7 @@
 import React from 'react';
 import BannerMedium from "../../features/common/components(renewal)/banners/BannerMedium.tsx";
-import { useTeamsPage } from "./hooks/useTeamsPage";
-import { TeamListContainer } from "../../features/teams/components/TeamListContainer";
+import { useTeamsPage } from "./hooks/useTeamsPage.ts";
+import { TeamListContainer } from "../../features/teams/components/TeamListContainer.tsx";
 
 export const Teams: React.FC = () => {
   const {

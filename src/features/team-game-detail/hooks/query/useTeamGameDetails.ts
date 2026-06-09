@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getTeamGameDetail } from "../../api/team-game-detail";
+import { getTeamGameDetail } from "../../api/team-game-detail.ts";
 
 interface TeamGameDetailParams {
   id: string | undefined;

@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { TeamInvitationData } from "../../../interfaces/team";
+import { TeamInvitationData } from "../../../interfaces/team.ts";
 import rookieIcon from "../../../assets/images/level=rookie.svg";
 import division6Icon from "../../../assets/images/level=division 6.svg";
 import division5Icon from "../../../assets/images/level=division 5.svg";
@@ -9,7 +9,7 @@ import division3Icon from "../../../assets/images/level=division 3.svg";
 import eliteIcon from "../../../assets/images/level=elite.svg";
 import clockBadgeRed from "../../../assets/images/clock_badge_red.svg";
 import arrowLeft from "../../../assets/arrow_left.svg";
-import { PLAYSTORE, APPLE_STORE } from "../../../utils/app";
+import { PLAYSTORE, APPLE_STORE } from "../../../utils/app.ts";
 
 interface TeamInvitationPCProps {
   data: TeamInvitationData;

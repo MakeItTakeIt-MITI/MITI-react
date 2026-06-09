@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { TeamDetailData, TeamMemberListItem } from "../../../interfaces/team";
-import { TeamDetailHero } from "./TeamDetailHero";
-import { TeamIntroduction } from "./TeamIntroduction";
-import { TeamMemberList } from "./TeamMemberList";
-import { JoinTeamBottomSheet } from "./JoinTeamBottomSheet";
+import { TeamDetailData, TeamMemberListItem } from "../../../interfaces/team.ts";
+import { TeamDetailHero } from "./TeamDetailHero.tsx";
+import { TeamIntroduction } from "./TeamIntroduction.tsx";
+import { TeamMemberList } from "./TeamMemberList.tsx";
+import { JoinTeamBottomSheet } from "./JoinTeamBottomSheet.tsx";
 import { FiArrowLeft } from "react-icons/fi";
 
 import eliteSvg from "../../../assets/images/level=elite.svg";

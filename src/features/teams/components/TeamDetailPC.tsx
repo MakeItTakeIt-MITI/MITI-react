@@ -1,7 +1,7 @@
 import React from "react";
-import { TeamDetailData, TeamMemberListItem } from "../../../interfaces/team";
-import { TeamDetailHero } from "./TeamDetailHero";
-import { TeamIntroduction } from "./TeamIntroduction";
+import { TeamDetailData, TeamMemberListItem, PlayerProfile } from "../../../interfaces/team.ts";
+import { TeamDetailHero } from "./TeamDetailHero.tsx";
+import { TeamIntroduction } from "./TeamIntroduction.tsx";
 import defaultProfileImg from "../../../assets/images/default_profile_image.svg";
 
 interface TeamDetailPCProps {
@@ -15,7 +15,7 @@ export const TeamDetailPC: React.FC<TeamDetailPCProps> = ({
   members,
   isMembersLoading,
 }) => {
-  const getMemberSpecs = (profile: any) => {
+  const getMemberSpecs = (profile: Partial<PlayerProfile>) => {
     const specs: string[] = [];
 
     if (profile.gender) {

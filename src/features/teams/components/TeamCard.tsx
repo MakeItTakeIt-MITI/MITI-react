@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TeamListItem } from '../../../interfaces/team';
+import { TeamListItem } from '../../../interfaces/team.ts';
 
 import eliteSvg from "../../../assets/images/level=elite.svg";
 import division3Svg from "../../../assets/images/level=division 3.svg";

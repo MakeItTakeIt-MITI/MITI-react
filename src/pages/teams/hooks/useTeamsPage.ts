@@ -1,6 +1,6 @@
 import { useCallback, useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import { useTeamsListData } from "../../../features/teams/hooks/query/useTeamsListData";
+import { useTeamsListData } from "../../../features/teams/hooks/query/useTeamsListData.ts";
 
 export const useTeamsPage = () => {
   const [isGeoSorted, setIsGeoSorted] = useState(false);

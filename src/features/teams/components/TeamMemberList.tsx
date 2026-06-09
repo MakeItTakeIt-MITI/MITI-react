@@ -1,5 +1,5 @@
 import React from "react";
-import { TeamMemberListItem } from "../../../interfaces/team.ts";
+import { TeamMemberListItem, PlayerProfile } from "../../../interfaces/team.ts";
 import defaultProfileImg from "../../../assets/images/default_profile_image.svg";
 
 interface TeamMemberListProps {
@@ -54,7 +54,7 @@ export const TeamMemberList: React.FC<TeamMemberListProps> = ({ members, isLoadi
     }
   };
 
-  const getMemberSpecs = (profile: any) => {
+  const getMemberSpecs = (profile: Partial<PlayerProfile>) => {
     const specs: string[] = [];
 
     if (profile.gender) {

@@ -14,7 +14,7 @@ export const getTeamsList = async (
   lng?: number
 ): Promise<TeamListResponse["data"]> => {
   try {
-    const params: Record<string, any> = { limit };
+    const params: Record<string, string | number> = { limit };
     if (cursor) params.cursor = cursor;
     if (lat !== undefined && lng !== undefined) {
       params.lat = lat;

@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useTeamInvitationDetail } from "../../features/teams/hooks/query/useTeamInvitation";
-import { TeamInvitationPC } from "../../features/teams/components/TeamInvitationPC";
-import { TeamInvitationMobile } from "../../features/teams/components/TeamInvitationMobile";
+import { useTeamInvitationDetail } from "../../features/teams/hooks/query/useTeamInvitation.ts";
+import { TeamInvitationPC } from "../../features/teams/components/TeamInvitationPC.tsx";
+import { TeamInvitationMobile } from "../../features/teams/components/TeamInvitationMobile.tsx";
 
 const TeamInvitation: React.FC = () => {
   const { token } = useParams<{ token: string }>();

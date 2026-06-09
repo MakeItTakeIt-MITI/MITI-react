@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getTeamMembers } from '../../api/teams';
+import { getTeamMembers } from '../../api/teams.ts';
 
 export const useTeamMembers = (teamId: number, status?: string[]) => {
   return useQuery({
