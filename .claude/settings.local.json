@@ -9,7 +9,12 @@
       "Bash(git push *)",
       "PowerShell(Get-ChildItem *)",
       "Bash(npx eslint *)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(npm info *)",
+      "Bash(npm audit *)",
+      "Bash(python3 -c ' *)",
+      "Bash(npm install *)",
+      "Bash(git stash *)"
     ]
   }
 }
