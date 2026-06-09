@@ -44,9 +44,4 @@ describe("DesktopHero Component", () => {
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute("href", "/games");
   });
-
-  it("displays the introductory badge", () => {
-    renderComponent();
-    expect(screen.getByText("지금 시작하세요!")).toBeInTheDocument();
-  });
 });

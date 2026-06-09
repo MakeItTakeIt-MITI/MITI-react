@@ -50,7 +50,7 @@ const CommunityPostsContainer = ({
           aria-label="인기 게시글 배너"
         />
         <ul
-          className="custom-scrollbar flex flex-col gap-4 h-[750px] overflow-y-auto"
+          className="no-scrollbar flex flex-col gap-4 h-[750px] overflow-y-auto"
           role="list"
           aria-live="polite"
           aria-busy="true"
@@ -80,7 +80,7 @@ const CommunityPostsContainer = ({
       />
       {/* Post component */}
       <ul
-        className="custom-scrollbar flex flex-col gap-4 h-[750px] overflow-y-auto"
+        className="no-scrollbar flex flex-col gap-4 h-[750px] overflow-y-auto"
         role="list"
         aria-label="게시글 목록"
       >

@@ -30,11 +30,11 @@ const HostGuideVideoModal = ({
 
       {/* player box */}
       <div
-        className="flex flex-col items-end relative md:w-[1200px] md:h-[725px] sm:w-full sm:h-full max-w-[95%] max-h-[90vh] bg-black rounded-lg overflow-hidden shadow-2xl"
+        className="flex flex-col relative md:w-[1200px] md:h-[675px] w-full max-w-[95vw] aspect-video bg-black rounded-lg overflow-hidden shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <video
-          className="w-full h-full object-cover bg-black"
+          className="w-full h-full object-contain bg-black"
           ref={videoRef}
           controls
           playsInline
@@ -47,7 +47,7 @@ const HostGuideVideoModal = ({
           type="button"
           onClick={handleVideoClose}
           aria-label="닫기"
-          className="z-50 p-2 rounded-full bg-black/60 text-white hover:bg-black/80"
+          className="absolute top-4 right-4 z-50 py-1.5 px-3 rounded-full bg-black/60 text-white hover:bg-black/80 text-sm font-semibold border border-white/20 transition-colors"
         >
           닫기
         </button>

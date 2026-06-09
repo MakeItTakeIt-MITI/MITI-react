@@ -15,9 +15,10 @@ type BannerType =
 
 interface BannerMediumProps {
   type: BannerType;
+  className?: string;
 }
 
-export default function BannerMedium({ type }: BannerMediumProps) {
+export default function BannerMedium({ type, className }: BannerMediumProps) {
   let bannerImg;
   switch (type) {
     case "manners":
@@ -44,8 +45,8 @@ export default function BannerMedium({ type }: BannerMediumProps) {
   }
 
   return (
-    <div className="sm:hidden md:block w-[800px]">
-      <img src={bannerImg} alt={type} />
+    <div className={className || "sm:hidden md:block w-[800px]"}>
+      <img src={bannerImg} alt={type} className="w-full h-auto object-cover rounded-xl" />
     </div>
   );
 }

@@ -193,8 +193,8 @@ const GameDetailContainer = ({
         <li className="text-xs font-[500] text-[#D6D6D6] space-y-1">
           <div className="space-x-[2px]">
             <span>{gameDetailData?.startdate.slice(0, 4)}년</span>
-            <span>{gameDetailData?.startdate.slice(5, 7)}월</span>
-            <span>{gameDetailData?.startdate.slice(8, 10)}일</span>
+            <span>{Number(gameDetailData?.startdate.slice(5, 7))}월</span>
+            <span>{Number(gameDetailData?.startdate.slice(8, 10))}일</span>
           </div>
           <div className="space-x-[2px]">
             <span>{duration}분</span>
@@ -203,10 +203,13 @@ const GameDetailContainer = ({
         </li>
 
         <li>
-          <GameAddress
-            address={gameDetailData?.court.address}
-            address_detail={gameDetailData?.court.address_detail || ""}
-          />
+          {gameDetailData?.court ? (
+            <GameAddress
+              court_address={`${gameDetailData.court.address} ${gameDetailData.court.court_name}`}
+            />
+          ) : (
+            <span className="text-[#D6D6D6] text-sm">장소 미정</span>
+          )}
         </li>
         <li>
           <GameTime

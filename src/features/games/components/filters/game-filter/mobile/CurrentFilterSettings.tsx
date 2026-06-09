@@ -55,7 +55,7 @@ const CurrentFilterSettings = ({
   };
 
   return (
-    <div className="md:hidden w-full overflow-x-auto">
+    <div className="md:hidden w-full overflow-x-auto no-scrollbar">
       <ul className="flex items-center gap-1.5 min-w-max">
         <li className="text-[#474747] text-xs font-[500] border border-[#474747] rounded-[50px] py-2 px-3">
           <button type="button" onClick={handleResetFilters}>

@@ -20,7 +20,9 @@ export interface CourtField {
 
 export interface GameField {
     id: number;
-    game_status: "open" | "closed" | "canceled" | "completed"; // restrict to known values
+    source_id: number;
+    game_type: "game" | "team_game";
+    status: "open" | "closed" | "canceled" | "completed"; // restrict to known values
     title: string;
     startdate: string;
     starttime: string;
@@ -32,8 +34,8 @@ export interface GameField {
     fee: number;
     info?: string;
     court_name: string;
-    address: string;
-    address_detail: string;
+    court_address: string;
+    court_images?: string[];
     latitude: string;
     longitude: string;
     // court: CourtField;

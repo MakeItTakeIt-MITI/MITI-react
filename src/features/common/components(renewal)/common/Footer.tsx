@@ -9,14 +9,14 @@ import { APPLE_STORE, PLAYSTORE } from "../../../../utils/app.ts";
 
 const Footer = () => {
   const { pathname } = useLocation();
-  const isLanding = pathname === "/";
+  const isLanding = pathname === "/" || pathname === "/home";
 
   return (
     <>
       <footer
         className={
           isLanding
-            ? "bg-[#000000D9]  z-[9999] w-full md:h-[246px] sm:h-[400px] sm:px-4 md:px-0 py-[30px] flex flex-col items-center justify-center gap-5"
+            ? "bg-[#000000]  z-[9999] w-full md:h-[246px] sm:h-[400px] sm:px-4 md:px-0 py-[30px] flex flex-col items-center justify-center gap-5"
             : "bg-[#141414] z-[9999] w-full md:h-[246px] sm:h-[400px] sm:px-4 md:px-0 py-[30px] flex flex-col items-center justify-center gap-5"
         }
       >

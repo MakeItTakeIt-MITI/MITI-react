@@ -77,12 +77,12 @@ export default function GameMap({ mapDataList, geolocation }: GameMapProps) {
 
     const addressOverlapCount: Record<string, number> = {};
     mapDataList.forEach((game: GameField) => {
-      const addr = game.address;
+      const addr = game.court_address;
       addressOverlapCount[addr] = (addressOverlapCount[addr] || 0) + 1;
     });
 
     mapDataList.forEach((game: GameField) => {
-      const address = game.address;
+      const address = game.court_address;
       const marker = new window.naver.maps.Marker({
         position: new window.naver.maps.LatLng(game.latitude, game.longitude),
         map,
@@ -97,9 +97,9 @@ export default function GameMap({ mapDataList, geolocation }: GameMapProps) {
               type="button"
               style={{
                 backgroundColor:
-                  selectedAddress === game.address ? "#A3F1F2" : "#EBEBEB",
+                  selectedAddress === game.court_address ? "#A3F1F2" : "#EBEBEB",
                 border:
-                  selectedAddress === game.address
+                  selectedAddress === game.court_address
                     ? "1px solid black"
                     : "#d4d4d4",
               }}
@@ -116,9 +116,9 @@ export default function GameMap({ mapDataList, geolocation }: GameMapProps) {
               <div
                 style={{
                   backgroundColor:
-                    selectedAddress === game.address ? "#A3F1F2" : "#EBEBEB",
+                    selectedAddress === game.court_address ? "#A3F1F2" : "#EBEBEB",
                   border:
-                    selectedAddress === game.address
+                    selectedAddress === game.court_address
                       ? "1px solid black"
                       : "#999",
                 }}
@@ -132,9 +132,9 @@ export default function GameMap({ mapDataList, geolocation }: GameMapProps) {
             <button
               style={{
                 backgroundColor:
-                  selectedAddress === game.address ? "#A3F1F2" : "#EBEBEB",
+                  selectedAddress === game.court_address ? "#A3F1F2" : "#EBEBEB",
                 border:
-                  selectedAddress === game.address
+                  selectedAddress === game.court_address
                     ? "1px solid black"
                     : "#d4d4d4",
               }}
@@ -164,7 +164,7 @@ export default function GameMap({ mapDataList, geolocation }: GameMapProps) {
         if (!isSelected) {
           toggleSelected();
           setCoordinates(game.latitude, game.longitude);
-          setSelectedAddress(game.address);
+          setSelectedAddress(game.court_address);
           map.setZoom(18, true);
           map.setCenter(
             new window.naver.maps.LatLng(game.latitude, game.longitude),

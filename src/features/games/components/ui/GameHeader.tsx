@@ -1,4 +1,4 @@
-import settings_mobile from "../../../../assets/v1.3/games/settings_icon.png";
+import filter_icon from "../../../../assets/images/filter.svg";
 import CurrentFilterSettings from "../filters/game-filter/mobile/CurrentFilterSettings.tsx";
 
 interface GameHeaderProps {
@@ -27,7 +27,7 @@ export default function GameHeader({
           onClick={handleToggleMobileFilterBox}
           type="button"
         >
-          <img src={settings_mobile} alt="settings_mobile" />
+          <img src={filter_icon} alt="filter_icon" />
         </button>
       </div>
 

@@ -1,19 +1,16 @@
-import location_marker from "../../../../assets/v1.3/icon/location.svg";
+import location_marker from "../../../../assets/images/map_marker.svg";
 
 interface GameAddressProps {
-  address: string;
-  address_detail: string;
+  court_address: string;
 }
 
 export default function GameAddress({
-  address,
-  address_detail,
+  court_address,
 }: GameAddressProps) {
   return (
-    <div className="flex items-center  gap-1 sm:text-[10px] md:text-xs font-[400] text-[#D6D6D6]">
-      <img src={location_marker} alt="location_marker" />
-      <span>{address}</span>
-      <span>{address_detail}</span>
+    <div className="flex items-center gap-1 sm:text-[10px] md:text-xs font-[400] text-[#D6D6D6]">
+      <img src={location_marker} className="w-3 h-3 md:w-3.5 md:h-3.5 shrink-0" alt="location_marker" />
+      <span>{court_address}</span>
     </div>
   );
 }

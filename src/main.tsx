@@ -10,6 +10,7 @@ import {
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import GameDetail from "./pages/games/game-detail/GameDetail.tsx";
+import TeamGameDetail from "./pages/team-games/team-game-detail/TeamGameDetail.tsx";
 import Courts from "./pages/courts/Courts.tsx";
 import React from "react";
 import NotFound from "./pages/other/NotFound.tsx";
@@ -27,6 +28,9 @@ import InquiryDetail from "./pages/inquiries/InquiryDetail.tsx";
 import Community from "./pages/community/Community.tsx";
 import CommunityPost from "./pages/community/CommunityPost.tsx";
 import CourtDetails from "./pages/courts/court-details/CourtDetails.tsx";
+import { Teams } from "./pages/teams/Teams.tsx";
+import TeamDetail from "./pages/teams/TeamDetail.tsx";
+import TeamInvitation from "./pages/teams/TeamInvitation.tsx";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +60,20 @@ const router = createBrowserRouter([
         children: [
           { path: "", element: <Games /> },
           { path: ":id", element: <GameDetail /> },
+        ],
+      },
+      {
+        path: "team-games",
+        children: [
+          { path: ":id", element: <TeamGameDetail /> },
+        ],
+      },
+      {
+        path: "teams",
+        children: [
+          { path: "", element: <Teams /> },
+          { path: ":id", element: <TeamDetail /> },
+          { path: "invitations/:token", element: <TeamInvitation /> },
         ],
       },
       {

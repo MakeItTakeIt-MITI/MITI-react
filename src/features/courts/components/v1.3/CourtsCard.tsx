@@ -37,16 +37,16 @@ const CourtsCard = ({
 
   return (
     <li
-      className="court-card-appear transition-transform duration-150 active:scale-[0.96]"
+      className="court-card-appear transition-transform duration-150 active:scale-[0.96] w-full"
       style={{ animationDelay: `${animationIndex * 40}ms` }}
     >
-      <Link to={id?.toString()} className="flex flex-col md:gap-3 sm:gap-2">
+      <Link to={id?.toString()} className="flex flex-col md:gap-3 sm:gap-2 w-full">
         <img
           src={images.length === 0 ? court_card_thumbnail : images[0]}
           alt={title}
-          className="md:size-[180px] sm:size-[165px] object-cover rounded-lg"
+          className="md:size-[180px] w-full aspect-square object-cover rounded-lg"
         />
-        <div className="md:w-[180px] sm:w-[165px] flex flex-col md:gap-[4px] sm:gap-2">
+        <div className="md:w-[180px] w-full flex flex-col md:gap-[4px] sm:gap-2">
           <h2 className="text-white font-bold md:text-base sm:text-sm truncate">
             {title}
           </h2>

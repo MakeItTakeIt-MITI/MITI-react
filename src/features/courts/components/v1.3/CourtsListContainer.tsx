@@ -4,9 +4,9 @@ import "../../../../features/common/scrollbar.css";
 import { CourtsField } from "../../interface/courts.ts";
 
 const SkeletonCourtsCard = () => (
-  <li className="flex flex-col md:gap-3 sm:gap-2 animate-pulse">
-    <div className="md:size-[180px] sm:size-[165px] bg-neutral-800 rounded-lg" />
-    <div className="md:w-[180px] sm:w-[165px] flex flex-col md:gap-[4px] sm:gap-2">
+  <li className="flex flex-col md:gap-3 sm:gap-2 animate-pulse w-full">
+    <div className="md:size-[180px] w-full aspect-square bg-neutral-800 rounded-lg" />
+    <div className="md:w-[180px] w-full flex flex-col md:gap-[4px] sm:gap-2">
       <div className="h-4 w-3/4 bg-neutral-800 rounded" />
       <div className="h-3 w-full bg-neutral-800 rounded" />
       <div className="h-[10px] w-12 bg-neutral-800 rounded self-end" />
@@ -15,7 +15,7 @@ const SkeletonCourtsCard = () => (
 );
 
 const CourtsListSkeleton = () => (
-  <ul className="custom-scrollbar sm:p-0 md:p-6 grid grid-cols-2 md:grid-cols-4 md:gap-4 sm:gap-[13px] justify-center sm:h-[600px] md:h-[560px] overflow-y-auto">
+  <ul className="no-scrollbar sm:px-4 md:p-6 grid grid-cols-2 md:grid-cols-4 md:gap-4 sm:gap-[13px] justify-center justify-items-center md:h-[560px] md:overflow-y-auto">
     {Array.from({ length: 8 }).map((_, i) => (
       <SkeletonCourtsCard key={`skeleton-${i}`} />
     ))}
@@ -46,7 +46,7 @@ const CourtsListContainer = ({
   }
 
   return (
-    <ul className="custom-scrollbar sm:p-0 md:p-6 grid grid-cols-2 md:grid-cols-4 md:gap-4 sm:gap-[13px] justify-center sm:h-[600px] md:h-[560px] overflow-y-auto">
+    <ul className="no-scrollbar sm:px-4 md:p-6 grid grid-cols-2 md:grid-cols-4 md:gap-4 sm:gap-[13px] justify-center justify-items-center md:h-[560px] md:overflow-y-auto">
       {courstDataPage?.map((courtData, index) => {
         return (
           <CourtsCard

@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
 
-const MobileHero = () => {
+interface MobileHeroProps {
+  handleVideoOpen: () => void;
+}
+
+const MobileHero = ({ handleVideoOpen }: MobileHeroProps) => {
   const splineRef = useRef<any>(null);
   const { ref: containerRef, inView } = useInView({ threshold: 0 });
 
@@ -19,7 +23,7 @@ const MobileHero = () => {
       style={{
         zIndex: 1,
       }}
-      className=" w-full  h-screen"
+      className="w-full h-screen relative"
     >
       <Suspense fallback={<div className="w-full h-full bg-black" />}>
         <Spline
@@ -37,15 +41,22 @@ const MobileHero = () => {
         />
       </Suspense>
 
+      {/* BOTTOM SHADOW OVERLAY */}
+      <div
+        className="absolute bottom-0 left-0 w-full h-[120px] z-[5]"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0))",
+        }}
+        aria-hidden="true"
+      />
+
       {/* Buttons */}
       <div
         style={{ zIndex: 10 }}
-        className="px-4 absolute bottom-[128px] left-0 right-0 flex flex-col gap-[42px]  justify-center"
+        className="px-4 absolute bottom-[128px] left-0 right-0 flex flex-col gap-6  justify-center"
       >
         <div className="text-white flex flex-col gap-3">
-          <h2 className="w-[116px] h-[32px] text-sm bg-[#11AADD33]  text-[#A3F1F2] border border-[#A3F1F2] py-1.5 px-2 flex items-center justify-center rounded-full">
-            지금 시작하세요!
-          </h2>
           <div className="font-bold ">
             <h1 data-testid="mobile-hero-main-heading" className="text-[30px]">
               오늘 퇴근하고
@@ -54,20 +65,27 @@ const MobileHero = () => {
               <span className="text-miti-brand">농구</span> 어떠세요?
             </h1>
           </div>
-          <p className="text-[14px] text-[#ADADAD] font-[500]">
+          <p className="text-[14px] text-[#ebebeb] font-[500]">
             번거로움은 그만, 농구만 즐기세요! <br />
             농구를 즐기는데 필요한 모든 일은 미티가 대신하겠습니다.
           </p>
         </div>
-        <Link
-          to="/games"
-          aria-label="오늘 참여 가능한 경기"
-          className=" mx-auto
-    w-[155px] h-[44px] rounded-full bg-miti-brand text-white font-bold text-sm inline-flex items-center justify-center  
-  "
-        >
-          오늘 참여 가능한 경기
-        </Link>
+        <div className="flex flex-row justify-center gap-3 w-full">
+          <Link
+            to="/games"
+            aria-label="오늘 참여 가능한 경기"
+            className="w-[155px] h-[44px] rounded-full bg-miti-brand text-white font-bold text-xs inline-flex items-center justify-center"
+          >
+            오늘 참여 가능한 경기
+          </Link>
+          <button
+            aria-label="게스트 모집 가이드"
+            onClick={handleVideoOpen}
+            className="w-[155px] h-[44px] rounded-full bg-transparent text-white border border-miti-brand font-bold text-xs inline-flex items-center justify-center"
+          >
+            게스트 모집 가이드
+          </button>
+        </div>
       </div>
     </div>
   );
