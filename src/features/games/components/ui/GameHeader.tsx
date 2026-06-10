@@ -19,9 +19,13 @@ export default function GameHeader({
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <span className="text-xs font-[400] text-white">
-          총 {gameCount}개의 경기
-        </span>
+        {tab !== "list" ? (
+          <span className="text-xs font-[400] text-white">
+            총 {gameCount}개의 경기
+          </span>
+        ) : (
+          <div />
+        )}
         <button
           className="md:hidden sm:block"
           onClick={handleToggleMobileFilterBox}
