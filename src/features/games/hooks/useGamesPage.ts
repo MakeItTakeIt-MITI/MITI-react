@@ -62,7 +62,8 @@ export const useGamesPage = () => {
 
   // * Logic for Games List Only API and Infinite Scrolling* //
   const { ref: inViewGameListRef, inView } = useInView({
-    threshold: 0.2,
+    threshold: 0,
+    rootMargin: "0px 0px 300px 0px",
   });
 
 

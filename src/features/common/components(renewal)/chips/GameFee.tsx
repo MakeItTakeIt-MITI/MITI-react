@@ -1,17 +1,17 @@
 interface GameFeeProps {
   fee: number;
-  size: "md" | "lg";
+  size: "md" | "lg" | "xl";
 }
 
 export default function GameFee({ fee, size }: GameFeeProps) {
   return (
-    <p
+    <span
       style={{
-        fontSize: size === "lg" ? "18px" : "16px",
+        fontSize: size === "xl" ? "20px" : size === "lg" ? "18px" : "16px",
       }}
-      className="text-[#7FEEF0] font-bold "
+      className="text-[#7FEEF0] font-bold"
     >
       {fee !== 0 ? fee.toLocaleString("kr") + " 원" : "무료"}
-    </p>
+    </span>
   );
 }

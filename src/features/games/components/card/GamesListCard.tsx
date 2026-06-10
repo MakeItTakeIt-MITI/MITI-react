@@ -21,16 +21,16 @@ export default function GamesListCard({ game, animationIndex = 0 }: GamesListCar
 
   return (
     <li
-      className="court-card-appear w-full p-1 rounded-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-neutral-800/70 hover:shadow-[0_8px_32px_0_rgba(26,220,223,0.25)] active:scale-[0.97]"
+      className="court-card-appear relative w-full p-2 rounded-lg court-card-border transition-all duration-300 md:hover:z-10 md:hover:-translate-y-1 active:scale-[0.98]"
       style={{ animationDelay: `${animationIndex * 40}ms` }}
     >
       <Link className="flex items-center   gap-5" to={detailPath}>
         {/* DATE */}
-        <div className="w-[34px] h-full text-white flex flex-col items-center justify-center">
-          <span className="text-[10px] font-[500]">
+        <div className="w-[40px] h-full text-white flex flex-col items-center justify-center gap-1 shrink-0">
+          <span className="text-[14px] font-[500] leading-tight">
             {Number(game.startdate.slice(5, 7))}월
           </span>
-          <span className="text-sm font-bold">
+          <span className="text-[20px] font-bold leading-none">
             {Number(game.startdate.slice(8, 10))}
           </span>
         </div>
@@ -51,15 +51,16 @@ export default function GamesListCard({ game, animationIndex = 0 }: GamesListCar
           <div className="space-y-1">
             <GameAddress
               court_address={game.court_address}
+              court_name={game.court_name}
             />
             <GameTime starttime={game.starttime} endtime={game.endtime} />
 
-            <div className="flex justify-between">
+            <div className="flex items-start justify-between">
               <GameParticipants
                 num_of_participations={game.num_of_participations}
                 max_invitation={game.max_invitation}
               />
-              <GameFee size="md" fee={game.fee} />
+              <GameFee size="xl" fee={game.fee} />
             </div>
           </div>
         </div>

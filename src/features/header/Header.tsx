@@ -3,7 +3,7 @@ import MobileNavbar from "./components/MobileNavbar";
 
 export default function Header() {
   return (
-    <header>
+    <header className="relative z-[99999]">
       <DesktopNavbar />
       <MobileNavbar />
     </header>

@@ -65,8 +65,14 @@ const MobileFilterPopup = ({
   };
 
   return (
-    <div className="fixed inset-0 z-[99999] bg-[#00000069] bg-opacity-40 flex items-end pointer-events-auto">
-      <div className="flex flex-col gap-3 w-full px-4 py-6 bg-[#141414] rounded-t-[25px]">
+    <div
+      onClick={onClick}
+      className="fixed inset-0 z-[99999] bg-[#00000069] bg-opacity-40 flex items-end pointer-events-auto animate-fade-in"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="flex flex-col gap-3 w-full px-4 py-6 bg-[#141414] rounded-t-[25px] animate-slide-up"
+      >
         {/* regions */}
         <div className="flex flex-col gap-2.5 pb-4">
           {/* header */}

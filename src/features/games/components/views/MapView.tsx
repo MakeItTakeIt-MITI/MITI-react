@@ -39,7 +39,7 @@ export default function MapView({
       />
       {/* <GamesMap mapDataList={mapDataList} geolocation={geolocation} /> */}
       {/* <GamesMap /> */}
-      <div className="flex flex-col gap-4 sm:h-[528px] md:h-[528px] overflow-y-auto custom-scrollbar px-4">
+      <div className="flex flex-col gap-4 sm:h-[528px] md:h-[528px] overflow-y-auto no-scrollbar w-full md:w-[780px] px-1 pt-2 pb-12">
         <GameHeader
           gameCount={mapDataList?.length ?? 0}
           handleToggleMobileFilterBox={handleToggleMobileFilterBox}

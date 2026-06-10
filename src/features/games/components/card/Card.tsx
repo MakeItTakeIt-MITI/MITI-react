@@ -6,6 +6,7 @@ import GameFee from "../../../common/components(renewal)/chips/GameFee.tsx";
 import { GameStatus } from "../../../common/components(renewal)/chips/GameStatus.tsx";
 import { GameField } from "../../interface/games.ts";
 import { Link } from "react-router-dom";
+import "./card.css";
 
 interface CardProps {
   game: GameField;
@@ -19,7 +20,7 @@ export default function Card({ game, animationIndex = 0 }: CardProps) {
 
   return (
     <li
-      className="court-card-appear cursor-pointer w-full sm:h-[128px] md:h-[136px] flex flex-col gap-2.5 justify-center md:p-3 rounded-lg text-white transition-all duration-300 md:hover:-translate-y-0.5 md:hover:bg-neutral-800/70 md:hover:shadow-[0_8px_32px_0_rgba(26,220,223,0.25)] active:scale-[0.97]"
+      className="court-card-appear cursor-pointer relative w-full flex flex-col gap-2.5 justify-center p-3 rounded-lg text-white court-card-border transition-all duration-300 md:hover:z-10 md:hover:-translate-y-1 active:scale-[0.98]"
       style={{ animationDelay: `${animationIndex * 40}ms` }}
     >
       <Link to={detailPath} className="flex flex-col gap-2.5">
@@ -31,15 +32,16 @@ export default function Card({ game, animationIndex = 0 }: CardProps) {
         <div className="space-y-1 ">
           <GameAddress
             court_address={game.court_address}
+            court_name={game.court_name}
           />
           <GameTime starttime={game.starttime} endtime={game.endtime} />
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-start justify-between">
             <GameParticipants
               num_of_participations={game.num_of_participations}
               max_invitation={game.max_invitation}
             />
-            <GameFee fee={game.fee} size="md" />
+            <GameFee fee={game.fee} size="xl" />
           </div>
         </div>
       </Link>
