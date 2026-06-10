@@ -9,6 +9,7 @@ import { useDatesLogic } from "../../../sidebar/hooks/useDatesLogic";
 import MobileProvinceField from "./MobileProvinceField";
 import close_icon from "../../../../../../assets/v1.3/games/filter_close_icon.svg";
 import { useDateStore } from "../../../sidebar/store/useDateStore";
+import "../../../styles/scrollbar.css";
 
 interface MobileFilterModalProps {
   handleToggleMobileFilterBox: () => void;
@@ -116,7 +117,7 @@ const MobileFilterModal = ({
       style={{
         scrollbarWidth: "none",
       }}
-      className="fixed w-full h-full top-0 right-0 bottom-0 left-0 px-4 py-6 bg-[#141414] z-[99999] overflow-hidden"
+      className="fixed w-full h-full top-0 right-0 bottom-0 left-0 px-4 py-6 bg-[#141414] z-[99999] overflow-hidden animate-slide-up"
     >
       <div className="flex flex-col justify-between h-full">
         {/* status field */}

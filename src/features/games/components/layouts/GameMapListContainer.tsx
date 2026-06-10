@@ -44,7 +44,7 @@ export default function GameMapListContainer({
   isSelected,
 }: GameMapListContainerProps) {
   return (
-    <article className="md:w-[720px] w-full min-h-[1px] flex flex-col gap-[20px]">
+    <article className="md:w-[800px] w-full min-h-[1px] flex flex-col gap-[20px]">
       {/* Tab Navigation */}
       <TabNavigation tab={tab} handleToggleTab={handleToggleTab} />
 

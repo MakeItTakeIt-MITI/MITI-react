@@ -18,7 +18,7 @@ export default function ScrollableGameList({
 }: ScrollableGameListProps) {
   if (isLoading) {
     return (
-      <ul className="flex flex-col gap-2.5 h-[500px] sm:h-[512px] overflow-y-auto">
+      <ul className="flex flex-col gap-2.5 h-[500px] sm:h-[512px] px-1 pt-2 pb-12 overflow-y-auto no-scrollbar">
         {Array.from({ length: 6 }).map((_, i) => (
           <MapGameListCardSkeleton key={`map-skel-${i}`} />
         ))}
@@ -28,7 +28,7 @@ export default function ScrollableGameList({
 
   if (mapDataList?.length === 0) {
     return (
-      <ul className="flex flex-col gap-2.5 h-[500px] sm:h-[512px] overflow-y-auto">
+      <ul className="flex flex-col gap-2.5 h-[500px] sm:h-[512px] px-1 pt-2 pb-12 overflow-y-auto no-scrollbar">
         <EmptyGameState />
       </ul>
     );
@@ -36,7 +36,7 @@ export default function ScrollableGameList({
 
   if (isSelected) {
     return (
-      <ul className="flex flex-col gap-2.5 h-[500px] sm:h-[512px] p-2 overflow-y-auto overflow-x-hidden">
+      <ul className="flex flex-col gap-2.5 h-[500px] sm:h-[512px] px-1 pt-2 pb-12 overflow-y-auto overflow-x-hidden no-scrollbar">
         {mapDataList
           ?.filter((game) => game.court_address === selectedAddress)
           .map((game, i) => (
@@ -47,7 +47,7 @@ export default function ScrollableGameList({
   }
 
   return (
-    <ul className="flex flex-col gap-2.5 h-[500px] sm:h-[512px] p-2 overflow-y-auto overflow-x-hidden">
+    <ul className="flex flex-col gap-2.5 h-[500px] sm:h-[512px] px-1 pt-2 pb-12 overflow-y-auto overflow-x-hidden no-scrollbar">
       {mapDataList?.map((game, i) => (
         <Card key={game.id} game={game} animationIndex={i} />
       ))}

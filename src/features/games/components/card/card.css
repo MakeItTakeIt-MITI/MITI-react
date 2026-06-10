@@ -1,3 +1,31 @@
 .custom-card-shadow {
   box-shadow: 0 4px 24px 0 #1adcdf;
 }
+
+.court-card-border {
+  position: relative;
+  border: 1px solid transparent;
+  transition: all 0.3s ease-out;
+  z-index: 1;
+}
+
+.court-card-border::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(26, 220, 223, 0) 0%, rgba(26, 220, 223, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .court-card-border:hover {
+    border-color: rgba(26, 220, 223, 0.5) !important;
+  }
+  .court-card-border:hover::after {
+    opacity: 1;
+  }
+}

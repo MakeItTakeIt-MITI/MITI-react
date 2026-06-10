@@ -49,10 +49,9 @@ export default function GameMap({ mapDataList, geolocation }: GameMapProps) {
         zoom: 14,
         scrollWheel: true,
         disableKineticPan: false,
-        zoomControl: true,
-        zoomControlOptions: {
-          position: window.naver.maps.Position.TOP_RIGHT,
-        },
+        zoomControl: false,
+        scaleControl: false,
+        logoControl: true,
       });
     }
     const map = mapRef.current;
@@ -62,9 +61,9 @@ export default function GameMap({ mapDataList, geolocation }: GameMapProps) {
       map.setCenter(
         new window.naver.maps.LatLng(coordinates.lat, coordinates.long),
       );
-    } catch {}
+    } catch { }
 
-    return () => {};
+    return () => { };
   }, [coordinates.lat, coordinates.long, setCoordinates]);
 
   // Update markers when mapDataList changes
@@ -93,63 +92,63 @@ export default function GameMap({ mapDataList, geolocation }: GameMapProps) {
 
       const iconContent = overlapped
         ? renderToString(
-            <button
-              type="button"
+          <button
+            type="button"
+            style={{
+              backgroundColor:
+                selectedAddress === game.court_address ? "#A3F1F2" : "#EBEBEB",
+              border:
+                selectedAddress === game.court_address
+                  ? "1px solid black"
+                  : "#d4d4d4",
+            }}
+            className="relative text-[10px] font-bold w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center"
+          >
+            <span className="flex items-center gap-1">
+              {game.fee !== 0
+                ? game.fee.toLocaleString("kr") + " 원"
+                : "무료"}
+            </span>
+            <span className="font-[300] text-[10px] text-[#737373]">
+              / {game.starttime.slice(0, 5)}
+            </span>
+            <div
               style={{
                 backgroundColor:
                   selectedAddress === game.court_address ? "#A3F1F2" : "#EBEBEB",
                 border:
                   selectedAddress === game.court_address
                     ? "1px solid black"
-                    : "#d4d4d4",
+                    : "#999",
               }}
-              className="relative text-[10px] font-bold w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center"
+              className="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] flex items-center justify-center text-[10px] font-bold"
             >
-              <span className="flex items-center gap-1">
-                {game.fee !== 0
-                  ? game.fee.toLocaleString("kr") + " 원"
-                  : "무료"}
-              </span>
-              <span className="font-[300] text-[10px] text-[#737373]">
-                / {game.starttime.slice(0, 5)}
-              </span>
-              <div
-                style={{
-                  backgroundColor:
-                    selectedAddress === game.court_address ? "#A3F1F2" : "#EBEBEB",
-                  border:
-                    selectedAddress === game.court_address
-                      ? "1px solid black"
-                      : "#999",
-                }}
-                className="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] flex items-center justify-center text-[10px] font-bold"
-              >
-                {addressOverlapCount[address]}
-              </div>
-            </button>,
-          )
+              {addressOverlapCount[address]}
+            </div>
+          </button>,
+        )
         : renderToString(
-            <button
-              style={{
-                backgroundColor:
-                  selectedAddress === game.court_address ? "#A3F1F2" : "#EBEBEB",
-                border:
-                  selectedAddress === game.court_address
-                    ? "1px solid black"
-                    : "#d4d4d4",
-              }}
-              className="relative text-[10px] font-bold border border-[#d4d4d4] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center"
-            >
-              <span className="flex items-center gap-1">
-                {game.fee !== 0
-                  ? game.fee.toLocaleString("kr") + " 원"
-                  : "무료"}
-              </span>
-              <span className="font-[300] text-[10px] text-[#737373]">
-                / {game.starttime.slice(0, 5)}
-              </span>
-            </button>,
-          );
+          <button
+            style={{
+              backgroundColor:
+                selectedAddress === game.court_address ? "#A3F1F2" : "#EBEBEB",
+              border:
+                selectedAddress === game.court_address
+                  ? "1px solid black"
+                  : "#d4d4d4",
+            }}
+            className="relative text-[10px] font-bold border border-[#d4d4d4] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center"
+          >
+            <span className="flex items-center gap-1">
+              {game.fee !== 0
+                ? game.fee.toLocaleString("kr") + " 원"
+                : "무료"}
+            </span>
+            <span className="font-[300] text-[10px] text-[#737373]">
+              / {game.starttime.slice(0, 5)}
+            </span>
+          </button>,
+        );
 
       marker.setIcon({ content: iconContent });
 
@@ -195,7 +194,7 @@ export default function GameMap({ mapDataList, geolocation }: GameMapProps) {
   }, [geolocation]);
 
   return (
-    <div className="relative w-full md:w-[700px]">
+    <div className="relative w-full md:w-[780px]">
       <div
         id="games-list"
         className="w-full sm:h-[241px] md:h-[450px] md:rounded-[20px]"
