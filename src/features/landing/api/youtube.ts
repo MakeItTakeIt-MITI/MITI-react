@@ -6,7 +6,7 @@ export const fetchPlaylist = async (PLAYLIST_ID: string, API_KEY: string) => {
             params: {
                 part: "snippet,contentDetails",
                 playlistId: PLAYLIST_ID,
-                maxResults: 4,
+                maxResults: 5,
                 key: API_KEY,
             },
         });

@@ -28,7 +28,7 @@ const Landing = () => {
         className="block min-[600px]:hidden min-h-screen w-full "
       >
         <MobileHero handleVideoOpen={handleVideoOpen} />
-        <VideoPlaylistContainer youtubeData={youtTubeData?.items} />
+        <VideoPlaylistContainer youtubeData={youtTubeData} />
       </main>
 
       <main
@@ -50,9 +50,7 @@ const Landing = () => {
         >
           <DesktopHero handleVideoOpen={handleVideoOpen} />
         </Suspense>
-        <div className="w-full max-w-[1200px] mx-auto">
-          <VideoPlaylistContainer youtubeData={youtTubeData?.items} />
-        </div>
+        <VideoPlaylistContainer youtubeData={youtTubeData} />
       </main>
     </>
   );
