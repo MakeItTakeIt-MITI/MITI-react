@@ -16,7 +16,7 @@ MITI는 농구를 사랑하는 사람들을 위한 올인원 플랫폼입니다.
 |--------|------|
 | Web | https://www.makeittakeit.kr/ |
 | Android | https://play.google.com/store/apps/details?id=com.miti.miti&hl=ko |
-| iOS | https://apps.apple.com/us/app/miti/id6503062372 |
+| iOS | https://apps.apple.com/ko/app/miti/id6503062372 |
 
 ---
 

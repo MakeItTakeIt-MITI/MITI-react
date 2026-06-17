@@ -3,8 +3,10 @@ import "../../features/landing/style/landing.css";
 import VideoPlaylistContainer from "@/features/landing/components/VideoPlaylistContainer";
 import MobileHero from "@/features/landing/components/MobileHero";
 import HostGuideVideoModal from "@/features/landing/components/HostGuideVideoModal";
+import CTABanner from "@/features/landing/components/CTABanner";
 import { useLandingPage } from "@/features/landing/hooks/useLandingPage";
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
+import Splash from "@/features/landing/components/Splash";
 
 const DesktopHero = React.lazy(
   () => import("@/features/landing/components/DesktopHero")
@@ -13,6 +15,7 @@ const DesktopHero = React.lazy(
 const Landing = () => {
   const { youtTubeData, openVideo, handleVideoOpen, handleVideoClose } =
     useLandingPage();
+  const [showSplash, setShowSplash] = useState(true);
 
   if (openVideo) {
     return <HostGuideVideoModal handleVideoClose={handleVideoClose} />;
@@ -20,6 +23,7 @@ const Landing = () => {
 
   return (
     <>
+      {showSplash && <Splash onComplete={() => setShowSplash(false)} />}
       <main
         style={{
           zIndex: 1,
@@ -29,6 +33,7 @@ const Landing = () => {
       >
         <MobileHero handleVideoOpen={handleVideoOpen} />
         <VideoPlaylistContainer youtubeData={youtTubeData} />
+        <CTABanner />
       </main>
 
       <main
@@ -51,9 +56,11 @@ const Landing = () => {
           <DesktopHero handleVideoOpen={handleVideoOpen} />
         </Suspense>
         <VideoPlaylistContainer youtubeData={youtTubeData} />
+        <CTABanner />
       </main>
     </>
   );
 };
 
 export default Landing;
+

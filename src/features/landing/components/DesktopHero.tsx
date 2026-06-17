@@ -43,10 +43,10 @@ const DesktopHero = ({ handleVideoOpen }: DesktopHeroProps) => {
 
         {/* BOTTOM SHADOW OVERLAY */}
         <div
-          className="absolute bottom-0 left-0 w-full h-[80px] z-10"
+          className="absolute bottom-0 left-0 w-full h-[240px] z-10"
           style={{
             background:
-              "linear-gradient(to top, rgba(0, 0, 0, 0.953), rgba(0,0,0,0.25), rgba(0,0,0,0))",
+              "linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 25%, rgba(0, 0, 0, 0.45) 55%, rgba(0, 0, 0, 0.15) 80%, rgba(0, 0, 0, 0) 100%)",
           }}
           aria-hidden="true"
         />

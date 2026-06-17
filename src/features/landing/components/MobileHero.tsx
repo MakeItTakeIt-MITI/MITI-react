@@ -43,10 +43,10 @@ const MobileHero = ({ handleVideoOpen }: MobileHeroProps) => {
 
       {/* BOTTOM SHADOW OVERLAY */}
       <div
-        className="absolute bottom-0 left-0 w-full h-[120px] z-[5]"
+        className="absolute bottom-0 left-0 w-full h-[260px] z-[5]"
         style={{
           background:
-            "linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0))",
+            "linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 25%, rgba(0, 0, 0, 0.45) 55%, rgba(0, 0, 0, 0.15) 80%, rgba(0, 0, 0, 0) 100%)",
         }}
         aria-hidden="true"
       />
